@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import Header from './Header'; 
 import styled from 'styled-components';
+import { friends }from '../fakedata/friends';
+import UserProfile from '../chat/UserProfile';
+
 
 const ChatApp: React.FC = () => {
-  const [userName] = useState('박사랑');
+
+  // 목록에서 누른 친구 상태 관리
+  // 초기값: 박사랑
+  const [selectedFriend, setSelectedFriend] = useState(friends[0]);
 
   const handleBackButtonClick = () => {
     console.log('Back button clicked');
@@ -15,11 +21,16 @@ const ChatApp: React.FC = () => {
 
   return (
     <AppContainer>
-      <Header
+     <Header
         onBackButtonClick={handleBackButtonClick}
-        profilePic='./assets/profile.png'
-        name={userName}
+        profilePic={selectedFriend.profileImage}
+        name={selectedFriend.name}
         onCallButtonClick={handleCallButtonClick}
+      />
+       <UserProfile
+        profileImage={selectedFriend.profileImage}
+        name={selectedFriend.name}
+        phoneNumber={selectedFriend.phoneNumber}
       />
     </AppContainer>
   );
