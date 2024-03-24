@@ -1,9 +1,13 @@
-function App() {
-	return (
-		<div>
-			<h1>19기 프론트엔드 파이팅!!! 디자인과 사이좋게 지내요~~~</h1>
-		</div>
-	);
-}
+import React from 'react';
+import ChatApp from './components/main/ChatApp'; 
+import GlobalStyle from './components/GlobalStyle';
+const App: React.FC = () => {
+  return (
+    <div>
+		<GlobalStyle/>
+      	<ChatApp />
+    </div>
+  );
+};
 
 export default App;
