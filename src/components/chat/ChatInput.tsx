@@ -96,6 +96,8 @@ const Footer = styled.div`
   background-color: #F7F8FC;
   width: 100%;
   height: 49px;
+
+  margin-top: 12px;
 `;
 
 const FooterContainer = styled.div`

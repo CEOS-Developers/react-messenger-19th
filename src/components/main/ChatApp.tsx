@@ -47,12 +47,15 @@ const ChatApp: React.FC = () => {
 const AppContainer = styled.div`
   background-color: #E3E4EB;
   min-height: 100vh;
+  padding-top: 60px; //헤더랑 푸터 높이만큼 패딩줘서 body 살리기
+  padding-bottom: 60px; 
+  box-sizing: border-box;
 `;
-
 const ChatInputWrapper = styled.div`
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 100; 
 `;
 
 export default ChatApp;
