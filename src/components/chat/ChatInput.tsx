@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { messageState, Message } from '../state/messageState';
 import styled from 'styled-components';
 
 const plusIcon = "./assets/icon.png";
@@ -13,19 +15,36 @@ interface InputBoxProps {
 interface InputContainerProps {
     expanded: boolean;
   }
+
+  const saveMessagesToLocalStorage = (messages: Message[]): void => {
+    localStorage.setItem('messages', JSON.stringify(messages));
+  };
+  
 const ChatInput: React.FC = () => {
     const [expanded, setExpanded] = useState(false); //인풋칸 클릭시 확장되기위해 변수 설정
     const containerRef = useRef<HTMLDivElement>(null); //ChatInput 컴포넌트 전체에 대해서 참조 생성!!
-
-   const handleInputClick = () => {
-    setExpanded(!expanded); // 클릭 시 확장됨!!
+    const [message, setMessage] = useState<string>('');
+    const setMessageList = useSetRecoilState(messageState);
+   
+   const send = (): void => {
+    if (message.trim() !== '') {
+      setMessageList((oldMessageList) => {
+        const newMessageList = [
+          ...oldMessageList,
+          { id: Date.now(), text: message, timestamp: new Date() },
+        ];
+        saveMessagesToLocalStorage(newMessageList);
+        return newMessageList;
+      });
+      setMessage('');
+    }
   };
 
   //배경 클릭 감지 핸들러
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setExpanded(!expanded); // 외부 클릭 시 토글 확장상태가 토글된다
+        setExpanded(!expanded); // 외부 클릭 시 확장상태가 토글된다
       }
     };
 
@@ -44,13 +63,21 @@ return (
         <PlusButton src={plusIcon} alt="Plus Button" />
         <InputContainer expanded={expanded}>
         <InputBox
-            onClick={() => setExpanded(true)}  
-            expanded={expanded}
+          onClick={() => setExpanded(true)}  
+          expanded={expanded}
+          value={message} 
+          onChange={(e) => setMessage(e.target.value)} // 입력값 변경 시 message 상태 업데이트
+          onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) { 
+                  send();
+                  e.preventDefault();
+              }
+          }}
         />
         <EmojiButton src={emojiIcon} alt="Emoji Button" />
         </InputContainer>
-        {expanded ? (
-          <SendButton src={sendIcon} alt="send Button" />
+        {expanded ? ( //확장되면서 Footer 구조 바뀌기
+          <SendButton src={sendIcon} alt="send Button" onClick={send} />
         ) : (
         <>
             <CameraButton src={cameraIcon} alt="Camera Button" />

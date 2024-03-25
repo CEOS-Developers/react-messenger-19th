@@ -4,11 +4,13 @@ import styled from 'styled-components';
 import { friends } from '../fakedata/friends';
 import UserProfile from '../chat/UserProfile';
 import ChatInput from '../chat/ChatInput';
+import ChatMessages from '../chat/ChatMessages'; // 메시지 목록 컴포넌트 import
+import { useRecoilValue } from 'recoil';
+import { messageState } from '../state/messageState'; 
 
 const ChatApp: React.FC = () => {
-  // 목록에서 누른 친구 상태 관리
-  // 초기값: 박사랑
-  const [selectedFriend, setSelectedFriend] = useState(friends[0]);
+  const [selectedFriend, setSelectedFriend] = useState(friends[0]); //나중에,, 친구 목록 구현하면 수정하기
+  const messages = useRecoilValue(messageState); // 메시지 상태 조회
 
   const handleBackButtonClick = () => {
     console.log('Back button clicked');
@@ -26,11 +28,15 @@ const ChatApp: React.FC = () => {
         name={selectedFriend.name}
         onCallButtonClick={handleCallButtonClick}
       />
-      <UserProfile
-        profileImage={selectedFriend.profileImage}
-        name={selectedFriend.name}
-        phoneNumber={selectedFriend.phoneNumber}
-      />
+      {messages.length > 0 ? ( // 조건부 렌더링: 이전에 나눈 대화가 있으면 ChatMessages 컴포넌트를 보여줌
+        <ChatMessages />
+      ) : ( // 이전에 나눈 대화 없으면 UserProfile 컴포넌트를 보여줌 (기본)
+        <UserProfile
+          profileImage={selectedFriend.profileImage}
+          name={selectedFriend.name}
+          phoneNumber={selectedFriend.phoneNumber}
+        />
+      )}
       <ChatInputWrapper>
         <ChatInput />
       </ChatInputWrapper>

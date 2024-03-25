@@ -1,12 +1,16 @@
 import React from 'react';
+import { RecoilRoot } from 'recoil'; 
 import ChatApp from './components/main/ChatApp'; 
 import GlobalStyle from './components/GlobalStyle';
+
 const App: React.FC = () => {
   return (
-    <div>
-		<GlobalStyle/>
-      	<ChatApp />
-    </div>
+    <RecoilRoot>
+      <div>
+        <GlobalStyle />
+        <ChatApp />
+      </div>
+    </RecoilRoot>
   );
 };
 
