@@ -1,9 +1,21 @@
+import styled from "styled-components";
+import ChattingPage from "./pages/Chat/ChattingPage";
+
+
+
 function App() {
 	return (
-		<div>
-			<h1>19기 프론트엔드 파이팅!!! 디자인과 사이좋게 지내요~~~</h1>
-		</div>
+		<Container>
+			<ChattingPage/>
+		</Container>
 	);
 }
+
+const Container = styled.div`
+	margin: 0 auto;
+    width: 375px;
+    height: 812px;
+    background-color: aliceblue;
+`
 
 export default App;
