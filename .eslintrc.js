@@ -22,8 +22,10 @@ module.exports = {
 		project: './tsconfig.json',
 	},
 	plugins: ['react'],
+	ignorePatterns: ['typings.d.ts'],
 	rules: {
 		'react/react-in-jsx-scope': 'off',
 		'@typescript-eslint/no-misused-promises': 'off',
+		'@typescript-eslint/non-nullable-type-assertion-style': 'off',
 	},
 };
