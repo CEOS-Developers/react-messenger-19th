@@ -5,14 +5,14 @@ import { friends } from '../fakedata/friends';
 import UserProfile from '../chat/UserProfile';
 import ChatInput from '../chat/ChatInput';
 import ChatMessages from '../chat/ChatMessages'; // 메시지 목록 컴포넌트 import
-import { useRecoilValue } from 'recoil';
-import { messageState } from '../state/messageState'; 
+import { useRecoilState } from 'recoil';
+import { messagesState } from '../state/messageState'; 
 import IphoneHeader from './IphoneHeader';
 import IphoneFooter from './IphoneFooter';
 
 const ChatApp: React.FC = () => {
   const [selectedFriend, setSelectedFriend] = useState(friends[0]); //나중에,, 친구 목록 구현하면 수정하기
-  const messages = useRecoilValue(messageState); // 메시지 상태 조회
+  const [messages, setMessages] = useRecoilState(messagesState); // 메시지 상태 조회
 
   const handleBackButtonClick = () => {
     console.log('Back button clicked');
@@ -55,6 +55,7 @@ const Container = styled.div`
   height: 100vh; 
   width: 100vw; 
 `;
+
 const AppContainer = styled.div`
   display: flex;
   flex-direction: column;

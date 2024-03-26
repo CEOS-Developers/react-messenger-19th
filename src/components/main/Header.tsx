@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useRecoilState} from 'recoil';
-import { selectedFriendState } from '../state/selectedFriendState';
-import { friends } from '../fakedata/friends';
+import { selectedUserState } from '../state/selectedUserState';
+import { usersState } from '../state/userState';
 
 interface HeaderProps {
   onBackButtonClick: () => void;
@@ -11,30 +11,33 @@ interface HeaderProps {
   onCallButtonClick: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onBackButtonClick, profilePic, name, onCallButtonClick }) => {
-  const [selectedFriend, setSelectedFriend] = useRecoilState(selectedFriendState);
+const Header: React.FC<HeaderProps> = ({ onBackButtonClick, onCallButtonClick }) => {
+  const [selectedUserId, setSelectedUserId] = useRecoilState(selectedUserState);
+  const [users] = useRecoilState(usersState);
 
-  const toggleFriend = () => {
+  const selectedUser = users.find(user => user.id === selectedUserId) ?? users[0];
 
-    // 우선은 가짜데이터에서 첫 두 명만 토글
-    // 현태 선택된 사람이 인덱스 0 이면 1로 토글, 인덱스 1이면 0으로 토글
-    const newSelectedFriend = selectedFriend.id === friends[0].id ? friends[1] : friends[0];
-    setSelectedFriend(newSelectedFriend);
+  const toggleUser = () => {
+    // 1번이랑 2번만 토글,,
+    const newSelectedUserId = selectedUserId === 1 ? 2 : 1;
+    setSelectedUserId(newSelectedUserId);
   };
 
+
     return (
-        <HeaderContainer>
-            <LeftContainer>
-                <BackButton src='./assets/back.png' alt='Back' onClick={onBackButtonClick}/>
-                <ProfileContainer onClick={toggleFriend}>
-                    <ProfilePic src={selectedFriend.profileImage} alt="Profile" />
-                    <Name>{selectedFriend.name}</Name>
-                </ProfileContainer>
-            </LeftContainer>
-          <CallButton src='./assets/call.png' alt='Call' onClick={onCallButtonClick}/>
-        </HeaderContainer>
-      );
-    };
+      <HeaderContainer>
+        <LeftContainer>
+          <BackButton src='./assets/back.png' alt='Back' onClick={onBackButtonClick}/>
+          <ProfileContainer onClick={toggleUser}>
+            <ProfilePic src={selectedUser.profileImage} alt="Profile" />
+            <Name>{selectedUser.name}</Name>
+          </ProfileContainer>
+        </LeftContainer>
+        <CallButton src='./assets/call.png' alt='Call' onClick={onCallButtonClick}/>
+      </HeaderContainer>
+    );
+  };
+  
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -46,7 +49,6 @@ const HeaderContainer = styled.div`
   
   width: 375px;
   height: 53px;
-
 `;
 
 const LeftContainer = styled.div`

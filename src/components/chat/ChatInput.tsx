@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { messageState, Message } from '../state/messageState';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { messagesState, Message } from '../state/messageState';
+import { selectedUserState } from '../state/selectedUserState';
+
 import styled from 'styled-components';
 
 const plusIcon = "./assets/icon.png";
@@ -16,28 +18,31 @@ interface InputContainerProps {
     expanded: boolean;
   }
 
-  const saveMessagesToLocalStorage = (messages: Message[]): void => {
-    localStorage.setItem('messages', JSON.stringify(messages));
-  };
   
 const ChatInput: React.FC = () => {
     const [expanded, setExpanded] = useState(false); //인풋칸 클릭시 확장되기위해 변수 설정
     const containerRef = useRef<HTMLDivElement>(null); //ChatInput 컴포넌트 전체에 대해서 참조 생성!!
     const [message, setMessage] = useState<string>('');
-    const setMessageList = useSetRecoilState(messageState);
+    const setMessageList = useSetRecoilState(messagesState);
+    const selectedUserId = useRecoilValue(selectedUserState);
+
    
-   const send = (): void => {
-    if (message.trim() !== '') {
-      setMessageList((oldMessageList) => {
-        const newMessageList = [
-          ...oldMessageList,
-          { id: Date.now(), text: message, timestamp: new Date() },
-        ];
-        saveMessagesToLocalStorage(newMessageList);
-        return newMessageList;
-      });
-      setMessage('');
-    }
+    const send = (): void => {
+      if (message.trim() !== '') {
+        //수신자와 발신자 설정 ... 나중에 수정해야됨!!
+        const senderId = selectedUserId;
+        const receiverId = selectedUserId === 1 ? 2 : 1;
+
+        const newMessage = {
+          id: Date.now(),
+          senderId, 
+          receiverId,
+          text: message,
+          timestamp: new Date().toISOString(),
+        };
+        setMessageList((oldMessageList) => [...oldMessageList, newMessage]);
+        setMessage(''); 
+      }
   };
 
   //배경 클릭 감지 핸들러
