@@ -58,8 +58,15 @@ const MessagesContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: 100%; 
-`;
+
+  width: 100%;
+  height: 646px;
+
+  background-color: #E3E4EB;
+  padding-bottom:12px;
+
+  overflow-y: auto;
+  `;
 
 const MessageContainer = styled.div`
   display: flex;

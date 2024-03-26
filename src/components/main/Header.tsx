@@ -31,13 +31,9 @@ const HeaderContainer = styled.div`
   background-color: #F7F8FC;
   color: white;
   
-  width: 100%;
+  width: 375px;
   height: 53px;
 
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 100;
 `;
 
 const LeftContainer = styled.div`

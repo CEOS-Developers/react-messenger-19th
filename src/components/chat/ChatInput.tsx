@@ -95,10 +95,7 @@ const Footer = styled.div`
   justify-content: center;
   background-color: #F7F8FC;
   width: 100%;
-  height: 49px;
-
-  margin-top: 12px;
-`;
+  height: 49px;`;
 
 const FooterContainer = styled.div`
   display: flex;

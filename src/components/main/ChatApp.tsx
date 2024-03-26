@@ -7,6 +7,8 @@ import ChatInput from '../chat/ChatInput';
 import ChatMessages from '../chat/ChatMessages'; // 메시지 목록 컴포넌트 import
 import { useRecoilValue } from 'recoil';
 import { messageState } from '../state/messageState'; 
+import IphoneHeader from './IphoneHeader';
+import IphoneFooter from './IphoneFooter';
 
 const ChatApp: React.FC = () => {
   const [selectedFriend, setSelectedFriend] = useState(friends[0]); //나중에,, 친구 목록 구현하면 수정하기
@@ -21,7 +23,9 @@ const ChatApp: React.FC = () => {
   };
 
   return (
+    <Container>
     <AppContainer>
+    <IphoneHeader src='./assets/Status Bar.png'/>
       <Header
         onBackButtonClick={handleBackButtonClick}
         profilePic={selectedFriend.profileImage}
@@ -37,25 +41,28 @@ const ChatApp: React.FC = () => {
           phoneNumber={selectedFriend.phoneNumber}
         />
       )}
-      <ChatInputWrapper>
         <ChatInput />
-      </ChatInputWrapper>
+        <IphoneFooter src='./assets/Home Indicator.png'/>
     </AppContainer>
+    </Container>
   );
 };
 
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  height: 100vh; 
+  width: 100vw; 
+`;
 const AppContainer = styled.div`
-  background-color: #E3E4EB;
-  min-height: 100vh;
-  padding-top: 60px; //헤더랑 푸터 높이만큼 패딩줘서 body 살리기
-  padding-bottom: 60px; 
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 375px; 
+  max-height: 812px; 
+  background-color: #FFFFFF; 
 `;
-const ChatInputWrapper = styled.div`
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: 100; 
-`;
+
+
 
 export default ChatApp;
