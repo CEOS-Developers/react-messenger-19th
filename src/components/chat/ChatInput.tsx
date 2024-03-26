@@ -18,6 +18,9 @@ interface InputContainerProps {
     expanded: boolean;
   }
 
+const saveMessagesToLocalStorage = (messages: Message[]): void => {
+    localStorage.setItem('messages', JSON.stringify(messages));
+  };
   
 const ChatInput: React.FC = () => {
     const [expanded, setExpanded] = useState(false); //인풋칸 클릭시 확장되기위해 변수 설정
@@ -40,7 +43,11 @@ const ChatInput: React.FC = () => {
           text: message,
           timestamp: new Date().toISOString(),
         };
-        setMessageList((oldMessageList) => [...oldMessageList, newMessage]);
+        setMessageList((oldMessageList) => {
+          const updatedMessages = [...oldMessageList, newMessage];
+          saveMessagesToLocalStorage(updatedMessages);
+          return updatedMessages;
+        });
         setMessage(''); 
       }
   };
@@ -109,7 +116,7 @@ const FooterContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #ffffff;
+  background-color: #F7F8FC;
   width: 354px;
   height: 29px;
 `;

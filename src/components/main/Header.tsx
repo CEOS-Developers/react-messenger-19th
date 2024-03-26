@@ -66,12 +66,17 @@ const BackButton = styled.img`
   margin-left: 16px;
   margin-right: 33.5px;
   
+  transition: transform 0.1s ease; 
+
+  &:active {
+    transform: scale(0.9);
+  }
 `;
 
 const ProfileContainer = styled.div`
   display: flex;
   align-items: center;
-  
+  cursor: pointer;
 `;
 
 const ProfilePic = styled.img`
@@ -95,6 +100,11 @@ const CallButton = styled.img`
   height: 25px;
   margin-right: 25px;
   
+  transition: transform 0.1s ease; 
+
+  &:active {
+    transform: scale(0.9);
+  }
 `;
 
 export default Header;

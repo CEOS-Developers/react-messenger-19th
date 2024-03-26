@@ -56,7 +56,7 @@ const ChatMessages: React.FC = () => {
           {groupMessages.map((message) => (
            <MessageLayout key={message.id} isSender={message.senderId === selectedUserId}>
            {message.senderId === selectedUserId ? (
-             // 발신자 레이아웃: 시간 -> 메시지
+             // 발신자 레이아웃: 시간 -> 메시지 순서
              <>
                <Timestamp key={message.id} isSender={message.senderId === selectedUserId}>{new Date(message.timestamp).toLocaleTimeString('ko-KR', 
                { hour: 'numeric', minute: '2-digit', hour12: true }).replace('AM', '오전').replace('PM', '오후')}
