@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import {useRecoilState} from 'recoil';
+import { selectedFriendState } from '../state/selectedFriendState';
+import { friends } from '../fakedata/friends';
 
 interface HeaderProps {
   onBackButtonClick: () => void;
@@ -9,13 +12,23 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ onBackButtonClick, profilePic, name, onCallButtonClick }) => {
+  const [selectedFriend, setSelectedFriend] = useRecoilState(selectedFriendState);
+
+  const toggleFriend = () => {
+
+    // 우선은 가짜데이터에서 첫 두 명만 토글
+    // 현태 선택된 사람이 인덱스 0 이면 1로 토글, 인덱스 1이면 0으로 토글
+    const newSelectedFriend = selectedFriend.id === friends[0].id ? friends[1] : friends[0];
+    setSelectedFriend(newSelectedFriend);
+  };
+
     return (
         <HeaderContainer>
             <LeftContainer>
                 <BackButton src='./assets/back.png' alt='Back' onClick={onBackButtonClick}/>
-                <ProfileContainer>
-                    <ProfilePic src={profilePic} alt="Profile" />
-                    <Name>{name}</Name>
+                <ProfileContainer onClick={toggleFriend}>
+                    <ProfilePic src={selectedFriend.profileImage} alt="Profile" />
+                    <Name>{selectedFriend.name}</Name>
                 </ProfileContainer>
             </LeftContainer>
           <CallButton src='./assets/call.png' alt='Call' onClick={onCallButtonClick}/>
