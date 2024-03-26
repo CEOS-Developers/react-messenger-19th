@@ -44,7 +44,10 @@ const ChatInput: React.FC = () => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setExpanded(!expanded); // 외부 클릭 시 확장상태가 토글된다
+        // 현재 확장된 상태일때만 외부 누르면 다시 축소되게
+        if (expanded) {
+          setExpanded(false);
+        }
       }
     };
 

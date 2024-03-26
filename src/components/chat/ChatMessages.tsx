@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 import { messageState, Message } from '../state/messageState';
 import styled from 'styled-components';
@@ -27,10 +27,21 @@ const formatDate = (dateString: string) => {
   return date.toLocaleDateString('ko-KR', options);
 };
 
+
+
 const ChatMessages: React.FC = () => {
   const messages = useRecoilValue<Message[]>(messageState);
   const groupedMessages = groupMessagesByDate(messages);
- 
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }; //메세지 보냈을 때 스크롤 자동으로 맨 아래로 이동!!
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]); // 의존성에 메세지 추가해서 관리하기
+
   return (
     <MessagesContainer>
       {Object.entries(groupedMessages).map(([date, groupMessages], index) => (
@@ -50,6 +61,7 @@ const ChatMessages: React.FC = () => {
           ))}
         </React.Fragment>
       ))}
+       <div ref={messagesEndRef} />
     </MessagesContainer>
   );
 };
