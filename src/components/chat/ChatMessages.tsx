@@ -27,9 +27,14 @@ const groupMessagesByDate = (messages: Message[]) => {
 //날짜 형식에 맞게 포맷팅하기 (오전 12:02 이렇게)
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
-  const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric', weekday: 'short' };
+  const options: Intl.DateTimeFormatOptions = { 
+    month: 'long', 
+    day: 'numeric', 
+    weekday: 'short' 
+  };
   return date.toLocaleDateString('ko-KR', options);
 };
+
 
 
 const ChatMessages: React.FC = () => {
@@ -60,7 +65,8 @@ const ChatMessages: React.FC = () => {
            {message.senderId === selectedUserId ? (
              // 발신자 레이아웃: 시간 -> 메시지 순서
              <>
-               <Timestamp key={message.id} isSender={message.senderId === selectedUserId}>{new Date(message.timestamp).toLocaleTimeString('ko-KR', 
+               <Timestamp key={message.id} isSender={message.senderId === selectedUserId}>
+                {new Date(message.timestamp).toLocaleTimeString('ko-KR', 
                { hour: 'numeric', minute: '2-digit', hour12: true }).replace('AM', '오전').replace('PM', '오후')}
                </Timestamp>
                <MessageItem 
@@ -82,7 +88,8 @@ const ChatMessages: React.FC = () => {
                 transition={{ duration: 0.5 }}
               >{message.text}
               </MessageItem>
-               <Timestamp key={message.id} isSender={message.senderId === selectedUserId}>{new Date(message.timestamp).toLocaleTimeString('ko-KR', 
+               <Timestamp key={message.id} isSender={message.senderId === selectedUserId}>
+                {new Date(message.timestamp).toLocaleTimeString('ko-KR', 
                { hour: 'numeric', minute: '2-digit', hour12: true }).replace('AM', '오전').replace('PM', '오후')}
                </Timestamp>
              </>

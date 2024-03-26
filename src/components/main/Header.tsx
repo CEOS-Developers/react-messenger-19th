@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ onBackButtonClick, onCallButtonClick })
             <Name>{selectedUser.name}</Name>
           </ProfileContainer>
         </LeftContainer>
-        <CallButton src='./assets/call.png' alt='Call' onClick={onCallButtonClick}/>
+        <CallButton src='./assets/Call.png' alt='Call' onClick={onCallButtonClick}/>
       </HeaderContainer>
     );
   };
