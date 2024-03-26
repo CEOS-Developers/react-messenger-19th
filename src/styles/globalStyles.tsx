@@ -6,7 +6,12 @@ const GlobalStyles = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
+  html {
+    background-color: #E5E6EB;
+  }
   body {
+    background-color: #FFFFFF;
+    opacity: 0.95;
     margin: 0 auto;
     height: 812px;
     width: 375px;
