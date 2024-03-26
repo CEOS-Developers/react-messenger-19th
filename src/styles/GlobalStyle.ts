@@ -14,6 +14,8 @@ const GlobalStyle = createGlobalStyle`
   body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    display: flex;
+    justify-content: center;
   }
   img,
   picture,
