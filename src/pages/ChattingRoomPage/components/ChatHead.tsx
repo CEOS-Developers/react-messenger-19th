@@ -4,11 +4,22 @@ import { ReactComponent as StatusSvg } from '@assets/svg/status.svg';
 import { ReactComponent as ArrowLeftSvg } from '@assets/svg/arrowLeft.svg';
 import { ReactComponent as SearchSvg } from '@assets/svg/search.svg';
 import { ReactComponent as MenuSvg } from '@assets/svg/menu.svg';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { UserState } from '@recoil/userAtom';
 
 const DUMMYNAME = '플래시';
 const DUMMYLEFTCOUNT = 3;
 
 export default function ChatHead() {
+  const [userName,setUserName] = useRecoilState(UserState);
+  const HandleNameToggle = () => {
+    if(userName==='송은수'){
+      setUserName('플래시')
+    }
+    else{
+      setUserName('송은수')
+    }
+  }
   return (
     <ChatHeaderWrapper>
       <Statusbox>
@@ -18,7 +29,7 @@ export default function ChatHead() {
         <ArrowLeftSvg />
         <span>{DUMMYLEFTCOUNT}</span>
       </GobackBox>
-      <ChatTitle>{DUMMYNAME}</ChatTitle>
+      <ChatTitle onClick={HandleNameToggle}>{DUMMYNAME}</ChatTitle>
       <MenuBox>
         <SearchSvg />
         <MenuSvg />
@@ -65,6 +76,7 @@ const ChatTitle = styled.h1`
   line-height: ${theme.textStyles.subTitle.line_height};
   font-weight: ${theme.textStyles.subTitle.font_weight};
   color: ${theme.colors.black};
+  cursor: pointer;
 `;
 
 const MenuBox = styled.div`
