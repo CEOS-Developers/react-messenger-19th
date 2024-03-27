@@ -48,7 +48,7 @@ const Chat = styled.div`
 `;
 
 const ChatBox = styled.div`
-	max-width: 70%;
+	max-width: 80%;
 	background-color: #fff;
 	padding: 8px 12px;
 	border-radius: 15px;
