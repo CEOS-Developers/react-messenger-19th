@@ -1,6 +1,7 @@
 import { currentChatRoomIdState } from '@recoil/chatAtom';
 import { UserState } from '@recoil/userAtom';
 import theme from '@styles/theme';
+import { Fragment, useEffect, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import Mychat from './Mychat';
@@ -25,6 +26,7 @@ export default function Chatting() {
   //이름 클릭시 반전을 위한 더미상태
   const userName = useRecoilValue(UserState);
   const chattingData = useRecoilValue(currentChatRoomIdState(DUMMYID));
+  const chatRef = useRef<HTMLDivElement>(null);
 
   //메시지 출력 함수: 상대일 경우 이미지와 이름 출력
   const showMessage = (chat: Chat, idx: number) => {
@@ -70,18 +72,25 @@ export default function Chatting() {
       const month = chat.date.slice(5, 7);
       const day = chat.date.slice(8, 10);
       return (
-        <>
+        <Fragment key={idx + 100}>
           <DateContainer>
             {year}년 {month}월 {day}일
           </DateContainer>
           {messageComponent}
-        </>
+        </Fragment>
       );
     }
     return messageComponent;
   };
+
+  useEffect(() => {
+    if (chatRef.current) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    }
+  });
+
   return (
-    <ChatWrapper>
+    <ChatWrapper ref={chatRef}>
       <SpaceBox />
       {chattingData &&
         chattingData?.chat.map((chat, idx) => showMessage(chat, idx))}
@@ -126,7 +135,12 @@ const ChatWrapper = styled.section`
   flex-direction: column;
   gap: 6px;
   width: 375px;
-  height: 100vh;
+  height: 100%;
   padding: 0 16px;
+  margin-bottom: 48px;
   background-color: ${theme.colors.blue};
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;

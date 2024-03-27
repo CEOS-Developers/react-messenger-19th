@@ -39,11 +39,13 @@ export default function ChatHead() {
 
 const Statusbox = styled.div`
   position: fixed;
+  z-index: 1;
   width: 375px;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   flex-shrink: 0;
+  background-color: ${theme.colors.blue};
 `;
 
 const ChatHeaderWrapper = styled.section`
