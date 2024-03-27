@@ -14,7 +14,10 @@ const StyledChatHeadNavRightCallImg = styled.img`
   height: 32px;
 `;
 
-const StyledChatHeadNavRightBalloonImg = styled.img``;
+const StyledChatHeadNavRightBalloonImg = styled.img`
+  width: 32px;
+  height: 32px;
+`;
 
 export default function ChatHeadNavRight() {
   return (
