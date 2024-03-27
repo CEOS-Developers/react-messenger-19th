@@ -19,7 +19,20 @@ interface ChattingRoom {
 
 export const chatDataState = atom<ChattingRoom[]>({
   key: 'chatDataState',
-  default: chattingData.chattings,
+  default: [],
+  effects: [
+    ({ setSelf, onSet }) => {
+      const savedData = localStorage.getItem('chatData');
+      if (savedData) setSelf(JSON.parse(savedData));
+      else setSelf(chattingData.chattings);
+
+      onSet((newValue: ChattingRoom[], _: any, isReset: boolean) => {
+        isReset
+          ? localStorage.removeItem('chatData')
+          : localStorage.setItem('chatData', JSON.stringify(newValue));
+      });
+    },
+  ],
 });
 
 export const currentChatRoomIdState = selectorFamily({
