@@ -42,6 +42,7 @@
     ]
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "prettier": "3.2.5"
   }
 }
