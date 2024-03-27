@@ -28,8 +28,8 @@ export const HeaderBox = styled.div`
 `;
 
 export const SVGIcon = styled.img`
-	width: 20px;
-	height: 20px;
+	width: 18px;
+	height: 18px;
 `;
 
 export const Name = styled.div`
@@ -44,6 +44,7 @@ export const ChatContainer = styled.div`
 	flex-grow: 1;
 	overflow-y: auto;
 	background-color: #8cabd9;
+	padding: 15px;
 `;
 
 export const InputContainer = styled.div`

@@ -1,4 +1,5 @@
 import * as C from './ChatRoom.styles';
+import YourAnswer from './YourAnswer';
 
 export default function ChatRoomComponent(): JSX.Element {
 	return (
@@ -15,7 +16,9 @@ export default function ChatRoomComponent(): JSX.Element {
 				</C.HeaderBox>
 			</C.ChatHeader>
 
-			<C.ChatContainer></C.ChatContainer>
+			<C.ChatContainer>
+				<YourAnswer />
+			</C.ChatContainer>
 
 			<C.InputContainer>
 				<C.SVGIcon src="./ChatRoom/add.svg" />
