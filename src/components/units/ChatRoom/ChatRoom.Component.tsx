@@ -1,4 +1,5 @@
 import * as C from './ChatRoom.styles';
+import MyAnswer from './MyAnswer';
 import YourAnswer from './YourAnswer';
 
 export default function ChatRoomComponent(): JSX.Element {
@@ -18,6 +19,7 @@ export default function ChatRoomComponent(): JSX.Element {
 
 			<C.ChatContainer>
 				<YourAnswer />
+				<MyAnswer />
 			</C.ChatContainer>
 
 			<C.InputContainer>
