@@ -1,13 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './Home';
-import Header from './components/@common/Header';
+import ChatPage from './pages/ChatPage';
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/header" element={<Header />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<ChatPage />} />
       </Routes>
     </BrowserRouter>
   );
