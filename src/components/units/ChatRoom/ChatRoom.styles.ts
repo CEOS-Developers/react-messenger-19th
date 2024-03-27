@@ -15,7 +15,7 @@ export const ChatHeader = styled.div`
 	justify-content: space-between;
 
 	padding: 0 23px;
-	height: 60px;
+	height: 55px;
 	background-color: #8cabd9;
 	border-bottom: 0.5px solid #cdcdcd;
 `;
@@ -40,7 +40,7 @@ export const Name = styled.div`
 `;
 
 export const ChatContainer = styled.div`
-	height: 83vh;
+	height: calc(100vh - 110px);
 	flex-grow: 1;
 	overflow-y: auto;
 	background-color: #8cabd9;
@@ -56,7 +56,7 @@ export const InputContainer = styled.div`
 `;
 
 export const ChatInput = styled.input`
-	width: 267px;
+	width: 90%;
 	height: 39px;
 	border-radius: 30px;
 	padding: 15px;
