@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import IphoneStatusLeftDiv from '@components/fixed/IphoneStatusBar/IphoneStatusLeftDiv';
-import IphoneStatusRightDiv from '@components/fixed/IphoneStatusBar/IphoneStatusRightDiv';
+import IphoneStatusLeftDiv from '@components/fixed/ChatHead/IphoneStatusBar/IphoneStatusLeftDiv';
+import IphoneStatusRightDiv from '@components/fixed/ChatHead/IphoneStatusBar/IphoneStatusRightDiv';
 
 const StyledIphoneStatusBar = styled.div`
-  position: absolute;
-  top: 0;
+  /* position: absolute; */
+  /* top: 0; */
   width: 375px;
   height: 47px;
   display: flex;
