@@ -4,7 +4,7 @@ import { ReactComponent as StatusSvg } from '@assets/svg/status.svg';
 import { ReactComponent as ArrowLeftSvg } from '@assets/svg/arrowLeft.svg';
 import { ReactComponent as SearchSvg } from '@assets/svg/search.svg';
 import { ReactComponent as MenuSvg } from '@assets/svg/menu.svg';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { UserState } from '@recoil/userAtom';
 
 const DUMMYNAME = '플래시';

@@ -9,7 +9,9 @@
           "from": "플래시",
           "content": "안녕하세요",
           "date": "2024-03-01",
-          "time": "12:00"
+          "time": "12:00",
+          "isDisplay": false,
+          "isRead": true
         },
         {
           "chatId": "2",
@@ -17,7 +19,19 @@
           "from": "플래시",
           "content": "반가워요",
           "date": "2024-03-01",
-          "time": "12:01"
+          "time": "12:00",
+          "isDisplay": true,
+          "isRead": true
+        },
+        {
+          "chatId": "3",
+          "to": "플래시",
+          "from": "송은수",
+          "content": "반가워요",
+          "date": "2024-03-01",
+          "time": "12:02",
+          "isDisplay": true,
+          "isRead": true
         }
       ]
     }
