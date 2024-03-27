@@ -1,11 +1,13 @@
 import theme from '@styles/theme';
 import styled from 'styled-components';
+import ChatBottom from './components/ChatBottom';
 import ChatHead from './components/ChatHead';
 
 export default function ChattingRoomPage() {
   return (
     <ContainerLayout>
       <ChatHead />
+      <ChatBottom />
     </ContainerLayout>
   );
 }
