@@ -7,7 +7,8 @@
       "@styles/*": ["./styles/*"],
       "@constant/*": ["./constant/*"],
       "@hooks/*": ["./hooks/*"],
-      "@pages/*": ["./pages/*"]
+      "@pages/*": ["./pages/*"],
+      "@recoil/*": ["./recoil/*"]
     }
   }
 }
