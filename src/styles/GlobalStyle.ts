@@ -16,8 +16,10 @@ const GlobalStyle = createGlobalStyle`
   
   html,
   body {
-    width:100%;
-    height: 100vh;
+    /* width:100%;
+    height: 100vh; */
+    width: 375px;
+    height: 812px;
     margin: 0 auto;
     font-size: 62.5%;
     font-family: "Pretendard";  
