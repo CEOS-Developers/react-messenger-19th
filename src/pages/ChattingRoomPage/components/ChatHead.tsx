@@ -40,8 +40,7 @@ const ChatHeaderWrapper = styled.section`
   align-items: center;
   width: 375px;
   height: 28px;
-  padding: 0 4px;
-  margin: 0 16px;
+  padding: 0 16px;
   background-color: ${theme.colors.blue};
   opacity: 0.8;
 `;
