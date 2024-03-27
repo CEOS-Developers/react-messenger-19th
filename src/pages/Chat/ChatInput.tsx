@@ -6,17 +6,49 @@ import galleryIcon from "../../assets/icons/gallery.png"
 import recordIcon from "../../assets/icons/record.png"
 import stickerIcon  from "../../assets/icons/sticker.png"
 
+interface Props {
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+  getChatData: (value: string) => void;
+}
 
-function ChatInput() {
+
+
+function ChatInput({getChatData, value, setValue}:Props) {
+const onChange = (e:React.ChangeEvent<HTMLInputElement>) =>{
+  setValue(e.target.value);
+}
+
+const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  if(!value.trim()){
+      alert('텍스트를 입력 해 주세요')
+  }
+    else{
+      getChatData(value);
+      setValue("");
+    }
+  }
+
+
+
   return (
     <ChatInputWrapper>
       <AddIcon><img src={addIcon}/> </AddIcon>
       <CameraIcon><img src={cameraIcon}/></CameraIcon>
       <GalleryIcon><img src={galleryIcon}/></GalleryIcon>
-      <InputFiledWrapper>
-        <InputFiled placeholder="Aa"/>
+
+      
+      <InputFiledWrapper  onSubmit={onSubmit}>
+        <InputFiled 
+        placeholder="Aa"
+        onChange = {onChange}
+        value={value}
+        />
+        
         <StickerIcon><img src = {stickerIcon}/></StickerIcon>
       </InputFiledWrapper>
+
       <RecordIcon><img src={recordIcon}/></RecordIcon>
     </ChatInputWrapper>
   )
@@ -33,7 +65,7 @@ const ChatInputWrapper = styled.div`
 `
 
 //텍스트 입력창
-const InputFiledWrapper = styled.div`
+const InputFiledWrapper = styled.form`
   border: 0.7px solid black;
   width: 199px;
   height: 35px;
