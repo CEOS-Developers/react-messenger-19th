@@ -44,7 +44,7 @@ export default function Chatting() {
       );
     }
     // 내가 아니고 처음이거나 이전과 보낸 사람이 다르면 출력
-    else if (idx === 0 || chat.from !== chattingData?.chat[idx - 1].from) {
+    else if (idx === 0 || chat.from !== chattingData?.chat[idx - 1].from || chat.date !== chattingData?.chat[idx - 1].date) {
       messageComponent = (
         <OppoChangeChat
           key={idx}
