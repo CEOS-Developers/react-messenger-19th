@@ -15,7 +15,7 @@ const Container = styled.div`
 	margin: 0 auto;
     width: 375px;
     height: 812px;
-    background-color: aliceblue;
+	background-color: aliceblue;
 `
 
 export default App;

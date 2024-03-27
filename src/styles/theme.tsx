@@ -11,7 +11,7 @@ const colors = {
   const fonts = {
     NotoSans : "font-family: 'Noto Sans KR', sans-serif;"
   };
-  
+
   const theme = {
     colors,
     fonts,
