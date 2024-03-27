@@ -1,6 +1,7 @@
 import theme from '@styles/theme';
 import styled from 'styled-components';
 import { ReactComponent as PlusSvg } from '@assets/svg/plus.svg';
+import { ReactComponent as SendSvg } from '@assets/svg/send.svg';
 import { ReactComponent as EmojiSvg } from '@assets/svg/emoji.svg';
 import { ReactComponent as MicSvg } from '@assets/svg/mic.svg';
 import { useState } from 'react';
@@ -90,7 +91,7 @@ export default function ChatBottom() {
         <EmojiSvg />
         {inputValue ? (
           <div onClick={HandleSubmit}>
-            <PlusSvg />
+            <SendSvg />
           </div>
         ) : (
           <MicSvg />
