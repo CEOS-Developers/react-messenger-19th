@@ -40,7 +40,7 @@ const HeaderWrapper = styled.div`
   align-items: center;
 `
 const CurrentTime = styled.div`
-  font-size : 12px;
+  font-size : 14px;
   font-weight: 500;
   margin-left: 26.85px;
 `

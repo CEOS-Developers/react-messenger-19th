@@ -25,6 +25,7 @@ const ChatBubbleWrapper = styled.div`
     width: 297.76px;
     height: fit-content;
     margin-top: 14.88px;
+    margin-left: 22.39px;
 `
 
 const ProfileWrapper = styled.div`

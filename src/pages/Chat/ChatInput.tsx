@@ -9,12 +9,12 @@ import stickerIcon  from "../../assets/icons/sticker.png"
 interface Props {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
-  getChatData: (value: string) => void;
+  addChatData: (value: string) => void;
 }
 
 
 
-function ChatInput({getChatData, value, setValue}:Props) {
+function ChatInput({addChatData, value, setValue}:Props) {
 const onChange = (e:React.ChangeEvent<HTMLInputElement>) =>{
   setValue(e.target.value);
 }
@@ -25,7 +25,7 @@ const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       alert('텍스트를 입력 해 주세요')
   }
     else{
-      getChatData(value);
+      addChatData(value);
       setValue("");
     }
   }
@@ -77,8 +77,9 @@ const InputFiledWrapper = styled.form`
 
 //개행만 가능 (협의 예정)
 const InputFiled = styled.input`
-  width: 158.7px;
+  width: 148.7px;
   margin-left: 16.03px;
+  margin-right: 10px;
   padding: 0;
   border: none;
   outline: none;

@@ -8,7 +8,7 @@ import myProfile from "../../assets/img/myProfile.png"
 import Footer from "../../components/Footer"
 import dayjs from "dayjs"
 import ChatBubbleReceiver from "../Chat/ChatBubbleReceiver"
-
+import ChatBubbleSender from "./ChatBubbleSender"
 
 function ChattingPage() {
   interface ChatType {
@@ -31,7 +31,7 @@ function ChattingPage() {
   const [value,  setValue] = useState<string>(''); //텍스트 입력값을 넣어주기 위한 state
   const [sender, setSender] = useState<string>('김다희');
   const [receiver, setReceiver] = useState<string>('김유빈');
-  const [rImg, setRImg] = useState<string>('friendProfile');
+  const [rImg, setRImg] = useState<string>('../../assets/img/friendProfile.png');
   const [chatData, setChatData] = useState<ChatType>({
     r_id: 0,
     isGroup: false,
@@ -45,20 +45,27 @@ function ChattingPage() {
         r_img: '',
         value: '',
         time: ''
-      },
+      }
     ],
   })
 
-  
+   //localStorage에서 가져오기
+   useEffect(() => {
+    const getChatData = localStorage.getItem('chatData')
+    if (getChatData) {
+      setChatData(JSON.parse(getChatData))
+    }
+  }, [])
+
+
   // 객체 생성
   const currentTime:string = dayjs().format('HH:mm'); // 시:분 형식으로 포맷팅
-
-  const getChatData = (value: string) => {
-    setChatData((prevChats: ChatType) => {
+  const addChatData = (value: string): void => {
+    setChatData((prevChatData: ChatType) => {
       const newChatData = {
         //localStorage 저장을 위해 분리
-        ...prevChats,
-        chat : [...prevChats.chat, {
+        ...prevChatData,
+        chat : [...prevChatData.chat, {
           c_id: Date.now(),
           sender: sender,
           receiver: receiver,
@@ -68,11 +75,11 @@ function ChattingPage() {
         }]
       }
       localStorage.setItem('chatData', JSON.stringify(newChatData))
+
       return newChatData
-    }) //채팅리스트에 Input 추가
+    }) 
   }
-
-
+  
 
   //유저 전환
   const toggleUser = () =>{
@@ -98,17 +105,23 @@ function ChattingPage() {
           <FriendProfileName> {receiver} </FriendProfileName>
        </ProfileInfoWrapper>
        <ChatBody>
-        {chatData.chat.map((chat, key) => (
-          <ChatBubbleReceiver
+        {chatData.chat.slice(1).map((chat, key) => (
+          chat.sender === sender?
+         ( <ChatBubbleSender
             key={chat.c_id}
             value={chat.value}
             time={chat.time}
             profileImg={chat.r_img}
-          />
+          /> ): (<ChatBubbleReceiver
+            key={chat.c_id}
+            value={chat.value}
+            time={chat.time}
+            profileImg={chat.r_img}
+          />)
           ))}
         </ChatBody>
        <ChatInput
-        getChatData={getChatData}
+        addChatData={addChatData}
         value={value}
         setValue={setValue}
        />
@@ -148,6 +161,7 @@ const ChatBody = styled.div`
   //background-color: beige;
   width: 100%;
   height: 545.33px;
+  overflow: scroll;
 `
 
 
