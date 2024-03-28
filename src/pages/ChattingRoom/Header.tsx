@@ -9,7 +9,7 @@ import { colors } from "../../style/colors";
 import { typography } from "../../style/typography";
 
 const Header = () => {
-  const userIdx = 1; // 임시
+  const userIdx = 2; // 임시
   return (
     <Wrapper>
       <StatusBar />
@@ -56,7 +56,7 @@ const RoomNameWrapper = styled.div`
 `;
 
 const RoomName = styled.span`
-  ${typography.body3}
-  padding-right:0.25rem;
+  ${typography.body3};
+  padding-right: 0.25rem;
   padding-top: 0.25rem;
 `;
