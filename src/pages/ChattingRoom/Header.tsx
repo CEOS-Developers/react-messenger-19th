@@ -30,7 +30,6 @@ const Header = () => {
 export default Header;
 
 const Wrapper = styled.div`
-  width: 23.4375rem;
   height: 8.3rem;
   flex-shrink: 0;
   border-bottom: 0.5px solid ${colors.gray300};
