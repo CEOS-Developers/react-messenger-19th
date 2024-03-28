@@ -11,6 +11,7 @@ const StyledChatInputContainer = styled.div`
   bottom: 0;
   padding-bottom: 34px;
   background-color: ${(props) => props.theme.color.white};
+  opacity: 0.95;
 `;
 
 export default function ChatInput() {
