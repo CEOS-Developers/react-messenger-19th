@@ -13,7 +13,7 @@ export default function YourFirstMessage(props: YourFirstMessageProps): JSX.Elem
 				<Chat>
 					<ChatBox>{props.message}</ChatBox>
 					<ChatTail />
-					<SentTime>23:49</SentTime>
+					<SentTime>{props.sentTime}</SentTime>
 				</Chat>
 			</TextContainer>
 		</MessageContainer>
@@ -45,7 +45,7 @@ const ProfileName = styled.div`
 `;
 
 const Chat = styled.div`
-	width: 100%;
+	width: auto;
 	position: relative; // 꼬리 이미지의 위치 기준점이 됩니다.
 	display: flex;
 	align-items: end;

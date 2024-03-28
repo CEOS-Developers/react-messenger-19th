@@ -6,7 +6,7 @@ export default function MyFirstMessage(props: MyFirstMessageProps): JSX.Element 
 		<MessageContainer>
 			<TextContainer>
 				<Chat>
-					<SentTime>12:32</SentTime>
+					<SentTime>{props.sentTime}</SentTime>
 					<ChatTail />
 					<ChatBox>{props.message}</ChatBox>
 				</Chat>

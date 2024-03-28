@@ -17,6 +17,12 @@ export default function ChatRoomComponent(): JSX.Element {
 	const [message, setMessage] = useState('');
 	const [messages, setMessages] = useRecoilState(chatMessagesState);
 
+	// 현재 시간을 24시간 형식으로 포맷
+	const now = new Date();
+	const hours = now.getHours().toString().padStart(2, '0'); // 시간을 2자리로 포맷
+	const minutes = now.getMinutes().toString().padStart(2, '0'); // 분을 2자리로 포맷
+	const sentTime = `${hours}:${minutes}`; // 예: "23:59"
+
 	const onChangeMessage = (event: ChangeEvent<HTMLInputElement>): void => {
 		setMessage(event.currentTarget.value);
 	};
@@ -27,14 +33,23 @@ export default function ChatRoomComponent(): JSX.Element {
 	};
 
 	const onSubmitMessage = (): void => {
-		const newMessage: Message = {
-			userId: user === me.name ? me.userId : opposite.userId,
-			name: user === me.name ? me.name : opposite.name,
-			text: message, // 입력된 메시지 내용
-			sender: me.name, // 혹은 다른 식별 가능한 사용자 정보
-		};
+		// 입력된 메시지에서 앞뒤 공백 제거
+		const trimmedMessage = message.trim();
 
-		setMessages(prevMessages => [...prevMessages, newMessage]);
+		// 공백만 있는 메시지는 전송하지 않음
+		if (trimmedMessage !== '') {
+			const newMessage: Message = {
+				userId: user === me.name ? me.userId : opposite.userId,
+				name: user === me.name ? me.name : opposite.name,
+				text: trimmedMessage, // 공백이 제거된 메시지 내용
+				sender: me.name, // 혹은 다른 식별 가능한 사용자 정보
+				sentTime,
+			};
+
+			setMessages(prevMessages => [...prevMessages, newMessage]);
+		}
+
+		// 메시지 입력 필드 초기화
 		setMessage('');
 	};
 
@@ -68,10 +83,10 @@ export default function ChatRoomComponent(): JSX.Element {
 					// 현재 메시지가 현재 활성 사용자에 의해 보내진 것인지 확인
 					msg.userId === (user === me.name ? me.userId : opposite.userId) ? (
 						// 현재 사용자가 보낸 메시지인 경우 (오른쪽에 위치시키기)
-						<MyFirstMessage key={index} message={msg.text} />
+						<MyFirstMessage key={index} message={msg.text} sentTime={sentTime} />
 					) : (
 						// 현재 사용자가 받은 메시지인 경우 (왼쪽에 위치시키기)
-						<YourFirstMessage key={index} message={msg.text} name={msg.name} />
+						<YourFirstMessage key={index} message={msg.text} name={msg.name} sentTime={sentTime} />
 					),
 				)}
 			</C.ChatContainer>
