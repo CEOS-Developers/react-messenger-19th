@@ -10,9 +10,11 @@ function App() {
       <GlobalStyles />
       <div className="Container">
         <StatusBar />
-        <Routes>
-          <Route path="/" element={<ChattingPage />} />
-        </Routes>
+        <div className="ChatBackground">
+          <Routes>
+            <Route path="/" element={<ChattingPage />} />
+          </Routes>
+        </div>
         <HomeIndicator />
       </div>
     </BrowserRouter>

@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "id": 0,
+      "name": "My Status",
+      "profileImg": "/img/MyStatus.svg'",
+      "isActive": true
+    },
+    {
+      "id": 1,
+      "name": "Dain Park",
+      "profileImg": "/img/DainPark.svg",
+      "isActive": true
+    }
+  ]
+}
