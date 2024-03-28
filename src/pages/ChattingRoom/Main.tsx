@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // image
 import smallAdd from "../../assets/smallAdd.svg";
@@ -13,9 +13,6 @@ import { colors } from "../../style/colors";
 import { typography } from "../../style/typography";
 
 const Main = () => {
-  const [value, setValue] = useState("");
-  const [isEmpty, setIsEmpty] = useState(true); // input란에 텍스트 입력 여부
-
   const data = [
     {
       text: "모든 국민은 헌법과 법률이 정한 법관에 의하여 법률에 의한 재판을 받을 권리를 가진다. 국가는 사회보장·사회복지의 증진에 노력할 의무를 진다. 국가는 건전한 소비행위를 계도하고 생산품의 품질향상을 촉구하기 위한 소비자보호운동을 법률이 정하는 바에 의하여 보장한다.",
@@ -34,9 +31,49 @@ const Main = () => {
     },
   ];
 
+  const [value, setValue] = useState("");
+  const [isEmpty, setIsEmpty] = useState(true); // input란에 텍스트 입력 여부
+  const [chats, setChats] = useState(data);
+
+  // 스크롤 이동
+  const chatWrapperRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (chatWrapperRef.current) {
+      chatWrapperRef.current.scrollTop = chatWrapperRef.current.scrollHeight;
+    }
+  }, [chats]);
+
+  const getDayOfWeek = (date: Date) => {
+    const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
+    return daysOfWeek[date.getDay()];
+  };
+
+  const getDate = () => {
+    const currentDate = new Date();
+    const formattedTimeStamp = `${
+      currentDate.getMonth() + 1
+    }월 ${currentDate.getDate()}일 (${getDayOfWeek(
+      currentDate
+    )}) ${currentDate.getHours()}:${String(currentDate.getMinutes()).padStart(
+      2,
+      "0"
+    )} ${currentDate.getHours() >= 12 ? "PM" : "AM"}`;
+
+    return formattedTimeStamp;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("전송");
+    if (!isEmpty) {
+      const newChat = {
+        text: value,
+        sender: 0,
+        timestamp: getDate(),
+      };
+      setChats([...chats, newChat]);
+      setValue("");
+      setIsEmpty(true);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,83 +83,34 @@ const Main = () => {
 
   return (
     <Wrapper>
-      <ChattingWrapper>
-        {" "}
-        <ChattingItemWrapper>
-          <TimeStamp>{data[0].timestamp}</TimeStamp>
-          <MsgBox align={data[0].sender !== 0 ? "start" : "end"}>
-            {data[0].sender !== 0 && (
-              <ProfileImg
-                src={`img/userProfile/${
-                  userData.users[data[0].sender].profileImg
-                }`}
-              />
-            )}
-            <Contents>
-              {data[0].sender !== 0 && (
-                <Name>{userData.users[data[0].sender].name}</Name>
+      <ChattingWrapper ref={chatWrapperRef}>
+        {chats.map((chat, index) => (
+          <ChattingItemWrapper key={index}>
+            <TimeStamp>{chat.timestamp}</TimeStamp>
+            <MsgBox align={chat.sender !== 0 ? "start" : "end"}>
+              {chat.sender !== 0 && (
+                <ProfileImg
+                  src={`img/userProfile/${
+                    userData.users[chat.sender].profileImg
+                  }`}
+                />
               )}
-              <MsgText
-                maxWidth={data[0].sender !== 0 ? 17.125 : 12}
-                bgColor={data[0].sender !== 0 ? colors.gray200 : colors.blurple}
-                txtColor={data[0].sender !== 0 ? colors.black : colors.white}
-              >
-                {data[0].text}
-              </MsgText>
-              {data[0].sender == 0 && <Read>읽음</Read>}
-            </Contents>
-          </MsgBox>
-        </ChattingItemWrapper>
-        <ChattingItemWrapper>
-          <TimeStamp>{data[1].timestamp}</TimeStamp>
-          <MsgBox align={data[1].sender !== 0 ? "start" : "end"}>
-            {data[1].sender !== 0 && (
-              <ProfileImg
-                src={`img/userProfile/${
-                  userData.users[data[1].sender].profileImg
-                }`}
-              />
-            )}
-            <Contents>
-              {data[1].sender !== 0 && (
-                <Name>{userData.users[data[1].sender].name}</Name>
-              )}
-              <MsgText
-                maxWidth={data[1].sender !== 0 ? 17.125 : 12}
-                bgColor={data[1].sender !== 0 ? colors.gray200 : colors.blurple}
-                txtColor={data[1].sender !== 0 ? colors.black : colors.white}
-              >
-                {data[1].text}
-              </MsgText>
-              {data[1].sender == 0 && <Read>읽음</Read>}
-            </Contents>
-          </MsgBox>
-        </ChattingItemWrapper>
-        <ChattingItemWrapper>
-          <TimeStamp>{data[2].timestamp}</TimeStamp>
-          <MsgBox align={data[2].sender !== 0 ? "start" : "end"}>
-            {data[2].sender !== 0 && (
-              <ProfileImg
-                src={`img/userProfile/${
-                  userData.users[data[2].sender].profileImg
-                }`}
-              />
-            )}
-            <Contents>
-              {data[2].sender !== 0 && (
-                <Name>{userData.users[data[2].sender].name}</Name>
-              )}
-              <MsgText
-                maxWidth={data[2].sender !== 0 ? 17.125 : 12}
-                bgColor={data[2].sender !== 0 ? colors.gray200 : colors.blurple}
-                txtColor={data[2].sender !== 0 ? colors.black : colors.white}
-              >
-                {data[2].text}
-              </MsgText>
-              {data[2].sender == 0 && <Read>읽음</Read>}
-            </Contents>
-          </MsgBox>
-        </ChattingItemWrapper>
+              <Contents>
+                {chat.sender !== 0 && (
+                  <Name>{userData.users[chat.sender].name}</Name>
+                )}
+                <MsgText
+                  maxWidth={chat.sender !== 0 ? 17.125 : 12}
+                  bgColor={chat.sender !== 0 ? colors.gray200 : colors.blurple}
+                  txtColor={chat.sender !== 0 ? colors.black : colors.white}
+                >
+                  {chat.text}
+                </MsgText>
+                {chat.sender === 0 && <Read>읽음</Read>}
+              </Contents>
+            </MsgBox>
+          </ChattingItemWrapper>
+        ))}
       </ChattingWrapper>
 
       <InputWrapper onSubmit={handleSubmit}>
