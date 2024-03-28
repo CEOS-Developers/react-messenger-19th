@@ -1,24 +1,22 @@
-import styled, { ThemeProvider } from 'styled-components';
-import { GlobalStyle } from './style/GlobalStyle';
-import theme from './style/Theme';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyle } from './styles/GlobalStyle';
+import theme from './styles/Theme';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
 
 function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <AppContainer></AppContainer>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />} />
+          </Routes>
+        </BrowserRouter>
       </ThemeProvider>
     </>
   );
 }
 
 export default App;
-
-const AppContainer = styled.div`
-  width: 37.5rem;
-  height: 81.2rem;
-  margin: 0 auto;
-  background-color: ${theme.white};
-  border-radius: 2.4rem;
-`;
