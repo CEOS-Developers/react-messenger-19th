@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import * as ST from '@styles/styledComponents';
+import { useRef, forwardRef } from 'react';
 
 const StyledChatInputForm = styled.form`
   width: 100%;
@@ -33,6 +34,7 @@ const StyledInputBox = styled.input`
   background-color: ${(props) => props.theme.color.grayMedium};
   border-radius: 20px;
   padding: 0;
+  padding-right: 40px; // 텍스트가 스마일 표시를 넘어가지 않게
 `;
 
 const StyledSmilingIcon = styled.img`
@@ -43,12 +45,14 @@ const StyledSmilingIcon = styled.img`
 `;
 
 const StyledStaleSendIcon = styled.img`
-  ${ST.hoverCursor};
+  /* ${ST.hoverCursor}; */
 `;
 
 const StyledClearSendIcon = styled.img``;
 
 export default function ChatInputForm() {
+  const inputRef = useRef();
+
   return (
     <StyledChatInputForm>
       <StyledPlusButton src="/images/circlePlus.svg" />
