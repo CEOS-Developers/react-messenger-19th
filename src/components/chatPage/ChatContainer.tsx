@@ -1,42 +1,40 @@
 import styled from 'styled-components';
 import { flexCenter } from '../../styles/GlobalStyle';
 import { ProfileIcon } from '../../assets';
-import msgData from '../../assets/data/msgData.json';
-import { MessageTypes } from './ChatFooter';
+import chatData from '../../assets/data/chatData.json';
+import { MsgType } from '../../types/types';
+import { useEffect, useRef } from 'react';
 interface ChatContainerProps {
-  list: MessageTypes[];
-  setList: React.Dispatch<React.SetStateAction<MessageTypes[]>>;
+  list: MsgType[];
+}
+
+function renderChat(data: MsgType) {
+  return (
+    <ChatBox $rcvd={data.rcvd}>
+      {data.rcvd && !data.sequential && <ProfileIcon />}
+      <Details $sequential={data.rcvd && !data.sequential}>
+        {data.rcvd && !data.sequential && <Name>세오스</Name>}
+        <Text $rcvd={data.rcvd}>{data.text}</Text>
+      </Details>
+    </ChatBox>
+  );
 }
 
 export default function ChatContainer(props: ChatContainerProps) {
-  const { list, setList } = props;
+  const { list } = props;
+  const listEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    listEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [list]);
 
   return (
     <Wrapper>
       <Date>어제</Date>
       <Layout>
-        {msgData.data.map((data) => {
-          return (
-            <ChatBox $rcvd={data.rcvd}>
-              {data.rcvd && !data.sequential && <ProfileIcon />}
-              <Details $sequential={data.rcvd && !data.sequential}>
-                {data.rcvd && !data.sequential && <Name>세오스</Name>}
-                <Message $rcvd={data.rcvd}>{data.text}</Message>
-              </Details>
-            </ChatBox>
-          );
-        })}
-        {list.map((data) => {
-          return (
-            <ChatBox $rcvd={data.rcvd}>
-              {data.rcvd && !data.sequential && <ProfileIcon />}
-              <Details $sequential={data.rcvd && !data.sequential}>
-                {data.rcvd && !data.sequential && <Name>세오스</Name>}
-                <Message $rcvd={data.rcvd}>{data.text}</Message>
-              </Details>
-            </ChatBox>
-          );
-        })}
+        {chatData.data.map((data) => renderChat(data))}
+        {list.map((data) => renderChat(data))}
+        <div ref={listEndRef} />
       </Layout>
     </Wrapper>
   );
@@ -80,7 +78,6 @@ const ChatBox = styled.div<{ $rcvd: boolean }>`
   display: flex;
   justify-content: ${({ $rcvd }) => ($rcvd ? 'none' : 'end')};
   gap: 0.6rem;
-  /* margin-left: ${({ $rcvd }) => ($rcvd ? 'none' : '15.5rem')}; */
 `;
 
 const Details = styled.div<{ $sequential: boolean }>`
@@ -99,7 +96,7 @@ const Name = styled.p`
   ${({ theme }) => theme.fonts.sent_person_small};
 `;
 
-const Message = styled.div<{ $rcvd: boolean }>`
+const Text = styled.div<{ $rcvd: boolean }>`
   max-width: 20.4rem;
   padding: 0.8rem 1.2rem;
   border-radius: 1.6rem;
