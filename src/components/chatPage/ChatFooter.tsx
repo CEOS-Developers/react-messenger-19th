@@ -1,16 +1,10 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { PlusIcon, VoiceIcon, EmojiIcon } from '../../assets';
-export interface MessageTypes {
-  id: number;
-  rcvd: boolean;
-  sequential: boolean;
-  text: string;
-}
-
+import { MsgType } from '../../types/types';
 interface ChatFooterProps {
-  list: MessageTypes[];
-  setList: React.Dispatch<React.SetStateAction<MessageTypes[]>>;
+  list: MsgType[];
+  setList: React.Dispatch<React.SetStateAction<MsgType[]>>;
 }
 
 export default function ChatFooter(props: ChatFooterProps) {
@@ -21,17 +15,18 @@ export default function ChatFooter(props: ChatFooterProps) {
     event.preventDefault();
     if (input.trim() !== '') {
       handleList(input);
+      setInput('');
     }
   }
 
   function handleList(input: string) {
-    const newMessage: MessageTypes = {
+    const newMsg: MsgType = {
       id: Date.now(),
       rcvd: false,
       sequential: true,
       text: input,
     };
-    setList([...list, newMessage]);
+    setList([...list, newMsg]);
   }
 
   function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
