@@ -90,9 +90,9 @@ const Main = () => {
                   <Name>{userData.users[chat.sender].name}</Name>
                 )}
                 <MsgText
-                  maxWidth={chat.sender !== 0 ? 17.125 : 12}
-                  bgColor={chat.sender !== 0 ? colors.gray200 : colors.blurple}
-                  txtColor={chat.sender !== 0 ? colors.black : colors.white}
+                  maxwidth={chat.sender !== 0 ? 17.125 : 12}
+                  bgcolor={chat.sender !== 0 ? colors.gray200 : colors.blurple}
+                  txtcolor={chat.sender !== 0 ? colors.black : colors.white}
                 >
                   {chat.text}
                 </MsgText>
@@ -176,16 +176,16 @@ const Name = styled.span`
   ${typography.body3}
 `;
 const MsgText = styled.span<{
-  bgColor: string;
-  txtColor: string;
-  maxWidth: number;
+  bgcolor: string;
+  txtcolor: string;
+  maxwidth: number;
 }>`
-  max-width: ${(props) => props.maxWidth}rem;
+  max-width: ${(props) => props.maxwidth}rem;
   ${typography.body2};
-  background-color: ${(props) => props.bgColor};
+  background-color: ${(props) => props.bgcolor};
   border-radius: 1.25rem;
   padding: 0.75rem;
-  color: ${(props) => props.txtColor};
+  color: ${(props) => props.txtcolor};
   text-align: start;
 `;
 const Read = styled.span`
