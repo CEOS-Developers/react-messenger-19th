@@ -1,0 +1,10 @@
+export { ReactComponent as HomeIndicatorIcon } from '../assets/icon/homeIndicator.svg';
+export { ReactComponent as InfoIcon } from '../assets/icon/info.svg';
+export { ReactComponent as ProfileIcon } from '../assets/icon/profile.svg';
+export { ReactComponent as PlusIcon } from '../assets/icon/plus.svg';
+export { ReactComponent as VoiceIcon } from '../assets/icon/voice.svg';
+export { ReactComponent as EmojiIcon } from '../assets/icon/emoji.svg';
+export { ReactComponent as BackArrowIcon } from '../assets/icon/backArrow.svg';
+export { ReactComponent as FindIcon } from '../assets/icon/find.svg';
+export { ReactComponent as CallIcon } from '../assets/icon/call.svg';
+export { ReactComponent as IndexIcon } from '../assets/icon/index.svg';

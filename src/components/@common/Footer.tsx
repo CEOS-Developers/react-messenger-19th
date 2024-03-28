@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as HomeIndicatorIcon } from '../../assets/icon/homeIndicator.svg';
+import { HomeIndicatorIcon } from '../../assets';
 
 export default function Footer() {
   return (

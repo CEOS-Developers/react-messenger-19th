@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { flexCenter } from '../../styles/GlobalStyle';
-import { ReactComponent as ProfileIcon } from '../../assets/icon/profile.svg';
+import { ProfileIcon } from '../../assets';
 import msgData from '../../assets/data/msgData.json';
 
 export default function ChatContainer() {

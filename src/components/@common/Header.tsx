@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as InfoIcon } from '../../assets/icon/info.svg';
+import { InfoIcon } from '../../assets';
 
 export default function Header() {
   return (

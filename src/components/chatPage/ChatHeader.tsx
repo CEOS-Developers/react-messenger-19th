@@ -1,8 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as BackArrowIcon } from '../../assets/icon/backArrow.svg';
-import { ReactComponent as FindIcon } from '../../assets/icon/find.svg';
-import { ReactComponent as CallIcon } from '../../assets/icon/call.svg';
-import { ReactComponent as IndexIcon } from '../../assets/icon/index.svg';
+import { BackArrowIcon, FindIcon, CallIcon, IndexIcon } from '../../assets';
 import { flexCenter } from '../../styles/GlobalStyle';
 
 export default function ChatHeader() {

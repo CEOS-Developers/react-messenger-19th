@@ -1,20 +1,26 @@
 import styled from 'styled-components';
-import { ReactComponent as PlusIcon } from '../../assets/icon/plus.svg';
-import { ReactComponent as VoicIcon } from '../../assets/icon/voice.svg';
-import { ReactComponent as EmojiIcon } from '../../assets/icon/emoji.svg';
-
-/* <InputBox onSubmit={handleSubmit}>
-<InputField type="text" value={input} onChange={handleInput} autoFocus /> */
+import { useState } from 'react';
+import { PlusIcon, VoiceIcon, EmojiIcon } from '../../assets';
 
 export default function ChatFooter() {
+  const [input, setInput] = useState('');
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+  }
+
+  function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
+    setInput(event.target.value);
+  }
+
   return (
     <Wrapper>
       <PlusIcon />
-      <InputBox>
-        <InputField type="text" autoFocus />
+      <InputBox onSubmit={handleSubmit}>
+        <InputField type="text" value={input} onChange={handleInput} autoFocus />
         <EmojiIcon />
       </InputBox>
-      <VoicIcon />
+      <VoiceIcon />
     </Wrapper>
   );
 }
