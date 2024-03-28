@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import rightSide from '../assets/img/rightSide.svg';
+import rightSide from '../assets/img/right-side.svg';
 
 const StatusBarContainer = styled.div`
   width: 23.4375rem;

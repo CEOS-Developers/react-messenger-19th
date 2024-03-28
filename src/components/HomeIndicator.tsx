@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import HomeBar from '../assets/img/homeIndicator.svg';
+import HomeBar from '../assets/img/home-indicator.svg';
 
 const HomeBarContainer = styled.div`
   width: 23.4375rem;

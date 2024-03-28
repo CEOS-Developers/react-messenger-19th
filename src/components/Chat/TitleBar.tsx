@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Left from '../../assets/img/left.svg';
-import VideoCall from '../../assets/img/videoCall.svg';
-import AudioCall from '../../assets/img/audioCall.svg';
+import VideoCall from '../../assets/img/video-call.svg';
+import AudioCall from '../../assets/img/audio-call.svg';
 
 const TitleBarContainer = styled.div`
   width: 23.4375rem;
@@ -26,7 +26,7 @@ const LeftImg = styled.img`
 `;
 
 const LeftText = styled.div`
-  color: var(--Whatsapp-Green, #1bd742);
+  color: #1bd742;
   font-family: 'SF Pro Text';
   font-size: 1.0625rem;
   font-style: normal;
@@ -93,16 +93,15 @@ const CallImg = styled.img`
   height: 1.5rem;
 `;
 
-interface ChatTitleProps {
-  userId: number;
+interface TitleBarProps {
   userName: string;
   profileImg: string;
   isActive: boolean;
   handleChangeUser?: () => void;
 }
 
-export default function TitleBar(props: ChatTitleProps) {
-  const { userId, userName, profileImg, isActive, handleChangeUser } = props;
+export default function TitleBar(props: TitleBarProps) {
+  const { userName, profileImg, isActive, handleChangeUser } = props;
 
   return (
     <TitleBarContainer>
