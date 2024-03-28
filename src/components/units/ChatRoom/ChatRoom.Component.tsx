@@ -83,9 +83,9 @@ export default function ChatRoomComponent(): JSX.Element {
 	useEffect(() => {
 		const handleVisualViewPortResize = (): void => {
 			const currentVisualViewport = window.visualViewport?.height ?? window.innerHeight;
-			if (divRef.current !== null) {
+			if (chatContainerRef.current !== null) {
 				// 입력창의 높이를 visualViewport의 높이에서 일정 값을 뺀 값으로 설정
-				divRef.current.style.height = `${currentVisualViewport - 30}px`;
+				chatContainerRef.current.style.height = `${currentVisualViewport - 30}px`;
 				// 화면을 입력창의 위치로 스크롤
 				window.scrollTo(0, 40);
 			}
@@ -154,7 +154,7 @@ export default function ChatRoomComponent(): JSX.Element {
 			<C.InputContainer>
 				<C.SVGIcon src="./ChatRoom/add.svg" />
 				<C.ChatForm onSubmit={onSubmitForm}>
-					<C.ChatInput type="text" onChange={onChangeMessage} value={message} ref={divRef} />
+					<C.ChatInput type="text" onChange={onChangeMessage} value={message} />
 					<button type="submit" style={{ border: 'none', background: 'transparent' }}>
 						<C.SVGIcon src="./ChatRoom/send.svg" />
 					</button>
