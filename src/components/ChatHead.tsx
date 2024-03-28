@@ -2,7 +2,7 @@ import React from 'react';
 
 interface User {
 	name: string;
-	image: '../item/profile_mini.png';
+	image: string;
 }
 
 interface ChatHeadProps {

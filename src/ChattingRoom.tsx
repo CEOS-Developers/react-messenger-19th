@@ -12,12 +12,12 @@ interface Message {
 
 interface User {
 	name: string;
-	image: './item/profile_mini.png';
+	image: string;
 }
 
 const initialUsers: User[] = [
-	{ name: '이지인', image: './item/profile_mini.png' },
-	{ name: '이영인', image: './item/profile_mini.png' },
+	{ name: '이지인', image: '/item/profile_mini.png' },
+	{ name: '이영인', image: '/item/profile_mini.png' },
 ];
 
 const initialMessages: Message[] = [];
@@ -28,7 +28,28 @@ function ChattingRoom() {
 	// 현재 메시지 기롥 상태 관리
 	const [messages, setMessages] = useState<Message[]>([]);
 	const currentUser = initialUsers[currentUserIndex];
-	return <div></div>;
+
+	const sendMessage = (messageContent: string) => {
+		const newMessage: Message = {
+			id: Date.now(),
+			from: currentUser.name,
+			content: messageContent,
+			date: new Date().toISOString(),
+		};
+		setMessages([...messages, newMessage]);
+	};
+
+	const toggleUser = () => {
+		setCurrentUserIndex((currentIndex) => (currentIndex === 0 ? 1 : 0));
+	};
+
+	return (
+		<div>
+			<ChatHead user={currentUser} onUserClick={toggleUser} />
+			<ChatBody messages={messages} currentUser={currentUser.name} />
+			<ChatBottom onSendMessage={sendMessage} />
+		</div>
+	);
 }
 
 export default ChattingRoom;
