@@ -54,12 +54,6 @@ export const InputContainer = styled.div`
 	height: 55px;
 	background-color: white;
 	gap: 17px;
-
-	position: fixed; /* 화면 하단에 고정 */
-	bottom: 0;
-	left: 0;
-	width: 100%; /* 화면 너비에 맞춤 */
-	z-index: 1000; /* 다른 요소들 위에 위치하도록 설정 */
 `;
 
 export const ChatForm = styled.form`

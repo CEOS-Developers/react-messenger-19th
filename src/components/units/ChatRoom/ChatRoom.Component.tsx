@@ -17,9 +17,6 @@ export default function ChatRoomComponent(): JSX.Element {
 	const [message, setMessage] = useState('');
 	const [messages, setMessages] = useRecoilState(chatMessagesState);
 
-	// 입력창에 대한 참조 생성
-	const divRef = useRef<HTMLInputElement | null>(null);
-
 	// chatContainer 스크롤 하단 고정
 	const chatContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -80,25 +77,11 @@ export default function ChatRoomComponent(): JSX.Element {
 		}
 	};
 
-	useEffect(() => {
-		const handleVisualViewPortResize = (): void => {
-			const currentVisualViewport = window.visualViewport?.height ?? window.innerHeight;
-			if (chatContainerRef.current !== null) {
-				// 입력창의 높이를 visualViewport의 높이에서 일정 값을 뺀 값으로 설정
-				chatContainerRef.current.style.height = `${currentVisualViewport - 30}px`;
-				// 화면을 입력창의 위치로 스크롤
-				window.scrollTo(0, 40);
-			}
-		};
+	// 초기 로드 시 실행
+	adjustViewportHeight();
 
-		// visualViewport의 resize 이벤트에 핸들러 등록
-		window.visualViewport?.addEventListener('resize', handleVisualViewPortResize);
-
-		// 컴포넌트 언마운트 시 이벤트 핸들러 제거
-		return () => {
-			window.visualViewport?.removeEventListener('resize', handleVisualViewPortResize);
-		};
-	}, []);
+	// 뷰포트 변경(키보드가 나타나거나 사라질 때) 시 조정
+	window.addEventListener('resize', adjustViewportHeight);
 
 	return (
 		<C.Wrapper>
@@ -172,4 +155,17 @@ function formatDate(dateString: string): string {
 		weekday: 'long',
 	};
 	return new Date(dateString).toLocaleDateString('ko-KR', options);
+}
+function adjustViewportHeight(): void {
+	if (isMobileDevice() && window.visualViewport) {
+		const viewportHeight = window.visualViewport.height;
+		document.documentElement.style.setProperty('--vh', `${viewportHeight * 0.01}px`);
+	} else {
+		// PC 환경일 경우, --vh 변수를 초기 뷰포트 높이(100vh)의 1%로 설정
+		const viewportHeight = window.innerHeight;
+		document.documentElement.style.setProperty('--vh', `${viewportHeight * 0.01}px`);
+	}
+}
+function isMobileDevice(): boolean {
+	return /Mobi|Android/i.test(navigator.userAgent);
 }
