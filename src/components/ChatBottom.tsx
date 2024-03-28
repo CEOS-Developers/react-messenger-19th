@@ -5,6 +5,9 @@ interface ChatBottomProps {
 }
 
 const ChatBottom: React.FC<ChatBottomProps> = ({ onSendMessage }) => {
+
+    const [inputValue, setInputValue] = useState('');
+    
 	return (
 		<div>
 			<input type='text' value='' />
