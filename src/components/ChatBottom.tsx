@@ -6,6 +6,9 @@ import {
 	SendButton,
 } from '../style/ChatBottomStyle';
 
+const sendIcon = '/item/sendIcon.png'; 
+const micIcon = 'item/micIcon.png'; 
+
 interface ChatBottomProps {
 	onSendMessage: (messageContent: string) => void;
 }
@@ -22,9 +25,12 @@ const ChatBottom: React.FC<ChatBottomProps> = ({ onSendMessage }) => {
 	const sendMessage = () => {
 		if (inputValue.trim()) {
 			onSendMessage(inputValue.trim());
-			setInputValue(''); 
+			setInputValue('');
 		}
 	};
+
+	// 입력된 텍스트에 따라 이미지 결정
+	const buttonImage = inputValue.trim() ? sendIcon : micIcon;
 
 	return (
 		<ChatBottomContainer>
@@ -36,7 +42,10 @@ const ChatBottom: React.FC<ChatBottomProps> = ({ onSendMessage }) => {
 				}
 				onKeyPress={handleKeyPress}
 			/>
-			<SendButton onClick={sendMessage}></SendButton>
+			<SendButton
+				onClick={sendMessage}
+				backgroundImage={buttonImage}
+			></SendButton>
 		</ChatBottomContainer>
 	);
 };

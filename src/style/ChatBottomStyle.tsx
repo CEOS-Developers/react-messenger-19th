@@ -14,10 +14,15 @@ export const ChatInput = styled.input`
   border: 1px solid #ccc;
 `;
 
-export const SendButton = styled.button`
-  padding: 8px 16px;
-  border-radius: 4px;
+export const SendButton = styled.button<{ backgroundImage: string }>`
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
   border: none;
-  background-color: #007bff;
-  color: white;
+  background-color: transparent;
+  background-image: url(${(props) => props.backgroundImage});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
 `;
