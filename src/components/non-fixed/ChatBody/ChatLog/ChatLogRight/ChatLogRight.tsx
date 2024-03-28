@@ -40,16 +40,23 @@ const StyledMessageContentContainer = styled.div`
   color: ${(props) => props.theme.color.black};
   line-height: 22.5px;
 `;
-export default function ChatLogRight() {
+export default function ChatLogRight({
+  from,
+  createdAt,
+  content,
+}: {
+  from: number;
+  createdAt: string;
+  content: string;
+}) {
+  const createdHourMinute = createdAt.slice(11, 16);
   return (
     <StyledChatLogRightContainer>
       <StyledNameAndMessageContainer>
-        <StyledNameSpan>김정민</StyledNameSpan>
-        <StyledTimeSpan>20:45</StyledTimeSpan>
+        <StyledNameSpan>{from === 2 ? '김정민' : '김승완'}</StyledNameSpan>
+        <StyledTimeSpan>{createdHourMinute}</StyledTimeSpan>
       </StyledNameAndMessageContainer>
-      <StyledMessageContentContainer>
-        동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세
-      </StyledMessageContentContainer>
+      <StyledMessageContentContainer>{content}</StyledMessageContentContainer>
     </StyledChatLogRightContainer>
   );
 }

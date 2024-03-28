@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { dateStringProps } from 'types/type';
+import { dateStringProps } from 'type/type';
 import { dateBeforeAfter } from '@styles/styledComponents';
 import { chatBodyDivElementGap } from '@styles/styledComponents';
 
@@ -29,7 +29,7 @@ const StyledDateDivider = styled.div`
 `;
 
 export default function DateDivider({ dateString }: dateStringProps) {
-  const [year, month, day] = dateString.slice(0, 10).split('-');
+  const [year, month, day] = dateString.split('-');
 
   return (
     <StyledDateDividerContainer>

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { isMessageOwnerEqualsWithModeProps } from 'types/type';
+import { isMessageOwnerEqualsWithModeProps } from 'type/type';
 
 const StyledChatLogLeft = styled.div`
   width: auto;
@@ -16,10 +16,7 @@ export default function ChatLogLeft({
       {isEqual === true ? (
         <StyledChatDiscordLogo src="/images/discord40.svg" />
       ) : (
-        <StyledChatDiscordLogo
-          src="/images/discord_2.svg"
-          style={{ width: '40px', height: '40px', borderRadius: '50%' }}
-        />
+        <StyledChatDiscordLogo src="/images/discordGreen40.svg" />
       )}
     </StyledChatLogLeft>
   );

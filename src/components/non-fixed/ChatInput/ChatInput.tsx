@@ -7,8 +7,6 @@ const StyledChatInputContainer = styled.div`
   width: 375px;
   height: auto;
   min-height: 90px;
-  /* position: absolute; */
-  /* bottom: 0; */
   padding-bottom: 34px;
   background-color: ${(props) => props.theme.color.white};
   opacity: 0.95;
