@@ -18,13 +18,13 @@ interface ChatBodyProps {
 	currentUser: string;
 }
 
-const formatDate = (dateString: string) => {
-	const date = new Date(dateString);
+const formatDate = (isoDateString: string) => {
+	const date = new Date(isoDateString);
 	return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
 };
 
-const formatTime = (dateString: string) => {
-	const date = new Date(dateString);
+const formatTime = (isoDateString: string) => {
+	const date = new Date(isoDateString);
 	return `${date.getHours().toString().padStart(2, '0')}:${date
 		.getMinutes()
 		.toString()
@@ -47,12 +47,12 @@ const ChatBody: React.FC<ChatBodyProps> = ({ messages, currentUser }) => {
 				return (
 					<React.Fragment key={message.id}>
 						{displayDateSeparator && (
-							<DateSeparator>{messageDate}</DateSeparator>
+							<DateSeparator>{formatDate(message.date)}</DateSeparator>
 						)}
 						<ChatMessageBox isCurrentUser={message.from === currentUser}>
-							<TimeDisplay>{formatTime(message.date)}</TimeDisplay>
 							<div>{message.from}</div>
 							<div>{message.content}</div>
+							<TimeDisplay>{formatTime(message.date)}</TimeDisplay>
 						</ChatMessageBox>
 					</React.Fragment>
 				);
