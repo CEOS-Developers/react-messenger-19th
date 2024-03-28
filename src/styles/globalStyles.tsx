@@ -10,6 +10,7 @@ const GlobalStyles = createGlobalStyle`
     background-color: #E5E6EB;
   }
   body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     background-color: #FFFFFF;
     opacity: 0.95;
     margin: 0 auto;
