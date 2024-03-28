@@ -5,12 +5,25 @@ interface ChatBottomProps {
 }
 
 const ChatBottom: React.FC<ChatBottomProps> = ({ onSendMessage }) => {
+	const [inputValue, setInputValue] = useState('');
 
-    const [inputValue, setInputValue] = useState('');
-    
+	const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+		if (event.key === 'Enter' && inputValue.trim()) {
+			onSendMessage(inputValue.trim());
+			setInputValue('');
+		}
+	};
+
 	return (
 		<div>
-			<input type='text' value='' />
+			<input
+				type='text'
+				value={inputValue}
+				onChange={(e: ChangeEvent<HTMLInputElement>) =>
+					setInputValue(e.target.value)
+				}
+				onKeyPress={handleKeyPress}
+			/>
 		</div>
 	);
 };
