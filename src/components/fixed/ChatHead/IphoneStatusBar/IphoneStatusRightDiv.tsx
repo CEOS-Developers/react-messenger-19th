@@ -15,9 +15,12 @@ const StyledIphoneStatusRightDiv = styled.div`
 export default function IphoneStatusRightDiv() {
   return (
     <StyledIphoneStatusRightDiv>
-      <StyledMobileSignalImage src="/icons/MobileSignal.png" />
-      <StyledWifiImage src="/icons/Wifi.png" />
-      <StyledBatteryImage src="/icons/_StatusBar-battery.png" />
+      <StyledMobileSignalImage
+        src="/images/mobileSignal.svg
+      "
+      />
+      <StyledWifiImage src="/images/Wifi.svg" />
+      <StyledBatteryImage src="/images/_StatusBar-battery.svg" />
     </StyledIphoneStatusRightDiv>
   );
 }

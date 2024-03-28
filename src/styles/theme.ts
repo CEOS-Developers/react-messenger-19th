@@ -16,6 +16,10 @@ const theme = {
       body2: '15px',
       label: '13px',
       caption: '10px',
+      thirtyTwoPixel: '32px',
+      sixteenPixel: '16px',
+      eightPixel: '8px',
+      fourPixel: '4px',
     },
     lineHeight: {
       h1: '150%',

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import * as ST from '@styles/styledComponents';
 
 const StyledChatHeadNavRight = styled.div`
   height: 32px;
@@ -12,21 +13,20 @@ const StyledChatHeadNavRight = styled.div`
 const StyledChatHeadNavRightCallImg = styled.img`
   width: 32px;
   height: 32px;
+  ${ST.hoverCursor}
 `;
 
 const StyledChatHeadNavRightBalloonImg = styled.img`
   width: 32px;
   height: 32px;
+  ${ST.hoverCursor}
 `;
 
 export default function ChatHeadNavRight() {
   return (
     <StyledChatHeadNavRight>
-      <StyledChatHeadNavRightCallImg
-        src="/icons/callCircle.png"
-        alt="This is call png image"
-      />
-      <StyledChatHeadNavRightBalloonImg src="/icons/chatBalloon.png" />
+      <StyledChatHeadNavRightCallImg src="/images/circleCall.svg" />
+      <StyledChatHeadNavRightBalloonImg src="/images/circleMessage.svg" />
     </StyledChatHeadNavRight>
   );
 }
