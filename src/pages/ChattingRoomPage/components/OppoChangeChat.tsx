@@ -34,6 +34,7 @@ export default function OppoChangeChat({
 const OppoContentBox = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 2px;
 `;
 
 const OppoImageBox = styled.div`
