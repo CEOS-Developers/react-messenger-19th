@@ -1,12 +1,37 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { PlusIcon, VoiceIcon, EmojiIcon } from '../../assets';
+export interface MessageTypes {
+  id: number;
+  rcvd: boolean;
+  sequential: boolean;
+  text: string;
+}
 
-export default function ChatFooter() {
+interface ChatFooterProps {
+  list: MessageTypes[];
+  setList: React.Dispatch<React.SetStateAction<MessageTypes[]>>;
+}
+
+export default function ChatFooter(props: ChatFooterProps) {
+  const { list, setList } = props;
   const [input, setInput] = useState('');
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (input.trim() !== '') {
+      handleList(input);
+    }
+  }
+
+  function handleList(input: string) {
+    const newMessage: MessageTypes = {
+      id: Date.now(),
+      rcvd: false,
+      sequential: true,
+      text: input,
+    };
+    setList([...list, newMessage]);
   }
 
   function handleInput(event: React.ChangeEvent<HTMLInputElement>) {

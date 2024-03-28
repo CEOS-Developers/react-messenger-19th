@@ -2,13 +2,31 @@ import styled from 'styled-components';
 import { flexCenter } from '../../styles/GlobalStyle';
 import { ProfileIcon } from '../../assets';
 import msgData from '../../assets/data/msgData.json';
+import { MessageTypes } from './ChatFooter';
+interface ChatContainerProps {
+  list: MessageTypes[];
+  setList: React.Dispatch<React.SetStateAction<MessageTypes[]>>;
+}
 
-export default function ChatContainer() {
+export default function ChatContainer(props: ChatContainerProps) {
+  const { list, setList } = props;
+
   return (
     <Wrapper>
       <Date>어제</Date>
       <Layout>
         {msgData.data.map((data) => {
+          return (
+            <ChatBox $rcvd={data.rcvd}>
+              {data.rcvd && !data.sequential && <ProfileIcon />}
+              <Details $sequential={data.rcvd && !data.sequential}>
+                {data.rcvd && !data.sequential && <Name>세오스</Name>}
+                <Message $rcvd={data.rcvd}>{data.text}</Message>
+              </Details>
+            </ChatBox>
+          );
+        })}
+        {list.map((data) => {
           return (
             <ChatBox $rcvd={data.rcvd}>
               {data.rcvd && !data.sequential && <ProfileIcon />}
