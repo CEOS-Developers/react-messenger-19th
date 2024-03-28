@@ -28,6 +28,13 @@ function ChattingRoom() {
 	// 현재 메시지 기롥 상태 관리
 	const [messages, setMessages] = useState<Message[]>([]);
 	const currentUser = initialUsers[currentUserIndex];
+	// 메세지 목록 끝으로 스크롤
+	const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+	useEffect(() => {
+		// 메시지가 추가될 때마다 스크롤을 하단으로 이동
+		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+	}, [messages]);
 
 	const sendMessage = (messageContent: string) => {
 		const today = new Date().toLocaleDateString('ko-KR', {
@@ -61,6 +68,7 @@ function ChattingRoom() {
 			<ChatHead user={currentUser} onUserClick={toggleUser} />
 			<ChatBody messages={messages} currentUser={currentUser.name} />
 			<ChatBottom onSendMessage={sendMessage} />
+			<div ref={messagesEndRef} />
 		</div>
 	);
 }
