@@ -1,9 +1,22 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ChattingPage from './pages/ChattingPage';
+import GlobalStyles from './style/GlobalStyles';
+import StatusBar from './components/StatusBar';
+import HomeIndicator from './components/HomeIndicator';
+
 function App() {
-	return (
-		<div>
-			<h1>19기 프론트엔드 파이팅!!! 디자인과 사이좋게 지내요~~~</h1>
-		</div>
-	);
+  return (
+    <BrowserRouter>
+      <GlobalStyles />
+      <div className="Container">
+        <StatusBar />
+        <Routes>
+          <Route path="/" element={<ChattingPage />} />
+        </Routes>
+        <HomeIndicator />
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;
