@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import * as ST from '@styles/styledComponents';
-import { useRef, forwardRef } from 'react';
+
+import { useRecoilState } from 'recoil';
+import { isInputBoxFocusedState } from '@context/state/atom';
 
 const StyledChatInputForm = styled.form`
   width: 100%;
@@ -51,16 +53,31 @@ const StyledStaleSendIcon = styled.img`
 const StyledClearSendIcon = styled.img``;
 
 export default function ChatInputForm() {
-  const inputRef = useRef();
+  const [isInputBoxFocused, setIsInputBoxFocused] = useRecoilState(
+    isInputBoxFocusedState
+  );
+
+  function handleToggleIsInputBoxFocused() {
+    setIsInputBoxFocused((prev) => !prev);
+  }
 
   return (
     <StyledChatInputForm>
-      <StyledPlusButton src="/images/circlePlus.svg" />
+      {isInputBoxFocused === false && (
+        <StyledPlusButton src="/images/circlePlus.svg" />
+      )}
       <StyledInputBoxContainer>
-        <StyledInputBox placeholder="메시지 보내기" />
+        <StyledInputBox
+          onFocus={handleToggleIsInputBoxFocused}
+          onBlur={handleToggleIsInputBoxFocused}
+        />
         <StyledSmilingIcon src="/images/smileEmoji.svg" />
       </StyledInputBoxContainer>
-      <StyledStaleSendIcon src="/images/staleSend.svg" />
+      {isInputBoxFocused === false ? (
+        <StyledStaleSendIcon src="/images/staleSend.svg" />
+      ) : (
+        <StyledStaleSendIcon src="/images/clearSend.svg" />
+      )}
     </StyledChatInputForm>
   );
 }

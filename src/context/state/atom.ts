@@ -16,3 +16,8 @@ export const userNumberState = atom({
   key: 'userNumber',
   default: 1,
 });
+
+export const isInputBoxFocusedState = atom({
+  key: 'isInputBoxFocused',
+  default: false,
+});
