@@ -137,7 +137,9 @@ table {
 }
 
 body{
-  min-height: 100vh;      
+  min-height: 100vh;
+  //임시
+  background-color: black;
 }
 
 button {

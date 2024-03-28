@@ -1,11 +1,7 @@
-import ChattingRoom from "./components/ChattingRoom";
+import Messenger from "./components/Messenger";
 
 function App() {
-  return (
-    <>
-      <ChattingRoom />
-    </>
-  );
+  return <Messenger />;
 }
 
 export default App;
