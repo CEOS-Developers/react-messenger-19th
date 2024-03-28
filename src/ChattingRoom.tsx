@@ -20,7 +20,14 @@ const initialUsers: User[] = [
 	{ name: '이영인', image: './item/profile_mini.png' },
 ];
 
+const initialMessages: Message[] = [];
+
 function ChattingRoom() {
+	// 현재 사용자 상태 관리
+	const [currentUserIndex, setCurrentUserIndex] = useState(0);
+	// 현재 메시지 기롥 상태 관리
+	const [messages, setMessages] = useState<Message[]>([]);
+	const currentUser = initialUsers[currentUserIndex];
 	return <div></div>;
 }
 
