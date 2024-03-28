@@ -1,8 +1,14 @@
 {
 	"users": [
 		{
+			"userId": 0,
+			"name": "김동혁",
+			"profileImage": "https://example.com/profiles/janedoe.jpg",
+			"statusMessage": "오늘도 행복하세요!"
+		},
+		{
 			"userId": 1,
-			"name": "Jane Doe",
+			"name": "정수완",
 			"profileImage": "https://example.com/profiles/janedoe.jpg",
 			"statusMessage": "오늘도 행복하세요!"
 		},
