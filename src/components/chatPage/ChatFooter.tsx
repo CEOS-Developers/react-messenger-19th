@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { PlusIcon, VoiceIcon, EmojiIcon } from '../../assets';
 import { MsgType } from '../../types/types';
+import date from '../../utils/date';
 interface ChatFooterProps {
   list: MsgType[];
   setList: React.Dispatch<React.SetStateAction<MsgType[]>>;
@@ -25,6 +26,7 @@ export default function ChatFooter(props: ChatFooterProps) {
       rcvd: false,
       sequential: true,
       text: input,
+      time: date(),
     };
     setList([...list, newMsg]);
   }

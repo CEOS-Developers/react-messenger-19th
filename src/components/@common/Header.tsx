@@ -1,17 +1,12 @@
 import styled from 'styled-components';
 import { InfoIcon } from '../../assets';
+import date from '../../utils/date';
 
 export default function Header() {
-  const today = new Date();
-  // const hours = String(today.getHours()).padStart(2, '0');
-  const hours = String(today.getHours());
-  const minutes = String(today.getMinutes()).padStart(2, '0');
-  const date = `${hours}:${minutes}`;
-
   return (
     <>
       <Wrapper>
-        <Time>{date}</Time>
+        <Time>{date().split(' ').slice(1)}</Time>
         <div>
           <InfoIcon />
         </div>

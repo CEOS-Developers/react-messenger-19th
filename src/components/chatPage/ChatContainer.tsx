@@ -2,39 +2,47 @@ import styled from 'styled-components';
 import { flexCenter } from '../../styles/GlobalStyle';
 import { ProfileIcon } from '../../assets';
 import chatData from '../../assets/data/chatData.json';
+import userData from '../../assets/data/userData.json';
 import { MsgType } from '../../types/types';
 import { useEffect, useRef } from 'react';
+
 interface ChatContainerProps {
   list: MsgType[];
+  userId: number;
 }
 
-function renderChat(data: MsgType) {
+function renderChat(data: MsgType, userId: number) {
+  const isSender = data.rcvd === (userId === 0);
+  const showTime = !isSender && data.sequential;
+
   return (
-    <ChatBox $rcvd={data.rcvd}>
-      {data.rcvd && !data.sequential && <ProfileIcon />}
-      <Details $sequential={data.rcvd && !data.sequential}>
-        {data.rcvd && !data.sequential && <Name>세오스</Name>}
-        <Text $rcvd={data.rcvd}>{data.text}</Text>
+    <ChatBox $rcvd={isSender} $sequential={data.sequential} key={data.id}>
+      {isSender && !data.sequential && <ProfileIcon />}
+      {showTime && <TimeNow>{data.time}</TimeNow>}
+      <Details $margin={isSender && data.sequential}>
+        {isSender && !data.sequential && <Name>{userData.data.find((user) => user.id === userId)?.name}</Name>}
+        <Text $rcvd={isSender}>{data.text}</Text>
       </Details>
+      {isSender && data.sequential && <TimeNow>{data.time}</TimeNow>}
     </ChatBox>
   );
 }
 
 export default function ChatContainer(props: ChatContainerProps) {
-  const { list } = props;
-  const listEndRef = useRef<HTMLDivElement>(null);
+  const { list, userId } = props;
+  const scrollEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    listEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    scrollEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [list]);
 
   return (
     <Wrapper>
-      <Date>어제</Date>
+      <Date>오늘</Date>
       <Layout>
-        {chatData.data.map((data) => renderChat(data))}
-        {list.map((data) => renderChat(data))}
-        <div ref={listEndRef} />
+        {chatData.data.map((data) => renderChat(data, userId))}
+        {list.map((data) => renderChat(data, userId))}
+        <div ref={scrollEndRef} />
       </Layout>
     </Wrapper>
   );
@@ -74,16 +82,17 @@ const Layout = styled.div`
   gap: 0.8rem;
 `;
 
-const ChatBox = styled.div<{ $rcvd: boolean }>`
+const ChatBox = styled.div<{ $rcvd: boolean; $sequential: boolean }>`
   display: flex;
   justify-content: ${({ $rcvd }) => ($rcvd ? 'none' : 'end')};
+  align-items: ${({ $sequential }) => ($sequential ? 'end' : 'none')};
   gap: 0.6rem;
 `;
 
-const Details = styled.div<{ $sequential: boolean }>`
+const Details = styled.div<{ $margin: boolean }>`
   display: flex;
   flex-direction: column;
-  margin-left: ${({ $sequential }) => ($sequential ? 'none' : '3.4rem')};
+  margin-left: ${({ $margin }) => ($margin ? '3.4rem' : 'none')};
 `;
 
 const Name = styled.p`
@@ -106,15 +115,10 @@ const Text = styled.div<{ $rcvd: boolean }>`
   background-color: ${({ theme, $rcvd }) => ($rcvd ? theme.colors.white : theme.colors.green_bg)};
 `;
 
-// const Status = styled.p`
-//   ${({ theme }) => theme.fonts.sent_time};
-//   color: var(--blue-3, ${({ theme }) => theme.colors.blue_txt});
-// `;
+const TimeNow = styled.p`
+  width: 4.5rem;
+  height: 1.4rem;
 
-// const TimeNow = styled.p`
-//   width: 4.5rem;
-//   height: 1.4rem;
-
-//   ${({ theme }) => theme.fonts.sent_time};
-//   color: var(--blue-3, ${({ theme }) => theme.colors.blue_txt});
-// `;
+  ${({ theme }) => theme.fonts.sent_time};
+  color: var(--blue-3, ${({ theme }) => theme.colors.blue_txt});
+`;

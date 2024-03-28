@@ -1,13 +1,26 @@
 import styled from 'styled-components';
 import { BackArrowIcon, FindIcon, CallIcon, IndexIcon } from '../../assets';
 import { flexCenter } from '../../styles/GlobalStyle';
+import userData from '../../assets/data/userData.json';
 
-export default function ChatHeader() {
+interface ChatHeaderProps {
+  userId: number;
+  setUserId: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export default function ChatHeader(props: ChatHeaderProps) {
+  const { userId, setUserId } = props;
+
+  function handleUser() {
+    const newUserId = userId === 0 ? 1 : 0;
+    setUserId(newUserId);
+  }
+
   return (
     <Wrapper>
       <Left>
         <BackArrowIcon />
-        <p>세오스</p>
+        <p onClick={handleUser}>{userData.data.find((user) => user.id === userId)?.name}</p>
       </Left>
       <Right>
         <FindIcon />

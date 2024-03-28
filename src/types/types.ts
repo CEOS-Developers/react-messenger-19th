@@ -3,4 +3,5 @@ export interface MsgType {
   rcvd: boolean;
   sequential: boolean;
   text: string;
+  time: string;
 }
