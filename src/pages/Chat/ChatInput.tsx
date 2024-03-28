@@ -6,6 +6,7 @@ import galleryIcon from "../../assets/icons/gallery.png"
 import recordIcon from "../../assets/icons/record.png"
 import stickerIcon  from "../../assets/icons/sticker.png"
 
+
 interface Props {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
@@ -29,7 +30,6 @@ const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       setValue("");
     }
   }
-
 
 
   return (

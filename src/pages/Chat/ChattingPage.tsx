@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import styled from "styled-components"
 import Header from "../../components/Header"
 import TopBarIcons from "../../components/TopBarIcons"
@@ -94,6 +94,12 @@ function ChattingPage() {
     }) 
   }
   
+  //스크롤 구현
+  const chatEndRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatData]);
+
 
  
 
@@ -114,13 +120,20 @@ function ChattingPage() {
             value={chat.value}
             time={chat.time}
             profileImg={chat.r_img}
-          /> ): (<ChatBubbleReceiver
+          /> ): (
+            <ChatBubbleReceiver
             key={chat.c_id}
             value={chat.value}
             time={chat.time}
             profileImg={chat.r_img}
-          />)
+            //조건 추후 수정 예정
+            isSameTime = {  key > 0 &&
+              chatData.chat[key - 1].sender === chat.sender &&
+              chatData.chat[key - 1].time === chat.time}
+            />)
           ))}
+        {/* 스크롤을 위한 빈 div */}
+        <div ref={chatEndRef} style={{ width: "100%" }}/>
         </ChatBody>
        <ChatInput
         addChatData={addChatData}
@@ -162,8 +175,10 @@ const FriendProfileName = styled.div`
 const ChatBody = styled.div`
   //background-color: beige;
   width: 100%;
-  height: 545.33px;
-  overflow: hidden;
+  flex: 1;
+  padding-top: 14.88px;
+  overflow-y: auto;
+  overflow-x: hidden;
 `
 
 

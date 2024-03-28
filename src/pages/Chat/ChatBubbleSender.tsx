@@ -3,7 +3,7 @@ import styled from "styled-components"
 interface Props {
     value : string,
     time: string,
-    profileImg: string
+    profileImg: string,
 }
 
 function ChatBubbleSender({value}: Props) {
@@ -18,8 +18,9 @@ const ChatBubbleWrapper = styled.div`
     flex-direction: row;
     width: 297.76px;
     height: fit-content;
-    margin-top: 14.88px;
+    margin-bottom: 14.88px;
     margin-left: 113.81px;
+    margin-right: 0;
 `
 const BubbleText = styled.div`
     width: 243.76px;
