@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import * as ST from '@styles/styledComponents';
+import { useRecoilState } from 'recoil';
+import { userNumberState } from '@context/state/atom';
 
 const StyledChatHeadNavLeft = styled.div`
   width: 122px;
@@ -35,11 +37,31 @@ const StyledUserNameSpan = styled.span`
 `;
 
 export default function ChatHeadNavLeft() {
+  const [userNumber, setUserNumber] = useRecoilState(userNumberState);
+
+  function handleClickChangeUserMode() {
+    if (userNumber === 1) {
+      setUserNumber(2);
+    } else if (userNumber === 2) {
+      setUserNumber(1);
+    }
+  }
   return (
     <StyledChatHeadNavLeft>
       <StyledChatHeavNavLeftBackImg src="/images/leftArrow.svg" />
-      <StyledChatHeadNavLeftDiscordImage src="/images/dicord_2.svg" />
-      <StyledUserNameSpan>김정민</StyledUserNameSpan>
+      <StyledChatHeadNavLeftDiscordImage
+        src="/images/dicord_2.svg"
+        onClick={handleClickChangeUserMode}
+      />
+      {userNumber === 1 ? (
+        <StyledUserNameSpan onClick={handleClickChangeUserMode}>
+          김정민
+        </StyledUserNameSpan>
+      ) : (
+        <StyledUserNameSpan onClick={handleClickChangeUserMode}>
+          김승완
+        </StyledUserNameSpan>
+      )}
     </StyledChatHeadNavLeft>
   );
 }
