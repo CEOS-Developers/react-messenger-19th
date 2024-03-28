@@ -77,6 +77,33 @@ export default function ChatRoomComponent(): JSX.Element {
 		}
 	};
 
+	useEffect(() => {
+		const inputField = document.querySelector('input[type="text"]'); // 메시지 입력 필드 선택
+		const chatContainer = document.querySelector('.ChatContainer') as HTMLElement; // ChatContainer 선택
+
+		const adjustChatContainer = (): void => {
+			if (window.innerHeight < window.innerWidth && chatContainer !== null) {
+				// 모바일 키보드가 활성화되면 실행될 로직
+				chatContainer.style.maxHeight = '50vh'; // chatContainer가 null이 아닐 때만 실행
+			}
+		};
+
+		const resetChatContainer = (): void => {
+			if (chatContainer !== null) {
+				// 키보드가 사라질 때 실행될 로직
+				chatContainer.style.maxHeight = '100vh'; // chatContainer가 null이 아닐 때만 실행
+			}
+		};
+
+		inputField?.addEventListener('focus', adjustChatContainer);
+		inputField?.addEventListener('blur', resetChatContainer);
+
+		return () => {
+			inputField?.removeEventListener('focus', adjustChatContainer);
+			inputField?.removeEventListener('blur', resetChatContainer);
+		};
+	}, []);
+
 	return (
 		<C.Wrapper>
 			<C.ChatHeader>
@@ -91,7 +118,7 @@ export default function ChatRoomComponent(): JSX.Element {
 				</C.HeaderBox>
 			</C.ChatHeader>
 
-			<C.ChatContainer ref={chatContainerRef}>
+			<C.ChatContainer ref={chatContainerRef} className="ChatContainer">
 				{messages.map((msg, index) => {
 					// 연속성(sentTime, userId) 판단
 					const isContinuous =
