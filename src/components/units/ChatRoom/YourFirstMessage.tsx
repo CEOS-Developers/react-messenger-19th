@@ -7,12 +7,13 @@ export default function YourFirstMessage(props: YourFirstMessageProps): JSX.Elem
 	const messages = useRecoilValue(chatMessagesState);
 	return (
 		<MessageContainer>
-			<Profile src="./ChatRoom/defaultProfile.svg" alt="profile" />
+			{!props.isContinuous && <Profile src="./ChatRoom/defaultProfile.svg" alt="profile" />}
 			<TextContainer>
-				<ProfileName>{props.name}</ProfileName>
+				{!props.isContinuous && <ProfileName>{props.name}</ProfileName>}
 				<Chat>
+					{props.isContinuous && <div style={{ marginLeft: '48px' }}></div>}
 					<ChatBox>{props.message}</ChatBox>
-					<ChatTail />
+					{!props.isContinuous && <ChatTail />}
 					<SentTime>{props.sentTime}</SentTime>
 				</Chat>
 			</TextContainer>

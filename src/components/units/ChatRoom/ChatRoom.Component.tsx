@@ -79,16 +79,28 @@ export default function ChatRoomComponent(): JSX.Element {
 			</C.ChatHeader>
 
 			<C.ChatContainer>
-				{messages.map((msg, index) =>
-					// 현재 메시지가 현재 활성 사용자에 의해 보내진 것인지 확인
-					msg.userId === (user === me.name ? me.userId : opposite.userId) ? (
-						// 현재 사용자가 보낸 메시지인 경우 (오른쪽에 위치시키기)
-						<MyFirstMessage key={index} message={msg.text} sentTime={sentTime} />
+				{messages.map((msg, index) => {
+					const isContinuous =
+						index > 0 &&
+						messages[index - 1].userId === msg.userId &&
+						messages[index - 1].sentTime === msg.sentTime;
+					return msg.userId === (user === me.name ? me.userId : opposite.userId) ? (
+						<MyFirstMessage
+							key={index}
+							message={msg.text}
+							sentTime={msg.sentTime}
+							isContinuous={isContinuous}
+						/>
 					) : (
-						// 현재 사용자가 받은 메시지인 경우 (왼쪽에 위치시키기)
-						<YourFirstMessage key={index} message={msg.text} name={msg.name} sentTime={sentTime} />
-					),
-				)}
+						<YourFirstMessage
+							key={index}
+							message={msg.text}
+							name={msg.name}
+							sentTime={msg.sentTime}
+							isContinuous={isContinuous}
+						/>
+					);
+				})}
 			</C.ChatContainer>
 
 			<C.InputContainer>

@@ -9,10 +9,12 @@ export interface Message {
 export interface MyFirstMessageProps {
 	message: string;
 	sentTime: string;
+	isContinuous: boolean;
 }
 
 export interface YourFirstMessageProps {
 	name: string;
 	message: string;
 	sentTime: string;
+	isContinuous: boolean;
 }
