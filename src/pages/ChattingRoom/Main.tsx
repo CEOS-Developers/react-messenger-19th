@@ -8,32 +8,22 @@ import voice from "../../assets/voice.svg";
 import send from "../../assets/send.svg";
 // data
 import userData from "../../data/user.json";
+import chattingData from "../../data/chatting.json";
 
 import { colors } from "../../style/colors";
 import { typography } from "../../style/typography";
 
 const Main = () => {
-  const data = [
-    {
-      text: "모든 국민은 헌법과 법률이 정한 법관에 의하여 법률에 의한 재판을 받을 권리를 가진다. 국가는 사회보장·사회복지의 증진에 노력할 의무를 진다. 국가는 건전한 소비행위를 계도하고 생산품의 품질향상을 촉구하기 위한 소비자보호운동을 법률이 정하는 바에 의하여 보장한다.",
-      sender: 2,
-      timestamp: "3월 21일 (목) 9:38 AM",
-    },
-    {
-      text: "법률안에 이의가 있을 때에는 대통령은 제1항의 기간내에 이의서를 붙여 국회로 환부하고, 그 재의를 요구할 수 있다. 국회의 폐회중에도 또한 같다. 대법원장의 임기는 6년으로 하며, 중임할 수 없다.",
-      sender: 0,
-      timestamp: "3월 21일 (목) 9:38 AM",
-    },
-    {
-      text: "행정각부의 장은 국무위원 중에서 국무총리의 제청으로 대통령이 임명한다. ",
-      sender: 2,
-      timestamp: "3월 22일 (금) 3:18 PM",
-    },
-  ];
-
   const [value, setValue] = useState("");
   const [isEmpty, setIsEmpty] = useState(true); // input란에 텍스트 입력 여부
-  const [chats, setChats] = useState(data);
+
+  // 데이터 관리
+  const storedChats = localStorage.getItem("chats");
+  const initialData = storedChats ? JSON.parse(storedChats) : chattingData;
+  const [chats, setChats] = useState(initialData);
+  useEffect(() => {
+    localStorage.setItem("chats", JSON.stringify(chats));
+  }, [chats]);
 
   // 스크롤 이동
   const chatWrapperRef = useRef<HTMLDivElement>(null);
