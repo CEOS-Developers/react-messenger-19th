@@ -84,7 +84,15 @@
       "id": 10,
       "rcvd": true,
       "sequential": true,
-      "text": "여의도 갔다가 더현대가서 밥먹으면 되겠네ㅎ 먹고 싶은거 있어?",
+      "text": "여의도 갔다가 더현대가서 밥먹으면 되겠네",
+      "isRead": true,
+      "likeCount": 0
+    },
+    {
+      "id": 11,
+      "rcvd": true,
+      "sequential": true,
+      "text": "먹고 싶은거 있어?",
       "isRead": true,
       "likeCount": 0
     }
