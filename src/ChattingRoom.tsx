@@ -31,6 +31,20 @@ function ChattingRoom() {
 	// 메세지 목록 끝으로 스크롤
 	const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
+    useEffect(() => {
+        // localStorage에서 메시지 데이터 로드
+        const savedMessages = localStorage.getItem('messages');
+        if (savedMessages) {
+          setMessages(JSON.parse(savedMessages));
+        }
+      }, []);
+    
+      useEffect(() => {
+        // 메시지 데이터를 localStorage에 저장
+        localStorage.setItem('messages', JSON.stringify(messages));
+      }, [messages]);
+    
+
 	useEffect(() => {
 		// 메시지가 추가될 때마다 스크롤을 하단으로 이동
 		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
