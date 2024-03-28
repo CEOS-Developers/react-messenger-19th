@@ -1,9 +1,24 @@
+import styled, { ThemeProvider } from 'styled-components';
+import { GlobalStyle } from './style/GlobalStyle';
+import theme from './style/Theme';
+
 function App() {
   return (
-    <div>
-      <h1>19기 프론트엔드 파이팅!!! 디자인과 사이좋게 지내요~~~</h1>
-    </div>
+    <>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <AppContainer></AppContainer>
+      </ThemeProvider>
+    </>
   );
 }
 
 export default App;
+
+const AppContainer = styled.div`
+  width: 37.5rem;
+  height: 81.2rem;
+  margin: 0 auto;
+  background-color: ${theme.white};
+  border-radius: 2.4rem;
+`;
