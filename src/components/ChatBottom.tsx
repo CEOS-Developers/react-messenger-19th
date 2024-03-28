@@ -1,5 +1,11 @@
 import React, { useState, KeyboardEvent, ChangeEvent } from 'react';
 
+import {
+	ChatBottomContainer,
+	ChatInput,
+	SendButton,
+} from '../style/ChatBottomStyle';
+
 interface ChatBottomProps {
 	onSendMessage: (messageContent: string) => void;
 }
@@ -9,14 +15,20 @@ const ChatBottom: React.FC<ChatBottomProps> = ({ onSendMessage }) => {
 
 	const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === 'Enter' && inputValue.trim()) {
+			sendMessage();
+		}
+	};
+
+	const sendMessage = () => {
+		if (inputValue.trim()) {
 			onSendMessage(inputValue.trim());
-			setInputValue('');
+			setInputValue(''); 
 		}
 	};
 
 	return (
-		<div>
-			<input
+		<ChatBottomContainer>
+			<ChatInput
 				type='text'
 				value={inputValue}
 				onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -24,7 +36,8 @@ const ChatBottom: React.FC<ChatBottomProps> = ({ onSendMessage }) => {
 				}
 				onKeyPress={handleKeyPress}
 			/>
-		</div>
+			<SendButton onClick={sendMessage}></SendButton>
+		</ChatBottomContainer>
 	);
 };
 

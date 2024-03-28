@@ -1,4 +1,5 @@
 import React from 'react';
+import { ChatHeadContainer, UserImage, UserName } from '../style/ChatHeadStyle';
 
 interface User {
 	name: string;
@@ -12,14 +13,14 @@ interface ChatHeadProps {
 
 const ChatHead: React.FC<ChatHeadProps> = ({ user, onUserClick }) => {
 	return (
-		<div onClick={onUserClick}>
-			<img
+		<ChatHeadContainer onClick={onUserClick}>
+			< UserImage
 				src={user.image}
 				alt='Profile'
 				style={{ width: '50px', height: '50px', borderRadius: '50%' }}
 			/>
-			<h2>{user.name}</h2>
-		</div>
+			<UserName>{user.name}</UserName>
+		</ChatHeadContainer>
 	);
 };
 
