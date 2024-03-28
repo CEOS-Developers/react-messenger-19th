@@ -3,6 +3,7 @@ import { GlobalStyle } from './styles/GlobalStyle';
 import theme from './styles/Theme';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
+import ChatRoom from 'components/ChatRoom/ChatRoom';
 
 function App() {
   return (
@@ -11,7 +12,9 @@ function App() {
         <GlobalStyle />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Layout />} />
+            <Route path="/" element={<Layout />}>
+              <Route index element={<ChatRoom />} />
+            </Route>
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
