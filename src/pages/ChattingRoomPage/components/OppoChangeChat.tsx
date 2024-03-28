@@ -1,6 +1,7 @@
 import theme from '@styles/theme';
 import styled from 'styled-components';
 import Pic from '@assets/img/pic.png';
+import useDoubleClick from '@hooks/useDoubleClick';
 
 interface OppoChangeChatProps {
   content: string;
@@ -15,21 +16,35 @@ export default function OppoChangeChat({
   isDisplay,
   from,
 }: OppoChangeChatProps) {
+  const { handleClick, isDoubleClicked } = useDoubleClick();
   return (
-    <OppoChangeChatWrapper>
-      <OppoImageBox>
-        <OppoImg src={Pic} alt="profile" />
-      </OppoImageBox>
-      <OppoContentBox>
-        <OppoChangeChatName>{from}</OppoChangeChatName>
-        <OppoChangeChatBox>{content}</OppoChangeChatBox>
-      </OppoContentBox>
-      <OppoChangeChatInfo>
-        {isDisplay && <OppoChangeChatTime>{time}</OppoChangeChatTime>}
-      </OppoChangeChatInfo>
-    </OppoChangeChatWrapper>
+    <OppoChangeChatContainer>
+      <OppoChangeChatWrapper>
+        <OppoImageBox>
+          <OppoImg src={Pic} alt="profile" />
+        </OppoImageBox>
+        <OppoContentBox>
+          <OppoChangeChatName>{from}</OppoChangeChatName>
+          <OppoChangeChatBox onClick={handleClick}>{content}</OppoChangeChatBox>
+        </OppoContentBox>
+        <OppoChangeChatInfo>
+          {isDisplay && <OppoChangeChatTime>{time}</OppoChangeChatTime>}
+        </OppoChangeChatInfo>
+      </OppoChangeChatWrapper>
+      {isDoubleClicked && <DUMMYBOX>하트</DUMMYBOX>}
+    </OppoChangeChatContainer>
   );
 }
+
+const DUMMYBOX = styled.div`
+  margin-left: 40px;
+`;
+
+const OppoChangeChatContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
 
 const OppoContentBox = styled.div`
   display: flex;

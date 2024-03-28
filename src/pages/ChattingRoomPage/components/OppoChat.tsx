@@ -1,4 +1,6 @@
+import useDoubleClick from '@hooks/useDoubleClick';
 import theme from '@styles/theme';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface OppochatProps {
@@ -7,20 +9,27 @@ interface OppochatProps {
   isDisplay: boolean;
 }
 
-export default function Oppochat({
-  content,
-  time,
-  isDisplay,
-}: OppochatProps) {
+export default function Oppochat({ content, time, isDisplay }: OppochatProps) {
+  const { handleClick, isDoubleClicked } = useDoubleClick();
   return (
-    <OppochatWrapper>
-      <OppochatBox>{content}</OppochatBox>
-      <OppoChatInfo>
-        {isDisplay && <OppochatTime>{time}</OppochatTime>}
-      </OppoChatInfo>
-    </OppochatWrapper>
+    <OppochatContainer>
+      <OppochatWrapper>
+        <OppochatBox onClick={handleClick}>{content}</OppochatBox>
+        <OppoChatInfo>
+          {isDisplay && <OppochatTime>{time}</OppochatTime>}
+        </OppoChatInfo>
+      </OppochatWrapper>
+      {isDoubleClicked && <div>하트</div>}
+    </OppochatContainer>
   );
 }
+
+const OppochatContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: 40px;
+`;
 
 const OppochatTime = styled.span`
   color: ${theme.colors.gray_1};
@@ -41,7 +50,6 @@ const OppochatWrapper = styled.section`
   display: flex;
   gap: 4px;
   align-self: flex-start;
-  margin-left: 40px;
 `;
 
 const OppochatBox = styled.div`
