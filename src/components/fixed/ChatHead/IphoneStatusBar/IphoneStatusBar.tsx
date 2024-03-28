@@ -3,8 +3,6 @@ import IphoneStatusLeftDiv from '@components/fixed/ChatHead/IphoneStatusBar/Ipho
 import IphoneStatusRightDiv from '@components/fixed/ChatHead/IphoneStatusBar/IphoneStatusRightDiv';
 
 const StyledIphoneStatusBar = styled.div`
-  /* position: absolute; */
-  /* top: 0; */
   width: 375px;
   height: 47px;
   display: flex;

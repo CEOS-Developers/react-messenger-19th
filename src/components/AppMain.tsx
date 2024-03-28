@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import ChatHead from '@components/fixed/ChatHead/ChatHead';
+import ChatBody from '@components/non-fixed/ChatBody/ChatBody';
 import ChatInput from '@components/non-fixed/ChatInput/ChatInput';
 import HomeIndicator from '@components/fixed/HomeIndicator/HomeIndicator';
 
@@ -14,6 +15,7 @@ export default function AppMain() {
   return (
     <StyledAppMain>
       <ChatHead />
+      <ChatBody />
       <ChatInput />
       <HomeIndicator />
     </StyledAppMain>

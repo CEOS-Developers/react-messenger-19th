@@ -5,19 +5,22 @@ const StyledHomeIndicator = styled.div`
   height: 34px;
   position: absolute;
   bottom: 0;
-  display: flex;
-  align-items: flex-start;
   z-index: 10;
   background-color: transparent;
-  /* opacity: 0; */
 `;
 
-const StyledHomeIndicatorImage = styled.img``;
+const StyledHomeIndicatorImage = styled.img`
+  position: absolute;
+  top: 21px;
+  right: 120px;
+  bottom: 8px;
+  left: 121px;
+`;
 
 export default function HomeIndicator() {
   return (
     <StyledHomeIndicator>
-      <StyledHomeIndicatorImage src="/images/iphoneHomeIndicator.svg" />
+      <StyledHomeIndicatorImage src="/images/HomeIndicator.svg" />
     </StyledHomeIndicator>
   );
 }
