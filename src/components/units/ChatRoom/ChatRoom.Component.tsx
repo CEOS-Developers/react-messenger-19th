@@ -1,4 +1,4 @@
-import { type ChangeEvent, useState, type MouseEvent } from 'react';
+import { type ChangeEvent, useState, type MouseEvent, useRef, useEffect } from 'react';
 import * as C from './ChatRoom.styles';
 
 import MyFirstMessage from './MyFirstMessage';
@@ -16,6 +16,17 @@ export default function ChatRoomComponent(): JSX.Element {
 	const [user, setUser] = useState<string>(me.name);
 	const [message, setMessage] = useState('');
 	const [messages, setMessages] = useRecoilState(chatMessagesState);
+
+	// chatContainer 스크롤 하단 고정
+	const chatContainerRef = useRef<HTMLDivElement | null>(null);
+
+	useEffect(() => {
+		// messages 배열이 변경될 때마다 실행
+		if (chatContainerRef.current !== null) {
+			const { scrollHeight, clientHeight } = chatContainerRef.current;
+			chatContainerRef.current.scrollTop = scrollHeight - clientHeight; // 스크롤을 맨 아래로 이동
+		}
+	}, [messages]); // messages 배열이 변경될 때마다 useEffect가 실행됩니다.
 
 	// 현재 시간을 24시간 형식으로 포맷
 	const now = new Date();
@@ -78,8 +89,9 @@ export default function ChatRoomComponent(): JSX.Element {
 				</C.HeaderBox>
 			</C.ChatHeader>
 
-			<C.ChatContainer>
+			<C.ChatContainer ref={chatContainerRef}>
 				{messages.map((msg, index) => {
+					// 연속성(sentTime, userId) 판단
 					const isContinuous =
 						index > 0 &&
 						messages[index - 1].userId === msg.userId &&
