@@ -30,11 +30,24 @@ function ChattingRoom() {
 	const currentUser = initialUsers[currentUserIndex];
 
 	const sendMessage = (messageContent: string) => {
+		const today = new Date().toLocaleDateString('ko-KR', {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric',
+			weekday: 'long',
+		});
+
+		const time = new Date().toLocaleTimeString('ko-KR', {
+			hour: '2-digit',
+			minute: '2-digit',
+			hour12: false,
+		});
+
 		const newMessage: Message = {
 			id: Date.now(),
 			from: currentUser.name,
 			content: messageContent,
-			date: new Date().toISOString(),
+			date: time,
 		};
 		setMessages([...messages, newMessage]);
 	};
