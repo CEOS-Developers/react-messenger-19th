@@ -15,4 +15,5 @@ const Wrapper = styled.div`
   width: 375px;
   height: 812px;
   margin: auto auto; // 가운데 정렬
+  background-color: white;
 `;
