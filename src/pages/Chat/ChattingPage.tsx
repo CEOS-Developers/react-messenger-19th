@@ -1,15 +1,17 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styled from "styled-components"
 import Header from "../../components/Header"
 import TopBarIcons from "../../components/TopBarIcons"
 import ChatInput from "./ChatInput"
 import friendProfile from "../../assets/img/friendProfile.png"
+import myProfile from "../../assets/img/myProfile.png"
 import Footer from "../../components/Footer"
 import dayjs from "dayjs"
+import ChatBubbleReceiver from "../Chat/ChatBubbleReceiver"
 
 
 function ChattingPage() {
-  interface ChatEle {
+  interface ChatType {
     //채팅 방 데이터
     r_id: number; //채팅방(room) 고유 id
     isGroup: boolean; //grop일 경우 group icon을 띄우기 위함
@@ -20,6 +22,7 @@ function ChattingPage() {
       c_id: number | null; //채팅 1개당 id
       sender: string; //발신자
       receiver: string; //수신자
+      r_img : string; //receiver_img 
       value: string; //텍스트 입력값
       time: string //텍스트 보낸 시간
     }[]
@@ -28,50 +31,60 @@ function ChattingPage() {
   const [value,  setValue] = useState<string>(''); //텍스트 입력값을 넣어주기 위한 state
   const [sender, setSender] = useState<string>('김다희');
   const [receiver, setReceiver] = useState<string>('김유빈');
-  const [chatData, setChatData] = useState<ChatEle>({
+  const [rImg, setRImg] = useState<string>('friendProfile');
+  const [chatData, setChatData] = useState<ChatType>({
     r_id: 0,
     isGroup: false,
     r_name: '김유빈',
-    r_profile: '',
+    r_profile: friendProfile, // 추후 데이터는 url 형태
     chat: [
       {
         c_id: null,
         sender: '',
         receiver: '',
+        r_img: '',
         value: '',
         time: ''
       },
     ],
   })
 
+  
   // 객체 생성
   const currentTime:string = dayjs().format('HH:mm'); // 시:분 형식으로 포맷팅
-  const getChatData = (value : string) => {
-    const newChatData = {
-      chat : [{
-        c_id: Date.now(),
-        sender: sender,
-        receiver: receiver,
-        value: value,
-        time: currentTime
-      }]
-    }
-    setChatData(prevState => ({
-      ...prevState,
-      chat: [...prevState.chat, ...newChatData.chat]
-    }));
-    localStorage.setItem("chatData", JSON.stringify([...chatData.chat, ...newChatData.chat]))
+
+  const getChatData = (value: string) => {
+    setChatData((prevChats: ChatType) => {
+      const newChatData = {
+        //localStorage 저장을 위해 분리
+        ...prevChats,
+        chat : [...prevChats.chat, {
+          c_id: Date.now(),
+          sender: sender,
+          receiver: receiver,
+          r_img: rImg,
+          value: value,
+          time: currentTime
+        }]
+      }
+      localStorage.setItem('chatData', JSON.stringify(newChatData))
+      return newChatData
+    }) //채팅리스트에 Input 추가
   }
+
+
 
   //유저 전환
   const toggleUser = () =>{
     if(sender == '김다희'){
       setSender('김유빈');
       setReceiver('김다희');
+      setRImg(myProfile);
     }
     else{
       setSender('김다희');
       setReceiver('김유빈');
+      setRImg(friendProfile);
     }
   }
 
@@ -81,12 +94,19 @@ function ChattingPage() {
        <Header/> 
        <TopBarIcons/>
        <ProfileInfoWrapper>
-          <FriendProfileImg src = {friendProfile} onClick={toggleUser}/>
+          <FriendProfileImg src = {rImg} onClick={toggleUser}/>
           <FriendProfileName> {receiver} </FriendProfileName>
        </ProfileInfoWrapper>
        <ChatBody>
-        <ChatBubble>가나다</ChatBubble>
-       </ChatBody>
+        {chatData.chat.map((chat, key) => (
+          <ChatBubbleReceiver
+            key={chat.c_id}
+            value={chat.value}
+            time={chat.time}
+            profileImg={chat.r_img}
+          />
+          ))}
+        </ChatBody>
        <ChatInput
         getChatData={getChatData}
         value={value}
@@ -129,8 +149,6 @@ const ChatBody = styled.div`
   width: 100%;
   height: 545.33px;
 `
-const ChatBubble = styled.div`
-  
-`
+
 
 export default ChattingPage
