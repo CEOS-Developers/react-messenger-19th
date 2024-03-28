@@ -26,24 +26,19 @@ function ChattingRoom() {
 	// 현재 사용자 상태 관리
 	const [currentUserIndex, setCurrentUserIndex] = useState(0);
 	// 현재 메시지 기롥 상태 관리
-	const [messages, setMessages] = useState<Message[]>([]);
+	const [messages, setMessages] = useState<Message[]>(() => {
+		// 로컬 스토리지에서 초기 메시지 로드
+		const savedMessages = localStorage.getItem('messages');
+		return savedMessages ? JSON.parse(savedMessages) : [];
+	});
 	const currentUser = initialUsers[currentUserIndex];
 	// 메세지 목록 끝으로 스크롤
 	const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-    useEffect(() => {
-        // localStorage에서 메시지 데이터 로드
-        const savedMessages = localStorage.getItem('messages');
-        if (savedMessages) {
-          setMessages(JSON.parse(savedMessages));
-        }
-      }, []);
-    
-      useEffect(() => {
-        // 메시지 데이터를 localStorage에 저장
-        localStorage.setItem('messages', JSON.stringify(messages));
-      }, [messages]);
-    
+	useEffect(() => {
+		// 메시지 데이터를 localStorage에 저장
+		localStorage.setItem('messages', JSON.stringify(messages));
+	}, [messages]);
 
 	useEffect(() => {
 		// 메시지가 추가될 때마다 스크롤을 하단으로 이동
@@ -70,7 +65,9 @@ function ChattingRoom() {
 			content: messageContent,
 			date: time,
 		};
-		setMessages([...messages, newMessage]);
+		
+		// 기존 메시지 배열에 새 메시지 추가
+		setMessages((prevMessages) => [...prevMessages, newMessage]);
 	};
 
 	const toggleUser = () => {
