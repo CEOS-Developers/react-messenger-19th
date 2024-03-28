@@ -26,7 +26,7 @@ export default function ChatRoomComponent(): JSX.Element {
 			const { scrollHeight, clientHeight } = chatContainerRef.current;
 			chatContainerRef.current.scrollTop = scrollHeight - clientHeight; // 스크롤을 맨 아래로 이동
 		}
-	}, [messages]); // messages 배열이 변경될 때마다 useEffect가 실행됩니다.
+	}, [messages]);
 
 	// 현재 시간을 24시간 형식으로 포맷
 	const now = new Date();
@@ -49,12 +49,14 @@ export default function ChatRoomComponent(): JSX.Element {
 
 		// 공백만 있는 메시지는 전송하지 않음
 		if (trimmedMessage !== '') {
+			const sentDate = new Date().toISOString().slice(0, 10); // 'YYYY-MM-DD' 형식으로 날짜 저장
 			const newMessage: Message = {
 				userId: user === me.name ? me.userId : opposite.userId,
 				name: user === me.name ? me.name : opposite.name,
 				text: trimmedMessage, // 공백이 제거된 메시지 내용
 				sender: me.name, // 혹은 다른 식별 가능한 사용자 정보
 				sentTime,
+				sentDate,
 			};
 
 			setMessages(prevMessages => [...prevMessages, newMessage]);
@@ -96,21 +98,32 @@ export default function ChatRoomComponent(): JSX.Element {
 						index > 0 &&
 						messages[index - 1].userId === msg.userId &&
 						messages[index - 1].sentTime === msg.sentTime;
-					return msg.userId === (user === me.name ? me.userId : opposite.userId) ? (
-						<MyFirstMessage
-							key={index}
-							message={msg.text}
-							sentTime={msg.sentTime}
-							isContinuous={isContinuous}
-						/>
-					) : (
-						<YourFirstMessage
-							key={index}
-							message={msg.text}
-							name={msg.name}
-							sentTime={msg.sentTime}
-							isContinuous={isContinuous}
-						/>
+					const isNewDay = index === 0 || messages[index - 1].sentDate !== msg.sentDate;
+
+					return (
+						<>
+							{isNewDay && (
+								<div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+									<C.DateSeparator>{formatDate(msg.sentDate)}</C.DateSeparator>
+								</div>
+							)}
+							{msg.userId === (user === me.name ? me.userId : opposite.userId) ? (
+								<MyFirstMessage
+									key={index}
+									message={msg.text}
+									sentTime={msg.sentTime}
+									isContinuous={isContinuous}
+								/>
+							) : (
+								<YourFirstMessage
+									key={index}
+									message={msg.text}
+									name={msg.name}
+									sentTime={msg.sentTime}
+									isContinuous={isContinuous}
+								/>
+							)}
+						</>
 					);
 				})}
 			</C.ChatContainer>
@@ -126,4 +139,14 @@ export default function ChatRoomComponent(): JSX.Element {
 			</C.InputContainer>
 		</C.Wrapper>
 	);
+}
+
+function formatDate(dateString: string): string {
+	const options: Intl.DateTimeFormatOptions = {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+		weekday: 'long',
+	};
+	return new Date(dateString).toLocaleDateString('ko-KR', options);
 }

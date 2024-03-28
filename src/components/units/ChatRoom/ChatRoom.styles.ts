@@ -75,3 +75,15 @@ export const ChatInput = styled.input`
 	outline: none;
 	border: none;
 `;
+
+export const DateSeparator = styled.div`
+	width: 44%;
+	margin: 10px 0;
+	padding: 6px 0;
+	text-align: center;
+
+	background-color: #7692b9;
+	border-radius: 50px;
+	color: #fff;
+	font-size: 12px;
+`;

@@ -4,6 +4,7 @@ export interface Message {
 	text: string;
 	sender: string;
 	sentTime: string;
+	sentDate: string;
 }
 
 export interface MyFirstMessageProps {
