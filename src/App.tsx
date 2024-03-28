@@ -1,25 +1,28 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import ChatRoom from './pages/ChatRoom';
+import { RecoilRoot } from 'recoil';
 
 function App(): JSX.Element {
 	return (
 		<>
-			<FullContainer>
-				<MobileContainer>
-					<BrowserRouter>
-						<Routes>
-							{/* <Route path="/" element={<Main />} /> */}
-							{/* <Route path="" element={<ChatList />}> */}
-							<Route path="/" element={<ChatRoom />} />
-							{/* </Route> */}
-							{/* <Route path="my-page" element={<MyPage />} /> */}
-							{/* <Route path="menu1" element={<Menu1 />} /> */}
-						</Routes>
-						{/* <Footer /> */}
-					</BrowserRouter>
-				</MobileContainer>
-			</FullContainer>
+			<RecoilRoot>
+				<FullContainer>
+					<MobileContainer>
+						<BrowserRouter>
+							<Routes>
+								{/* <Route path="/" element={<Main />} /> */}
+								{/* <Route path="" element={<ChatList />}> */}
+								<Route path="/" element={<ChatRoom />} />
+								{/* </Route> */}
+								{/* <Route path="my-page" element={<MyPage />} /> */}
+								{/* <Route path="menu1" element={<Menu1 />} /> */}
+							</Routes>
+							{/* <Footer /> */}
+						</BrowserRouter>
+					</MobileContainer>
+				</FullContainer>
+			</RecoilRoot>
 		</>
 	);
 }

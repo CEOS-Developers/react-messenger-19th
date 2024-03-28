@@ -56,6 +56,15 @@ export const InputContainer = styled.div`
 	gap: 17px;
 `;
 
+export const ChatForm = styled.form`
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+`;
+
 export const ChatInput = styled.input`
 	width: 90%;
 	height: 39px;
