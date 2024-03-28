@@ -17,6 +17,9 @@ export default function ChatRoomComponent(): JSX.Element {
 	const [message, setMessage] = useState('');
 	const [messages, setMessages] = useRecoilState(chatMessagesState);
 
+	// 입력창에 대한 참조 생성
+	const divRef = useRef<HTMLInputElement | null>(null);
+
 	// chatContainer 스크롤 하단 고정
 	const chatContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -78,29 +81,22 @@ export default function ChatRoomComponent(): JSX.Element {
 	};
 
 	useEffect(() => {
-		const inputField = document.querySelector('input[type="text"]'); // 메시지 입력 필드 선택
-		const chatContainer = document.querySelector('.ChatContainer') as HTMLElement; // ChatContainer 선택
-
-		const adjustChatContainer = (): void => {
-			if (window.innerHeight < window.innerWidth && chatContainer !== null) {
-				// 모바일 키보드가 활성화되면 실행될 로직
-				chatContainer.style.maxHeight = '50vh'; // chatContainer가 null이 아닐 때만 실행
+		const handleVisualViewPortResize = (): void => {
+			const currentVisualViewport = window.visualViewport?.height ?? window.innerHeight;
+			if (divRef.current !== null) {
+				// 입력창의 높이를 visualViewport의 높이에서 일정 값을 뺀 값으로 설정
+				divRef.current.style.height = `${currentVisualViewport - 30}px`;
+				// 화면을 입력창의 위치로 스크롤
+				window.scrollTo(0, 40);
 			}
 		};
 
-		const resetChatContainer = (): void => {
-			if (chatContainer !== null) {
-				// 키보드가 사라질 때 실행될 로직
-				chatContainer.style.maxHeight = '100vh'; // chatContainer가 null이 아닐 때만 실행
-			}
-		};
+		// visualViewport의 resize 이벤트에 핸들러 등록
+		window.visualViewport?.addEventListener('resize', handleVisualViewPortResize);
 
-		inputField?.addEventListener('focus', adjustChatContainer);
-		inputField?.addEventListener('blur', resetChatContainer);
-
+		// 컴포넌트 언마운트 시 이벤트 핸들러 제거
 		return () => {
-			inputField?.removeEventListener('focus', adjustChatContainer);
-			inputField?.removeEventListener('blur', resetChatContainer);
+			window.visualViewport?.removeEventListener('resize', handleVisualViewPortResize);
 		};
 	}, []);
 
@@ -158,7 +154,7 @@ export default function ChatRoomComponent(): JSX.Element {
 			<C.InputContainer>
 				<C.SVGIcon src="./ChatRoom/add.svg" />
 				<C.ChatForm onSubmit={onSubmitForm}>
-					<C.ChatInput type="text" onChange={onChangeMessage} value={message} />
+					<C.ChatInput type="text" onChange={onChangeMessage} value={message} ref={divRef} />
 					<button type="submit" style={{ border: 'none', background: 'transparent' }}>
 						<C.SVGIcon src="./ChatRoom/send.svg" />
 					</button>
