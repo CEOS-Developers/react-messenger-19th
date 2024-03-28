@@ -2,13 +2,14 @@ import styled from 'styled-components';
 import theme from '../styles/Theme';
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
+import Footer from 'components/Footer';
 
 function Layout() {
   return (
     <LayoutContainer>
       <Header />
       <Outlet />
-      {/* <Footer /> */}
+      <Footer />
     </LayoutContainer>
   );
 }
