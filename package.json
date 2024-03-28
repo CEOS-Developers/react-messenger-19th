@@ -25,6 +25,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
+    "serve": "serve -s build",
     "push": "git push origin Programming-Seungwan:Programming-Seungwan"
   },
   "eslintConfig": {
