@@ -14,7 +14,7 @@ interface ChatHeadProps {
 const ChatHead: React.FC<ChatHeadProps> = ({ user, onUserClick }) => {
 	return (
 		<ChatHeadContainer onClick={onUserClick}>
-			< UserImage
+			<UserImage
 				src={user.image}
 				alt='Profile'
 				style={{ width: '50px', height: '50px', borderRadius: '50%' }}

@@ -6,8 +6,8 @@ import {
 	SendButton,
 } from '../style/ChatBottomStyle';
 
-const sendIcon = '/item/sendIcon.png'; 
-const micIcon = 'item/micIcon.png'; 
+const sendIcon = '/item/sendIcon.png';
+const micIcon = '/item/micIcon.png';
 
 interface ChatBottomProps {
 	onSendMessage: (messageContent: string) => void;
@@ -42,10 +42,7 @@ const ChatBottom: React.FC<ChatBottomProps> = ({ onSendMessage }) => {
 				}
 				onKeyPress={handleKeyPress}
 			/>
-			<SendButton
-				onClick={sendMessage}
-				backgroundImage={buttonImage}
-			></SendButton>
+			<SendButton src={buttonImage} onClick={sendMessage} alt='Send' />
 		</ChatBottomContainer>
 	);
 };

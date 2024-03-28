@@ -45,16 +45,17 @@ function ChattingRoom() {
 		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
 	}, [messages]);
 
-	const sendMessage = (messageContent: string) => {
-		const newMessage: Message = {
-			id: Date.now(),
-			from: currentUser.name,
-			content: messageContent,
-			date: new Date().toISOString(), // ISO 형식의 날짜 문자열 사용
-		};
-
-		setMessages((prevMessages) => [...prevMessages, newMessage]);
-	};
+    const sendMessage = (messageContent: string) => {
+        const newMessage: Message = {
+            id: Date.now(),
+            from: currentUser.name,
+            content: messageContent,
+            date: new Date().toISOString(), // ISO 형식의 날짜 문자열 사용
+        };
+    
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
+    };
+    
 
 	const toggleUser = () => {
 		setCurrentUserIndex((currentIndex) => (currentIndex === 0 ? 1 : 0));

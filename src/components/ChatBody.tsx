@@ -1,9 +1,12 @@
+
 import React from 'react';
 import {
 	ChatBodyContainer,
 	TimeDisplay,
 	DateSeparator,
 	ChatMessageBox,
+    UserProfileImage
+    
 } from '../style/ChatBodyStyle';
 
 interface Message {
@@ -49,11 +52,11 @@ const ChatBody: React.FC<ChatBodyProps> = ({ messages, currentUser }) => {
 						{displayDateSeparator && (
 							<DateSeparator>{formatDate(message.date)}</DateSeparator>
 						)}
+                    <TimeDisplay>{formatTime(message.date)}</TimeDisplay>
 						<ChatMessageBox isCurrentUser={message.from === currentUser}>
-							<div>{message.from}</div>
 							<div>{message.content}</div>
-							<TimeDisplay>{formatTime(message.date)}</TimeDisplay>
 						</ChatMessageBox>
+                        <UserProfileImage src='/item/profile_mini.png' isCurrentUser={message.from === currentUser}/>
 					</React.Fragment>
 				);
 			})}
