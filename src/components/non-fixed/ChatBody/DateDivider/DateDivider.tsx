@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { dateStringProps } from 'types/type';
 import { dateBeforeAfter } from '@styles/styledComponents';
+import { chatBodyDivElementGap } from '@styles/styledComponents';
 
 const StyledDateDividerContainer = styled.div`
   width: 100%;
@@ -9,6 +10,7 @@ const StyledDateDividerContainer = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+  ${chatBodyDivElementGap}
 `;
 
 const StyledDateDivider = styled.div`

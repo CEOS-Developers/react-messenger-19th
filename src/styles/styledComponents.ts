@@ -14,3 +14,7 @@ export const dateBeforeAfter = css`
   height: 1px;
   background-color: ${(props) => props.theme.color.grayMedium};
 `;
+
+export const chatBodyDivElementGap = css`
+  margin-bottom: 24px;
+`;
