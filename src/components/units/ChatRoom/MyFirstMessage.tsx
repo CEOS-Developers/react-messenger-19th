@@ -6,9 +6,9 @@ export default function MyFirstMessage(props: MyFirstMessageProps): JSX.Element 
 		<MessageContainer>
 			<TextContainer>
 				<Chat>
-					<ChatBox>{props.message}</ChatBox>
+					<SentTime>12:32</SentTime>
 					<ChatTail />
-					<SentTime>124124</SentTime>
+					<ChatBox>{props.message}</ChatBox>
 				</Chat>
 			</TextContainer>
 		</MessageContainer>
@@ -28,19 +28,22 @@ const TextContainer = styled.div`
 `;
 
 const Chat = styled.div`
+	width: 100%;
 	position: relative; // 꼬리 이미지의 위치 기준점이 됩니다.
 	display: flex;
-	flex-direction: column;
-	align-items: flex-end; // ChatBox가 왼쪽에 정렬되도록 합니다.
+	justify-content: end;
+	align-items: end;
 	margin-right: 10px; // 나선형 꼬리 이미지와 충분한 공간을 확보합니다.
 `;
 
 const ChatBox = styled.div`
-	max-width: 80%;
+	width: 80%;
 	background-color: #9de694;
 	padding: 8px 12px;
 	border-radius: 15px;
-	font-size: 16px;
+	font-size: 14px;
+	word-wrap: break-word; // 긴 텍스트를 자동으로 줄바꿈합니다.
+	white-space: normal; // 텍스트의 공백을 적절히 처리합니다.
 `;
 
 const ChatTail = styled.div`
@@ -54,9 +57,6 @@ const ChatTail = styled.div`
 `;
 
 const SentTime = styled.div`
-	position: absolute;
-	bottom: 0px;
-	left: 10px;
 	font-size: 12px;
 	color: #666; // 시간 표시 색상 조절
 	padding: 2px 5px; // 필요한 경우 패딩 조절
