@@ -31,7 +31,7 @@ function ChattingPage() {
   const [value,  setValue] = useState<string>(''); //텍스트 입력값을 넣어주기 위한 state
   const [sender, setSender] = useState<string>('김다희');
   const [receiver, setReceiver] = useState<string>('김유빈');
-  const [rImg, setRImg] = useState<string>('../../assets/img/friendProfile.png');
+  const [rImg, setRImg] = useState<string>(friendProfile);
   const [chatData, setChatData] = useState<ChatType>({
     r_id: 0,
     isGroup: false,
@@ -57,6 +57,20 @@ function ChattingPage() {
     }
   }, [])
 
+   //유저 전환
+   const toggleUser = () =>{
+    if(sender == '김다희'){
+      setSender('김유빈');
+      setReceiver('김다희');
+      setRImg(myProfile);
+    }
+    else{
+      setSender('김다희');
+      setReceiver('김유빈');
+      setRImg(friendProfile);
+    }
+  }
+
 
   // 객체 생성
   const currentTime:string = dayjs().format('HH:mm'); // 시:분 형식으로 포맷팅
@@ -69,7 +83,7 @@ function ChattingPage() {
           c_id: Date.now(),
           sender: sender,
           receiver: receiver,
-          r_img: rImg,
+          r_img: sender === '김다희' ? myProfile : friendProfile,
           value: value,
           time: currentTime
         }]
@@ -81,19 +95,7 @@ function ChattingPage() {
   }
   
 
-  //유저 전환
-  const toggleUser = () =>{
-    if(sender == '김다희'){
-      setSender('김유빈');
-      setReceiver('김다희');
-      setRImg(myProfile);
-    }
-    else{
-      setSender('김다희');
-      setReceiver('김유빈');
-      setRImg(friendProfile);
-    }
-  }
+ 
 
 
   return (
@@ -161,7 +163,7 @@ const ChatBody = styled.div`
   //background-color: beige;
   width: 100%;
   height: 545.33px;
-  overflow: scroll;
+  overflow: hidden;
 `
 
 
