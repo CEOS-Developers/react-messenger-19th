@@ -42,6 +42,7 @@
 2. 친구와의 메시지 탭을 누르면 바로 메시지 url로 넘어감 : `message/{친구명}`의 주소로 처리됨
 3. <- arrow를 통해서 이전의 `/message` 주소로 리디렉션됨.
 
-### 해결 포인트
+### 해결 포인트(trouble shooting)
 
 1. input 박스 옆에 웃는 아이코은 span 태그 내부에 input과 이모지를 flex item으로 구성하며 해당 길이는 따라서 조정해줘야 함 => 아예 컨테이너를 만들어서 그 안에 input 요소를 넣고 이모지는 absolute 속성으로서 해결함
+2. focused가 된 상태에서 제출 버튼을 누르면 폼이 제출 되는 것이 아니라 그냥 입력해제가 되어버림. onBlur가 먼저 트리거 됨 => `handleToggleIsInputBoxFocused` 함수의 내부 조건부 로직으로 바꿔줌
