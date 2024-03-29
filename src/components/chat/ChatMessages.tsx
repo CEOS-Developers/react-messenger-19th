@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 
-
 // 날짜별로 메세지 그룹화하기!!
 const groupMessagesByDate = (messages: Message[]) => {
   const grouped: { [key: string]: Message[] } = {};
@@ -56,7 +55,7 @@ const ChatMessages: React.FC = () => {
   }, [messages]); 
 
   return (
-    <MessagesContainer>
+    <MessagesContainer className='scroll-box'>
       {Object.entries(groupedMessages).map(([date, groupMessages], index) => (
         <React.Fragment key={index}>
           <DateLabel>{formatDate(date)}</DateLabel>
@@ -113,8 +112,6 @@ const MessagesContainer = styled.div`
   height: 646px;
 
   background-color: #E3E4EB;
-
-  overflow-y: auto;
   `;
 
   const MessageLayout = styled.div<{ isSender: boolean }>`

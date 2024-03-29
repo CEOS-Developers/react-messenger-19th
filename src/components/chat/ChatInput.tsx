@@ -196,6 +196,7 @@ const InputBox = styled.input<InputBoxProps>`
   flex: 1;
   height: 29px;
   border: none;
+  padding: 7px 0 7px 16px; 
   background-color: transparent;
   font-family:'Pretendard';
   &:focus {

@@ -46,6 +46,31 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   }
+
+  .scroll-box{
+    overflow-y: scroll; 
+    
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border: 4px solid transparent;
+    background-clip: padding-box; 
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #BEC4CD;
+    border-radius: 100px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #A6ADB7;
+    cursor: pointer;
+  }  
+ }
 `;
 
 export default GlobalStyle;
