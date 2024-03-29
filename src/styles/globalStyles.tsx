@@ -8,7 +8,8 @@ const GlobalStyles = createGlobalStyle`
   }
   html {
     background-color: #E5E6EB;
-    height: 100%;
+    /* height: 100%; */
+    height: 100dvh;
   }
   body {
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
