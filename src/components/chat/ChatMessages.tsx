@@ -9,69 +9,17 @@ import EmojiModal from './EmojiModal';
 
 
 
-function parseISODateTime(timestamp: string = ""): Date {
-  console.log("Parsing timestamp:", timestamp);
-  if (!timestamp) {
-    return new Date();
-  }
 
-  try {
-    let year, month, day, hour, minute, second;
+//날짜 형식에 맞게 포맷팅하기 (12월 25일 (월) 이런식)
+const formatShortDate = (timestamp: string) => {
+  const date = new Date(timestamp);
+  const month = date.toLocaleString('ko-KR', { month: 'long' });
+  const day = date.toLocaleString('ko-KR', { day: '2-digit' });
+  const weekday = date.toLocaleString('ko-KR', { weekday: 'short' });
 
-    if (timestamp.includes('T')) {
-      // ISO 형식 (2024-03-29T07:29:55.177Z)
-      const [datePart, timePart] = timestamp.split('T');
-      [year, month, day] = datePart.split('-').map(num => parseInt(num, 10));
-      [hour, minute, second] = timePart.split(':').map(num => parseInt(num, 10));
-    } else if (timestamp.includes('.')) {
-      // 다른 형식 (2023. 12. 26.)
-      [year, month, day] = timestamp.split('.').map(num => parseInt(num.trim(), 10));
-      hour = minute = second = 0; 
-    } else {
-      throw new Error('Unsupported timestamp format');
-    }
-
-    return new Date(Date.UTC(year, month - 1, day, hour, minute, second));
-  } catch (error) {
-    console.error('Error parsing timestamp in parseISODateTime:', error);
-    // 파싱 중 오류 발생 시 현재 날짜/시간 반환
-    return new Date();
-  }
-}
-
-
-// 날짜별로 메세지 그룹화하기!!
-const groupMessagesByDate = (messages: Message[]) => {
-  const grouped: { [key: string]: Message[][] } = {};
-  messages.forEach((message) => {
-    const dateKey = parseISODateTime(message.timestamp).toLocaleDateString('ko-KR', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    });
-
-    if (!grouped[dateKey]) {
-      grouped[dateKey] = [];
-    }
-
-    const lastGroup = grouped[dateKey][grouped[dateKey].length - 1];
-    if (lastGroup && lastGroup[lastGroup.length - 1].senderId === message.senderId &&
-        (parseISODateTime(message.timestamp).getTime() - parseISODateTime(lastGroup[lastGroup.length - 1].timestamp).getTime()) <= 60000) {
-      lastGroup.push(message);
-    } else {
-      grouped[dateKey].push([message]);
-    }
-  });
-
-  return grouped;
+  return `${month} ${day} (${weekday})`;
 };
 
-//날짜 형식에 맞게 포맷팅하기 (오전 12:02 이렇게..!!)
-const formatDate = (timestamp: string) => {
-  const date = parseISODateTime(timestamp);
-  const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric', weekday: 'short' };
-  return date.toLocaleDateString('ko-KR', options).replace('.', '');
-};
 
 
 
@@ -93,12 +41,45 @@ const ChatMessages: React.FC = () => { //상턔관리 변수들
   const filteredMessages = messages.filter(
     message => message.senderId === selectedUserId || message.receiverId === selectedUserId
   );
+
+  
+  //날짜로 메세지 그룹화하기 (꼬리물기)
+  const groupMessagesByDate = (messages: Message[]) => {
+    const grouped: { [key: string]: Message[][] } = {}; //그룹화된 메세지를 저장
+    messages.forEach((message) => {
+      const dateKey = formatShortDate(message.timestamp); //기준: 날짜
+  
+      if (!grouped[dateKey]) {
+        grouped[dateKey] = [];
+      }
+  
+      const lastGroup = grouped[dateKey][grouped[dateKey].length - 1];
+      if (
+        lastGroup &&
+        lastGroup[lastGroup.length - 1].senderId === message.senderId && //자신이 보낸 메세지가 마지막 것인지
+        new Date(message.timestamp).getTime() - new Date(lastGroup[lastGroup.length - 1].timestamp).getTime() <= 60000 //시간차 1분
+      ) {
+        lastGroup.push(message); // 꼬리물기
+      } else {
+        grouped[dateKey].push([message]); //새그룹 (시간뜨게)
+      }
+    });
+  
+    return grouped;
+  };
+  
+
   const groupedMessages = groupMessagesByDate(filteredMessages);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }; //메세지 보냈을 때 스크롤 자동으로 맨 아래로 이동!!
+
+
+
 
   // 이모지 선택 핸들러
   const handleEmojiSelect = (messageId: string, emojiUrl: string) => {
@@ -117,10 +98,14 @@ const ChatMessages: React.FC = () => { //상턔관리 변수들
     setActiveModalMessageId(null); 
   };
 
+
+
   //모달창 열고닫는 토글 핸들러
   const toggleEmojiModalForMessage = (messageId: string) => {
     setActiveModalMessageId(prevId => prevId === messageId ? null : messageId);
   };
+
+
 
 // 이모지 불러오기
 const loadEmojisFromLocalStorage = () => {
@@ -143,11 +128,12 @@ const loadEmojisFromLocalStorage = () => {
 
   }, [messages]); 
 
+
   return (
       <MessagesContainer className='scroll-box'>
         {Object.entries(groupedMessages).map(([timestamp, groupMessages], index) => (
           <React.Fragment key={index}>
-            <DateLabel>{formatDate(timestamp)}</DateLabel>
+            <DateLabel>{timestamp}</DateLabel> {/*'날짜' 출력*/}
             {groupMessages.map((group, groupIndex) => (
               <React.Fragment key={groupIndex}>
                 {group.map((message, messageIndex) => (
@@ -156,10 +142,10 @@ const loadEmojisFromLocalStorage = () => {
                       // 발신자 레이아웃: 시간 (맨 처음 톡에만) -> 메시지
                       <>
                         {messageIndex === 0 && ( // 맨처음 톡에만 시간 떠야됨
-                          <Timestamp isSender={message.senderId === selectedUserId}>
-                            {new Date(message.timestamp).toLocaleTimeString('ko-KR', 
-                            { hour: 'numeric', minute: '2-digit', hour12: true }).replace('AM', '오전').replace('PM', '오후')}
-                          </Timestamp>
+                          <Timestamp isSender={message.senderId === selectedUserId}> 
+                            {new Date(message.timestamp).toLocaleTimeString('ko-KR',
+                            { hour: 'numeric', minute: '2-digit', hour12: true }).replace('AM', '오전').replace('PM', '오후')}  {/*오전 12:26 형식으로 '시간' 출력하기!!!*/}
+                          </Timestamp> 
                         )}
                         <MessageItem 
                           isSender={message.senderId === selectedUserId}
