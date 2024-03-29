@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import StatusBar from "../../components/common/StatusBar";
+import { useSenderContext } from "../../assets/SenderContext";
+
 import userData from "../../data/user.json";
+
 // image
 import back from "../../assets/back.svg";
 import profileArrow from "../../assets/profileArrow.svg";
@@ -9,16 +12,21 @@ import { colors } from "../../style/colors";
 import { typography } from "../../style/typography";
 
 const Header = () => {
-  const userIdx = 2; // 임시
+  const { sender, setSender } = useSenderContext();
+  const user = userData.users[sender];
+
+  const toggleSender = () => {
+    sender === 0 ? setSender(2) : setSender(0);
+  };
   return (
     <Wrapper>
       <StatusBar />
       <RoomInfoWrapper>
         <img src={back} />
-        <RoomInfo>
-          <img src={`img/userProfile/${userData.users[userIdx].profileImg}`} />
+        <RoomInfo onClick={toggleSender}>
+          <RoomProfile src={`img/userProfile/${user.profileImg}`} />
           <RoomNameWrapper>
-            <RoomName>{userData.users[userIdx].name}</RoomName>
+            <RoomName>{user.name}</RoomName>
             <img src={profileArrow} />
           </RoomNameWrapper>
         </RoomInfo>
@@ -47,6 +55,13 @@ const RoomInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+`;
+
+const RoomProfile = styled.img`
+  height: 3.25rem;
+  width: auto;
+  justify-content: center;
+  align-items: center;
 `;
 
 const RoomNameWrapper = styled.div`
