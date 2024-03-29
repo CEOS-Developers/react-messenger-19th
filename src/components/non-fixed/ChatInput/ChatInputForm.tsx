@@ -10,6 +10,7 @@ import {
 } from '@context/state/atom';
 import { adjustTimeForUserLocation } from '@utils/makeTimeString';
 import sortByDate from '@utils/sortArrayByDate';
+import useScrollToBottom from '@hooks/useScrollToBottom';
 
 const StyledChatInputForm = styled.form`
   width: 100%;
@@ -78,6 +79,7 @@ export default function ChatInputForm() {
     messageDateArrayState
   );
   const [userNumber, setUserNumber] = useRecoilState(userNumberState);
+  const [scrollToBottom, setScrollFunction] = useScrollToBottom();
 
   function handleToggleIsInputBoxFocused() {
     // 포커스가 되었는데 값이 있는 상태에서 블러가 풀리는 것으로 가면 상태를 변경시키지 않음 => 내용이 없는 상태에서 메시지 전송도 막아줌
@@ -90,10 +92,10 @@ export default function ChatInputForm() {
   function handleSubmitForm(ev: any) {
     if (isInputBoxFocused === false) {
       ev.preventDefault();
-      console.log('hi');
+      // console.log('hi');
     } else if (isInputBoxFocused === true) {
       ev.preventDefault();
-      console.log('good');
+      // console.log('good');
       const createdAt = adjustTimeForUserLocation();
       const createdDate = createdAt.slice(0, 10);
       const content = inputRef.current?.value as string;
@@ -137,6 +139,7 @@ export default function ChatInputForm() {
       if (inputRef.current !== null) {
         inputRef.current.value = '';
       }
+      // scrollToBottom();
     }
   }
 

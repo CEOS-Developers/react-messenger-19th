@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import OneDateContainer from '@components/non-fixed/ChatBody/OneDateContainer/OneDateContainer';
 import { messageDataObject, voidFunction } from '@_type/type';
 import sortByDate from '@utils/sortArrayByDate';
+import useScrollToBottom from '@hooks/useScrollToBottom';
 
 const StyledChatBodyContainer = styled.div`
   flex-grow: 1;
@@ -25,12 +26,23 @@ export default function ChatBody() {
     messageDateArrayState
   );
 
-  const scrollToBottom: voidFunction = function () {
+  const [scrollToBottom, setScrollFunction] = useScrollToBottom();
+
+  const scrollToBottomFunction: voidFunction = function () {
     if (chatBodyContainerRef.current) {
       chatBodyContainerRef.current.scrollTop =
         chatBodyContainerRef.current.scrollHeight;
     }
   };
+
+  useEffect(() => {
+    setScrollFunction(scrollToBottomFunction);
+  }, []);
+
+  // messageData가 변경된 이후에 dom에 반영되고 그 다음에 scroll이 내려가야 새로 생긴 요소까지 반영
+  useEffect(() => {
+    scrollToBottom();
+  }, [messageData]);
 
   // 처음 chatBody 컴포넌트가 DOM에 마운트 되면 json 파일로부터 정보를 가져온다.
   useEffect(() => {
