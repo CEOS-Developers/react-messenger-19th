@@ -5,6 +5,7 @@ import { messageDataState, userNumberState } from '@context/state/atom';
 const StyledChatLogRightContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 const StyledNameAndMessageContainer = styled.div`
@@ -90,8 +91,8 @@ export default function ChatLogRight({
   }
 
   return (
-    <StyledChatLogRightContainer>
-      <StyledNameAndMessageContainer onDoubleClick={handleDoubleClickMessage}>
+    <StyledChatLogRightContainer onDoubleClick={handleDoubleClickMessage}>
+      <StyledNameAndMessageContainer>
         <StyledNameSpan>{from === 2 ? '김정민' : '김승완'}</StyledNameSpan>
         <StyledTimeSpan>{createdHourMinute}</StyledTimeSpan>
       </StyledNameAndMessageContainer>
