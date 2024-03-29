@@ -2,6 +2,7 @@ import useDoubleClick from '@hooks/useDoubleClick';
 import theme from '@styles/theme';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import HeartBox from './HeartBox';
 
 interface OppochatProps {
   content: string;
@@ -19,7 +20,7 @@ export default function Oppochat({ content, time, isDisplay }: OppochatProps) {
           {isDisplay && <OppochatTime>{time}</OppochatTime>}
         </OppoChatInfo>
       </OppochatWrapper>
-      {isDoubleClicked && <div>하트</div>}
+      {isDoubleClicked && <HeartBox />}
     </OppochatContainer>
   );
 }

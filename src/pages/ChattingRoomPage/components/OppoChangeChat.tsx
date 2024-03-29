@@ -2,6 +2,7 @@ import theme from '@styles/theme';
 import styled from 'styled-components';
 import Pic from '@assets/img/pic.png';
 import useDoubleClick from '@hooks/useDoubleClick';
+import HeartBox from './HeartBox';
 
 interface OppoChangeChatProps {
   content: string;
@@ -31,12 +32,16 @@ export default function OppoChangeChat({
           {isDisplay && <OppoChangeChatTime>{time}</OppoChangeChatTime>}
         </OppoChangeChatInfo>
       </OppoChangeChatWrapper>
-      {isDoubleClicked && <DUMMYBOX>하트</DUMMYBOX>}
+      {isDoubleClicked && (
+        <EmotionBox>
+          <HeartBox />
+        </EmotionBox>
+      )}
     </OppoChangeChatContainer>
   );
 }
 
-const DUMMYBOX = styled.div`
+const EmotionBox = styled.div`
   margin-left: 40px;
 `;
 
