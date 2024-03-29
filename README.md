@@ -4,7 +4,7 @@ https://react-messenger-19th-taupe.vercel.app/
 
 # ⚙️ 구현 기능
 
-<img width="760" alt="image" src="https://github.com/CEOS-Developers/react-messenger-19th/assets/101055312/b78e0d0b-f8d2-4a32-903e-3b8cd26ad5ea">
+<img width="740" alt="image" src="https://github.com/CEOS-Developers/react-messenger-19th/assets/101055312/e51b414e-857d-4244-9360-61e587c41cf7">
 
 ![화면 기록 2024-03-29 오후 9 20 44 (1)](https://github.com/CEOS-Developers/react-messenger-19th/assets/101055312/f5128e75-1798-4afd-b183-713668a26bb6)
 
