@@ -8,15 +8,17 @@ import {
 
 import chattingData from "../data/chatting.json";
 
+interface Chat {
+  text: string;
+  sender: number;
+  timestamp: string;
+}
+
 interface SenderContextType {
   currentUser: number;
   setCurrentUser: React.Dispatch<React.SetStateAction<number>>;
-  chats: Array<{ text: string; sender: number; timestamp: string }>;
-  setChats: React.Dispatch<
-    React.SetStateAction<
-      Array<{ text: string; sender: number; timestamp: string }>
-    >
-  >;
+  chats: Chat[];
+  setChats: React.Dispatch<React.SetStateAction<Chat[]>>;
 }
 
 const SenderContext = createContext<SenderContextType | undefined>(undefined);
@@ -29,19 +31,13 @@ export const SenderProvider: React.FC<SenderProviderProps> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<number>(0); // 상대방이 2가 됨
 
   const storedChatsJSON = localStorage.getItem("chats");
-  const initialData: Array<{
-    text: string;
-    sender: number;
-    timestamp: string;
-  }> = storedChatsJSON ? JSON.parse(storedChatsJSON) : chattingData;
+  const initialData: Chat[] = storedChatsJSON
+    ? JSON.parse(storedChatsJSON)
+    : chattingData;
 
-  const [chats, setChats] =
-    useState<Array<{ text: string; sender: number; timestamp: string }>>(
-      initialData
-    );
+  const [chats, setChats] = useState<Chat[]>(initialData);
 
   useEffect(() => {
-    console.log(chats);
     localStorage.setItem("chats", JSON.stringify(chats));
   }, [chats]);
 
