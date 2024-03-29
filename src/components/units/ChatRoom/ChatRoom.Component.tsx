@@ -77,12 +77,6 @@ export default function ChatRoomComponent(): JSX.Element {
 		}
 	};
 
-	// 초기 로드 시 실행
-	adjustViewportHeight();
-
-	// 뷰포트 변경(키보드가 나타나거나 사라질 때) 시 조정
-	window.addEventListener('resize', adjustViewportHeight);
-
 	return (
 		<C.Wrapper>
 			<C.ChatHeader>
@@ -146,7 +140,7 @@ export default function ChatRoomComponent(): JSX.Element {
 		</C.Wrapper>
 	);
 }
-
+// yyyy년 mm월 dd일 @요일
 function formatDate(dateString: string): string {
 	const options: Intl.DateTimeFormatOptions = {
 		year: 'numeric',
@@ -155,17 +149,4 @@ function formatDate(dateString: string): string {
 		weekday: 'long',
 	};
 	return new Date(dateString).toLocaleDateString('ko-KR', options);
-}
-function adjustViewportHeight(): void {
-	if (isMobileDevice() && window.visualViewport) {
-		const viewportHeight = window.visualViewport.height;
-		document.documentElement.style.setProperty('--vh', `${viewportHeight * 0.01}px`);
-	} else {
-		// PC 환경일 경우, --vh 변수를 초기 뷰포트 높이(100vh)의 1%로 설정
-		const viewportHeight = window.innerHeight;
-		document.documentElement.style.setProperty('--vh', `${viewportHeight * 0.01}px`);
-	}
-}
-function isMobileDevice(): boolean {
-	return /Mobi|Android/i.test(navigator.userAgent);
 }
