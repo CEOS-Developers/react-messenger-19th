@@ -27,21 +27,21 @@ interface SenderProviderProps {
 
 export const SenderProvider: React.FC<SenderProviderProps> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<number>(0); // 상대방이 2가 됨
-  const [chats, setChats] = useState<
-    Array<{ text: string; sender: number; timestamp: string }>
-  >([]);
+
+  const storedChatsJSON = localStorage.getItem("chats");
+  const initialData: Array<{
+    text: string;
+    sender: number;
+    timestamp: string;
+  }> = storedChatsJSON ? JSON.parse(storedChatsJSON) : chattingData;
+
+  const [chats, setChats] =
+    useState<Array<{ text: string; sender: number; timestamp: string }>>(
+      initialData
+    );
 
   useEffect(() => {
-    const storedChats = localStorage.getItem("chats");
-    const parsedChats = storedChats ? JSON.parse(storedChats) : [];
-    if (parsedChats.length === 0) {
-      localStorage.setItem("chats", JSON.stringify(chattingData));
-    } else {
-      setChats(parsedChats);
-    }
-  }, []);
-
-  useEffect(() => {
+    console.log(chats);
     localStorage.setItem("chats", JSON.stringify(chats));
   }, [chats]);
 
