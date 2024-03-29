@@ -79,9 +79,12 @@ const ChatMessages: React.FC = () => { //상턔관리 변수들
       if (prev[messageId] === emojiUrl) {
         const newEmojis = { ...prev };
         delete newEmojis[messageId];
+        localStorage.removeItem(`selectedEmojis_${messageId}`); 
         return newEmojis;
       } else {
-        return { ...prev, [messageId]: emojiUrl };
+        const newEmojis = { ...prev, [messageId]: emojiUrl };
+        localStorage.setItem(`selectedEmojis_${messageId}`, JSON.stringify(newEmojis[messageId]));
+        return newEmojis;
       }
     });
     setActiveModalMessageId(null);  // Close the modal after selection
@@ -92,13 +95,25 @@ const ChatMessages: React.FC = () => { //상턔관리 변수들
     setActiveModalMessageId(prevId => prevId === messageId ? null : messageId);
   };
 
-
-
-
-
+// 이모지 불러오기
+const loadEmojisFromLocalStorage = () => {
+  const emojis: { [key: string]: string } = {};
+  Object.keys(localStorage).forEach(key => {
+    if (key.startsWith('selectedEmojis_')) {
+      const messageId = key.substring('selectedEmojis_'.length);
+      const emojiUrl = localStorage.getItem(key);
+      if (emojiUrl) {
+        emojis[messageId] = JSON.parse(emojiUrl);
+      }
+    }
+  });
+  setSelectedEmojis(emojis);
+};
 
   useEffect(() => {
     scrollToBottom();
+    loadEmojisFromLocalStorage();
+
   }, [messages]); 
 
   return (
