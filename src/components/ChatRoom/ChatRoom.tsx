@@ -15,6 +15,7 @@ import { getCurrentTime } from "util/getCurrentTime";
 import mockData from "data/chatData.json";
 import { Chat } from "types/ChatData";
 import ChatRoomHeader from "components/ChatRoom/ChatRoomHeader";
+import { formatDateToTime } from "util/formatDateToTime";
 
 function ChatRoom() {
   const [inputValue, setInputValue] = useState("");
@@ -99,7 +100,7 @@ function ChatRoom() {
               key={message.id}
             >
               <div className="time_wrapper">
-                <CurrentTime>{getCurrentTime()} </CurrentTime>
+                <SentTime>{formatDateToTime(message.createdAt)} </SentTime>
               </div>
               <ChatText $isMyMessage={message.senderId === participantsId.me}>
                 {message.text}
@@ -188,7 +189,7 @@ const ChatWrapper = styled.div<{ $isMyMessage: boolean }>`
   }
 `;
 
-const CurrentTime = styled.p`
+const SentTime = styled.p`
   display: flex;
   align-items: flex-end;
   color: var(--gray04);

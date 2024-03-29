@@ -1,34 +1,39 @@
 import styled from "styled-components";
 import { ReactComponent as LeftArrowIcon } from "asset/icons/LeftArrowIcon.svg";
 import { User } from "types/ChatData";
+import { getElapsedTime } from "util/getElapsedTime";
 
 interface ParticipantsId {
   me: string;
   partner: string;
 }
+
 interface ChatRoomHeaderProps {
   toggleParticipantsId: () => void;
   findUserById: (userId: string) => User | undefined;
   participantsId: ParticipantsId;
 }
+
 function ChatRoomHeader({
   toggleParticipantsId,
   findUserById,
   participantsId,
 }: ChatRoomHeaderProps) {
+  const partner = findUserById(participantsId.partner);
   return (
     <ChatRoomHeaderWrapper>
       <button>
         <LeftArrowIcon className="arrow_icon" alt="뒤로 가기 아이콘" />
       </button>
       <UserDetailInfo>
-        <h1 className="user_name">
-          {findUserById(participantsId.partner)?.name}
-        </h1>
-        <p className="last_access">마지막 접속 5분 전</p>
+        <h1 className="user_name">{partner?.name}</h1>
+        <p className="last_access">
+          마지막 접속
+          {partner?.lastAccess && getElapsedTime(partner?.lastAccess)}
+        </p>
       </UserDetailInfo>
       <UserProfileImg
-        src={findUserById(participantsId.partner)?.profileImage}
+        src={partner?.profileImage}
         onClick={toggleParticipantsId}
       />
     </ChatRoomHeaderWrapper>
