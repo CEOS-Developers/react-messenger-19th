@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { flexCenter } from 'styles/CommonStyle';
+import styled from "styled-components";
+import { flexCenter } from "styles/CommonStyle";
 
 function Footer() {
   return (
@@ -12,6 +12,7 @@ function Footer() {
 export default Footer;
 
 const FooterWrapper = styled.div`
+  background-color: var(--gray01);
   ${flexCenter}
   width: 100%;
   height: 3.4rem;

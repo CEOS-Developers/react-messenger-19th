@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const device = {
   tablet: `(min-width: 768px) and (max-width: 1199px)`,
@@ -15,6 +15,23 @@ body{
 body{
   font-family: 'Pretandard';
 }
+
+:root {
+  --white: #FFFFFF;
+  --black: #111111;
+  --gray01: #F6F6F6;
+  --gray02: #EFEFF3;
+  --gray03: #BAB9BD;
+  --gray04: #8E8E92;
+  --yellow: #F19937;
+  --red01: #FE3B30;
+  --red02: #EA445A;
+  --green: #21C004;
+  --blue01: #3478F6;
+  --blue02: #59A7D6;
+  --blue03: #B5CADD;
+}
+
 
 
 /* reset css */
