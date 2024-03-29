@@ -28,7 +28,7 @@ function ChatRoomHeader({
       <UserDetailInfo>
         <h1 className="user_name">{partner?.name}</h1>
         <p className="last_access">
-          마지막 접속
+          마지막 접속 &nbsp;
           {partner?.lastAccess && getElapsedTime(partner?.lastAccess)}
         </p>
       </UserDetailInfo>

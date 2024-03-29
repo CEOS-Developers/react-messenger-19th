@@ -7,13 +7,13 @@
           "id": "user1",
           "name": "연우",
           "profileImage": "/images/User1.png",
-          "lastAccess": "2024-03-29T11:56:00"
+          "lastAccess": "2024-03-29T21:49:00"
         },
         {
           "id": "user2",
           "name": "유담이",
           "profileImage": "/images/User2.png",
-          "lastAccess": "2024-03-29T11:54:00"
+          "lastAccess": "2024-03-29T20:54:00"
         }
       ],
       "messages": [
