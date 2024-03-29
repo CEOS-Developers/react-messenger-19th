@@ -7,7 +7,7 @@ import { ReactComponent as AudioIcon } from "asset/icons/AudioIcon.svg";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { getCurrentTime } from "util/getCurrentTime";
 import mockData from "data/chatData.json";
-import { Chat, ChatData, User } from "types/ChatData";
+import { Chat } from "types/ChatData";
 
 function ChatRoom() {
   const [inputValue, setInputValue] = useState("");
@@ -17,15 +17,18 @@ function ChatRoom() {
 
   const { users, messages } = chatData;
 
-  // 현재 보내는 사람
-  const [currentSenderId, setCurrentSenderId] = useState(users[0].id);
+  const [currentPartnerId, setCurrentPartnerId] = useState(users[0].id);
+  const [currentMyId, setCurrentMyId] = useState(users[1].id);
 
   const findUserById = (userId: string) => {
     return users.find((user) => user.id === userId);
   };
 
-  const toggleCurrentSenderId = () => {
-    setCurrentSenderId((prevId) =>
+  const toggleCurrentMyId = () => {
+    setCurrentMyId((prevId) =>
+      prevId === users[0].id ? users[1].id : users[0].id
+    );
+    setCurrentPartnerId((prevId) =>
       prevId === users[0].id ? users[1].id : users[0].id
     );
   };
@@ -36,6 +39,23 @@ function ChatRoom() {
 
   const handleInputSubmit = (e: FormEvent) => {
     e.preventDefault();
+    if (!inputValue.trim()) {
+      return;
+    }
+    setChatData((prev: Chat) => ({
+      ...prev,
+      messages: [
+        ...prev.messages,
+        {
+          id: 5,
+          senderId: currentMyId,
+          text: inputValue,
+          createdAt: "2024-03-29T11:42:00",
+        },
+      ],
+    }));
+
+    setInputValue("");
   };
 
   return (
@@ -46,27 +66,30 @@ function ChatRoom() {
             <LeftArrowIcon className="arrow_icon" alt="뒤로 가기 아이콘" />
           </button>
           <UserDetailInfo>
-            <h1 className="user_name">{findUserById(currentSenderId)?.name}</h1>
+            <h1 className="user_name">
+              {findUserById(currentPartnerId)?.name}
+            </h1>
             <p className="last_access">마지막 접속 5분 전</p>
           </UserDetailInfo>
           <UserProfileImg
-            src={findUserById(currentSenderId)?.profileImage}
-            onClick={toggleCurrentSenderId}
+            src={findUserById(currentPartnerId)?.profileImage}
+            onClick={toggleCurrentMyId}
           />
         </ChatRoomHeader>
         <ChatList>
-          <ChatWrapper>
-            <div className="time_wrapper">
-              <CurrentTime>{getCurrentTime()} </CurrentTime>
-            </div>
-            <ChatText>Good morning!</ChatText>
-          </ChatWrapper>
-          <ChatWrapper>
-            <div className="time_wrapper">
-              <CurrentTime>{getCurrentTime()} </CurrentTime>
-            </div>
-            <ChatText>Good morning!</ChatText>
-          </ChatWrapper>
+          {messages.map((message) => (
+            <ChatWrapper
+              isMyMessage={message.senderId === currentMyId}
+              key={message.id}
+            >
+              <div className="time_wrapper">
+                <CurrentTime>{getCurrentTime()} </CurrentTime>
+              </div>
+              <ChatText isMyMessage={message.senderId === currentMyId}>
+                {message.text}
+              </ChatText>
+            </ChatWrapper>
+          ))}
         </ChatList>
       </ChatRoomContainer>
       <ChatInputWrapper onSubmit={handleInputSubmit}>
@@ -167,13 +190,18 @@ const ChatList = styled.div`
   gap: 1.6rem;
   flex-direction: column;
   padding: 2.5rem 0;
+  overflow-y: auto;
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
 `;
 
-const ChatWrapper = styled.div`
+const ChatWrapper = styled.div<{ isMyMessage: boolean }>`
   display: flex;
   gap: 1.2rem;
+
   justify-content: flex-end;
 
+  flex-direction: ${({ isMyMessage }) => (isMyMessage ? "row" : "row-reverse")};
   .time_wrapper {
     display: flex;
   }
@@ -187,7 +215,7 @@ const CurrentTime = styled.p`
   letter-spacing: 0.01rem;
 `;
 
-const ChatText = styled.p`
+const ChatText = styled.p<{ isMyMessage: boolean }>`
   display: flex;
 
   padding: 0.7rem 1.5rem;
@@ -195,8 +223,19 @@ const ChatText = styled.p`
   font-feature-settings:
     "clig" off,
     "liga" off;
-  border-radius: 1.8rem 1.8rem 0rem 1.75rem;
-  background: var(--blue03);
+
+  border-radius: 1.8rem 1.8rem 1.75rem 0rem;
+  border: 1px solid var(--blue03);
+  background: var(--white);
+
+  ${({ isMyMessage }) =>
+    isMyMessage &&
+    `
+    border-radius: 1.8rem 1.8rem 0rem 1.75rem;
+    background: var(--blue03);
+    
+  `}
+
   font-size: 1.7rem;
   line-height: 2.2rem;
   letter-spacing: -0.04rem;
