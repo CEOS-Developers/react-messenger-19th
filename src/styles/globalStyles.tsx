@@ -24,6 +24,7 @@ const GlobalStyles = createGlobalStyle`
 
   /* 스크롤 바 관련 UI를 제거하는 속성 원하는 요소에 scroll-box 클래스를 부여하면 됨 */
 .scroll-box {
+  overflow-x: hidden;
   -ms-overflow-style: none;
 }
 
