@@ -4,8 +4,8 @@ import ChatInputForm from '@components/non-fixed/ChatInput/ChatInputForm';
 const StyledChatInputContainer = styled.div`
   width: 375px;
   /* height: auto; */
-  min-height: 56px;
-  /* padding-bottom: 34px; */
+  min-height: 90px;
+  padding-bottom: 34px;
   background-color: ${(props) => props.theme.color.white};
   opacity: 0.95;
 `;

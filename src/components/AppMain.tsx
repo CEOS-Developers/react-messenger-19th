@@ -9,7 +9,6 @@ const StyledAppMain = styled.main`
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding-bottom: 34px;
 `;
 
 export default function AppMain() {
