@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { flexCenter, flexColumn } from "styles/CommonStyle";
-import { ReactComponent as LeftArrowIcon } from "asset/icons/LeftArrowIcon.svg";
 import { ReactComponent as EmogiIcon } from "asset/icons/EmogiIcon.svg";
 import { ReactComponent as FileInputIcon } from "asset/icons/FileInputIcon.svg";
 import { ReactComponent as AudioIcon } from "asset/icons/AudioIcon.svg";
@@ -15,6 +14,7 @@ import {
 import { getCurrentTime } from "util/getCurrentTime";
 import mockData from "data/chatData.json";
 import { Chat } from "types/ChatData";
+import ChatRoomHeader from "components/ChatRoom/ChatRoomHeader";
 
 function ChatRoom() {
   const [inputValue, setInputValue] = useState("");
@@ -63,7 +63,7 @@ function ChatRoom() {
       messages: [
         ...prev.messages,
         {
-          id: 5,
+          id: Date.now().toString(),
           senderId: participantsId.me,
           text: inputValue,
           createdAt: getCurrentTime(),
@@ -87,31 +87,21 @@ function ChatRoom() {
   return (
     <>
       <ChatRoomContainer>
-        <ChatRoomHeader>
-          <button>
-            <LeftArrowIcon className="arrow_icon" alt="뒤로 가기 아이콘" />
-          </button>
-          <UserDetailInfo>
-            <h1 className="user_name">
-              {findUserById(participantsId.partner)?.name}
-            </h1>
-            <p className="last_access">마지막 접속 5분 전</p>
-          </UserDetailInfo>
-          <UserProfileImg
-            src={findUserById(participantsId.partner)?.profileImage}
-            onClick={toggleParticipantsId}
-          />
-        </ChatRoomHeader>
+        <ChatRoomHeader
+          toggleParticipantsId={toggleParticipantsId}
+          findUserById={findUserById}
+          participantsId={participantsId}
+        />
         <ChatList>
           {messages.map((message) => (
             <ChatWrapper
-              isMyMessage={message.senderId === participantsId.me}
+              $isMyMessage={message.senderId === participantsId.me}
               key={message.id}
             >
               <div className="time_wrapper">
                 <CurrentTime>{getCurrentTime()} </CurrentTime>
               </div>
-              <ChatText isMyMessage={message.senderId === participantsId.me}>
+              <ChatText $isMyMessage={message.senderId === participantsId.me}>
                 {message.text}
               </ChatText>
             </ChatWrapper>
@@ -146,45 +136,6 @@ const ChatRoomContainer = styled.div`
   height: 74rem;
   ${flexColumn}
   padding: 0 1.6rem;
-`;
-
-const ChatRoomHeader = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  img {
-    cursor: pointer;
-  }
-`;
-
-const UserProfileImg = styled.img`
-  width: 4rem;
-  height: 4rem;
-  border-radius: 100%;
-`;
-
-const UserDetailInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-
-  .arrow_icon {
-    display: flex;
-    align-items: flex-start;
-  }
-  .user_name {
-    color: var(--black);
-    text-align: center;
-    font-size: 1.8rem;
-    line-height: 2rem;
-  }
-
-  .last_access {
-    color: var(--gray04);
-    font-size: 1.3rem;
-    letter-spacing: -0.01rem;
-  }
 `;
 
 const ChatInputWrapper = styled.form`
@@ -225,12 +176,13 @@ const ChatList = styled.div`
   scrollbar-width: none; /* 파이어폭스 */
 `;
 
-const ChatWrapper = styled.div<{ isMyMessage: boolean }>`
+const ChatWrapper = styled.div<{ $isMyMessage: boolean }>`
   display: flex;
   gap: 1.2rem;
   justify-content: flex-end;
 
-  flex-direction: ${({ isMyMessage }) => (isMyMessage ? "row" : "row-reverse")};
+  flex-direction: ${({ $isMyMessage }) =>
+    $isMyMessage ? "row" : "row-reverse"};
   .time_wrapper {
     display: flex;
   }
@@ -244,7 +196,7 @@ const CurrentTime = styled.p`
   letter-spacing: 0.01rem;
 `;
 
-const ChatText = styled.p<{ isMyMessage: boolean }>`
+const ChatText = styled.p<{ $isMyMessage: boolean }>`
   max-width: 20rem;
   padding: 0.7rem 1.5rem;
   color: var(--black);
@@ -258,8 +210,8 @@ const ChatText = styled.p<{ isMyMessage: boolean }>`
   border: 1px solid var(--blue03);
   background: var(--white);
 
-  ${({ isMyMessage }) =>
-    isMyMessage &&
+  ${({ $isMyMessage }) =>
+    $isMyMessage &&
     `
     border-radius: 1.8rem 1.8rem 0rem 1.75rem;
     background: var(--blue03);
