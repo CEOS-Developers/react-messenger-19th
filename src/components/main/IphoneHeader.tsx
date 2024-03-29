@@ -22,6 +22,6 @@ const IphoneHeaderImg = styled.img`
   border-radius: 30px 30px 0 0;
 
   @media (max-width: 768px) {
-    display: block; 
+    display: none; 
   }
 `;

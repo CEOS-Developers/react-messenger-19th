@@ -4,11 +4,12 @@ import { messagesState, Message } from '../state/messageState';
 import { selectedUserState } from '../state/selectedUserState';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import UserProfile from './UserProfile';
 
 
 // 날짜별로 메세지 그룹화하기!!
 const groupMessagesByDate = (messages: Message[]) => {
-  const grouped: { [key: string]: Message[] } = {};
+  const grouped: { [key: string]: Message[][] } = {}; // 날짜별로 메시지 그룹의 배열을 저장
   messages.forEach((message) => {
     const dateKey = new Date(message.timestamp).toLocaleDateString('ko-KR', {
       year: 'numeric',
@@ -18,12 +19,20 @@ const groupMessagesByDate = (messages: Message[]) => {
     if (!grouped[dateKey]) {
       grouped[dateKey] = [];
     }
-    grouped[dateKey].push(message);
+
+    // 1분으로 연속된 메시지를 판별하여 그룹으로 묶기,......
+    const lastGroup = grouped[dateKey][grouped[dateKey].length - 1];
+    if (lastGroup && lastGroup[lastGroup.length - 1].senderId === message.senderId &&
+        new Date(message.timestamp).getTime() - new Date(lastGroup[lastGroup.length - 1].timestamp).getTime() <= 60000) {
+      lastGroup.push(message); // 지금 보낸 톡을 마지막 그룹에 추가
+    } else {
+      grouped[dateKey].push([message]); // 새로운 그룹 생성
+    }
   });
   return grouped;
 };
 
-//날짜 형식에 맞게 포맷팅하기 (오전 12:02 이렇게)
+//날짜 형식에 맞게 포맷팅하기 (오전 12:02 이렇게..!!)
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
   const options: Intl.DateTimeFormatOptions = { 
@@ -33,6 +42,7 @@ const formatDate = (dateString: string) => {
   };
   return date.toLocaleDateString('ko-KR', options);
 };
+
 
 
 
@@ -55,51 +65,58 @@ const ChatMessages: React.FC = () => {
   }, [messages]); 
 
   return (
-    <MessagesContainer className='scroll-box'>
-      {Object.entries(groupedMessages).map(([date, groupMessages], index) => (
-        <React.Fragment key={index}>
-          <DateLabel>{formatDate(date)}</DateLabel>
-          {groupMessages.map((message) => (
-           <MessageLayout key={message.id} isSender={message.senderId === selectedUserId}>
-           {message.senderId === selectedUserId ? (
-             // 발신자 레이아웃: 시간 -> 메시지 순서
-             <>
-               <Timestamp key={message.id} isSender={message.senderId === selectedUserId}>
-                {new Date(message.timestamp).toLocaleTimeString('ko-KR', 
-               { hour: 'numeric', minute: '2-digit', hour12: true }).replace('AM', '오전').replace('PM', '오후')}
-               </Timestamp>
-               <MessageItem 
-                key={message.id}
-                isSender={message.senderId === selectedUserId}
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ type: 'spring', stiffness: 260, damping: 20 }}>{message.text}
-                </MessageItem>
-             </>
-           ) : (
-             // 수신자 레이아웃: 메시지 -> 시간
-             <>
-               <MessageItem 
-                key={message.id}
-                isSender={false}
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-              >{message.text}
-              </MessageItem>
-               <Timestamp key={message.id} isSender={message.senderId === selectedUserId}>
-                {new Date(message.timestamp).toLocaleTimeString('ko-KR', 
-               { hour: 'numeric', minute: '2-digit', hour12: true }).replace('AM', '오전').replace('PM', '오후')}
-               </Timestamp>
-             </>
-           )}
-         </MessageLayout>
-          ))}
-        </React.Fragment>
-      ))}
-       <div ref={messagesEndRef} />
-    </MessagesContainer>
-  );
+      <MessagesContainer className='scroll-box'>
+        {Object.entries(groupedMessages).map(([date, groupMessages], index) => (
+          <React.Fragment key={index}>
+            <DateLabel>{formatDate(date)}</DateLabel>
+            {groupMessages.map((group, groupIndex) => (
+              <React.Fragment key={groupIndex}>
+                {group.map((message, messageIndex) => (
+                  <MessageLayout key={message.id} isSender={message.senderId === selectedUserId}>
+                    {message.senderId === selectedUserId ? (
+                      // 발신자 레이아웃: 시간 (맨 처음 톡에만) -> 메시지
+                      <>
+                        {messageIndex === 0 && ( // 맨처음 톡에만 시간 떠야됨
+                          <Timestamp isSender={message.senderId === selectedUserId}>
+                            {new Date(message.timestamp).toLocaleTimeString('ko-KR', 
+                            { hour: 'numeric', minute: '2-digit', hour12: true }).replace('AM', '오전').replace('PM', '오후')}
+                          </Timestamp>
+                        )}
+                        <MessageItem 
+                          isSender={message.senderId === selectedUserId}
+                          initial={{ scale: 0, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          transition={{ type: 'spring', stiffness: 260, damping: 20 }}>
+                          {message.text}
+                        </MessageItem>
+                      </>
+                    ) : (
+                      // 수신자 레이아웃: 메시지 -> 시간
+                      <>
+                        <MessageItem 
+                          isSender={false}
+                          initial={{ opacity: 0, scale: 0.5 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.5 }}>
+                          {message.text}
+                        </MessageItem>
+                        {messageIndex === 0 && ( // 마찬가지로 맨위에 톡만 시간뜨기
+                          <Timestamp isSender={message.senderId === selectedUserId}>
+                            {new Date(message.timestamp).toLocaleTimeString('ko-KR', 
+                            { hour: 'numeric', minute: '2-digit', hour12: true }).replace('AM', '오전').replace('PM', '오후')}
+                          </Timestamp>
+                        )}
+                      </>
+                    )}
+                  </MessageLayout>
+                ))}
+              </React.Fragment>
+            ))}
+          </React.Fragment>
+        ))}
+        <div ref={messagesEndRef} />
+      </MessagesContainer>
+    );
 };
 
 
@@ -107,10 +124,8 @@ const MessagesContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-
   width: 100%;
-  height: 646px;
-
+  flex-grow: 1;
   background-color: #E3E4EB;
   `;
 
@@ -150,6 +165,13 @@ const DateLabel = styled.div`
   margin-bottom: 16px;
   font-size: 15px;
   color: #63666A;
+`;
+
+const ProfilePic = styled.img`
+  width: 37px; 
+  height: 37px; 
+  border-radius: 50%;
+  margin-right: 10px; 
 `;
 
 export default ChatMessages;

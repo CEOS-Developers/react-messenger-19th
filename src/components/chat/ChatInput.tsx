@@ -110,7 +110,7 @@ const Footer = styled.div`
   justify-content: center;
   background-color: #F7F8FC;
   width: 100%;
-  height: 49px;`;
+  height: 42px;`;
 
 const FooterContainer = styled.div`
   display: flex;
@@ -118,7 +118,7 @@ const FooterContainer = styled.div`
   justify-content: space-between;
   background-color: #F7F8FC;
   width: 354px;
-  height: 29px;
+  height: 42px;
 `;
 
 const InputContainer = styled.div<InputContainerProps>`
@@ -127,7 +127,7 @@ const InputContainer = styled.div<InputContainerProps>`
   background-color: white;
   border-radius: 100px;
   width: ${({ expanded }) => expanded ? '275px' : '246px'};
-  height: 29px;
+  height: 35px;
 
   transition: width 0.3s ease;
 `;
@@ -194,11 +194,10 @@ const SendButton = styled.img`
 
 const InputBox = styled.input<InputBoxProps>`
   flex: 1;
-  height: 29px;
   border: none;
-  padding: 7px 0 7px 16px; 
   background-color: transparent;
   font-family:'Pretendard';
+  margin-left: 16px;
   &:focus {
     outline: none;
   }

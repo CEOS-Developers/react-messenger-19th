@@ -47,13 +47,15 @@ const HeaderContainer = styled.div`
   background-color: #F7F8FC;
   color: white;
   
-  width: 375px;
-  height: 53px;
+  width: 100%;
+  max-height: 54px;
+
 `;
 
 const LeftContainer = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 11px
 `;
 
 const BackButton = styled.img`
@@ -65,7 +67,8 @@ const BackButton = styled.img`
   height: 17px; 
   margin-left: 16px;
   margin-right: 33.5px;
-  
+  margin-top: 6px;
+
   transition: transform 0.1s ease; 
 
   &:active {
@@ -84,12 +87,14 @@ const ProfilePic = styled.img`
   height: 37px;
   border-radius: 50%;
   margin-right: 13px;
+  margin-top: 6px;
 `;
 
 const Name = styled.h2`
   font-size: 20px;
   color: #1F1F1F;
   font-weight: 600;
+  margin-top: 6px;
 `;
 
 const CallButton = styled.img`
@@ -99,7 +104,8 @@ const CallButton = styled.img`
   width: 25px;
   height: 25px;
   margin-right: 25px;
-  
+  margin-bottom: 11px
+
   transition: transform 0.1s ease; 
 
   &:active {

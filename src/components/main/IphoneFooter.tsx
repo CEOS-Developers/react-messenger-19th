@@ -22,6 +22,6 @@ background-color: #F7F8FC;
 border-radius: 0 0 30px 30px ;
 
 @media (max-width: 768px) {
-  display: block; 
+  display: none; 
 }
 `;

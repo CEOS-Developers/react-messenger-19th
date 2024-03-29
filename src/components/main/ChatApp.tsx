@@ -12,6 +12,7 @@ import IphoneFooter from './IphoneFooter';
 const ChatApp: React.FC = () => {
   const [messages, setMessages] = useRecoilState(messagesState); 
   const [selectedFriend, setSelectedFriend] = useState({profileImage: '', name: '', phoneNumber: ''});
+  
   const handleBackButtonClick = () => {
     console.log('Back button clicked');
   };
@@ -57,11 +58,21 @@ const Container = styled.div`
 const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 375px; 
-  max-height: 812px; 
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
   background-color: #FFFFFF; 
+
+
+  @media (min-width: 768px) {  //데스크탑 뷰에서는 375*812 고정
+    max-width: 375px;
+    max-height: 812px;
+    min-height: 812px;
+    width: 375px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
 `;
-
-
 
 export default ChatApp;
