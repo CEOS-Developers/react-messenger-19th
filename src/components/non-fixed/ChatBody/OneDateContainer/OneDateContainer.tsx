@@ -23,7 +23,6 @@ export default function OneDateContainer({
     <StyledOneDateContainer>
       <DateDivider dateString={messageDate} />
       {oneDateMessagData.map((data) => {
-        console.log(data);
         return (
           <ChatLog
             isEqual={userNumber === data.from}

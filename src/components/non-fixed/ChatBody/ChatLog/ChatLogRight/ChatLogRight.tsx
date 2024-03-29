@@ -1,4 +1,8 @@
 import styled from 'styled-components';
+import { useRecoilState } from 'recoil';
+import { messageDataState, userNumberState } from '@context/state/atom';
+import useLocalStorage from '@hooks/useLocalStorage';
+import { processedMessageData } from '@_type/type';
 
 const StyledChatLogRightContainer = styled.div`
   display: flex;
@@ -63,10 +67,35 @@ export default function ChatLogRight({
   content: string;
   like: boolean;
 }) {
+  const [messageData, setMessageData] = useRecoilState(messageDataState);
+  const [userNumber, setUserNumber] = useRecoilState(userNumberState);
+  const [localStorageChatMessageData, localStorageChatMessageDateArray] =
+    useLocalStorage();
   const createdHourMinute = createdAt.slice(11, 16);
+  const createdDate = createdAt.slice(0, 10);
+  const deepCopiedMessageData = JSON.parse(JSON.stringify(messageData));
+  console.log(deepCopiedMessageData);
+
+  function handleDoubleClickMessage() {
+    // 자신과 달라야 한다.
+    if (from === userNumber) return;
+
+    const prevSpecifiedDateArray = deepCopiedMessageData[createdDate];
+    for (const data of prevSpecifiedDateArray) {
+      if (data['createdAt'] === createdAt) {
+        data['like'] = !data['like'];
+      }
+    }
+    setMessageData(deepCopiedMessageData);
+    localStorage.setItem(
+      'chatMessageData',
+      JSON.stringify(deepCopiedMessageData)
+    );
+  }
+
   return (
     <StyledChatLogRightContainer>
-      <StyledNameAndMessageContainer>
+      <StyledNameAndMessageContainer onDoubleClick={handleDoubleClickMessage}>
         <StyledNameSpan>{from === 2 ? '김정민' : '김승완'}</StyledNameSpan>
         <StyledTimeSpan>{createdHourMinute}</StyledTimeSpan>
       </StyledNameAndMessageContainer>
