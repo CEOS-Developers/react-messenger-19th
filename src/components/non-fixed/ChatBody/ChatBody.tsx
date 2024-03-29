@@ -8,9 +8,14 @@ import sortByDate from '@utils/sortArrayByDate';
 
 const StyledChatBodyContainer = styled.div`
   flex-grow: 1;
+  flex-shrink: 0;
   margin-top: 16px;
   margin-right: 16px;
   margin-left: 16px;
+  /* overflow-y: scroll; */
+  width: 343px;
+  height: 595px;
+  overflow-y: scroll;
 `;
 
 export default function ChatBody() {
@@ -89,7 +94,7 @@ export default function ChatBody() {
   }, []);
 
   return (
-    <StyledChatBodyContainer>
+    <StyledChatBodyContainer className="scroll-box">
       {messageDateArray.map((messageDate) => {
         return <OneDateContainer key={messageDate} messageDate={messageDate} />;
       })}

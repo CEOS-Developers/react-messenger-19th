@@ -102,21 +102,25 @@ export default function ChatInputForm() {
       const like = false;
 
       const newMessageData = {
+        content: content,
         createdAt: createdAt,
         createdDate: createdDate,
-        content: content,
         from: from,
         like: like,
       };
 
-      const tmpMessageData = { ...messageData };
+      const tmpMessageData = Object.assign({}, messageData);
+
       const tmpMessageDateArray = [...messageDateArray];
 
       if (tmpMessageData[createdDate] === undefined) {
         tmpMessageData[createdDate] = [];
         tmpMessageData[createdDate].push(newMessageData);
       } else {
-        tmpMessageData[createdDate].push(newMessageData);
+        console.log(tmpMessageData[createdDate]);
+        const prevDateArray = [...tmpMessageData[createdDate]];
+        prevDateArray.push(newMessageData);
+        tmpMessageData[createdDate] = prevDateArray;
       }
 
       if (!tmpMessageDateArray.includes(createdDate)) {
