@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { messagesState, Message } from '../state/messageState';
 import { selectedUserState } from '../state/selectedUserState';
-
 import styled from 'styled-components';
 
 const plusIcon = "./assets/icon.png";
@@ -71,6 +70,9 @@ const ChatInput: React.FC = () => {
     };
   }, [expanded]); 
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value);
+  };
 
 return (
     <Footer ref={containerRef}>
@@ -81,7 +83,7 @@ return (
           onClick={() => setExpanded(true)}  
           expanded={expanded}
           value={message} 
-          onChange={(e) => setMessage(e.target.value)} // 입력값 변경 시 message 상태 업데이트
+          onChange={handleChange} // 입력값 변경 시 message 상태 업데이트
           onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) { 
                   send();

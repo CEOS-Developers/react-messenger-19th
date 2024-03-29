@@ -34,17 +34,21 @@ const groupMessagesByDate = (messages: Message[]) => {
   return grouped;
 };
 
+//사파리 날짜 형식에 맞게 -를 /로 바꿔주는함수
+function convertDateFormat(dateString: string) {
+  return dateString.replace(/-/g, '/');
+}
 //날짜 형식에 맞게 포맷팅하기 (오전 12:02 이렇게..!!)
 const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
+  const formattedDate = convertDateFormat(dateString);
+  const date = new Date(formattedDate);
   const options: Intl.DateTimeFormatOptions = { 
     month: 'long', 
     day: 'numeric', 
-    weekday: 'short' 
+    weekday: 'short',
   };
-  return date.toLocaleDateString('ko-KR', options);
+  return date.toLocaleString('ko-KR', options);
 };
-
 
 
 
