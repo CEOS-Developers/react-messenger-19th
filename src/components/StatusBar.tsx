@@ -44,13 +44,11 @@ export default function StatusBar() {
       setCurrentTime(`${hours}:${minutes}`);
     }
 
-    // 컴포넌트 마운트 시 현재 시간을 설정하고, 1초마다 시간을 업데이트
     getCurrentTime();
     const intervalId = setInterval(getCurrentTime, 1000); // 1초마다 getCurrentTime을 실행
 
-    // 컴포넌트가 언마운트될 때 setInterval을 정리
     return () => clearInterval(intervalId);
-  }, []); // 의존성 배열이 빈 배열이므로, 이 effect는 컴포넌트가 마운트될 때 한 번만 실행
+  }, []);
 
   return (
     <StatusBarContainer>
