@@ -11,6 +11,27 @@ const ChattingRoomContainer = styled.div`
   overflow-y: auto;
 `;
 
+const TodayContainer = styled.div`
+  display: inline-flex;
+  padding: 0.1875rem 1rem;
+  align-items: flex-start;
+  border-radius: 0.375rem;
+  background: #dbdfeb;
+  position: absolute;
+  top: 0.84rem;
+  bottom: 0.84rem;
+`;
+
+const TodayText = styled.div`
+  color: #414350;
+  text-align: center;
+  font-family: 'SF Pro Text';
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+`;
+
 export default function ChattingRoom() {
   const chatList = useSelector(
     (state: RootState) => state.chat.chattings[0].chatList
