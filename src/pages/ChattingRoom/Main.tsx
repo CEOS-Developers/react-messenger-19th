@@ -14,7 +14,7 @@ import { colors } from "../../style/colors";
 import { typography } from "../../style/typography";
 
 const Main = () => {
-  const { currentUser, setCurrentUser, chats, setChats } = useSenderContext();
+  const { currentUser, chats, setChats } = useSenderContext();
   const currentOpponent = currentUser === 0 ? 2 : 0;
   const currentOpponentData = userData.users[currentOpponent];
 
