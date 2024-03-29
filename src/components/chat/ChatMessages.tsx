@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 import { messagesState, Message } from '../state/messageState';
 import { selectedUserState } from '../state/selectedUserState';
 import { usersState, User } from '../state/userState';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import EmojiModal from './EmojiModal';
+
 
 
 // 날짜별로 메세지 그룹화하기!!
@@ -50,12 +52,16 @@ const ChatMessages: React.FC = () => { //상턔관리 변수들
   const selectedUserId = useRecoilValue(selectedUserState);
   const messages = useRecoilValue<Message[]>(messagesState);
   const userProfiles = useRecoilValue<User[]>(usersState);
+  const [activeModalMessageId, setActiveModalMessageId] = useState<string | null>(null); //공감 모달이 열린 메세지의 ID저장해야돼서
+  const [selectedEmojis, setSelectedEmojis] = useState<{ [key: string]: string }>({});
+
 
   const findUserProfileImage = (userId: number): string | undefined => {
     const userProfile = userProfiles.find(profile => profile.id === userId);
     return userProfile?.profileImage;
   };
 
+  
   const filteredMessages = messages.filter(
     message => message.senderId === selectedUserId || message.receiverId === selectedUserId
   );
@@ -65,6 +71,31 @@ const ChatMessages: React.FC = () => { //상턔관리 변수들
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }; //메세지 보냈을 때 스크롤 자동으로 맨 아래로 이동!!
+
+  // 이모지 선택 핸들러
+  const handleEmojiSelect = (messageId: string, emojiUrl: string) => {
+    setSelectedEmojis(prev => {
+      // Toggle emoji selection off if the same emoji is clicked
+      if (prev[messageId] === emojiUrl) {
+        const newEmojis = { ...prev };
+        delete newEmojis[messageId];
+        return newEmojis;
+      } else {
+        return { ...prev, [messageId]: emojiUrl };
+      }
+    });
+    setActiveModalMessageId(null);  // Close the modal after selection
+  };
+
+  //모달창 열고닫는 토글 핸들러
+  const toggleEmojiModalForMessage = (messageId: string) => {
+    setActiveModalMessageId(prevId => prevId === messageId ? null : messageId);
+  };
+
+
+
+
+
 
   useEffect(() => {
     scrollToBottom();
@@ -98,7 +129,7 @@ const ChatMessages: React.FC = () => { //상턔관리 변수들
                       </>
                     ) : (
                       // 수신자 레이아웃: 프사 -> 메시지 -> 시간
-                      <>
+                      <MessageModalContainer>
                       <ReceiverMessageContainer
                           initial={{ opacity: 0, scale: 0.5 }}
                           animate={{ opacity: 1, scale: 1 }}
@@ -109,19 +140,32 @@ const ChatMessages: React.FC = () => { //상턔관리 변수들
                           alt="Profile" 
                           visible={messageIndex === 0} 
                         />
-                        <MessageItem 
-                          isSender={false}
+                         <MessageItem
+                            key={message.id}
+                            isSender={message.senderId === selectedUserId}
+                            onDoubleClick={() =>  toggleEmojiModalForMessage(message.id.toString())} 
+                            style={{ cursor: "pointer" }}
                           >
                           {message.text}
                         </MessageItem>
-                        </ReceiverMessageContainer>
+                       
                         {messageIndex === 0 && ( // 마찬가지로 맨위에 톡만 시간뜨기
                           <Timestamp isSender={message.senderId === selectedUserId}>
                             {new Date(message.timestamp).toLocaleTimeString('ko-KR', 
                             { hour: 'numeric', minute: '2-digit', hour12: true }).replace('AM', '오전').replace('PM', '오후')}
                           </Timestamp>
                         )}
-                    </>
+                       </ReceiverMessageContainer>
+                       {activeModalMessageId === message.id.toString() && (
+                      <EmojiModal
+                        onEmojiSelect={(emoji) => handleEmojiSelect(message.id.toString(), emoji)}
+                        onClose={() => setActiveModalMessageId(null)}
+                        selectedEmojiUrl={selectedEmojis[message.id] || null}                        />
+                        )}
+                        {selectedEmojis[message.id] && (
+                        <EmojiIcon src={selectedEmojis[message.id]} alt="emoji" style={{marginLeft:'47px', marginTop:'5px'}} />
+                        )}
+                    </MessageModalContainer>
                     )}
                   </MessageLayout>
                 ))}
@@ -163,6 +207,7 @@ const MessageItem = styled(motion.div)<{ isSender: boolean }>`
   font-size: 15px;
   color: #262626;
   word-break: break-word;
+  user-select: none; //긁어도 선택안되게
 `;
 
 const Timestamp = styled.div<{ isSender: boolean }>`
@@ -189,10 +234,20 @@ const ProfilePic = styled.img<{ visible?: boolean }>`
   margin-right: 10px;
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
 `;
-
+const MessageModalContainer = styled.div`
+`;
 const ReceiverMessageContainer = styled(motion.div)`
   display: flex;
   flex-direction: row;
   align-items: center;
+`;
+
+const EmojiIcon = styled.img`
+background-color: #EAEBF1;
+width: 16px;
+height: 16.17px;
+
+padding: 3px;
+border-radius: 100px;
 `;
 export default ChatMessages;
