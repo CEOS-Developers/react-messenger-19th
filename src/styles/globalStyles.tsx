@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
   }
   html {
     background-color: #E5E6EB;
-    /* height: 100%; */
+
     height: 100dvh;
   }
   body {
@@ -17,11 +17,11 @@ const GlobalStyles = createGlobalStyle`
     opacity: 0.95;
     margin: 0 auto;
     height: 812px;
-    height: 100%;
+    height: 100dvh;
     width: 375px;
   }
   #root {
-    height: 100%;
+    height: 100dvh;
     width: 100%;
   }
 

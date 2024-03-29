@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 const StyledHomeIndicator = styled.div`
-  width: 100%;
+  width: inherit;
   height: 34px;
   position: absolute;
   bottom: 0;
-  /* z-index: 10; */
+  z-index: 10;
   background-color: transparent;
 `;
 
