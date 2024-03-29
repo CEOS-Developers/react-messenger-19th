@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Plus from '../../assets/img/plus.svg';
 import Attachment from '../../assets/img/attachment.svg';
@@ -82,7 +82,7 @@ export default function ChatInput() {
 
     // 샘플 데이터 - 실제 사용 시 적절한 값으로 대체
     const chatRoomId = 0; // 예시
-    const senderId = 1; // 예시
+    const senderId = 0; // 예시
     const time = '9:45am'; // 현재 시각 등으로 대체 가능
     const isRead = true; // 상황에 따라 설정
 

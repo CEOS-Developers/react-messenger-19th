@@ -24,7 +24,7 @@ export const chatSlice = createSlice({
       if (chatRoom) {
         const newChatId =
           chatRoom.chatList.length > 0
-            ? chatRoom.chatList[chatRoom.chatList.length - 1].id + 1
+            ? chatRoom.chatList[chatRoom.chatList.length - 1].id + 1 // 마지막 항목의 id+1로 id 설정
             : 0;
         chatRoom.chatList.push({
           id: newChatId,
