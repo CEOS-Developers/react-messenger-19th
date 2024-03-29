@@ -62,7 +62,7 @@ export default function ChatInput() {
     // 샘플 데이터 - 실제 사용 시 적절한 값으로 대체
     const chatRoomId = 0; // 예시
     const senderId = 0; // 예시
-    const time = FormatTime(new Date()); // 현재 시각을 포맷팅하여 사용
+    const time = new Date().toISOString(); // 현재 시각을 string으로 변환
     const isRead = true; // 상황에 따라 설정
 
     dispatch(addChat({ chatRoomId, senderId, content: value, time, isRead }));

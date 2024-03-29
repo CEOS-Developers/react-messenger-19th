@@ -1,4 +1,6 @@
-export default function FormatTime(date: Date): string {
+export default function FormatTime(dateInput: Date | string): string {
+  const date = typeof dateInput === 'string' ? new Date(dateInput) : dateInput;
+
   let hours = date.getHours();
   let minutes = date.getMinutes();
   const ampm = hours >= 12 ? 'pm' : 'am';
