@@ -39,7 +39,7 @@ function ChatRoom() {
     setParticipantsId((prev) => ({ me: prev.partner, partner: prev.me }));
   };
 
-  const handleKeyDownInputValue = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDownInputValue = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.nativeEvent.isComposing) {
       // isComposing 이 true 이면
       return; // 조합 중이므로 동작을 막는다.
@@ -49,7 +49,7 @@ function ChatRoom() {
       handleInputSubmit(e);
     }
   };
-  const handleChangeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeInputValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(e.target.value);
   };
 
@@ -126,7 +126,7 @@ function ChatRoom() {
         <button type="button">
           <AudioIcon alt="음성 텍스트 입력 아이콘" />
         </button>
-        <input
+        <textarea
           onKeyDown={handleKeyDownInputValue}
           placeholder="메시지"
           onChange={handleChangeInputValue}
@@ -195,7 +195,10 @@ const ChatInputWrapper = styled.form`
   height: 4.5rem;
   position: relative;
 
-  input {
+  textarea {
+    border: none;
+    outline: none;
+    resize: none;
     width: 28.3rem;
     height: 3.3rem;
     border-radius: 1.65rem;
@@ -242,7 +245,6 @@ const CurrentTime = styled.p`
 `;
 
 const ChatText = styled.p<{ isMyMessage: boolean }>`
-  display: flex;
   max-width: 20rem;
   padding: 0.7rem 1.5rem;
   color: var(--black);
