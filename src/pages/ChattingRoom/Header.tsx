@@ -3,7 +3,6 @@ import StatusBar from "../../components/common/StatusBar";
 import { useSenderContext } from "../../assets/SenderContext";
 
 import userData from "../../data/user.json";
-import chattingData from "../../data/chatting.json";
 
 // image
 import back from "../../assets/back.svg";
@@ -13,21 +12,26 @@ import { colors } from "../../style/colors";
 import { typography } from "../../style/typography";
 
 const Header = () => {
-  const { sender, setSender } = useSenderContext();
-  const user = userData.users[sender === 0 ? 2 : 0];
+  const { currentUser, setCurrentUser } = useSenderContext();
+  const currentOpponent = currentUser === 0 ? 2 : 0;
+  const currentOpponentData = userData.users[currentOpponent];
 
   const toggleSender = () => {
-    sender === 0 ? setSender(2) : setSender(0);
+    const newSender = currentOpponent;
+    setCurrentUser(newSender);
   };
+
   return (
     <Wrapper>
       <StatusBar />
       <RoomInfoWrapper>
         <img src={back} />
         <RoomInfo onClick={toggleSender}>
-          <RoomProfile src={`img/userProfile/${user.profileImg}`} />
+          <RoomProfile
+            src={`img/userProfile/${currentOpponentData.profileImg}`}
+          />
           <RoomNameWrapper>
-            <RoomName>{user.name}</RoomName>
+            <RoomName>{currentOpponentData.name}</RoomName>
             <img src={profileArrow} />
           </RoomNameWrapper>
         </RoomInfo>

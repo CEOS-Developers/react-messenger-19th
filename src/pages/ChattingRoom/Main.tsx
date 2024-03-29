@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect, useRef } from "react";
+import { useSenderContext } from "../../assets/SenderContext";
 
 // image
 import smallAdd from "../../assets/smallAdd.svg";
@@ -8,27 +9,17 @@ import voice from "../../assets/voice.svg";
 import send from "../../assets/send.svg";
 // data
 import userData from "../../data/user.json";
-import { useSenderContext } from "../../assets/SenderContext";
-
-import chattingData from "../../data/chatting.json";
 
 import { colors } from "../../style/colors";
 import { typography } from "../../style/typography";
 
 const Main = () => {
-  const { sender, setSender } = useSenderContext();
-  const user = userData.users[sender === 0 ? 2 : 0];
+  const { currentUser, setCurrentUser, chats, setChats } = useSenderContext();
+  const currentOpponent = currentUser === 0 ? 2 : 0;
+  const currentOpponentData = userData.users[currentOpponent];
 
   const [value, setValue] = useState("");
   const [isEmpty, setIsEmpty] = useState(true); // input란에 텍스트 입력 여부
-
-  // 데이터 관리
-  const storedChats = localStorage.getItem("chats");
-  const initialData = storedChats ? JSON.parse(storedChats) : chattingData;
-  const [chats, setChats] = useState(initialData);
-  useEffect(() => {
-    localStorage.setItem("chats", JSON.stringify(chats));
-  }, [chats]);
 
   // 스크롤 이동
   const chatWrapperRef = useRef<HTMLDivElement>(null);
@@ -62,7 +53,7 @@ const Main = () => {
     if (!isEmpty) {
       const newChat = {
         text: value,
-        sender: sender,
+        sender: currentUser,
         timestamp: getDate(),
       };
       setChats([...chats, newChat]);
@@ -79,27 +70,32 @@ const Main = () => {
   return (
     <Wrapper>
       <ChattingWrapper ref={chatWrapperRef}>
-        {chats.map((chat, index) => (
-          <ChattingItemWrapper key={index}>
-            <TimeStamp>{chat.timestamp}</TimeStamp>
-            <MsgBox align={chat.sender !== 0 ? "start" : "end"}>
-              {chat.sender !== 0 && (
-                <ProfileImg src={`img/userProfile/${user.profileImg}`} />
-              )}
-              <Contents>
-                {chat.sender !== 0 && <Name>{user.name}</Name>}
-                <MsgText
-                  maxwidth={chat.sender !== 0 ? 17.125 : 12}
-                  bgcolor={chat.sender !== 0 ? colors.gray200 : colors.blurple}
-                  txtcolor={chat.sender !== 0 ? colors.black : colors.white}
-                >
-                  {chat.text}
-                </MsgText>
-                {chat.sender === 0 && <Read>읽음</Read>}
-              </Contents>
-            </MsgBox>
-          </ChattingItemWrapper>
-        ))}
+        {chats.map((chat, index) => {
+          const isMine = chat.sender === currentUser;
+          return (
+            <ChattingItemWrapper key={index}>
+              <TimeStamp>{chat.timestamp}</TimeStamp>
+              <MsgBox align={isMine ? "end" : "start"}>
+                {isMine || (
+                  <ProfileImg
+                    src={`img/userProfile/${currentOpponentData.profileImg}`}
+                  />
+                )}
+                <Contents>
+                  {isMine || <Name>{currentOpponentData.name}</Name>}
+                  <MsgText
+                    maxwidth={isMine ? 12 : 17.125}
+                    bgcolor={isMine ? colors.blurple : colors.gray200}
+                    txtcolor={isMine ? colors.white : colors.black}
+                  >
+                    {chat.text}
+                  </MsgText>
+                  {isMine && <Read>읽음</Read>}
+                </Contents>
+              </MsgBox>
+            </ChattingItemWrapper>
+          );
+        })}
       </ChattingWrapper>
 
       <InputWrapper onSubmit={handleSubmit}>
