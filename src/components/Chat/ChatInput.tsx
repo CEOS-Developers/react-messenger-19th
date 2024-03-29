@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import Plus from '../../assets/img/plus.svg';
 import Attachment from '../../assets/img/attachment.svg';
 import Camera from '../../assets/img/camera.svg';
 import Microphone from '../../assets/img/microphone.svg';
-import FormatTime from './FormatTime';
-import { useDispatch } from 'react-redux';
-import { addChat } from '../../chatSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { addChat } from '../../features/chatSlice';
 
 const InputContainer = styled.div`
   width: 23.4375rem;
@@ -49,19 +49,20 @@ const Input = styled.input`
 `;
 
 export default function ChatInput() {
+  const nowUser = useSelector((state: RootState) => state.user.nowUser); // 현재 사용자 상태 가져오기
   const [value, setValue] = useState<string>('');
   const dispatch = useDispatch();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     if (!value.trim()) {
       alert('공백 없이 입력해주세요.');
       return;
     }
 
-    // 샘플 데이터 - 실제 사용 시 적절한 값으로 대체
-    const chatRoomId = 0; // 예시
-    const senderId = 0; // 예시
+    const chatRoomId = 0; // 이번 과제 예시
+    const senderId = nowUser;
     const time = new Date().toISOString(); // 현재 시각을 string으로 변환
     const isRead = true; // 상황에 따라 설정
 

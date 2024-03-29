@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import initialChatData from './assets/data/initialChatData.json';
+import initialChatData from '../assets/data/initialChatData.json';
 
 const initialState = initialChatData;
 

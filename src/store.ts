@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import chatReducer from './chatSlice';
+import chatReducer from './features/chatSlice';
+import userReducer from './features/userSlice';
 
 export const store = configureStore({
   reducer: {
-    chat: chatReducer, // chat 기능에 대한 리듀서를 스토어에 추가
+    chat: chatReducer,
+    user: userReducer,
   },
 });
 

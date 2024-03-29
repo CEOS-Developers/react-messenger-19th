@@ -1,22 +1,43 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TitleBar from '../components/Chat/TitleBar';
 import ChattingRoom from '../components/Chat/ChattingRoom';
 import ChatInput from '../components/Chat/ChatInput';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 import userData from '../assets/data/userData.json';
 
+interface User {
+  id: number;
+  name: string;
+  profileImg: string;
+  isActive: boolean;
+}
+
 export default function ChattingPage() {
-  const [partner] = useState(userData.users[1]);
+  const nowUser = useSelector((state: RootState) => state.user.nowUser);
+  const userList = useSelector((state: RootState) => state.user.userList);
+  const [partner, setPartner] = useState<User | null>(null);
+
+  useEffect(() => {
+    const nextUser = userData.users.find((user) => user.id !== nowUser) ?? null;
+    setPartner(nextUser);
+  }, [nowUser, userList]); // nowUser 또는 userList가 변경될 때마다 effect를 실행
 
   return (
     <>
-      <TitleBar
-        userName={partner.name}
-        profileImg={partner.profileImg}
-        isActive={partner.isActive}
-        //handleChangeUser={handleChangeUser}
-      />
-      <ChattingRoom />
-      <ChatInput />
+      {partner !== null ? (
+        <>
+          <TitleBar
+            name={partner.name}
+            profileImg={partner.profileImg}
+            isActive={partner.isActive}
+          />
+          <ChattingRoom />
+          <ChatInput />
+        </>
+      ) : (
+        <p>파트너 정보가 없습니다.</p>
+      )}
     </>
   );
 }

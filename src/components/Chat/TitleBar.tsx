@@ -1,7 +1,11 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import Left from '../../assets/img/left.svg';
 import VideoCall from '../../assets/img/video-call.svg';
 import AudioCall from '../../assets/img/audio-call.svg';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeUser } from '../../features/userSlice';
+import { RootState } from '../../store';
 
 const TitleBarContainer = styled.div`
   width: 23.4375rem;
@@ -94,14 +98,28 @@ const CallImg = styled.img`
 `;
 
 interface TitleBarProps {
-  userName: string;
+  name: string;
   profileImg: string;
   isActive: boolean;
-  handleChangeUser?: () => void;
 }
 
 export default function TitleBar(props: TitleBarProps) {
-  const { userName, profileImg, isActive, handleChangeUser } = props;
+  const { name, profileImg, isActive } = props;
+
+  const nowUser = useSelector((state: RootState) => state.user.nowUser);
+  const userList = useSelector((state: RootState) => state.user.userList);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(`현재 유저가 바뀌었습니다: ${nowUser}`);
+  }, [nowUser]); // nowUser가 변경될 때마다 이 effect를 실행합니다.
+
+  const handleChangeUser = () => {
+    const currentIndex = userList.indexOf(nowUser); // 현재 nowUser의 인덱스
+    const nextIndex = currentIndex === 0 ? 1 : 0;
+    const nextUser = userList[nextIndex];
+    dispatch(changeUser(nextUser));
+  };
 
   return (
     <TitleBarContainer>
@@ -116,7 +134,7 @@ export default function TitleBar(props: TitleBarProps) {
           alt="유저 프로필"
         />
         <ProfileInnerContainer>
-          <ProfileName>{userName}</ProfileName>
+          <ProfileName>{name}</ProfileName>
           {isActive ? (
             <OnlineText>online</OnlineText>
           ) : (
