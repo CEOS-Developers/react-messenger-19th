@@ -81,7 +81,7 @@ const Emoji = styled.div<{ selected: boolean }>`
   }
   opacity: ${({ selected }) => (selected ? '1' : '0.5')};//선택된이모지만 선명
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 `;

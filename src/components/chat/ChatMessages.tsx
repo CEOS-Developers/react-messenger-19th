@@ -9,11 +9,16 @@ import EmojiModal from './EmojiModal';
 
 
 
+//사파리 날짜 형식에 맞게 -를 /로 바꿔주는함수
+function convertDateFormat(dateString: string) {
+  return dateString.replace(/-/g, '/');
+}
+
 // 날짜별로 메세지 그룹화하기!!
 const groupMessagesByDate = (messages: Message[]) => {
   const grouped: { [key: string]: Message[][] } = {}; // 날짜별로 메시지 그룹의 배열을 저장
   messages.forEach((message) => {
-    const dateKey = new Date(message.timestamp).toLocaleDateString('ko-KR', {
+    const dateKey = new Date(convertDateFormat(message.timestamp)).toLocaleDateString('ko-KR', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
@@ -34,10 +39,7 @@ const groupMessagesByDate = (messages: Message[]) => {
   return grouped;
 };
 
-//사파리 날짜 형식에 맞게 -를 /로 바꿔주는함수
-function convertDateFormat(dateString: string) {
-  return dateString.replace(/-/g, '/');
-}
+
 //날짜 형식에 맞게 포맷팅하기 (오전 12:02 이렇게..!!)
 const formatDate = (dateString: string) => {
   const formattedDate = convertDateFormat(dateString);
