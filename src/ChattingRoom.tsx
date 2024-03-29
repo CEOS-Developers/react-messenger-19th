@@ -18,7 +18,7 @@ interface User {
 
 const initialUsers: User[] = [
 	{ name: '이지인', image: '/item/profile_mini.png' },
-	{ name: '이영인', image: '/item/profile_mini.png' },
+	{ name: '이영인', image: '/item/profile_mini2.png' },
 ];
 
 const initialMessages: Message[] = [];
@@ -69,7 +69,7 @@ function ChattingRoom() {
 	return (
 		<div>
 			<ChatHead user={currentUser} onUserClick={toggleUser} />
-			<ChatBody messages={messages} currentUser={currentUser.name} />
+			<ChatBody messages={messages} userImage={currentUser.image} currentUser={currentUser.name}  />
 			<ChatBottom onSendMessage={sendMessage} />
 			<div ref={messagesEndRef} />
 		</div>

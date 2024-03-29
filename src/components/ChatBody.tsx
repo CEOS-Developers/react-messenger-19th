@@ -19,6 +19,7 @@ interface Message {
 interface ChatBodyProps {
 	messages: Message[];
 	currentUser: string;
+    userImage: string;
 }
 
 const formatDate = (isoDateString: string) => {
@@ -34,7 +35,7 @@ const formatTime = (isoDateString: string) => {
 		.padStart(2, '0')}`;
 };
 
-const ChatBody: React.FC<ChatBodyProps> = ({ messages, currentUser }) => {
+const ChatBody: React.FC<ChatBodyProps> = ({ messages,userImage, currentUser}) => {
 	let lastDate = '';
     let lastMinute = '';
 
@@ -69,7 +70,7 @@ const ChatBody: React.FC<ChatBodyProps> = ({ messages, currentUser }) => {
 						<ChatMessageBox isCurrentUser={message.from === currentUser}>
 							<div>{message.content}</div>
 						</ChatMessageBox>
-                        <UserProfileImage src='/item/profile_mini.png' isCurrentUser={message.from === currentUser}/>
+                        <UserProfileImage src={userImage} isCurrentUser={message.from === currentUser}/>
 					</React.Fragment>
 				);
 			})}
