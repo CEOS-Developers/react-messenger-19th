@@ -3,86 +3,98 @@
     {
       "id": 0,
       "rcvd": true,
-      "sequential": false,
+      "isSameTime": false,
+      "isFirst": true,
       "text": "텍스트 영역 너비는 최대 180까지 가능합니다. 세오스 짱.",
       "time": "오전 10:06"
     },
     {
       "id": 1,
       "rcvd": false,
-      "sequential": false,
+      "isSameTime": false,
+      "isFirst": true,
       "text": "텍스트 영역 너비는 최대 180까지 가능합니다. 세오스 짱.",
       "time": "오전 10:06"
     },
     {
       "id": 2,
       "rcvd": false,
-      "sequential": true,
+      "isSameTime": true,
+      "isFirst": true,
       "text": "요즘 날씨 진짜 좋다",
       "time": "오전 10:10"
     },
     {
       "id": 3,
       "rcvd": false,
-      "sequential": true,
+      "isSameTime": true,
+      "isFirst": false,
       "text": "서울은 이번주 일요일에 벚꽃 핀다더라!?",
-      "time": "오전 10:12"
+      "time": "오전 10:10"
     },
     {
       "id": 4,
       "rcvd": true,
-      "sequential": false,
+      "isSameTime": true,
+      "isFirst": true,
       "text": "진짜? ",
       "time": "오전 10:12"
     },
     {
       "id": 5,
       "rcvd": true,
-      "sequential": true,
+      "isSameTime": true,
+      "isFirst": false,
       "text": "당장 보러 가자",
       "time": "오전 10:12"
     },
     {
       "id": 6,
       "rcvd": true,
-      "sequential": true,
+      "isSameTime": false,
+      "isFirst": true,
       "text": "시간 언제 되는데?",
       "time": "오전 10:13"
     },
     {
       "id": 7,
       "rcvd": false,
-      "sequential": false,
+      "isSameTime": true,
+      "isFirst": true,
       "text": "일요일은 스터디 있어서 안되고 월요일 어때? 나 공강임",
       "time": "오전 10:15"
     },
     {
       "id": 8,
       "rcvd": false,
-      "sequential": true,
+      "isSameTime": true,
+      "isFirst": false,
       "text": "여의도도 좋고 잠실도 좋아",
       "time": "오전 10:15"
     },
     {
       "id": 9,
       "rcvd": true,
-      "sequential": false,
+      "isSameTime": true,
+      "isFirst": true,
       "text": "나도 월요일 오전 수업이라 가능!",
       "time": "오전 10:30"
     },
     {
       "id": 10,
       "rcvd": true,
-      "sequential": true,
+      "isSameTime": true,
+      "isFirst": false,
       "text": "여의도 갔다가 더현대가서 밥먹으면 되겠네",
       "time": "오전 10:30"
     },
     {
       "id": 11,
       "rcvd": true,
-      "sequential": true,
+      "isSameTime": false,
+      "isFirst": true,
       "text": "먹고 싶은거 있어?",
-      "time": "오전 10:31"
+      "time": "오전 10:32"
     }
   ]
 }
