@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { adjustTimeForUserLocation } from '@utils/makeTimeString';
 
 const StyledIphoneStatusLeftDiv = styled.div`
   width: 54px;
@@ -12,5 +13,9 @@ const StyledIphoneStatusLeftDiv = styled.div`
 `;
 
 export default function IphoneStatusLeftDiv() {
-  return <StyledIphoneStatusLeftDiv>9:41</StyledIphoneStatusLeftDiv>;
+  const time = adjustTimeForUserLocation();
+
+  return (
+    <StyledIphoneStatusLeftDiv>{time.slice(11, 16)}</StyledIphoneStatusLeftDiv>
+  );
 }
