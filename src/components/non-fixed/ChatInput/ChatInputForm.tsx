@@ -2,7 +2,15 @@ import styled from 'styled-components';
 import * as ST from '@styles/styledComponents';
 import { useRecoilState } from 'recoil';
 import { useRef } from 'react';
-import { isInputBoxFocusedState } from '@context/state/atom';
+import {
+  isInputBoxFocusedState,
+  messageDataState,
+  messageDateArrayState,
+  userNumberState,
+} from '@context/state/atom';
+import { adjustTimeForUserLocation } from '@utils/makeTimeString';
+import sortByDate from '@utils/sortArrayByDate';
+import { processedMessageData } from '@_type/type';
 
 const StyledChatInputForm = styled.form`
   width: 100%;
@@ -66,6 +74,11 @@ export default function ChatInputForm() {
   const [isInputBoxFocused, setIsInputBoxFocused] = useRecoilState(
     isInputBoxFocusedState
   );
+  const [messageData, setMessageData] = useRecoilState(messageDataState);
+  const [messageDateArray, setMessageDateArray] = useRecoilState(
+    messageDateArrayState
+  );
+  const [userNumber, setUserNumber] = useRecoilState(userNumberState);
 
   function handleToggleIsInputBoxFocused() {
     // 포커스가 되었는데 값이 있는 상태에서 블러가 풀리는 것으로 가면 상태를 변경시키지 않음 => 내용이 없는 상태에서 메시지 전송도 막아줌
@@ -82,6 +95,44 @@ export default function ChatInputForm() {
     } else if (isInputBoxFocused === true) {
       ev.preventDefault();
       console.log('good');
+      const createdAt = adjustTimeForUserLocation();
+      const createdDate = createdAt.slice(0, 10);
+      const content = inputRef.current?.value as string;
+      const from = userNumber;
+      const like = false;
+
+      const newMessageData = {
+        createdAt: createdAt,
+        createdDate: createdDate,
+        content: content,
+        from: from,
+        like: like,
+      };
+
+      const tmpMessageData = { ...messageData };
+      const tmpMessageDateArray = [...messageDateArray];
+
+      if (tmpMessageData[createdDate] === undefined) {
+        tmpMessageData[createdDate] = [];
+        tmpMessageData[createdDate].push(newMessageData);
+      } else {
+        tmpMessageData[createdDate].push(newMessageData);
+      }
+
+      if (!tmpMessageDateArray.includes(createdDate)) {
+        tmpMessageDateArray.push(createdDate);
+        tmpMessageDateArray.sort(sortByDate);
+      }
+      setMessageData(tmpMessageData);
+      setMessageDateArray(tmpMessageDateArray);
+      localStorage.setItem('chatMessageData', JSON.stringify(tmpMessageData));
+      localStorage.setItem(
+        'chatMessageDateArray',
+        JSON.stringify(tmpMessageDateArray)
+      );
+      if (inputRef.current !== null) {
+        inputRef.current.value = '';
+      }
     }
   }
 
