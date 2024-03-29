@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import ChatHead from './components/ChatHead';
 import ChatBody from './components/ChatBody';
 import ChatBottom from './components/ChatBottom';
+import dummy from './dummy.json';
 
 interface Message {
 	id: number;
@@ -38,6 +39,9 @@ function ChattingRoom() {
 	useEffect(() => {
 		// 메시지 데이터를 localStorage에 저장
 		localStorage.setItem('messages', JSON.stringify(messages));
+
+		//dummy.message = JSON.stringify(messages);
+		//console.log(dummy.message);
 	}, [messages]);
 
 	useEffect(() => {
@@ -45,17 +49,16 @@ function ChattingRoom() {
 		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
 	}, [messages]);
 
-    const sendMessage = (messageContent: string) => {
-        const newMessage: Message = {
-            id: Date.now(),
-            from: currentUser.name,
-            content: messageContent,
-            date: new Date().toISOString(), // ISO 형식의 날짜 문자열 사용
-        };
-    
-        setMessages((prevMessages) => [...prevMessages, newMessage]);
-    };
-    
+	const sendMessage = (messageContent: string) => {
+		const newMessage: Message = {
+			id: Date.now(),
+			from: currentUser.name,
+			content: messageContent,
+			date: new Date().toISOString(), // ISO 형식의 날짜 문자열 사용
+		};
+
+		setMessages((prevMessages) => [...prevMessages, newMessage]);
+	};
 
 	const toggleUser = () => {
 		setCurrentUserIndex((currentIndex) => (currentIndex === 0 ? 1 : 0));
