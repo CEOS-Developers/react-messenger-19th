@@ -6,9 +6,6 @@ import ChatContainer from '../components/chatPage/ChatContainer';
 import { useState } from 'react';
 import { MsgType } from '../types/types';
 
-// import { useSetRecoilState } from 'recoil';
-// import { useRecoilValue } from 'recoil';
-
 export default function ChatPage() {
   const [list, setList] = useState<MsgType[]>([]);
   const [userId, setUserId] = useState(0);
@@ -17,8 +14,8 @@ export default function ChatPage() {
     <>
       <Header />
       <ChatHeader userId={userId} setUserId={setUserId} />
-      <ChatContainer list={list} userId={userId}/>
-      <ChatFooter list={list} setList={setList}/>
+      <ChatContainer list={list} userId={userId} />
+      <ChatFooter list={list} setList={setList} />
       <Footer />
     </>
   );
