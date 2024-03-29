@@ -19,3 +19,5 @@ export type processedMessageDataArray = processedMessageData[];
 export interface messageDataObject {
   [key: string]: processedMessageDataArray;
 }
+
+export type voidFunction = () => void;

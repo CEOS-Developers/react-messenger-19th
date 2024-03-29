@@ -21,3 +21,8 @@ export const isInputBoxFocusedState = atom({
   key: 'isInputBoxFocused',
   default: false,
 });
+
+export const scrollToBottomState = atom({
+  key: 'scrollToBottomState',
+  default: () => {},
+});

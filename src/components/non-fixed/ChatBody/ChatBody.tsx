@@ -1,9 +1,9 @@
 import { useRecoilState } from 'recoil';
 import { messageDataState, messageDateArrayState } from '@context/state/atom';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import OneDateContainer from '@components/non-fixed/ChatBody/OneDateContainer/OneDateContainer';
-import { messageDataObject } from '@_type/type';
+import { messageDataObject, voidFunction } from '@_type/type';
 import sortByDate from '@utils/sortArrayByDate';
 
 const StyledChatBodyContainer = styled.div`
@@ -12,7 +12,6 @@ const StyledChatBodyContainer = styled.div`
   margin-top: 16px;
   margin-right: 16px;
   margin-left: 16px;
-  /* overflow-y: scroll; */
   width: 343px;
   height: 595px;
   overflow-y: scroll;
@@ -20,10 +19,18 @@ const StyledChatBodyContainer = styled.div`
 
 export default function ChatBody() {
   // 여기에서 json 데이터를 불러와서 날짜별로 쪼갠다. 그리고 구분선, 메시지,메시지, 다시 구분선 메시지 메시지 느낌으로 나눠준다
+  const chatBodyContainerRef = useRef<any>(null);
   const [messageData, setMessageData] = useRecoilState(messageDataState);
   const [messageDateArray, setMessageDateArray] = useRecoilState(
     messageDateArrayState
   );
+
+  const scrollToBottom: voidFunction = function () {
+    if (chatBodyContainerRef.current) {
+      chatBodyContainerRef.current.scrollTop =
+        chatBodyContainerRef.current.scrollHeight;
+    }
+  };
 
   // 처음 chatBody 컴포넌트가 DOM에 마운트 되면 json 파일로부터 정보를 가져온다.
   useEffect(() => {
@@ -75,7 +82,6 @@ export default function ChatBody() {
       localStorage.getItem('chatMessageData') === null &&
       localStorage.getItem('chatMessageDateArray') === null
     ) {
-      console.log('yes!');
       loadMessageData();
     } else if (
       localStorage.getItem('chatMessageData') !== null &&
@@ -94,7 +100,7 @@ export default function ChatBody() {
   }, []);
 
   return (
-    <StyledChatBodyContainer className="scroll-box">
+    <StyledChatBodyContainer className="scroll-box" ref={chatBodyContainerRef}>
       {messageDateArray.map((messageDate) => {
         return <OneDateContainer key={messageDate} messageDate={messageDate} />;
       })}

@@ -10,7 +10,6 @@ import {
 } from '@context/state/atom';
 import { adjustTimeForUserLocation } from '@utils/makeTimeString';
 import sortByDate from '@utils/sortArrayByDate';
-import { processedMessageData } from '@_type/type';
 
 const StyledChatInputForm = styled.form`
   width: 100%;
@@ -118,6 +117,7 @@ export default function ChatInputForm() {
         tmpMessageData[createdDate].push(newMessageData);
       } else {
         console.log(tmpMessageData[createdDate]);
+        // 기존의 배열을 구조분해하여 다른 메모리 값을 가진 배열로 받음
         const prevDateArray = [...tmpMessageData[createdDate]];
         prevDateArray.push(newMessageData);
         tmpMessageData[createdDate] = prevDateArray;
