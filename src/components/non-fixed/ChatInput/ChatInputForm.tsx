@@ -95,6 +95,7 @@ export default function ChatInputForm() {
     if (isInputBoxFocused === false) {
       ev.preventDefault();
     } else if (isInputBoxFocused === true) {
+      if (inputRef.current?.value === '') return;
       ev.preventDefault();
 
       const createdAt = adjustTimeForUserLocation();
