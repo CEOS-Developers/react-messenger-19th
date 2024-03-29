@@ -35,6 +35,9 @@ function ChattingRoom() {
 		return savedMessages;
 	});
 	const currentUser = initialUsers[currentUserIndex];
+	const otherUserIndex = (currentUserIndex + 1) % initialUsers.length;
+	const otherUser = initialUsers[otherUserIndex];
+
 	// 메세지 목록 끝으로 스크롤
 	const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
@@ -69,7 +72,11 @@ function ChattingRoom() {
 	return (
 		<div>
 			<ChatHead user={currentUser} onUserClick={toggleUser} />
-			<ChatBody messages={messages} userImage={currentUser.image} currentUser={currentUser.name}  />
+			<ChatBody
+				messages={messages}
+				userImage={otherUser.image}
+				currentUser={currentUser.name}
+			/>
 			<ChatBottom onSendMessage={sendMessage} />
 			<div ref={messagesEndRef} />
 		</div>
