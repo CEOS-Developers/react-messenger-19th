@@ -71,7 +71,6 @@ export default function ChatLogRight({
   const createdHourMinute = createdAt.slice(11, 16);
   const createdDate = createdAt.slice(0, 10);
   const deepCopiedMessageData = JSON.parse(JSON.stringify(messageData));
-  console.log(deepCopiedMessageData);
 
   function handleDoubleClickMessage() {
     // 자신과 달라야 한다.

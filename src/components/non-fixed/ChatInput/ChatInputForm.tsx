@@ -115,7 +115,6 @@ export default function ChatInputForm() {
         tmpMessageData[createdDate] = [];
         tmpMessageData[createdDate].push(newMessageData);
       } else {
-        console.log(tmpMessageData[createdDate]);
         // 기존의 배열을 구조분해하여 다른 메모리 값을 가진 배열로 받음
         const prevDateArray = [...tmpMessageData[createdDate]];
         prevDateArray.push(newMessageData);
