@@ -11,7 +11,6 @@ import {
   useState,
   KeyboardEvent,
 } from "react";
-import { getCurrentTime } from "util/getCurrentTime";
 import mockData from "data/chatData.json";
 import { Chat } from "types/ChatData";
 import ChatRoomHeader from "components/ChatRoom/ChatRoomHeader";
@@ -64,10 +63,10 @@ function ChatRoom() {
       messages: [
         ...prev.messages,
         {
-          id: Date.now().toString(),
+          id: Date().toString(),
           senderId: participantsId.me,
           text: inputValue,
-          createdAt: getCurrentTime(),
+          createdAt: Date().toString(),
         },
       ],
     }));

@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { ReactComponent as HeaderIcons } from "../asset/icons/HeaderIcons.svg";
 import { flexCenter } from "../styles/CommonStyle";
-import { getCurrentTime } from "util/getCurrentTime";
+import { formatDateToTime } from "util/formatDateToTime";
 
 function Header() {
   return (
     <HeaderWrapper>
-      <CurrentTime>{getCurrentTime()}</CurrentTime>
+      <CurrentTime>{formatDateToTime(Date())}</CurrentTime>
       <HeaderIcons alt="연결상태, 와이파이, 배터리 아이콘" />
     </HeaderWrapper>
   );

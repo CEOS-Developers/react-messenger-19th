@@ -1,6 +1,7 @@
 export const formatDateToTime = (isoString: string) => {
   const date = new Date(isoString);
-  return date.toLocaleTimeString("en-GB", {
+  console.log(date);
+  return date.toLocaleTimeString("ko-KR", {
     hour: "2-digit",
     minute: "2-digit",
     hour12: false,
