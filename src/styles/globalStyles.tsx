@@ -8,6 +8,7 @@ const GlobalStyles = createGlobalStyle`
   }
   html {
     background-color: #E5E6EB;
+    height: 100%;
   }
   body {
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -15,6 +16,7 @@ const GlobalStyles = createGlobalStyle`
     opacity: 0.95;
     margin: 0 auto;
     height: 812px;
+    height: 100%;
     width: 375px;
   }
   #root {

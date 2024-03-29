@@ -23,6 +23,7 @@ export default function OneDateContainer({
     <StyledOneDateContainer>
       <DateDivider dateString={messageDate} />
       {oneDateMessagData.map((data) => {
+        console.log(data);
         return (
           <ChatLog
             isEqual={userNumber === data.from}
@@ -30,6 +31,7 @@ export default function OneDateContainer({
             createdAt={data.createdAt}
             content={data.content}
             key={data.createdAt}
+            like={data.like}
           />
         );
       })}

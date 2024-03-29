@@ -16,16 +16,24 @@ export default function ChatLog({
   from,
   createdAt,
   content,
+  like,
 }: {
   isEqual: boolean;
   from: number;
   createdAt: string;
   content: string;
+  like: boolean;
 }) {
   return (
     <StyledChatLogContainer>
       <ChatLogLeft isEqual={isEqual} />
-      <ChatLogRight from={from} createdAt={createdAt} content={content} />
+      <ChatLogRight
+        isEqual={isEqual}
+        from={from}
+        createdAt={createdAt}
+        content={content}
+        like={like}
+      />
     </StyledChatLogContainer>
   );
 }

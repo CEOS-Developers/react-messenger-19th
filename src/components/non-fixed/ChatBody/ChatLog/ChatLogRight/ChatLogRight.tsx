@@ -40,14 +40,28 @@ const StyledMessageContentContainer = styled.div`
   color: ${(props) => props.theme.color.black};
   line-height: 22.5px;
 `;
+
+const StyledLikeHeartDiv = styled.div`
+  width: 100%;
+  height: 22px;
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 2px;
+`;
+
+const StyledLikeHeartImage = styled.img``;
 export default function ChatLogRight({
+  isEqual,
   from,
   createdAt,
   content,
+  like,
 }: {
+  isEqual: boolean;
   from: number;
   createdAt: string;
   content: string;
+  like: boolean;
 }) {
   const createdHourMinute = createdAt.slice(11, 16);
   return (
@@ -57,6 +71,11 @@ export default function ChatLogRight({
         <StyledTimeSpan>{createdHourMinute}</StyledTimeSpan>
       </StyledNameAndMessageContainer>
       <StyledMessageContentContainer>{content}</StyledMessageContentContainer>
+      {isEqual === false && like === true && (
+        <StyledLikeHeartDiv>
+          <StyledLikeHeartImage src="/images/likeHeart.svg" />
+        </StyledLikeHeartDiv>
+      )}
     </StyledChatLogRightContainer>
   );
 }
