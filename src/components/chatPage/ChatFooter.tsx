@@ -37,7 +37,6 @@ export default function ChatFooter(props: ChatFooterProps) {
         if (filterSameTimeIndex !== list.length) {
           isFirst = false;
         }
-
         const updatedList = list.map((msg, index) => (index === filterSameTimeIndex ? { ...msg, isFirst: true } : msg));
         setList([]);
         setList(updatedList);
@@ -51,7 +50,6 @@ export default function ChatFooter(props: ChatFooterProps) {
       text: input,
       time: date(),
     };
-
     setList((prevList) => [...prevList, newMsg]);
   }
 

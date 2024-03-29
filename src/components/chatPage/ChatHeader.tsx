@@ -20,7 +20,7 @@ export default function ChatHeader(props: ChatHeaderProps) {
     <Wrapper>
       <Left>
         <BackArrowIcon />
-        <p onClick={handleUser}>{userData.data.find((user) => user.id === userId)?.name}</p>
+        <SentName onClick={handleUser}>{userData.data.find((user) => user.id === userId)?.name}</SentName>
       </Left>
       <Right>
         <FindIcon />
@@ -41,12 +41,9 @@ const Wrapper = styled.section`
   background-color: ${({ theme }) => theme.colors.blue_bg};
 `;
 
-const Left = styled.div`
+const Left = styled.span`
   ${flexCenter}
   gap: 0.4rem;
-
-  ${({ theme }) => theme.fonts.sent_person_large};
-  color: ${({ theme }) => theme.colors.black};
 
   & svg {
     width: 3.2rem;
@@ -54,7 +51,12 @@ const Left = styled.div`
   }
 `;
 
-const Right = styled.div`
+const SentName = styled.p`
+  ${({ theme }) => theme.fonts.sent_person_large};
+  color: ${({ theme }) => theme.colors.black};
+`;
+
+const Right = styled.span`
   ${flexCenter}
   gap: 0.2rem;
 

@@ -76,14 +76,14 @@ const Layout = styled.div`
   gap: 0.8rem;
 `;
 
-const ChatBox = styled.div<{ $rcvd: boolean }>`
+const ChatBox = styled.span<{ $rcvd: boolean }>`
   display: flex;
   justify-content: ${({ $rcvd }) => ($rcvd ? 'none' : 'end')};
 
   gap: 0.6rem;
 `;
 
-const Details = styled.div<{ $margin: boolean }>`
+const Details = styled.section<{ $margin: boolean }>`
   display: flex;
   flex-direction: column;
   margin-left: ${({ $margin }) => ($margin ? '3.4rem' : 'none')};
@@ -99,7 +99,7 @@ const Name = styled.p`
   ${({ theme }) => theme.fonts.sent_person_small};
 `;
 
-const Text = styled.div<{ $rcvd: boolean }>`
+const Text = styled.span<{ $rcvd: boolean }>`
   max-width: 20.4rem;
   padding: 0.8rem 1.2rem;
   border-radius: 1.6rem;
@@ -109,7 +109,7 @@ const Text = styled.div<{ $rcvd: boolean }>`
   background-color: ${({ theme, $rcvd }) => ($rcvd ? theme.colors.white : theme.colors.green_bg)};
 `;
 
-const TimeNow = styled.div`
+const TimeNow = styled.span`
   display: flex;
   align-items: end;
   width: 4.5rem;
