@@ -1,66 +1,142 @@
-# 서론
+# 배포링크
+[카카오톡](https://vercel.com/songess/ceos-week3-react-messenger)
 
-안녕하세요 🙌🏻 19기 프론트 운영진 배성준입니다. 이번 미션에서는 드디어 투두리스트에서 벗어나 새로운 프로젝트인 **messenger** 만들기를 진행합니다.
+# 후기 및 구현기능
 
-이번주는 특별히 **디자이너와의 협업**으로 진행되는 미션입니다. 디자이너분께서 열심히 리디자인 한 메신저 프로젝트를 여러분들께서 구현해주시면 됩니다.
+생각보다 할 게 많았던 과제였던거 같습니다..!
 
-동시에, 이번주부터는 새로 **TypeScript**를 적용해보려고 합니다.
+디자이너분과 협업을 하면서 진행했기 떄문에 `styled-components`의 `theme`을 사용해 `font`, `textStyles`을 설정하고 시작했습니다. 또 375x812 맞춤으로 코드를 작성할 것이라 `rem`단위를 사용하지 않고 `px`을 사용했습니다.
 
-프로젝트의 규모가 커지게 될 수록, 컴포넌트가 가지는 props의 종류 또한 다양해지게 됩니다. 무지성 코딩을 하다보면 가끔 이 props의 구성과 이름, 어떤 타입이 들어가야 하는지 헷갈리기 마련이죠. 보통 그럴 때 다시 컴포넌트 정의 부분으로 돌아가 props의 구성을 보고 오곤 합니다.
+절대경로를 설정했는데, cra를 사용한 프로젝트이기 때문에 `baseUrl`및 `paths`만으로는 설정이 부족했고 `craco`, `react-app-alias`의 라이브러리의 도움을 받아 해결했습니다. 다만 `@types`는 적용이 되지 않아 `type`들은 직접 선언해서 사용했습니다.
 
-하지만 이럴 때, typescript를 적용한다면 컴포넌트의 구성과 그 이름, 심지어 타입까지 한번에 자동완성으로 편리하게 관리할 수 있고, 생산성이 증대되겠죠.
+과제에 `recoil`사용이 권장되어 있어서 사용해봤습니다. `recoil`을 사용해보지 않았던 이유가 `redux`처럼 보일러 플레이트가 많고, 디스패치를 많이 사용해야 할 것 같아 사용해보지 않았으나, 직접 사용해보니 잘못된 생각이였다는 걸 깨달았습니다. `useRecoilState`를 `useState`처럼 사용할 수 있었고, 보일러 플레이트도 필요하지 않았습니다. 또한 `selector`를 통해 디스패치의 기능을 훨씬 쉽게 사용한 느낌이였습니다.  
+공식문서를 찾아보니 `effects`를 통해 다른 `built-in`함수들도 많아 찾아보던 중 `onSet`과 `setSelf`는 유용하게 사용할 수 있을 거 같아 적용시켜 보았습니다.
 
-또한, **React Hooks**에 조금 더 익숙해지는 것을 목표로 합니다. 여러 Hook들이 있지만 그 중에서도 `useState`, `useEffect`, `useRef`를 중점적으로 사용해 보는 미션인데요, React를 사용하면서 굉장히 자주 쓰이는 Hook들이기 때문에 이 부분을 집중적으로 공부해 보아요!
+`effects`는 '부수효과를 관리하고 atom을 초기화 또는 동기화하기 위한 API'라고 나와있어 `localStorage`에 제격이라 생각했습니다.
+`setSelf`는 초기값을 설정하는 함수로, `localStorage`에 값이 있다면 받아오고, 없다면 저장해놓은 `json`데이터를 가져왔습니다.  
+`onSet`은 atom을 모니터하며 값이 갱신되면 함수가 실행되어 `localStorage`를 최신화 시켰습니다.
 
-그럼 이번 미션도 파이팅입니다!!🎉
+이름을 눌렀을때 변하는 것을 구현하기 위해 `recoil`을 사용해 현재`user`가 누구인지를 토클시켜주었습니다.
 
-# 미션
+정말 카카오톡처럼 구현해보고자 하니 어려운 부분이 두 개 있었습니다.
 
-## Key Questions
+### 언제 상대방의 프로필과 이름을 띄우지?
 
-- JavaScript를 사용할때에 비해 TypeScript를 사용할 때의 장점은 무엇인가요?
-- 디자이너로부터 전달받은 피그마 링크 혹은, 피그마 캡처본
-- 컴포넌트를 분리한 기준은 무엇인가요?
-- 디자인 시스템을 적용하면서 느낀 점은 무엇인가요?
-- 디자이너와 소통하며 느낀점은 무엇인가요?
+상대방의 프로필과 이름이 항상 뜨면 안되고, 특정상황에만 떠야 했습니다.
 
-## 미션 목표
+- 처음 나한테 보냈다
+- 이전 채팅이 상대방이 아니고 나다
+- 날짜가 바뀌었다
+  3가지 경우의 수 + 내가 아닌 경우에는 상대방의 프로필과 사진을 띄워줬습니다.
 
-- TypeScript를 사용해봅시다.
-- useState로 컴포넌트의 상태를 관리합니다.
-- useEffect와 useRef의 사용법을 이해합니다.
-- styled-components를 통한 CSS-in-JS 및 CSS Preprocessor의 사용법에 익숙해집니다.
+### 타임스탬프가 분 단위로 같을때는 가장 밑에 것만 찍히게 하고싶어
 
-## 기한
+`chat`객체를 만들때 `isDisplay:boolean`속성을 넣었고 최초에 만들어질때는 `true`를 갖게 했습니다. 그리고 새로운 채팅이 입력될 때마다 이전 채팅을 확인하고 이전채팅과 새로운 채팅의 발신자가 같은지, 날짜 및 시간이 같은지 확인하여 모두 일치한다면 이전 채팅의 `isDisplay`를 `false`로 바꿔주었습니다.
 
-2024년 3월 29일 금요일
+```ts
+interface Chat {
+  chatId: string;
+  to: string;
+  from: string;
+  content: string;
+  date: string;
+  time: string;
+  isDisplay: boolean;
+  isRead: boolean;
+}
 
-## 필수 구현 기능
+interface ChattingRoom {
+  id: string;
+  chat: Chat[];
+}
+```
 
-- 피그마를 보고 [결과화면](https://3th-fb-messenger.netlify.app)과 같이 구현합니다.
-- 디자인 시스템을 구축합니다.
-- 채팅방 상단의 프로필을 클릭하면 사용자를 변경할 수 있습니다.
-- 메세지를 보내면 채팅방 하단으로 스크롤을 이동시킵니다.
-- 메세지에 유저 정보(프로필 사진, 이름)를 표시합니다.
-- user와 message 데이터를 json 파일에 저장합니다.
-- UI는 **반응형을 제외**하고 피그마파일을 따라서 진행합니다.
+확장성을 고려해 채팅관련된 것을 하나의 객체배열 안에서 해결하고자 하여 `ChattingRoom`이라는 객체를 배열로 만들어 관리했고, 채팅이 갱신되면 `ChattingRoom`의 속성 중 하나인 `Chat[]`의 마지막 원소에 접근하고 새로운 원소를 추가해줘야 했습니다.
 
-### 추가 구현 기능
+리액트는 상태의 불변성을 중요시 여기는데, 이렇게 중첩된 구조의 배열에 접근하여 값을 바꿔주어야 하다보니 `prev`의 값을 받아와 새로운 변수에 할당하고 이를 다시 넣어줘야하는 과정을 반복해야 했기 때문에 로직이 조금 복잡해졌습니다. 더 나은 방법을 고민해봤지만 떠오르지 않아 이렇게 해결했습니다.
 
-- 더블 클릭 하면 감정표현을 추가합니다.
-- 그 외 추가하고 싶은 기능이 있다면 마음껏 추가해 주세요!
+날짜가 변경될 때도 날짜 변경선이 나오도록 구현했습니다.
 
-참고로 이번 과제는 다음주까지 이어지는 과제이므로 **확장성**을 충분히 고려해 주세요. 참고로 **4주차 과제에서는 유저 및 기능 추가와 Routing을** 진행합니다. 이를 위해 [recoil](https://recoiljs.org/ko/)이나 [redux](https://ko.redux.js.org/introduction/getting-started/)를 이용한 상태관리를 미리 해보시는 것을 추천합니다!! 모두 공식문서 많이 읽어보시고 자신만의 상태관리 조합도 찾아보면 재밌을 거에요 XD
+카카오톡에서처럼 상단 navigation이 반투명하게 설정했습니다.
 
-## 링크 및 참고자료
+`useDoubleClick`훅을 만들어 상대방 채팅을 더블클릭하면 좋아요를 표시할 수 있도록 했습니다.
 
-- [React docs - Hook](https://ko.reactjs.org/docs/hooks-intro.html)
-- [React의 Hooks 완벽 정복하기](https://velog.io/@velopert/react-hooks#1-usestate)
-- [useEffect 완벽 가이드](https://overreacted.io/ko/a-complete-guide-to-useeffect/)
-- [코딩 컨벤션](https://ui.toast.com/fe-guide/ko_CODING-CONVENTION)
-- [타입스크립트 핸드북](https://joshua1988.github.io/ts/intro.html)
-- [리액트 프로젝트에서 타입스크립트 사용하기 (시리즈)](https://velog.io/@velopert/series/react-with-typescript)
-- [디자인 시스템 구축기](https://yozm.wishket.com/magazine/detail/1830/)
-- [[영상] : 컴포넌트에 대한 이해](https://www.youtube.com/watch?v=21eiJc90ggo)
-- [Styled Component로 디자인 시스템 구축하기](https://zaat.dev/blog/building-a-design-system-in-react-with-styled-components/)
-- [ts 절대경로 설정하기](https://tesseractjh.tistory.com/232)
+# Key Questions
+
+## JavaScript를 사용할때에 비해 TypeScript를 사용할 때의 장점은 무엇인가요?
+
+자동완성기능을 사용할 수 있고, 에러를 사전에 방지할 수 있습니다.
+
+js는 유연한 언어인만큼 어떻게 작동할 지 모르는 부분들이 있습니다.
+
+```javascript
+[] + [] = ''
+[] + {} = '[object object]'
+{} + [] = 0
+{} + {} = NaN
+```
+
+이렇게 원하지 않는 형태로 동작할 수 있습니다. 이처럼 예상치 못한 연산으로 에러가 발생하면 컴파일 에러를 띄워주지 않고 런타임에 에러를 띄웁니다. 타입스크립트는 이런 부분을 사전에 방지해줄 수 있습니다.
+
+컴포넌트들이 많아지고 주고받는 props들이 생기거나 컴포넌트를 선언할 때 어떤 props가 필요한지 헷갈릴 수 있는데, 자동완성기능을 통해 어떤 속성들이 필요한지 알 수 있습니다.
+
+타입을 너무 제한적으로 사용한다고 느낄 수도 있겠지만, 유니온타입이나 제네릭을 통해 타입을 확장성있게 사용할 수도 있습니다.
+
+## 디자이너로부터 전달받은 피그마 링크 혹은, 피그마 캡처본
+
+![캡쳐본](./src/assets/img/capture.png)
+
+## 컴포넌트를 분리한 기준은 무엇인가요?
+
+채팅 박스역할을 하는 코드들, 채팅의 상단바역할을 하는 코드들, 하단바 역할을 하는 코드들 처럼 기능에 따라 분류 했습니다.
+
+```
+src
+ ┣ assets
+ ┃ ┣ data
+ ┃ ┃ ┗ chattingRoomData.json
+ ┃ ┣ img
+ ┃ ┃ ┗ ...
+ ┃ ┣ svg
+ ┃ ┃ ┣ ...
+ ┣ hooks
+ ┃ ┗ useDoubleClick.tsx
+ ┣ pages
+ ┃ ┗ ChattingRoomPage
+ ┃ ┃ ┣ components
+ ┃ ┃ ┃ ┣ ChatBottom.tsx
+ ┃ ┃ ┃ ┣ ChatHead.tsx
+ ┃ ┃ ┃ ┣ Chatting.tsx
+ ┃ ┃ ┃ ┣ HeartBox.tsx
+ ┃ ┃ ┃ ┣ Mychat.tsx
+ ┃ ┃ ┃ ┣ OppoChangeChat.tsx
+ ┃ ┃ ┃ ┗ OppoChat.tsx
+ ┃ ┃ ┗ ChattingRoomPage.tsx
+ ┣ recoil
+ ┃ ┣ chatAtom.ts
+ ┃ ┗ userAtom.ts
+ ┣ styles
+ ┃ ┣ GlobalStyle.ts
+ ┃ ┗ theme.ts
+ ┣ types
+ ┃ ┗ type.ts
+ ┣ App.tsx
+ ┣ index.tsx
+ ┣ svg.d.ts
+ ┗ types.d.ts
+```
+
+페이지폴더를 만들고, 컴포넌트 폴더를 만들어서 페이지에서 사용하는 컴포넌트들을 만들어줬습니다. 기능별로 컴포넌트들을 구현했기 때문에 원하는 위치에서 컴포넌트를 호출해주고 css만 설정해주면 페이지를 만들 수 있었습니다.
+
+## 디자인 시스템을 적용하면서 느낀 점은 무엇인가요?
+
+혼자 만들다 보면 색상이나 텍스트스타일을 미리 지정해놓는게 아니기 때문에 한번 해보고 렌더링 해보면서 어떤게 제일 적합한지 여러번 시도해봐야 했습니다. 하지만 `figma`를 통해 디자인을 받아서 개발했기 때문에 그런 고민을 할 필요가 없었습니다.
+
+또한 이미 정해진 규격(ex. body1, body2, body3, ...)이 있고 그것들을 사용해 디자인을 해주셨기 때문에, 미리 `theme`으로 규격을 저장해놓으면 개발하면서 호출하기만 하면 되니깐 굉장히 편했습니다.
+
+
+## 디자이너와 소통하며 느낀점은 무엇인가요?
+
+기능적인 부분을 위주로 생각하다보니 디자인적 요소를 가끔 잘못 만들 때가 있습니다. 버튼이 의도한게 아니거나, 간격이 이상하거나 하는 부분들을 놓쳐서 배포했는데 이런 부분들을 피드백 해주셔서 나는 개발하는 부분에 더 집중하면 돼서 좋다! 라고 느꼈습니다. 
+
+또한 디자이너와 개발자의 시선이 다르기 때문에 원활한 소통을 통해 프로젝트를 끝내면 훨씬 더 멋진 결과물의 나올 거 같다고 생각했습니다.
