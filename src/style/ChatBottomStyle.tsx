@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const ChatBottomContainer = styled.div`
 position: fixed;
 bottom: 0;
-width: 375px;
+width: 100%;
 height: 80px;
 
 
@@ -15,14 +15,15 @@ height: 80px;
 `;
 
 export const ChatInput = styled.input`
-	width: 14.25rem;
+width: 60%;
+
 	height: 2rem;
 	flex-shrink: 0;
   font-size: 14px;
-
+  margin-left:11%;
 	border-radius: 1rem;
 	border: 0.5px solid var(--gray, #8d8d8f);
-	opacity: 0.4496;
+	opacity: 0.5;
 	background: var(--white, #fff);
 `;
 
