@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { messageDataState, userNumberState } from '@context/state/atom';
-import useLocalStorage from '@hooks/useLocalStorage';
-import { processedMessageData } from '@_type/type';
 
 const StyledChatLogRightContainer = styled.div`
   display: flex;
@@ -69,8 +67,7 @@ export default function ChatLogRight({
 }) {
   const [messageData, setMessageData] = useRecoilState(messageDataState);
   const [userNumber, setUserNumber] = useRecoilState(userNumberState);
-  const [localStorageChatMessageData, localStorageChatMessageDateArray] =
-    useLocalStorage();
+
   const createdHourMinute = createdAt.slice(11, 16);
   const createdDate = createdAt.slice(0, 10);
   const deepCopiedMessageData = JSON.parse(JSON.stringify(messageData));
