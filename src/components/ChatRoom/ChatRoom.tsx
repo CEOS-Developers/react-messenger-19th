@@ -12,25 +12,22 @@ import { Chat } from "types/ChatData";
 function ChatRoom() {
   const [inputValue, setInputValue] = useState("");
 
-  // 대화창 하나만 구현하는 거니, 첫 번째 채팅 데이터만 가져옴
+  // 대화창 하나만 구현하는 거니, 첫 번째 채팅방 데이터만 가져옴
   const [chatData, setChatData] = useState<Chat>(mockData.chats[0]);
 
   const { users, messages } = chatData;
 
-  const [currentPartnerId, setCurrentPartnerId] = useState(users[0].id);
-  const [currentMyId, setCurrentMyId] = useState(users[1].id);
+  const [participantsId, setParticipantsId] = useState({
+    me: chatData.users[0].id,
+    partner: chatData.users[1].id,
+  });
 
   const findUserById = (userId: string) => {
     return users.find((user) => user.id === userId);
   };
 
-  const toggleCurrentMyId = () => {
-    setCurrentMyId((prevId) =>
-      prevId === users[0].id ? users[1].id : users[0].id
-    );
-    setCurrentPartnerId((prevId) =>
-      prevId === users[0].id ? users[1].id : users[0].id
-    );
+  const toggleParticipantsId = () => {
+    setParticipantsId((prev) => ({ me: prev.partner, partner: prev.me }));
   };
 
   const handleChangeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +45,7 @@ function ChatRoom() {
         ...prev.messages,
         {
           id: 5,
-          senderId: currentMyId,
+          senderId: participantsId.me,
           text: inputValue,
           createdAt: "2024-03-29T11:42:00",
         },
@@ -67,25 +64,25 @@ function ChatRoom() {
           </button>
           <UserDetailInfo>
             <h1 className="user_name">
-              {findUserById(currentPartnerId)?.name}
+              {findUserById(participantsId.partner)?.name}
             </h1>
             <p className="last_access">마지막 접속 5분 전</p>
           </UserDetailInfo>
           <UserProfileImg
-            src={findUserById(currentPartnerId)?.profileImage}
-            onClick={toggleCurrentMyId}
+            src={findUserById(participantsId.partner)?.profileImage}
+            onClick={toggleParticipantsId}
           />
         </ChatRoomHeader>
         <ChatList>
           {messages.map((message) => (
             <ChatWrapper
-              isMyMessage={message.senderId === currentMyId}
+              isMyMessage={message.senderId === participantsId.me}
               key={message.id}
             >
               <div className="time_wrapper">
                 <CurrentTime>{getCurrentTime()} </CurrentTime>
               </div>
-              <ChatText isMyMessage={message.senderId === currentMyId}>
+              <ChatText isMyMessage={message.senderId === participantsId.me}>
                 {message.text}
               </ChatText>
             </ChatWrapper>
