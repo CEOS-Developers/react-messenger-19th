@@ -8,12 +8,17 @@ import voice from "../../assets/voice.svg";
 import send from "../../assets/send.svg";
 // data
 import userData from "../../data/user.json";
+import { useSenderContext } from "../../assets/SenderContext";
+
 import chattingData from "../../data/chatting.json";
 
 import { colors } from "../../style/colors";
 import { typography } from "../../style/typography";
 
 const Main = () => {
+  const { sender, setSender } = useSenderContext();
+  const user = userData.users[sender === 0 ? 2 : 0];
+
   const [value, setValue] = useState("");
   const [isEmpty, setIsEmpty] = useState(true); // input란에 텍스트 입력 여부
 
@@ -57,7 +62,7 @@ const Main = () => {
     if (!isEmpty) {
       const newChat = {
         text: value,
-        sender: 0,
+        sender: sender,
         timestamp: getDate(),
       };
       setChats([...chats, newChat]);
@@ -79,16 +84,10 @@ const Main = () => {
             <TimeStamp>{chat.timestamp}</TimeStamp>
             <MsgBox align={chat.sender !== 0 ? "start" : "end"}>
               {chat.sender !== 0 && (
-                <ProfileImg
-                  src={`img/userProfile/${
-                    userData.users[chat.sender].profileImg
-                  }`}
-                />
+                <ProfileImg src={`img/userProfile/${user.profileImg}`} />
               )}
               <Contents>
-                {chat.sender !== 0 && (
-                  <Name>{userData.users[chat.sender].name}</Name>
-                )}
+                {chat.sender !== 0 && <Name>{user.name}</Name>}
                 <MsgText
                   maxwidth={chat.sender !== 0 ? 17.125 : 12}
                   bgcolor={chat.sender !== 0 ? colors.gray200 : colors.blurple}
@@ -165,6 +164,8 @@ const MsgBox = styled.div<{ align: string }>`
 const ProfileImg = styled.img`
   margin-right: 0.38rem;
   align-self: end;
+  width: 1.75rem;
+  height: 1.75rem;
 `;
 const Contents = styled.div`
   display: flex;

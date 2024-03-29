@@ -3,6 +3,7 @@ import StatusBar from "../../components/common/StatusBar";
 import { useSenderContext } from "../../assets/SenderContext";
 
 import userData from "../../data/user.json";
+import chattingData from "../../data/chatting.json";
 
 // image
 import back from "../../assets/back.svg";
@@ -13,7 +14,7 @@ import { typography } from "../../style/typography";
 
 const Header = () => {
   const { sender, setSender } = useSenderContext();
-  const user = userData.users[sender];
+  const user = userData.users[sender === 0 ? 2 : 0];
 
   const toggleSender = () => {
     sender === 0 ? setSender(2) : setSender(0);

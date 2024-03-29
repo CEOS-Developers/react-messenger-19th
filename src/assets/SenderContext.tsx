@@ -12,7 +12,7 @@ interface SenderProviderProps {
 }
 
 export const SenderProvider: React.FC<SenderProviderProps> = ({ children }) => {
-  const [sender, setSender] = useState<number>(2);
+  const [sender, setSender] = useState<number>(0);
 
   return (
     <SenderContext.Provider value={{ sender, setSender }}>
