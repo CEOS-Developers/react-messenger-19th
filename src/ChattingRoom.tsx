@@ -29,8 +29,10 @@ function ChattingRoom() {
 	// 현재 메시지 기롥 상태 관리
 	const [messages, setMessages] = useState<Message[]>(() => {
 		// 로컬 스토리지에서 초기 메시지 로드
-		const savedMessages = localStorage.getItem('messages');
-		return savedMessages ? JSON.parse(savedMessages) : [];
+		//	const savedMessages = localStorage.getItem('messages');
+		const savedMessages = dummy;
+		//return savedMessages ? JSON.parse(savedMessages) : [];
+		return savedMessages;
 	});
 	const currentUser = initialUsers[currentUserIndex];
 	// 메세지 목록 끝으로 스크롤
