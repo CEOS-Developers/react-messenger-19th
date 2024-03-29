@@ -16,6 +16,7 @@ function Layout() {
 export default Layout;
 
 const LayoutContainer = styled.div`
+  position: relative;
   width: 37.5rem;
   height: 81.2rem;
   margin: 0 auto;

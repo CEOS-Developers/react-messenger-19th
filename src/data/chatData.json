@@ -1,0 +1,33 @@
+{
+  "chats": [
+    {
+      "id": "chat1",
+      "users": [
+        {
+          "id": "user1",
+          "name": "연우",
+          "profileImage": "path_to_image/user1.png",
+          "lastAccess": "2024-03-29T11:56:00"
+        },
+        {
+          "id": "user2",
+          "name": "유담이",
+          "profileImage": "path_to_image/user2.png",
+          "lastAccess": "2024-03-29T11:54:00"
+        }
+      ],
+      "messages": [
+        {
+          "senderId": "user1",
+          "text": "Good morning!",
+          "createdAt": "2024-03-29T11:40:00"
+        },
+        {
+          "senderId": "user2",
+          "text": "지금 뭐하고있어?",
+          "createdAt": "2024-03-29T11:42:00"
+        }
+      ]
+    }
+  ]
+}

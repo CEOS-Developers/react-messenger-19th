@@ -6,8 +6,28 @@ import { ReactComponent as FileInputIcon } from "asset/icons/FileInputIcon.svg";
 import { ReactComponent as AudioIcon } from "asset/icons/AudioIcon.svg";
 import UserImg from "asset/images/User.png";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { getCurrentTime } from "util/getCurrentTime";
+import mockData from "data/chatData.json";
+import { Chat, ChatData } from "types/ChatData";
+
 function ChatRoom() {
   const [inputValue, setInputValue] = useState("");
+
+  // 대화창 하나만 구현하는 거니, 첫 번째 채팅 데이터만 가져옴
+  const [chatData, setChatData] = useState<Chat>(mockData.chats[0]);
+
+  const { users, messages } = chatData;
+
+  // 현재 보내는 사람
+  const [currentSenderId, setCurrentSenderId] = useState("user1");
+
+  const toggleCurrentSenderId = () => {
+    setCurrentSenderId((prevId) =>
+      prevId === chatData.users[0].id
+        ? chatData.users[1].id
+        : chatData.users[0].id
+    );
+  };
 
   const handleChangeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -25,13 +45,26 @@ function ChatRoom() {
             <LeftArrowIcon className="arrow_icon" alt="뒤로 가기 아이콘" />
           </button>
           <UserDetailInfo>
-            <p className="user_name">연우</p>
+            <h1 className="user_name">{}</h1>
             <p className="last_access">마지막 접속 5분 전</p>
           </UserDetailInfo>
           <UserProfileImg src={UserImg} />
         </ChatRoomHeader>
+        <ChatList>
+          <ChatWrapper>
+            <div className="time_wrapper">
+              <CurrentTime>{getCurrentTime()} </CurrentTime>
+            </div>
+            <ChatText>Good morning!</ChatText>
+          </ChatWrapper>
+          <ChatWrapper>
+            <div className="time_wrapper">
+              <CurrentTime>{getCurrentTime()} </CurrentTime>
+            </div>
+            <ChatText>Good morning!</ChatText>
+          </ChatWrapper>
+        </ChatList>
       </ChatRoomContainer>
-
       <ChatInputWrapper onSubmit={handleInputSubmit}>
         <button type="button">
           <FileInputIcon alt="파일 첨부 아이콘" />
@@ -55,8 +88,10 @@ function ChatRoom() {
 export default ChatRoom;
 
 const ChatRoomContainer = styled.div`
+  height: 74rem;
   ${flexColumn}
   padding: 0 1.6rem;
+  flex: 1;
 `;
 
 const ChatRoomHeader = styled.div`
@@ -91,6 +126,7 @@ const UserDetailInfo = styled.div`
   .last_access {
     color: var(--gray04);
     font-size: 1.3rem;
+    letter-spacing: -0.01rem;
   }
 `;
 
@@ -117,4 +153,44 @@ const ChatInputWrapper = styled.form`
     right: 2.3rem;
     top: 0.6rem;
   }
+`;
+
+const ChatList = styled.div`
+  display: flex;
+  gap: 1.6rem;
+  flex-direction: column;
+  padding: 2.5rem 0;
+`;
+
+const ChatWrapper = styled.div`
+  display: flex;
+  gap: 1.2rem;
+  justify-content: flex-end;
+
+  .time_wrapper {
+    display: flex;
+  }
+`;
+
+const CurrentTime = styled.p`
+  display: flex;
+  align-items: flex-end;
+  color: var(--gray04);
+  font-size: 1rem;
+  letter-spacing: 0.01rem;
+`;
+
+const ChatText = styled.p`
+  display: flex;
+
+  padding: 0.7rem 1.5rem;
+  color: var(--black);
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  border-radius: 1.8rem 1.8rem 0rem 1.75rem;
+  background: var(--blue03);
+  font-size: 1.7rem;
+  line-height: 2.2rem;
+  letter-spacing: -0.04rem;
 `;

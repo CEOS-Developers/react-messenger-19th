@@ -13,6 +13,10 @@ export default Footer;
 
 const FooterWrapper = styled.div`
   background-color: var(--gray01);
+  position: sticky;
+  right: 0;
+  left: 0;
+  bottom: 0;
   ${flexCenter}
   width: 100%;
   height: 3.4rem;
