@@ -1,68 +1,98 @@
-# 서론
+# 🥳 배포 링크
 
-배포 링크 : https://react-messenger-19th-taupe.vercel.app/
+https://react-messenger-19th-taupe.vercel.app/
 
-안녕하세요 🙌🏻 19기 프론트 운영진 배성준입니다. 이번 미션에서는 드디어 투두리스트에서 벗어나 새로운 프로젝트인 **messenger** 만들기를 진행합니다.
+# ⚙️ 구현 기능
 
-이번주는 특별히 **디자이너와의 협업**으로 진행되는 미션입니다. 디자이너분께서 열심히 리디자인 한 메신저 프로젝트를 여러분들께서 구현해주시면 됩니다.
+<img width="760" alt="image" src="https://github.com/CEOS-Developers/react-messenger-19th/assets/101055312/b78e0d0b-f8d2-4a32-903e-3b8cd26ad5ea">
 
-동시에, 이번주부터는 새로 **TypeScript**를 적용해보려고 합니다.
+![화면 기록 2024-03-29 오후 9 20 44 (1)](https://github.com/CEOS-Developers/react-messenger-19th/assets/101055312/f5128e75-1798-4afd-b183-713668a26bb6)
 
-프로젝트의 규모가 커지게 될 수록, 컴포넌트가 가지는 props의 종류 또한 다양해지게 됩니다. 무지성 코딩을 하다보면 가끔 이 props의 구성과 이름, 어떤 타입이 들어가야 하는지 헷갈리기 마련이죠. 보통 그럴 때 다시 컴포넌트 정의 부분으로 돌아가 props의 구성을 보고 오곤 합니다.
+## React Hooks 사용
 
-하지만 이럴 때, typescript를 적용한다면 컴포넌트의 구성과 그 이름, 심지어 타입까지 한번에 자동완성으로 편리하게 관리할 수 있고, 생산성이 증대되겠죠.
+1. **useState**: ChatBottom 컴포넌트에서 사용자가 입력한 메시지 값을 관리 등 컴포넌트의 상태를 관리하기 위해 사용했습니다.
+2. **useEffect**: UI와 관련 없는 부수 효과를 수행하기 위해 사용했습니다. 예시로, ChattingRoom 컴포넌트가 마운트될 때 서버에서 메시지 목록을 불러오거나, 메시지 목록이 업데이트될 때마다 자동으로 스크롤 위치를 조정할 때 사용했습니다.
+3. **useRef**: DOM 요소에 직접 접근하기 위해 사용되는 훅입니다. 새 메시지가 추가될 때마다 채팅 목록의 스크롤을 가장 아래로 이동시키기 위해 messagesEndRef를 사용했습니다.
 
-또한, **React Hooks**에 조금 더 익숙해지는 것을 목표로 합니다. 여러 Hook들이 있지만 그 중에서도 `useState`, `useEffect`, `useRef`를 중점적으로 사용해 보는 미션인데요, React를 사용하면서 굉장히 자주 쓰이는 Hook들이기 때문에 이 부분을 집중적으로 공부해 보아요!
+- 작동 방식 : messagesEndRef는 채팅 목록 끝 참조 → useEffect 훅을 통해, 메시지가 추가될 때마다, current가 가리키는 DOM 요소(채팅 목록 끝)로 스크롤을 이동시킴
 
-그럼 이번 미션도 파이팅입니다!!🎉
+```typescript
+const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-# 미션
+//..
+useEffect(() => {
+	// 메시지가 추가될 때마다 스크롤을 하단으로 이동
+	messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+}, [messages]);
+```
 
-## Key Questions
+# ✅ Key Questions
 
-- JavaScript를 사용할때에 비해 TypeScript를 사용할 때의 장점은 무엇인가요?
-- 디자이너로부터 전달받은 피그마 링크 혹은, 피그마 캡처본
-- 컴포넌트를 분리한 기준은 무엇인가요?
-- 디자인 시스템을 적용하면서 느낀 점은 무엇인가요?
-- 디자이너와 소통하며 느낀점은 무엇인가요?
+## JavaScript를 사용할때에 비해 TypeScript를 사용할 때의 장점은 무엇인가요?
 
-## 미션 목표
+1. 타입 체크를 통한 오류 예방
 
-- TypeScript를 사용해봅시다.
-- useState로 컴포넌트의 상태를 관리합니다.
-- useEffect와 useRef의 사용법을 이해합니다.
-- styled-components를 통한 CSS-in-JS 및 CSS Preprocessor의 사용법에 익숙해집니다.
+```typescript
+interface Message {
+	id: number;
+	from: string;
+	content: string;
+	date: string;
+}
 
-## 기한
+interface ChatBodyProps {
+	messages: Message[];
+	currentUser: string;
+	userImage: string;
+}
 
-2024년 3월 29일 금요일
+const [messages, setMessages] = useState<Message[]>([]);
+```
 
-## 필수 구현 기능
+ChatBodyProps 인터페이스는 ChatBody 컴포넌트가 받아야 할 props의 구조와 타입을 명시적으로 정의해주기 때문에,
+컴포넌트에 잘못된 타입의 props를 전달하거나 전달하지 않았을 경우, 컴파일 단계에서 바로 오류를 발견할 수 있습니다.
 
-- 피그마를 보고 [결과화면](https://3th-fb-messenger.netlify.app)과 같이 구현합니다.
-- 디자인 시스템을 구축합니다.
-- 채팅방 상단의 프로필을 클릭하면 사용자를 변경할 수 있습니다.
-- 메세지를 보내면 채팅방 하단으로 스크롤을 이동시킵니다.
-- 메세지에 유저 정보(프로필 사진, 이름)를 표시합니다.
-- user와 message 데이터를 json 파일에 저장합니다.
-- UI는 **반응형을 제외**하고 피그마파일을 따라서 진행합니다.
+또한 메시지를 추가하는 함수 내에서 newMessage 객체를 생성할 때, Message 인터페이스에서 요구하는 속성을 빼먹거나 잘못된 타입을 사용하면 TypeScript 컴파일러가 즉시 오류를 표시하기 떄문에, 런타임 오류를 방지하고, 실수 가능성을 줄입니다.
 
-### 추가 구현 기능
+2. 코드 자동 완성 및 리팩토링 용이
+   컴포넌트에 어떤 props를 전달해야 하는지 쉽게 알 수 있고, 이는 개발 효율성을 높입니다.
+   또한 특정 인터페이스의 구조를 변경해야 한다면, TypeScript를 사용하면 해당 인터페이스를 사용하는 모든 곳을 찾아 수정해야 함을 알 수 있기 때문에, 더욱 안전하고 빠른 리팩토링이 가능합니다.
 
-- 더블 클릭 하면 감정표현을 추가합니다.
-- 그 외 추가하고 싶은 기능이 있다면 마음껏 추가해 주세요!
+3. 코드 의도와 구조 명확화
+   인터페이스를 통해 코드의 의도와 구조를 다른 개발자에게 명확히 전달할 수 있어 코드의 가독성이 향상됩니다.
 
-참고로 이번 과제는 다음주까지 이어지는 과제이므로 **확장성**을 충분히 고려해 주세요. 참고로 **4주차 과제에서는 유저 및 기능 추가와 Routing을** 진행합니다. 이를 위해 [recoil](https://recoiljs.org/ko/)이나 [redux](https://ko.redux.js.org/introduction/getting-started/)를 이용한 상태관리를 미리 해보시는 것을 추천합니다!! 모두 공식문서 많이 읽어보시고 자신만의 상태관리 조합도 찾아보면 재밌을 거에요 XD
+## 디자이너로부터 전달받은 피그마 링크 혹은, 피그마 캡처본
 
-## 링크 및 참고자료
+<img width="741" alt="스크린샷 2024-03-29 오후 7 16 01" src="https://github.com/CEOS-Developers/react-messenger-19th/assets/101055312/02e7d0b3-0898-457b-b5da-2720a632cf28">
 
-- [React docs - Hook](https://ko.reactjs.org/docs/hooks-intro.html)
-- [React의 Hooks 완벽 정복하기](https://velog.io/@velopert/react-hooks#1-usestate)
-- [useEffect 완벽 가이드](https://overreacted.io/ko/a-complete-guide-to-useeffect/)
-- [코딩 컨벤션](https://ui.toast.com/fe-guide/ko_CODING-CONVENTION)
-- [타입스크립트 핸드북](https://joshua1988.github.io/ts/intro.html)
-- [리액트 프로젝트에서 타입스크립트 사용하기 (시리즈)](https://velog.io/@velopert/series/react-with-typescript)
-- [디자인 시스템 구축기](https://yozm.wishket.com/magazine/detail/1830/)
-- [[영상] : 컴포넌트에 대한 이해](https://www.youtube.com/watch?v=21eiJc90ggo)
-- [Styled Component로 디자인 시스템 구축하기](https://zaat.dev/blog/building-a-design-system-in-react-with-styled-components/)
-- [ts 절대경로 설정하기](https://tesseractjh.tistory.com/232)
+## 컴포넌트를 분리한 기준은 무엇인가요?
+
+1. 각 컴포넌트를 UI 영역별 & 기능별로 분리했습니다.
+   단일 책임 원칙에 따라 한 가지 기능만 수행하도록 설계했습니다.
+
+- **ChatHead**: 채팅방의 상단에 위치한 사용자 프로필을 표시합니다. 사용자 이름과 이미지를 포함합니다.
+- **ChatBody**: 채팅방에서의 대화 내용을 표시합니다. 메시지마다 시간과 날짜, 사용자 프로필 이미지를 표시할 수 있도록 구현했습니다.
+- **ChatBottom**: 메시지 입력창과 전송 버튼을 포함합니다. 사용자 입력을 받고, 'Enter' 키나 전송 버튼 클릭 시 메시지를 전송하는 기능을 구현했습니다.
+
+2. 또한, 버튼, 입력 필드같이, 사용자 이벤트에 따라, 특정 기능을 하고, 자주 사용되는 UI들도 재사용이 용이하게 별도의 컴포넌트로 분리했습니다.
+
+## 디자인 시스템을 적용하면서 느낀 점은 무엇인가요?
+
+디자인 시스템을 적용함으로써 UI의 일관성을 유지할 수 있었던 것 같습니다.
+또한, 개발 과정에서도 확실히 편리함을 느꼈습니다.
+우선, 디자인 시스템을 통해 개발자와 디자이너 간의 커뮤니케이션이 명확해졌고, 일관된 디자인 언어를 공유할 수 있었습니다.
+또한, UX/UI적인 고민을 덜어 개발에만 집중할 수 있어 좋았던 것 같습니다.
+디자인 시스템을 활용하면서 서비스를 만들 때는 정말 여러 UI 요소들이 있다는 것을 느꼈습니다. 이러한 UI 요소들은 모두 교체 가능성이 있으므로, 서비스의 규모가 커질수록, 나중에 UI 요소들을 교체하기 편하게 컴포넌트를 분리하고 가독성 있는 코드를 짜는 것이 중요하다는 깨달음을 얻었습니다.
+
+## 디자이너와 소통하며 느낀점은 무엇인가요?
+
+피그마에 만들어주신 UI를 가지고 개발하면서, 혼자 개발하고, UI까지 만들 때와는 퀄리티가 다른 결과물이 나온 것 같다는 생각이 듭니다.
+특히, 메시지를 입력할 때는 아이콘이 보내기 버튼이고, 입력하지 않을 때는 마이크 아이콘인 것은, 너무 당연한 UX이나, 일상 속에서는 신경쓰지 않고 지나쳤었는데, 피그마에서 UI 하나하나를 가져다 개발하면서, 정말 이는 사용자 친화적인 것 같다는 생각이 들었습니다.
+
+# 💡 느낀 점
+
+처음에는 json에 데이터를 저장한다는게, 새로 입력된 대화 내역도 업데이트해야 한다고 생각해, 어떻게 구현할지 감이 잡히지 않아,
+우선은 로컬 스토리지와 useEffect를 사용하여 대화 내역을 저장하고 관리하는 것을 구현했습니다.
+json에 더미 데이터를 저장해야하는 것을 이어서 계속 고민해보다가 백엔드도 구현해야 하는건가?...라는 생각을 하며 json-server를 통해 json 데이터를 업데이트하는 법을 계속해서 시도했었습니다.
+그런데, 초기 데이터만 json 파일에 저장하고, 이를 불러오는 것이란 걸 알고, 안심하며 초기 메시지 로드 하는 부분을 로컬 스토리지에서, -> json 파일에서 json 객체를 가져오는 것으로 수정했습니다.
+이를 통해, json에 새로 입력된 대화 내역도 업데이트해야 하는 것도 구현해보고 싶다는 생각이 너무 커져서, 중간고사 이후에 이 부분을 구현하는게 기대가 됩니다.
