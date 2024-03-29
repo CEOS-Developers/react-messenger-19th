@@ -49,7 +49,7 @@ const ChatBox = styled.div`
 const ChatTail = styled.div`
 	position: absolute;
 	top: 0; // 꼬리의 정확한 위치를 조절합니다.
-	right: -10px; // 꼬리가 ChatBox 왼쪽에 위치하도록 조절합니다.
+	right: -9px; // 꼬리가 ChatBox 왼쪽에 위치하도록 조절합니다.
 	width: 26px; // 꼬리 이미지의 크기입니다.
 	height: 20px; // 꼬리 이미지의 크기입니다.
 	background-image: url('./ChatRoom/MyChatTail.svg');
