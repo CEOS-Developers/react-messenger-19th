@@ -23,20 +23,7 @@ export default function ChatContainer(props: ChatContainerProps) {
     <Wrapper>
       <Date>오늘</Date>
       <Layout>
-        {chatData.data.map((data) => (
-          <ChatBox $rcvd={data.rcvd === (userId === 0)} key={data.id}>
-            {data.rcvd === (userId === 0) && (!data.isSameTime || (data.isSameTime && data.isFirst)) && <ProfileIcon />}
-            {!(data.rcvd === (userId === 0)) && !(data.isSameTime && data.isFirst) && <TimeNow>{data.time}</TimeNow>}
-            <Details $margin={data.rcvd === (userId === 0) && !data.isFirst}>
-              {data.rcvd === (userId === 0) && (!data.isSameTime || (data.isSameTime && data.isFirst)) && (
-                <Name>{userData.data.find((user) => user.id === userId)?.name}</Name>
-              )}
-              <Text $rcvd={data.rcvd === (userId === 0)}>{data.text}</Text>
-            </Details>
-            {data.rcvd === (userId === 0) && !(data.isSameTime && data.isFirst) && <TimeNow>{data.time}</TimeNow>}
-          </ChatBox>
-        ))}
-        {list.map((data) => (
+        {[...chatData.data, ...list].map((data) => (
           <ChatBox $rcvd={data.rcvd === (userId === 0)} key={data.id}>
             {data.rcvd === (userId === 0) && (!data.isSameTime || (data.isSameTime && data.isFirst)) && <ProfileIcon />}
             {!(data.rcvd === (userId === 0)) && !(data.isSameTime && data.isFirst) && <TimeNow>{data.time}</TimeNow>}
