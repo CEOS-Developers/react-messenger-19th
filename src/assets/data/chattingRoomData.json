@@ -7,9 +7,9 @@
           "chatId": "1",
           "to": "송은수",
           "from": "플래시",
-          "content": "안녕하세요",
+          "content": "내일 저녁은 햄버거를 먹을거야. 왜냐하면 어제 파스타를 먹었고 오늘은 한끼도 못먹었거든.",
           "date": "2024-03-01",
-          "time": "12:00",
+          "time": "19:00",
           "isDisplay": false,
           "isRead": true
         },
@@ -17,9 +17,9 @@
           "chatId": "2",
           "to": "송은수",
           "from": "플래시",
-          "content": "반가워요",
+          "content": "너는 먹고 싶은게 있어?",
           "date": "2024-03-01",
-          "time": "12:00",
+          "time": "19:00",
           "isDisplay": true,
           "isRead": true
         },
@@ -27,11 +27,41 @@
           "chatId": "3",
           "to": "플래시",
           "from": "송은수",
-          "content": "반가워요",
+          "content": "음...",
           "date": "2024-03-01",
-          "time": "12:02",
+          "time": "19:01",
           "isDisplay": true,
           "isRead": true
+        },
+        {
+          "chatId": "4",
+          "to": "송은수",
+          "from": "플래시",
+          "content": "현기증 나니깐 얼른 답변해줘.",
+          "date": "2024-03-02",
+          "time": "08:31",
+          "isDisplay": true,
+          "isRead": true
+        },
+        {
+          "chatId": "5",
+          "to": "플래시",
+          "from": "송은수",
+          "content": "조금만 기다려",
+          "date": "2024-03-03",
+          "time": "12:02",
+          "isDisplay": false,
+          "isRead": false
+        },
+        {
+          "chatId": "6",
+          "to": "플래시",
+          "from": "송은수",
+          "content": "고민좀 해볼게",
+          "date": "2024-03-03",
+          "time": "12:02",
+          "isDisplay": true,
+          "isRead": false
         }
       ]
     }

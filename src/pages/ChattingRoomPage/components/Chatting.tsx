@@ -107,7 +107,7 @@ const DateContainer = styled.div`
   text-align: center;
   &::before {
     display: inline-block;
-    width: calc(40% - 20px);
+    width: calc(40% - 25px);
     height: 1px;
     margin: 8px 10px 8px 0;
     background-color: ${theme.colors.gray_2};
@@ -117,7 +117,7 @@ const DateContainer = styled.div`
 
   &::after {
     display: inline-block;
-    width: calc(40% - 20px);
+    width: calc(40% - 25px);
     height: 1px;
     margin: 8px 0 8px 10px;
     background-color: ${theme.colors.gray_2};
