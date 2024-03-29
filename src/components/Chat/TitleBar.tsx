@@ -1,11 +1,10 @@
-import { useEffect } from 'react';
 import styled from 'styled-components';
-import Left from '../../assets/img/left.svg';
-import VideoCall from '../../assets/img/video-call.svg';
-import AudioCall from '../../assets/img/audio-call.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeUser } from '../../features/userSlice';
 import { RootState } from '../../store';
+import Left from '../../assets/img/left.svg';
+import VideoCall from '../../assets/img/video-call.svg';
+import AudioCall from '../../assets/img/audio-call.svg';
 
 const TitleBarContainer = styled.div`
   width: 23.4375rem;
@@ -123,12 +122,8 @@ export default function TitleBar(props: TitleBarProps) {
         <LeftImg src={Left} alt="왼쪽 화살표 이미지" />
         <LeftText>12</LeftText>
       </LeftContainer>
-      <ProfileContainer>
-        <ProfileImg
-          onClick={handleChangeUser}
-          src={profileImg}
-          alt="유저 프로필"
-        />
+      <ProfileContainer onClick={handleChangeUser}>
+        <ProfileImg src={profileImg} alt="유저 프로필" />
         <ProfileInnerContainer>
           <ProfileName>{name}</ProfileName>
           {isActive ? (

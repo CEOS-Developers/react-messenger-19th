@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import TitleBar from '../components/Chat/TitleBar';
-import ChattingRoom from '../components/Chat/ChattingRoom';
-import ChatInput from '../components/Chat/ChatInput';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import userData from '../assets/data/userData.json';
+import TitleBar from '../components/Chat/TitleBar';
+import ChattingRoom from '../components/Chat/ChattingRoom';
+import ChatInput from '../components/Chat/ChatInput';
 
 interface User {
   id: number;

@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import ChatBubble from './ChatBubble';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import ChatBubble from './ChatBubble';
 import FormatTime from './FormatTime';
 
 const ChattingRoomContainer = styled.div`
@@ -61,20 +61,18 @@ export default function ChattingRoom() {
   const chatList = useSelector(
     (state: RootState) => state.chat.chattings[0].chatList
   );
-  const ChattingRoomContainerRef = useRef<HTMLDivElement>(null);
+  const ChattingRoomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // chatList가 변경될 때마다 실행됩니다.
-    if (ChattingRoomContainerRef.current) {
-      ChattingRoomContainerRef.current.scrollTop =
-        ChattingRoomContainerRef.current.scrollHeight;
+    if (ChattingRoomRef.current) {
+      ChattingRoomRef.current.scrollTop = ChattingRoomRef.current.scrollHeight;
     }
   }, [chatList]); // chatList가 변경될 때마다 useEffect를 다시 실행
 
   let lastDate = '';
 
   return (
-    <ChattingRoomContainer ref={ChattingRoomContainerRef}>
+    <ChattingRoomContainer ref={ChattingRoomRef}>
       {chatList.map((chat) => {
         const chatDateDMY = formatDateToDMY(chat.time); // 현재 채팅의 날짜를 "dd/mm/yy" 형식으로 변환
         let showDateText = false;

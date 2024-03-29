@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { addChat } from '../../features/chatSlice';
 import Plus from '../../assets/img/plus.svg';
 import Attachment from '../../assets/img/attachment.svg';
 import Camera from '../../assets/img/camera.svg';
 import Microphone from '../../assets/img/microphone.svg';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { addChat } from '../../features/chatSlice';
 
 const InputContainer = styled.div`
   width: 23.4375rem;

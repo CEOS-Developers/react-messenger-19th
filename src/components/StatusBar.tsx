@@ -44,7 +44,7 @@ export default function StatusBar() {
       setCurrentTime(`${hours}:${minutes}`);
     }
 
-    // 컴포넌트 마운트 시 현재 시간을 설정하고, 매 분마다 시간을 업데이트
+    // 컴포넌트 마운트 시 현재 시간을 설정하고, 30초마다 시간을 업데이트
     getCurrentTime();
     const intervalId = setInterval(getCurrentTime, 30000); // 30초마다 getCurrentTime을 실행
 
