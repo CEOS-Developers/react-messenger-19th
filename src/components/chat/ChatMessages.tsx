@@ -9,47 +9,68 @@ import EmojiModal from './EmojiModal';
 
 
 
-//사파리 날짜 형식에 맞게 -를 /로 바꿔주는함수
-function convertDateFormat(dateString: string) {
-  return dateString.replace(/-/g, '/');
+function parseISODateTime(timestamp: string = ""): Date {
+  console.log("Parsing timestamp:", timestamp);
+  if (!timestamp) {
+    return new Date();
+  }
+
+  try {
+    let year, month, day, hour, minute, second;
+
+    if (timestamp.includes('T')) {
+      // ISO 형식 (2024-03-29T07:29:55.177Z)
+      const [datePart, timePart] = timestamp.split('T');
+      [year, month, day] = datePart.split('-').map(num => parseInt(num, 10));
+      [hour, minute, second] = timePart.split(':').map(num => parseInt(num, 10));
+    } else if (timestamp.includes('.')) {
+      // 다른 형식 (2023. 12. 26.)
+      [year, month, day] = timestamp.split('.').map(num => parseInt(num.trim(), 10));
+      hour = minute = second = 0; 
+    } else {
+      throw new Error('Unsupported timestamp format');
+    }
+
+    return new Date(Date.UTC(year, month - 1, day, hour, minute, second));
+  } catch (error) {
+    console.error('Error parsing timestamp in parseISODateTime:', error);
+    // 파싱 중 오류 발생 시 현재 날짜/시간 반환
+    return new Date();
+  }
 }
+
 
 // 날짜별로 메세지 그룹화하기!!
 const groupMessagesByDate = (messages: Message[]) => {
   const grouped: { [key: string]: Message[][] } = {};
   messages.forEach((message) => {
-    const dateKey = new Date(message.timestamp).toLocaleDateString('ko-KR', {
+    const dateKey = parseISODateTime(message.timestamp).toLocaleDateString('ko-KR', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
     });
+
     if (!grouped[dateKey]) {
       grouped[dateKey] = [];
     }
 
-    // 1분으로 연속된 메시지를 판별하여 그룹으로 묶기,......
     const lastGroup = grouped[dateKey][grouped[dateKey].length - 1];
     if (lastGroup && lastGroup[lastGroup.length - 1].senderId === message.senderId &&
-        new Date(message.timestamp).getTime() - new Date(lastGroup[lastGroup.length - 1].timestamp).getTime() <= 60000) {
-      lastGroup.push(message); // 지금 보낸 톡을 마지막 그룹에 추가
+        (parseISODateTime(message.timestamp).getTime() - parseISODateTime(lastGroup[lastGroup.length - 1].timestamp).getTime()) <= 60000) {
+      lastGroup.push(message);
     } else {
-      grouped[dateKey].push([message]); // 새로운 그룹 생성
+      grouped[dateKey].push([message]);
     }
   });
+
   return grouped;
 };
 
-
 //날짜 형식에 맞게 포맷팅하기 (오전 12:02 이렇게..!!)
-const formatDate = (dateString: string) => {
-  const formattedDate = convertDateFormat(dateString);
-  const date = new Date(formattedDate);
-  const options: Intl.DateTimeFormatOptions = { 
-    month: 'long', 
-    day: 'numeric', 
-    weekday: 'short',
-  };
-  return date.toLocaleString('ko-KR', options);
+const formatDate = (timestamp: string) => {
+  const date = parseISODateTime(timestamp);
+  const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric', weekday: 'short' };
+  return date.toLocaleDateString('ko-KR', options).replace('.', '');
 };
 
 
@@ -58,6 +79,7 @@ const ChatMessages: React.FC = () => { //상턔관리 변수들
   const selectedUserId = useRecoilValue(selectedUserState);
   const messages = useRecoilValue<Message[]>(messagesState);
   const userProfiles = useRecoilValue<User[]>(usersState);
+
   const [activeModalMessageId, setActiveModalMessageId] = useState<string | null>(null); //공감 모달이 열린 메세지의 ID저장해야돼서
   const [selectedEmojis, setSelectedEmojis] = useState<{ [key: string]: string }>({});
 
@@ -81,7 +103,6 @@ const ChatMessages: React.FC = () => { //상턔관리 변수들
   // 이모지 선택 핸들러
   const handleEmojiSelect = (messageId: string, emojiUrl: string) => {
     setSelectedEmojis(prev => {
-      // Toggle emoji selection off if the same emoji is clicked
       if (prev[messageId] === emojiUrl) {
         const newEmojis = { ...prev };
         delete newEmojis[messageId];
@@ -93,7 +114,7 @@ const ChatMessages: React.FC = () => { //상턔관리 변수들
         return newEmojis;
       }
     });
-    setActiveModalMessageId(null);  // Close the modal after selection
+    setActiveModalMessageId(null); 
   };
 
   //모달창 열고닫는 토글 핸들러
@@ -124,9 +145,9 @@ const loadEmojisFromLocalStorage = () => {
 
   return (
       <MessagesContainer className='scroll-box'>
-        {Object.entries(groupedMessages).map(([date, groupMessages], index) => (
+        {Object.entries(groupedMessages).map(([timestamp, groupMessages], index) => (
           <React.Fragment key={index}>
-            <DateLabel>{formatDate(date)}</DateLabel>
+            <DateLabel>{formatDate(timestamp)}</DateLabel>
             {groupMessages.map((group, groupIndex) => (
               <React.Fragment key={groupIndex}>
                 {group.map((message, messageIndex) => (
