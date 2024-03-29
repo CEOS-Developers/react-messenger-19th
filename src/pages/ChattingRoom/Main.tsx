@@ -106,14 +106,16 @@ const Main = () => {
             value={value}
             onChange={handleChange}
           ></InputText>
-          <img src={emoji} />
-          {isEmpty ? (
-            <VoiceImg src={voice} />
-          ) : (
-            <SendBtn type="submit">
-              <img src={send} />
-            </SendBtn>
-          )}
+          <IconsWrapper>
+            <Emoji src={emoji} />
+            {isEmpty ? (
+              <VoiceImg src={voice} />
+            ) : (
+              <SendBtn type="submit">
+                <img src={send} />
+              </SendBtn>
+            )}
+          </IconsWrapper>
         </Input>
       </InputWrapper>
     </Wrapper>
@@ -204,11 +206,9 @@ const InputWrapper = styled.form`
 const Input = styled.span`
   display: flex;
   height: 2.25rem;
-  padding: 0.625rem 0;
-  padding-left: 0.75rem;
+  width: 18.875rem;
+  padding: 0.625rem 0.75rem;
   align-items: center;
-  gap: 0.75rem;
-  flex-shrink: 0;
   border-radius: 5rem;
   border: 1px solid ${colors.gray300};
 `;
@@ -228,13 +228,23 @@ const InputText = styled.input`
   &::placeholder {
     ${colors.gray300}
   }
+
+  padding-right: 0.5rem;
 `;
 
+const IconsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Emoji = styled.img`
+  width: 1.25rem;
+  height: 1.25rem;
+`;
 const VoiceImg = styled.img`
-  padding-right: 0.75rem;
+  padding-left: 0.75rem;
 `;
 const SendBtn = styled.button`
-  padding-right: 0.37rem;
   display: flex;
   align-items: center;
 `;
