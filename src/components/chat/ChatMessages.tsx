@@ -16,9 +16,9 @@ function convertDateFormat(dateString: string) {
 
 // 날짜별로 메세지 그룹화하기!!
 const groupMessagesByDate = (messages: Message[]) => {
-  const grouped: { [key: string]: Message[][] } = {}; // 날짜별로 메시지 그룹의 배열을 저장
+  const grouped: { [key: string]: Message[][] } = {};
   messages.forEach((message) => {
-    const dateKey = new Date(convertDateFormat(message.timestamp)).toLocaleDateString('ko-KR', {
+    const dateKey = new Date(message.timestamp).toLocaleDateString('ko-KR', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
