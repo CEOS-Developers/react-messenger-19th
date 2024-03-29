@@ -110,10 +110,6 @@ export default function TitleBar(props: TitleBarProps) {
   const userList = useSelector((state: RootState) => state.user.userList);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(`현재 유저가 바뀌었습니다: ${nowUser}`);
-  }, [nowUser]); // nowUser가 변경될 때마다 이 effect를 실행합니다.
-
   const handleChangeUser = () => {
     const currentIndex = userList.indexOf(nowUser); // 현재 nowUser의 인덱스
     const nextIndex = currentIndex === 0 ? 1 : 0;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import ChatBubble from './ChatBubble';
 import { useSelector } from 'react-redux';
@@ -12,13 +12,11 @@ const ChattingRoomContainer = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
 
-  // 웹킷 기반 브라우저를 위한 스타일
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // Internet Explorer/Edge
   &::-webkit-scrollbar {
-    width: 5px;
+    display: none; // Chrome, Safari
   }
-
-  // 파이어폭스 브라우저를 위한 스타일
-  scrollbar-width: thin;
 `;
 
 const DateContainer = styled.div`
@@ -63,12 +61,21 @@ export default function ChattingRoom() {
   const chatList = useSelector(
     (state: RootState) => state.chat.chattings[0].chatList
   );
+  const ChattingRoomContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // chatList가 변경될 때마다 실행됩니다.
+    if (ChattingRoomContainerRef.current) {
+      ChattingRoomContainerRef.current.scrollTop =
+        ChattingRoomContainerRef.current.scrollHeight;
+    }
+  }, [chatList]); // chatList가 변경될 때마다 useEffect를 다시 실행
 
   let lastDate = '';
 
   return (
-    <ChattingRoomContainer>
-      {chatList.map((chat, index) => {
+    <ChattingRoomContainer ref={ChattingRoomContainerRef}>
+      {chatList.map((chat) => {
         const chatDateDMY = formatDateToDMY(chat.time); // 현재 채팅의 날짜를 "dd/mm/yy" 형식으로 변환
         let showDateText = false;
 
