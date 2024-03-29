@@ -2,9 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 import { messagesState, Message } from '../state/messageState';
 import { selectedUserState } from '../state/selectedUserState';
+import { usersState, User } from '../state/userState';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import UserProfile from './UserProfile';
 
 
 // 날짜별로 메세지 그룹화하기!!
@@ -46,9 +46,15 @@ const formatDate = (dateString: string) => {
 
 
 
-const ChatMessages: React.FC = () => {
+const ChatMessages: React.FC = () => { //상턔관리 변수들
   const selectedUserId = useRecoilValue(selectedUserState);
-  const messages = useRecoilValue(messagesState);
+  const messages = useRecoilValue<Message[]>(messagesState);
+  const userProfiles = useRecoilValue<User[]>(usersState);
+
+  const findUserProfileImage = (userId: number): string | undefined => {
+    const userProfile = userProfiles.find(profile => profile.id === userId);
+    return userProfile?.profileImage;
+  };
 
   const filteredMessages = messages.filter(
     message => message.senderId === selectedUserId || message.receiverId === selectedUserId
@@ -91,22 +97,31 @@ const ChatMessages: React.FC = () => {
                         </MessageItem>
                       </>
                     ) : (
-                      // 수신자 레이아웃: 메시지 -> 시간
+                      // 수신자 레이아웃: 프사 -> 메시지 -> 시간
                       <>
-                        <MessageItem 
-                          isSender={false}
+                      <ReceiverMessageContainer
                           initial={{ opacity: 0, scale: 0.5 }}
                           animate={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.5 }}>
+                          transition={{ duration: 0.5 }}
+                        >
+                        <ProfilePic //첫메세지만 프사 보여지고 나머지 메세지들은 hidden으로 숨기기
+                          src={findUserProfileImage(message.receiverId)} 
+                          alt="Profile" 
+                          visible={messageIndex === 0} 
+                        />
+                        <MessageItem 
+                          isSender={false}
+                          >
                           {message.text}
                         </MessageItem>
+                        </ReceiverMessageContainer>
                         {messageIndex === 0 && ( // 마찬가지로 맨위에 톡만 시간뜨기
                           <Timestamp isSender={message.senderId === selectedUserId}>
                             {new Date(message.timestamp).toLocaleTimeString('ko-KR', 
                             { hour: 'numeric', minute: '2-digit', hour12: true }).replace('AM', '오전').replace('PM', '오후')}
                           </Timestamp>
                         )}
-                      </>
+                    </>
                     )}
                   </MessageLayout>
                 ))}
@@ -167,11 +182,17 @@ const DateLabel = styled.div`
   color: #63666A;
 `;
 
-const ProfilePic = styled.img`
+const ProfilePic = styled.img<{ visible?: boolean }>`
   width: 37px; 
   height: 37px; 
   border-radius: 50%;
-  margin-right: 10px; 
+  margin-right: 10px;
+  visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
 `;
 
+const ReceiverMessageContainer = styled(motion.div)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
 export default ChatMessages;
