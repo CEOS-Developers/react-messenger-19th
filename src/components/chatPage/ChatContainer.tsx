@@ -11,23 +11,6 @@ interface ChatContainerProps {
   userId: number;
 }
 
-function renderChat(data: MsgType, userId: number) {
-  const isSender = data.rcvd === (userId === 0);
-  const showTime = !isSender && data.sequential;
-
-  return (
-    <ChatBox $rcvd={isSender} $sequential={data.sequential} key={data.id}>
-      {isSender && !data.sequential && <ProfileIcon />}
-      {showTime && <TimeNow>{data.time}</TimeNow>}
-      <Details $margin={isSender && data.sequential}>
-        {isSender && !data.sequential && <Name>{userData.data.find((user) => user.id === userId)?.name}</Name>}
-        <Text $rcvd={isSender}>{data.text}</Text>
-      </Details>
-      {isSender && data.sequential && <TimeNow>{data.time}</TimeNow>}
-    </ChatBox>
-  );
-}
-
 export default function ChatContainer(props: ChatContainerProps) {
   const { list, userId } = props;
   const scrollEndRef = useRef<HTMLDivElement>(null);
@@ -40,8 +23,32 @@ export default function ChatContainer(props: ChatContainerProps) {
     <Wrapper>
       <Date>오늘</Date>
       <Layout>
-        {chatData.data.map((data) => renderChat(data, userId))}
-        {list.map((data) => renderChat(data, userId))}
+        {chatData.data.map((data) => (
+          <ChatBox $rcvd={data.rcvd === (userId === 0)} $sequential={data.sequential} key={data.id}>
+            {data.rcvd === (userId === 0) && !data.sequential && <ProfileIcon />}
+            {!(data.rcvd === (userId === 0)) && data.sequential && <TimeNow>{data.time}</TimeNow>}
+            <Details $margin={data.rcvd === (userId === 0) && data.sequential}>
+              {data.rcvd === (userId === 0) && !data.sequential && (
+                <Name>{userData.data.find((user) => user.id === userId)?.name}</Name>
+              )}
+              <Text $rcvd={data.rcvd === (userId === 0)}>{data.text}</Text>
+            </Details>
+            {data.rcvd === (userId === 0) && data.sequential && <TimeNow>{data.time}</TimeNow>}
+          </ChatBox>
+        ))}
+        {list.map((data) => (
+          <ChatBox $rcvd={data.rcvd === (userId === 0)} $sequential={data.sequential} key={data.id}>
+            {data.rcvd === (userId === 0) && !data.sequential && <ProfileIcon />}
+            {!(data.rcvd === (userId === 0)) && data.sequential && <TimeNow>{data.time}</TimeNow>}
+            <Details $margin={data.rcvd === (userId === 0) && data.sequential}>
+              {data.rcvd === (userId === 0) && !data.sequential && (
+                <Name>{userData.data.find((user) => user.id === userId)?.name}</Name>
+              )}
+              <Text $rcvd={data.rcvd === (userId === 0)}>{data.text}</Text>
+            </Details>
+            {data.rcvd === (userId === 0) && data.sequential && <TimeNow>{data.time}</TimeNow>}
+          </ChatBox>
+        ))}
         <div ref={scrollEndRef} />
       </Layout>
     </Wrapper>
