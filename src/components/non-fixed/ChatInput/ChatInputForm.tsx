@@ -88,6 +88,15 @@ export default function ChatInputForm() {
   }
 
   function handleMakeIsInputfocusedTrue() {
+    if (inputRef.current?.value === '') return;
+    setIsInputBoxFocused(true);
+  }
+
+  function handleUserTypeInput() {
+    if (inputRef.current?.value === '') {
+      setIsInputBoxFocused(false);
+      return;
+    }
     setIsInputBoxFocused(true);
   }
 
@@ -154,6 +163,7 @@ export default function ChatInputForm() {
         <StyledInputBox
           onFocus={handleMakeIsInputfocusedTrue}
           onBlur={handleMakeIsInputfocusedFalse}
+          onInput={handleUserTypeInput}
           placeholder="메시지 보내기"
           ref={inputRef}
         />
