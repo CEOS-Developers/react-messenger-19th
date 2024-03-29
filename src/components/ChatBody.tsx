@@ -36,16 +36,25 @@ const formatTime = (isoDateString: string) => {
 
 const ChatBody: React.FC<ChatBodyProps> = ({ messages, currentUser }) => {
 	let lastDate = '';
+    let lastMinute = '';
 
 
 	return (
 		<ChatBodyContainer>
 			{messages.map((message, index) => {
 				const messageDate = formatDate(message.date);
+                const messageMinute = formatTime(message.date);
 				let displayDateSeparator = false;
+                let displayMinuteSeparator = false;
+
 				if (messageDate !== lastDate) {
 					lastDate = messageDate;
 					displayDateSeparator = true;
+				}
+
+                if (messageMinute !== lastMinute) {
+					lastMinute = messageMinute;
+					displayMinuteSeparator = true;
 				}
 
 				return (
@@ -53,7 +62,10 @@ const ChatBody: React.FC<ChatBodyProps> = ({ messages, currentUser }) => {
 						{displayDateSeparator && (
 							<DateSeparator>{formatDate(message.date)}</DateSeparator>
 						)}
-                    <TimeDisplay>{formatTime(message.date)}</TimeDisplay>
+                        {displayMinuteSeparator && (
+							 <TimeDisplay>{formatTime(message.date)}</TimeDisplay>
+						)}
+                   
 						<ChatMessageBox isCurrentUser={message.from === currentUser}>
 							<div>{message.content}</div>
 						</ChatMessageBox>

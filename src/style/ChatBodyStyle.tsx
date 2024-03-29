@@ -6,6 +6,8 @@ display:inline-block;
 
   width:196px;
   margin-left:30px;
+  margin-bottom:5px;
+  margin-top:5px;
   border-radius: 8px;
   background-color: #EDEDED;
   align-self: flex-start;
