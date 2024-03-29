@@ -8,6 +8,7 @@ import {
   messageDateArrayState,
   userNumberState,
 } from '@context/state/atom';
+import { flushSync } from 'react-dom';
 import { adjustTimeForUserLocation } from '@utils/makeTimeString';
 import sortByDate from '@utils/sortArrayByDate';
 
@@ -79,12 +80,15 @@ export default function ChatInputForm() {
   );
   const [userNumber, setUserNumber] = useRecoilState(userNumberState);
 
-  function handleToggleIsInputBoxFocused() {
-    // 포커스가 되었는데 값이 있는 상태에서 블러가 풀리는 것으로 가면 상태를 변경시키지 않음 => 내용이 없는 상태에서 메시지 전송도 막아줌
+  function handleMakeIsInputfocusedFalse() {
     if (isInputBoxFocused && inputRef.current?.value !== '') {
       return;
     }
-    setIsInputBoxFocused((prev) => !prev);
+    setIsInputBoxFocused(false);
+  }
+
+  function handleMakeIsInputfocusedTrue() {
+    setIsInputBoxFocused(true);
   }
 
   function handleSubmitForm(ev: any) {
@@ -135,6 +139,8 @@ export default function ChatInputForm() {
       if (inputRef.current !== null) {
         inputRef.current.value = '';
       }
+      setIsInputBoxFocused(false);
+      inputRef.current?.blur();
     }
   }
 
@@ -145,8 +151,8 @@ export default function ChatInputForm() {
       )}
       <StyledInputBoxContainer>
         <StyledInputBox
-          onFocus={handleToggleIsInputBoxFocused}
-          onBlur={handleToggleIsInputBoxFocused}
+          onFocus={handleMakeIsInputfocusedTrue}
+          onBlur={handleMakeIsInputfocusedFalse}
           placeholder="메시지 보내기"
           ref={inputRef}
         />

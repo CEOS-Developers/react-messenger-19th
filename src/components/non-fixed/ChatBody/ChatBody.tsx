@@ -9,12 +9,10 @@ import useScrollToBottom from '@hooks/useScrollToBottom';
 
 const StyledChatBodyContainer = styled.div`
   flex-grow: 1;
-  /* flex-shrink: 0; */
   margin-top: 16px;
   margin-right: 16px;
   margin-left: 16px;
   width: 343px;
-  /* height: 595px; */
   overflow-y: scroll;
 `;
 
