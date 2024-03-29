@@ -37,6 +37,7 @@ const formatTime = (isoDateString: string) => {
 const ChatBody: React.FC<ChatBodyProps> = ({ messages, currentUser }) => {
 	let lastDate = '';
 
+
 	return (
 		<ChatBodyContainer>
 			{messages.map((message, index) => {

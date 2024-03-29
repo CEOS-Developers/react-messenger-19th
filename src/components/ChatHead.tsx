@@ -17,7 +17,7 @@ const ChatHead: React.FC<ChatHeadProps> = ({ user, onUserClick }) => {
 			<UserImage
 				src={user.image}
 				alt='Profile'
-				style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+				style={{ width: '34px', height: '34px', borderRadius: '50%' }}
 			/>
 			<UserName>{user.name}</UserName>
 		</ChatHeadContainer>

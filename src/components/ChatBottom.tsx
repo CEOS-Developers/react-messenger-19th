@@ -36,6 +36,7 @@ const ChatBottom: React.FC<ChatBottomProps> = ({ onSendMessage }) => {
 		<ChatBottomContainer>
 			<ChatInput
 				type='text'
+                placeholder='메시지 보내기'
 				value={inputValue}
 				onChange={(e: ChangeEvent<HTMLInputElement>) =>
 					setInputValue(e.target.value)
