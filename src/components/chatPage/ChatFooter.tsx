@@ -20,15 +20,39 @@ export default function ChatFooter(props: ChatFooterProps) {
     }
   }
 
+  function checkSameTime(): boolean {
+    const lastMsg = list[list.length - 1];
+    if (lastMsg && lastMsg.time === date()) {
+      return true;
+    }
+    return false;
+  }
+
   function handleList(input: string) {
+    let isFirst = true;
+
+    if (checkSameTime()) {
+      const filterSameTimeIndex = list.findIndex((msg) => msg.time === date());
+      if (filterSameTimeIndex !== -1) {
+        if (filterSameTimeIndex !== list.length) {
+          isFirst = false;
+        }
+
+        const updatedList = list.map((msg, index) => (index === filterSameTimeIndex ? { ...msg, isFirst: true } : msg));
+        setList([]);
+        setList(updatedList);
+      }
+    }
     const newMsg: MsgType = {
       id: Date.now(),
       rcvd: false,
-      sequential: true,
+      isSameTime: checkSameTime(),
+      isFirst: isFirst,
       text: input,
       time: date(),
     };
-    setList([...list, newMsg]);
+
+    setList((prevList) => [...prevList, newMsg]);
   }
 
   function handleInput(event: React.ChangeEvent<HTMLInputElement>) {

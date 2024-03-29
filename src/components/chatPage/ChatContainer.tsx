@@ -24,29 +24,29 @@ export default function ChatContainer(props: ChatContainerProps) {
       <Date>오늘</Date>
       <Layout>
         {chatData.data.map((data) => (
-          <ChatBox $rcvd={data.rcvd === (userId === 0)} $sequential={data.sequential} key={data.id}>
-            {data.rcvd === (userId === 0) && !data.sequential && <ProfileIcon />}
-            {!(data.rcvd === (userId === 0)) && data.sequential && <TimeNow>{data.time}</TimeNow>}
-            <Details $margin={data.rcvd === (userId === 0) && data.sequential}>
-              {data.rcvd === (userId === 0) && !data.sequential && (
+          <ChatBox $rcvd={data.rcvd === (userId === 0)} key={data.id}>
+            {data.rcvd === (userId === 0) && (!data.isSameTime || (data.isSameTime && data.isFirst)) && <ProfileIcon />}
+            {!(data.rcvd === (userId === 0)) && !(data.isSameTime && data.isFirst) && <TimeNow>{data.time}</TimeNow>}
+            <Details $margin={data.rcvd === (userId === 0) && !data.isFirst}>
+              {data.rcvd === (userId === 0) && (!data.isSameTime || (data.isSameTime && data.isFirst)) && (
                 <Name>{userData.data.find((user) => user.id === userId)?.name}</Name>
               )}
               <Text $rcvd={data.rcvd === (userId === 0)}>{data.text}</Text>
             </Details>
-            {data.rcvd === (userId === 0) && data.sequential && <TimeNow>{data.time}</TimeNow>}
+            {data.rcvd === (userId === 0) && !(data.isSameTime && data.isFirst) && <TimeNow>{data.time}</TimeNow>}
           </ChatBox>
         ))}
         {list.map((data) => (
-          <ChatBox $rcvd={data.rcvd === (userId === 0)} $sequential={data.sequential} key={data.id}>
-            {data.rcvd === (userId === 0) && !data.sequential && <ProfileIcon />}
-            {!(data.rcvd === (userId === 0)) && data.sequential && <TimeNow>{data.time}</TimeNow>}
-            <Details $margin={data.rcvd === (userId === 0) && data.sequential}>
-              {data.rcvd === (userId === 0) && !data.sequential && (
+          <ChatBox $rcvd={data.rcvd === (userId === 0)} key={data.id}>
+            {data.rcvd === (userId === 0) && (!data.isSameTime || (data.isSameTime && data.isFirst)) && <ProfileIcon />}
+            {!(data.rcvd === (userId === 0)) && !(data.isSameTime && data.isFirst) && <TimeNow>{data.time}</TimeNow>}
+            <Details $margin={data.rcvd === (userId === 0) && !data.isFirst}>
+              {data.rcvd === (userId === 0) && (!data.isSameTime || (data.isSameTime && data.isFirst)) && (
                 <Name>{userData.data.find((user) => user.id === userId)?.name}</Name>
               )}
               <Text $rcvd={data.rcvd === (userId === 0)}>{data.text}</Text>
             </Details>
-            {data.rcvd === (userId === 0) && data.sequential && <TimeNow>{data.time}</TimeNow>}
+            {data.rcvd === (userId === 0) && !(data.isSameTime && data.isFirst) && <TimeNow>{data.time}</TimeNow>}
           </ChatBox>
         ))}
         <div ref={scrollEndRef} />
@@ -89,10 +89,10 @@ const Layout = styled.div`
   gap: 0.8rem;
 `;
 
-const ChatBox = styled.div<{ $rcvd: boolean; $sequential: boolean }>`
+const ChatBox = styled.div<{ $rcvd: boolean }>`
   display: flex;
   justify-content: ${({ $rcvd }) => ($rcvd ? 'none' : 'end')};
-  align-items: ${({ $sequential }) => ($sequential ? 'end' : 'none')};
+
   gap: 0.6rem;
 `;
 
@@ -122,9 +122,10 @@ const Text = styled.div<{ $rcvd: boolean }>`
   background-color: ${({ theme, $rcvd }) => ($rcvd ? theme.colors.white : theme.colors.green_bg)};
 `;
 
-const TimeNow = styled.p`
+const TimeNow = styled.div`
+  display: flex;
+  align-items: end;
   width: 4.5rem;
-  height: 1.4rem;
 
   ${({ theme }) => theme.fonts.sent_time};
   color: var(--blue-3, ${({ theme }) => theme.colors.blue_txt});
