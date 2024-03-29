@@ -16,8 +16,8 @@ const GlobalStyles = createGlobalStyle`
     background-color: #FFFFFF;
     opacity: 0.95;
     margin: 0 auto;
-    height: 812px;
-    height: 100dvh;
+    /* height: 812px; */
+    height: 100%;
     width: 375px;
   }
   #root {
