@@ -4,6 +4,9 @@ import Plus from '../../assets/img/plus.svg';
 import Attachment from '../../assets/img/attachment.svg';
 import Camera from '../../assets/img/camera.svg';
 import Microphone from '../../assets/img/microphone.svg';
+import initialChatData from '../../assets/data/initialChatData.json';
+import { useDispatch } from 'react-redux';
+import { addChat } from '../../chatSlice';
 
 const InputContainer = styled.div`
   width: 23.4375rem;
@@ -45,8 +48,30 @@ const Input = styled.input`
   letter-spacing: -0.02563rem;
 `;
 
+const TodayContainer = styled.div`
+  display: inline-flex;
+  padding: 0.1875rem 1rem;
+  align-items: flex-start;
+  border-radius: 0.375rem;
+  background: #dbdfeb;
+  position: absolute;
+  top: 0.84rem;
+  bottom: 0.84rem;
+`;
+
+const TodayText = styled.div`
+  color: #414350;
+  text-align: center;
+  font-family: 'SF Pro Text';
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+`;
+
 export default function ChatInput() {
   const [value, setValue] = useState<string>('');
+  const dispatch = useDispatch();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -54,6 +79,14 @@ export default function ChatInput() {
       alert('공백 없이 입력해주세요.');
       return;
     }
+
+    // 샘플 데이터 - 실제 사용 시 적절한 값으로 대체
+    const chatRoomId = 0; // 예시
+    const senderId = 1; // 예시
+    const time = '9:45am'; // 현재 시각 등으로 대체 가능
+    const isRead = true; // 상황에 따라 설정
+
+    dispatch(addChat({ chatRoomId, senderId, content: value, time, isRead }));
     setValue('');
   };
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ChatBubble from './ChatBubble';
-import ChatData from '../../assets/data/chatData.json';
+import initialChatData from '../../assets/data/initialChatData.json';
 
 const ChattingRoomContainer = styled.div`
   width: 23.4375rem;
@@ -10,7 +10,8 @@ const ChattingRoomContainer = styled.div`
 `;
 
 export default function ChattingRoom() {
-  const chatList = ChatData.chattings[0].chatList;
+  const chatList = initialChatData.chattings[0].chatList;
+
   return (
     <ChattingRoomContainer>
       {chatList.map((chat) => (
