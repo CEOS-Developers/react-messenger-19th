@@ -1,0 +1,98 @@
+[
+    {
+      "r_id": 1,
+      "isGroup": false,
+      "r_name": "John's Chat",
+      "r_profile": "https://example.com/profiles/john.jpg",
+      "chat": [
+        {
+          "c_id": 1711688718759,
+          "sender": "John",
+          "receiver": "me",
+          "r_img": "https://example.com/profiles/you.jpg",
+          "value": "Hello, how are you?",
+          "time": "15:00"
+        },
+        {
+          "c_id": 2,
+          "sender": "You",
+          "receiver": "me",
+          "r_img": "https://example.com/profiles/john.jpg",
+          "value": "I'm good, thanks!",
+          "time": "20:00"
+        }
+      ]
+    },
+    {
+      "r_id": 2,
+      "isGroup": true,
+      "r_name": "Group Chat",
+      "r_profile": "https://example.com/profiles/group.jpg",
+      "chat": [
+        {
+          "c_id": 1711688718760,
+          "sender": "Alice",
+          "receiver": "me",
+          "r_img": "https://example.com/profiles/group.jpg",
+          "value": "Hey everyone!",
+          "time": "13:00"
+        },
+        {
+          "c_id": 1711688718761,
+          "sender": "Bob",
+          "receiver": "me",
+          "r_img": "https://example.com/profiles/group.jpg",
+          "value": "Hello!",
+          "time": "15:00"
+        }
+      ]
+    },
+    {
+      "r_id": 3,
+      "isGroup": false,
+      "r_name": "Sarah's Chat",
+      "r_profile": "https://example.com/profiles/sarah.jpg",
+      "chat": [
+        {
+          "c_id": 1711688718763,
+          "sender": "me",
+          "receiver": "Sarah",
+          "r_img": "https://example.com/profiles/sarah.jpg",
+          "value": "Hi Sarah!",
+          "time": "19:00"
+        }
+      ]
+    },
+    {
+      "r_id": 4,
+      "isGroup": false,
+      "r_name": "Mark's Chat",
+      "r_profile": "https://example.com/profiles/mark.jpg",
+      "chat": []
+    },
+    {
+      "r_id": 5,
+      "isGroup": false,
+      "r_name": "Emma's Chat",
+      "r_profile": "https://example.com/profiles/emma.jpg",
+      "chat": [
+        {
+          "c_id": 1711688718764,
+          "sender": "me",
+          "receiver": "Emma",
+          "r_img": "https://example.com/profiles/emma.jpg",
+          "value": "Hello Emma!",
+          "time": "02:00"
+        },
+        {
+          "c_id": 1711688718767,
+          "sender": "Emma",
+          "receiver": "me",
+          "r_img": "https://example.com/profiles/you.jpg",
+          "value": "Hi there!",
+          "time": "05:00"
+        }
+      ]
+    }
+  ]
+  
