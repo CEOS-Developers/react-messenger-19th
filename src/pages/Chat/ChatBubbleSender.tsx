@@ -25,7 +25,7 @@ const ChatBubbleWrapper = styled.div`
 const BubbleText = styled.div`
     width: 243.76px;
     height: fit-content;
-    background-color: cadetblue;
+    background-color: ${({theme})=> theme.colors.green};
     border: none;
     border-radius: 20px;
     padding: 15px;
