@@ -8,7 +8,7 @@ export interface Chat {
   messages: Message[];
 }
 
-interface User {
+export interface User {
   id: string;
   name: string;
   profileImage: string;

@@ -4,11 +4,10 @@ import { ReactComponent as LeftArrowIcon } from "asset/icons/LeftArrowIcon.svg";
 import { ReactComponent as EmogiIcon } from "asset/icons/EmogiIcon.svg";
 import { ReactComponent as FileInputIcon } from "asset/icons/FileInputIcon.svg";
 import { ReactComponent as AudioIcon } from "asset/icons/AudioIcon.svg";
-import UserImg from "asset/images/User.png";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { getCurrentTime } from "util/getCurrentTime";
 import mockData from "data/chatData.json";
-import { Chat, ChatData } from "types/ChatData";
+import { Chat, ChatData, User } from "types/ChatData";
 
 function ChatRoom() {
   const [inputValue, setInputValue] = useState("");
@@ -19,13 +18,15 @@ function ChatRoom() {
   const { users, messages } = chatData;
 
   // 현재 보내는 사람
-  const [currentSenderId, setCurrentSenderId] = useState("user1");
+  const [currentSenderId, setCurrentSenderId] = useState(users[0].id);
+
+  const findUserById = (userId: string) => {
+    return users.find((user) => user.id === userId);
+  };
 
   const toggleCurrentSenderId = () => {
     setCurrentSenderId((prevId) =>
-      prevId === chatData.users[0].id
-        ? chatData.users[1].id
-        : chatData.users[0].id
+      prevId === users[0].id ? users[1].id : users[0].id
     );
   };
 
@@ -45,10 +46,13 @@ function ChatRoom() {
             <LeftArrowIcon className="arrow_icon" alt="뒤로 가기 아이콘" />
           </button>
           <UserDetailInfo>
-            <h1 className="user_name">{}</h1>
+            <h1 className="user_name">{findUserById(currentSenderId)?.name}</h1>
             <p className="last_access">마지막 접속 5분 전</p>
           </UserDetailInfo>
-          <UserProfileImg src={UserImg} />
+          <UserProfileImg
+            src={findUserById(currentSenderId)?.profileImage}
+            onClick={toggleCurrentSenderId}
+          />
         </ChatRoomHeader>
         <ChatList>
           <ChatWrapper>
@@ -99,6 +103,9 @@ const ChatRoomHeader = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  img {
+    cursor: pointer;
+  }
 `;
 
 const UserProfileImg = styled.img`
