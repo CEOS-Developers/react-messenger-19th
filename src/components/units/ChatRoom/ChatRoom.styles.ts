@@ -37,6 +37,7 @@ export const Name = styled.div`
 	font-size: 16px;
 	margin-left: 10px;
 	line-height: 60px;
+	cursor: pointer;
 `;
 
 export const ChatContainer = styled.div`
