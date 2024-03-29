@@ -1,16 +1,15 @@
-function toISOString(year, month, day, hour, minute) {
-  // JavaScript의 Date 객체는 월을 0부터 시작으로 카운트하기 때문에, 월에서 1을 빼줍니다.
-  // Date 객체를 생성할 때 UTC 시간으로 설정하기 위해 Date.UTC 메서드를 사용합니다.
-  const date = new Date(Date.UTC(year, month - 1, day, hour, minute));
-
-  // ISO 8601 형식의 문자열로 변환
-  return date.toISOString();
+// 사용자의 시간대 오프셋(시간대에 따라 분 단위로 설정)
+function getUserTimezoneOffset() {
+  // 예시: 한국 시간대의 경우 UTC+9
+  return 9 * 60; // 분 단위로 설정
 }
 
-// 함수 사용 예시
-console.log(toISOString(2024, 3, 19, 20, 45));
-console.log(toISOString(2024, 3, 19, 20, 48));
-console.log(toISOString(2024, 3, 19, 20, 49));
-console.log(toISOString(2024, 3, 19, 20, 51));
-console.log(toISOString(2024, 3, 19, 20, 52));
-console.log(toISOString(2024, 3, 20, 1, 32));
+// ISO 문자열로 시간을 보정하는 함수
+export function adjustTimeForUserLocation() {
+  const currentTime = new Date();
+  const userTimezoneOffset = getUserTimezoneOffset();
+  const adjustedTime = new Date(
+    currentTime.getTime() + userTimezoneOffset * 60000
+  ); // 시간대 오프셋을 밀리초 단위로 변환하여 시간 보정
+  return adjustedTime.toISOString();
+}

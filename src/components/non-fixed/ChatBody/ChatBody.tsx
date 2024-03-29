@@ -1,9 +1,5 @@
 import { useRecoilState } from 'recoil';
-import {
-  messageDataState,
-  messageDateArrayState,
-  userNumberState,
-} from '@context/state/atom';
+import { messageDataState, messageDateArrayState } from '@context/state/atom';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import OneDateContainer from '@components/non-fixed/ChatBody/OneDateContainer/OneDateContainer';
@@ -53,6 +49,14 @@ export default function ChatBody() {
         }
         // 기존의 날짜 배열을 오름차순으로 정렬
         tmpDateArray.sort(sortByDate);
+        localStorage.setItem(
+          'chatMessageData',
+          JSON.stringify(tmpMessageDataObject)
+        );
+        localStorage.setItem(
+          'chatMessageDateArray',
+          JSON.stringify(tmpDateArray)
+        );
         setMessageData(tmpMessageDataObject);
         setMessageDateArray(tmpDateArray);
       } catch (error) {
@@ -60,7 +64,28 @@ export default function ChatBody() {
       }
     }
 
-    loadMessageData();
+    // 기존의 로컬 스토리지에 아무 정보도 없다면 json 파일의 내용을 상태로 만들고 로컬 스토리지에도 반영
+    // 하지만 이미 있다면 해당 내용을 가져와서 상태로 만든다
+    if (
+      localStorage.getItem('chatMessageData') === null &&
+      localStorage.getItem('chatMessageDateArray') === null
+    ) {
+      console.log('yes!');
+      loadMessageData();
+    } else if (
+      localStorage.getItem('chatMessageData') !== null &&
+      localStorage.getItem('chatMessageDateArray') !== null
+    ) {
+      const lstrgChatMessageData = JSON.parse(
+        localStorage.getItem('chatMessageData') as string
+      );
+      const lstrgChatMessageDateArray = JSON.parse(
+        localStorage.getItem('chatMessageDateArray') as string
+      );
+
+      setMessageData(lstrgChatMessageData);
+      setMessageDateArray(lstrgChatMessageDateArray);
+    }
   }, []);
 
   return (
