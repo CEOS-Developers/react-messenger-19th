@@ -1,7 +1,8 @@
 export interface MsgType {
   id: number;
   rcvd: boolean;
-  sequential: boolean;
+  isSameTime: boolean;
+  isFirst: boolean;
   text: string;
   time: string;
 }
