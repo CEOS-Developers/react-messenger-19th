@@ -117,7 +117,9 @@ const Footer = styled.div`
   background-color: #F7F8FC;
   width: 100%;
   height: 42px;
-  
+  @media (max-width: 768px) {
+    background-color: #ffffff;
+  }
    `;
 
 const FooterContainer = styled.div`

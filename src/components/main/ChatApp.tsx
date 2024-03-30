@@ -59,8 +59,8 @@ const Container = styled.div`
 const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
+  width: 100vw; 
+  height: 100vh; 
   margin: 0 auto;
   background-color: #FFFFFF; 
 
@@ -69,7 +69,6 @@ const AppContainer = styled.div`
     max-width: 375px;
     max-height: 812px;
     min-height: 812px;
-    width: 375px;
     height: auto;
     border-radius: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
