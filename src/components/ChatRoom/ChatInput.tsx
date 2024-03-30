@@ -1,6 +1,7 @@
 import { ReactComponent as EmogiIcon } from "asset/icons/EmogiIcon.svg";
 import { ReactComponent as FileInputIcon } from "asset/icons/FileInputIcon.svg";
 import { ReactComponent as AudioIcon } from "asset/icons/AudioIcon.svg";
+import { ReactComponent as SendIcon } from "asset/icons/SendIcon.svg";
 import {
   ChangeEvent,
   Dispatch,
@@ -34,7 +35,7 @@ function ChatInput({ setChatData, me }: ChatInputProps) {
   const handleChangeInputValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(e.target.value);
 
-    handleResizeHeight();
+    handleResizeTextAreaHeight();
   };
 
   const handleInputSubmit = (e: FormEvent) => {
@@ -60,7 +61,7 @@ function ChatInput({ setChatData, me }: ChatInputProps) {
 
   const textArea = useRef<HTMLTextAreaElement>(null);
 
-  const handleResizeHeight = () => {
+  const handleResizeTextAreaHeight = () => {
     if (!textArea.current) {
       return;
     }
@@ -70,23 +71,37 @@ function ChatInput({ setChatData, me }: ChatInputProps) {
 
   return (
     <ChatInputWrapper onSubmit={handleInputSubmit}>
-      <button type="button">
-        <FileInputIcon alt="파일 첨부 아이콘" />
-      </button>
-      <button type="button">
-        <AudioIcon alt="음성 텍스트 입력 아이콘" />
-      </button>
-      <textarea
-        rows={1}
-        ref={textArea}
-        onKeyDown={handleKeyDownInputValue}
-        placeholder="메시지"
-        onChange={handleChangeInputValue}
-        value={inputValue}
-      />
-      <button>
-        <EmogiIcon className="emogi_icon" alt="이모지 아이콘" />
-      </button>
+      <div className="file_audio_button">
+        <button type="button">
+          <FileInputIcon alt="파일 첨부 아이콘" />
+        </button>
+        <button type="button">
+          <AudioIcon alt="음성 텍스트 입력 아이콘" />
+        </button>
+      </div>
+      <TextAreaWrapper>
+        <textarea
+          // 초기값은 1줄만
+          rows={1}
+          ref={textArea}
+          onKeyDown={handleKeyDownInputValue}
+          placeholder="메시지"
+          onChange={handleChangeInputValue}
+          value={inputValue}
+        />
+        <button>
+          <EmogiIcon
+            type="button"
+            className={`emogi_icon ${inputValue && "move_icon"}`}
+            alt="이모지 아이콘"
+          />
+        </button>
+      </TextAreaWrapper>
+      {inputValue && (
+        <button>
+          <SendIcon alt="보내기아이콘" />
+        </button>
+      )}
     </ChatInputWrapper>
   );
 }
@@ -95,13 +110,25 @@ export default ChatInput;
 
 const ChatInputWrapper = styled.form`
   background: var(--gray01);
-  box-shadow: 0px -0.33px 0px 0px #a6a6aa;
   ${flexCenter}
-  gap : 0.5rem;
+  box-shadow: 0px -0.33px 0px 0px #a6a6aa;
+  gap: 0.5rem;
   height: 6rem;
+  width: 100%;
   position: relative;
 
+  .file_audio_button {
+    ${flexCenter}
+    gap: 0.5rem;
+  }
+`;
+
+const TextAreaWrapper = styled.div`
+  ${flexCenter}
   textArea {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
     -ms-overflow-style: none; /* IE, Edge */
     scrollbar-width: none; /* Firefox */
     border: none;
@@ -109,6 +136,7 @@ const ChatInputWrapper = styled.form`
     resize: none;
     overflow: auto;
     width: 28.3rem;
+    height: 100%;
 
     max-height: 5rem;
     border-radius: 1.65rem;
@@ -118,12 +146,22 @@ const ChatInputWrapper = styled.form`
     font-size: 1.7rem;
   }
 
+  textarea:not(:placeholder-shown) {
+    width: 24.5rem;
+  }
+
   textArea::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
   }
+
+  .emogi_icon.move_icon {
+    right: 5.8rem;
+  }
+
   .emogi_icon {
     position: absolute;
     right: 2.3rem;
     top: 1.5rem;
+    transition: 0.2s ease-out;
   }
 `;
