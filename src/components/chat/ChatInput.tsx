@@ -118,10 +118,7 @@ const Footer = styled.div`
   width: 100%;
   height: 42px;
   
-  @media (max-width: 768px) {
-    background-color: #ffffff;
-  }
-  `;
+   `;
 
 const FooterContainer = styled.div`
   display: flex;
