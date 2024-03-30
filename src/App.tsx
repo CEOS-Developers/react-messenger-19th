@@ -6,10 +6,8 @@ import StatusBar from './components/StatusBar';
 import HomeIndicator from './components/HomeIndicator';
 
 const Container = styled.div`
-  width: 23.4375rem;
-  height: 50.75rem;
-  border-radius: 1.25rem;
   background: #f6f6f6;
+  border-radius: 1.25rem;
 `;
 
 // StatusBar와 HomeIndicator 제외 영역

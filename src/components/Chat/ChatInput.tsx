@@ -23,6 +23,9 @@ const IconImg = styled.img`
 `;
 
 const InputBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 14.375rem;
   height: 1.875rem;
   border-radius: 0.9375rem;
@@ -34,10 +37,8 @@ const InputBox = styled.div`
 `;
 
 const Input = styled.input`
-  width: 78%;
-  position: relative;
-  top: 0.22rem;
-  left: 0.75rem;
+  width: 88%;
+  height: 100%;
   border: none;
   outline: none;
   font-family: 'SF Pro Text';
