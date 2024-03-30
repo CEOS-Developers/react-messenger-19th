@@ -83,7 +83,7 @@ return (
           onClick={() => setExpanded(true)}  
           expanded={expanded}
           value={message} 
-          onChange={handleChange} // 입력값 변경 시 message 상태 업데이트
+          onInput={handleChange} // 입력값 변경 시 message 상태 업데이트
           onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) { 
                   send();
