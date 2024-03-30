@@ -37,22 +37,22 @@ const ChatMessages: React.FC = () => { //상턔관리 변수들
     return userProfile?.profileImage;
   };
 
-  
+
   const filteredMessages = messages.filter(
     message => message.senderId === selectedUserId || message.receiverId === selectedUserId
   );
 
-  
+
   //날짜로 메세지 그룹화하기 (꼬리물기)
   const groupMessagesByDate = (messages: Message[]) => {
     const grouped: { [key: string]: Message[][] } = {}; //그룹화된 메세지를 저장
     messages.forEach((message) => {
       const dateKey = formatShortDate(message.timestamp); //기준: 날짜
-  
+
       if (!grouped[dateKey]) {
         grouped[dateKey] = [];
       }
-  
+
       const lastGroup = grouped[dateKey][grouped[dateKey].length - 1];
       if (
         lastGroup &&
@@ -64,10 +64,10 @@ const ChatMessages: React.FC = () => { //상턔관리 변수들
         grouped[dateKey].push([message]); //새그룹 (시간뜨게)
       }
     });
-  
+
     return grouped;
   };
-  
+
 
   const groupedMessages = groupMessagesByDate(filteredMessages);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -140,7 +140,11 @@ const loadEmojisFromLocalStorage = () => {
                   <MessageLayout key={message.id} isSender={message.senderId === selectedUserId}>
                     {message.senderId === selectedUserId ? (
                       // 발신자 레이아웃: 시간 (맨 처음 톡에만) -> 메시지
-                      <>
+                      <MessageModalContainer isSender={message.senderId === selectedUserId}>
+                      <SenderMessageContainer
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ type: 'spring', stiffness: 260, damping: 20 }}>
                         {messageIndex === 0 && ( // 맨처음 톡에만 시간 떠야됨
                           <Timestamp isSender={message.senderId === selectedUserId}> 
                             {new Date(message.timestamp).toLocaleTimeString('ko-KR',
@@ -148,16 +152,34 @@ const loadEmojisFromLocalStorage = () => {
                           </Timestamp> 
                         )}
                         <MessageItem 
+                          key={message.id}
                           isSender={message.senderId === selectedUserId}
-                          initial={{ scale: 0, opacity: 0 }}
-                          animate={{ scale: 1, opacity: 1 }}
-                          transition={{ type: 'spring', stiffness: 260, damping: 20 }}>
+                          onDoubleClick={() =>  toggleEmojiModalForMessage(message.id.toString())} 
+                          style={{ cursor: "pointer" }}
+                          >
                           {message.text}
                         </MessageItem>
-                      </>
+                        </SenderMessageContainer>
+                        {activeModalMessageId === message.id.toString() && (
+                      <EmojiModal
+                        onEmojiSelect={(emoji) => handleEmojiSelect(message.id.toString(), emoji)}
+                        onClose={() => setActiveModalMessageId(null)}
+                        selectedEmojiUrl={selectedEmojis[message.id] || null}
+                        />
+                        )}
+                        {selectedEmojis[message.id] && (
+                        <EmojiIcon 
+                        src={selectedEmojis[message.id]} 
+                        alt="emoji" 
+                        style={{marginTop:'5px'}} 
+                        />
+                        )}
+                    </MessageModalContainer>
+
+            
                     ) : (
                       // 수신자 레이아웃: 프사 -> 메시지 -> 시간
-                      <MessageModalContainer>
+                      <MessageModalContainer isSender={message.senderId === selectedUserId}>
                       <ReceiverMessageContainer
                           initial={{ opacity: 0, scale: 0.5 }}
                           animate={{ opacity: 1, scale: 1 }}
@@ -176,7 +198,7 @@ const loadEmojisFromLocalStorage = () => {
                           >
                           {message.text}
                         </MessageItem>
-                       
+
                         {messageIndex === 0 && ( // 마찬가지로 맨위에 톡만 시간뜨기
                           <Timestamp isSender={message.senderId === selectedUserId}>
                             {new Date(message.timestamp).toLocaleTimeString('ko-KR', 
@@ -191,7 +213,11 @@ const loadEmojisFromLocalStorage = () => {
                         selectedEmojiUrl={selectedEmojis[message.id] || null}                        />
                         )}
                         {selectedEmojis[message.id] && (
-                        <EmojiIcon src={selectedEmojis[message.id]} alt="emoji" style={{marginLeft:'47px', marginTop:'5px'}} />
+                        <EmojiIcon 
+                          src={selectedEmojis[message.id]} 
+                          alt="emoji" 
+                          style={{marginLeft:'47px', marginTop:'5px'}} 
+                          />
                         )}
                     </MessageModalContainer>
                     )}
@@ -219,7 +245,6 @@ const MessagesContainer = styled.div`
   const MessageLayout = styled.div<{ isSender: boolean }>`
   display: flex;
   flex-direction: row;
-
   align-self: ${({ isSender }) => isSender ? 'flex-end' : 'flex-start'}; //발신메세지 오른쪽, 수신메세지 왼쪽
   margin: ${({ isSender }) => isSender ? `0 15px 0 0` : `0 0 0 15px`};
   background-color: transparent;
@@ -236,6 +261,11 @@ const MessageItem = styled(motion.div)<{ isSender: boolean }>`
   color: #262626;
   word-break: break-word;
   user-select: none; //긁어도 선택안되게
+
+   transition: transform 0.2s ease;
+  &:active {
+    transform: scale(0.95);
+  }
 `;
 
 const Timestamp = styled.div<{ isSender: boolean }>`
@@ -262,20 +292,29 @@ const ProfilePic = styled.img<{ visible?: boolean }>`
   margin-right: 10px;
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
 `;
-const MessageModalContainer = styled.div`
+const MessageModalContainer = styled.div<{ isSender: boolean }>`
+display: flex;
+flex-direction: column;
+align-items: ${({ isSender }) => (isSender ? 'flex-end' : 'flex-start')}};
 `;
 const ReceiverMessageContainer = styled(motion.div)`
   display: flex;
   flex-direction: row;
   align-items: center;
 `;
+const SenderMessageContainer = styled(motion.div)`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+`;
 
 const EmojiIcon = styled.img`
 background-color: #EAEBF1;
 width: 16px;
 height: 16.17px;
-
 padding: 3px;
-border-radius: 100px;
+border-radius: 100%;
+background-color: '#EAEBF1';
+
 `;
 export default ChatMessages;

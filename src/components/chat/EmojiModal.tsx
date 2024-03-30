@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { motion } from 'framer-motion';
 
 interface EmojiModalProps {
   onEmojiSelect: (emoji: string) => void;
@@ -32,13 +32,26 @@ const EmojiModal: React.FC<EmojiModalProps> = ({ onEmojiSelect, onClose, selecte
   }, [onClose]);
 
   return (
-    <ModalBackground onClick={onClose}>
-      <ModalContent ref={modalRef} onClick={(e) => e.stopPropagation()}>
+    <ModalBackground 
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1.0 }}
+      exit={{ opacity: 0, scale: 2.0 }}
+      transition={{ duration: 0.5 }}
+      onClick={onClose}
+      >
+      <ModalContent 
+        initial={{ scale: 0.5 }}
+        animate={{ scale: 1 }}
+        exit={{ scale: 0.8 }}
+        ref={modalRef} 
+        onClick={(e) => e.stopPropagation()}>
         {emojis.map((emoji) => (
           <Emoji 
           key={emoji.id} 
           onClick={() => onEmojiSelect(emoji.url)} 
-          selected={selectedEmojiUrl === emoji.url || selectedEmojiUrl === null}          >
+          selected={selectedEmojiUrl === emoji.url || selectedEmojiUrl === null}          
+          whileTap={{ scale: 0.9 }}
+          >
             <img src={emoji.url} alt={emoji.id} />
           </Emoji>
         ))}
@@ -49,16 +62,14 @@ const EmojiModal: React.FC<EmojiModalProps> = ({ onEmojiSelect, onClose, selecte
 
 export default EmojiModal;
 
-const ModalBackground = styled.div`
+const ModalBackground = styled(motion.div)` 
   position: relative;
   margin-top: 8px;
-  margin-left: 15px
+  margin-left: 47px
 `;
 
-const ModalContent = styled.div`
-  width: 152px;
+const ModalContent = styled(motion.div)`  width: 152px;
   height: 34.17px;
-
   background-color: #ffffff;
   border-radius: 10px;
   display: flex;
@@ -68,20 +79,21 @@ const ModalContent = styled.div`
   gap: 10px;
 `;
 
-const Emoji = styled.div<{ selected: boolean }>`
+const Emoji = styled(motion.div)<{ selected: boolean }>`
   cursor: pointer;
   width: 16px;
   height: 16.17px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 100%;
   img {
     width: 100%;
     height: 100%;
   }
-  opacity: ${({ selected }) => (selected ? '1' : '0.5')};//선택된이모지만 선명
+  opacity: ${({ selected }) => (selected ? '1' : '0.3')};//선택된이모지만 선명
   &:hover {
     transform: scale(1.2);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   }
 `;

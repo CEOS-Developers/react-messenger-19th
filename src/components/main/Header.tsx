@@ -50,6 +50,10 @@ const HeaderContainer = styled.div`
   width: 100%;
   max-height: 54px;
 
+  @media (max-width: 768px) {
+    background-color: #ffffff;
+  }
+
 `;
 
 const LeftContainer = styled.div`
