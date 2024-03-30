@@ -27,6 +27,7 @@ const ChatInput: React.FC = () => {
     const [message, setMessage] = useState<string>('');
     const setMessageList = useSetRecoilState(messagesState);
     const selectedUserId = useRecoilValue(selectedUserState);
+    const [isComposing, setIsComposing] = useState(false); //한글 입력할때 상태관리를 위한 변수
 
    
     const send = (): void => {
@@ -74,6 +75,14 @@ const ChatInput: React.FC = () => {
     setMessage(e.target.value);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && !e.nativeEvent.isComposing) {
+        e.preventDefault();
+        send();
+        setMessage(''); // setInput("")와 같은 역할을 하는 로직
+    }
+};
+
 return (
     <Footer ref={containerRef}>
       <FooterContainer>
@@ -83,13 +92,8 @@ return (
           onClick={() => setExpanded(true)}  
           expanded={expanded}
           value={message} 
-          onInput={handleChange} // 입력값 변경 시 message 상태 업데이트
-          onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) { 
-                  send();
-                  e.preventDefault();
-              }
-          }}
+          onChange={handleChange} // 입력값 변경 시 message 상태 업데이트
+          onKeyDown={handleKeyDown}
         />
         <EmojiButton src={emojiIcon} alt="Emoji Button" />
         </InputContainer>
