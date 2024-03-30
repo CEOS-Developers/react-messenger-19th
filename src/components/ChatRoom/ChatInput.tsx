@@ -7,6 +7,7 @@ import {
   FormEvent,
   KeyboardEvent,
   SetStateAction,
+  useRef,
   useState,
 } from "react";
 import styled from "styled-components";
@@ -32,6 +33,8 @@ function ChatInput({ setChatData, me }: ChatInputProps) {
   };
   const handleChangeInputValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(e.target.value);
+
+    handleResizeHeight();
   };
 
   const handleInputSubmit = (e: FormEvent) => {
@@ -54,6 +57,17 @@ function ChatInput({ setChatData, me }: ChatInputProps) {
 
     setInputValue("");
   };
+
+  const textArea = useRef<HTMLTextAreaElement>(null);
+
+  const handleResizeHeight = () => {
+    if (!textArea.current) {
+      return;
+    }
+    textArea.current.style.height = "auto"; //height 초기화
+    textArea.current.style.height = textArea?.current?.scrollHeight + "px";
+  };
+
   return (
     <ChatInputWrapper onSubmit={handleInputSubmit}>
       <button type="button">
@@ -63,6 +77,8 @@ function ChatInput({ setChatData, me }: ChatInputProps) {
         <AudioIcon alt="음성 텍스트 입력 아이콘" />
       </button>
       <textarea
+        rows={1}
+        ref={textArea}
         onKeyDown={handleKeyDownInputValue}
         placeholder="메시지"
         onChange={handleChangeInputValue}
@@ -82,15 +98,19 @@ const ChatInputWrapper = styled.form`
   box-shadow: 0px -0.33px 0px 0px #a6a6aa;
   ${flexCenter}
   gap : 0.5rem;
-  height: 4.5rem;
+  height: 6rem;
   position: relative;
 
-  textarea {
+  textArea {
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none; /* Firefox */
     border: none;
     outline: none;
     resize: none;
+    overflow: auto;
     width: 28.3rem;
     height: 3.3rem;
+    max-height: 5rem;
     border-radius: 1.65rem;
     border: 0.1rem solid var(--gray03);
     background: var(--white);
@@ -98,9 +118,12 @@ const ChatInputWrapper = styled.form`
     font-size: 1.7rem;
   }
 
+  textArea::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
   .emogi_icon {
     position: absolute;
     right: 2.3rem;
-    top: 0.6rem;
+    top: 1.5rem;
   }
 `;

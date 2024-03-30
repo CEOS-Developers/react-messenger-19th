@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { flexCenter, flexColumn } from "styles/CommonStyle";
-
-import { ChangeEvent, FormEvent, useState, KeyboardEvent } from "react";
+import { flexColumn } from "styles/CommonStyle";
+import { useState } from "react";
 import mockData from "data/chatData.json";
 import { Chat } from "types/ChatData";
 import ChatRoomHeader from "components/ChatRoom/ChatRoomHeader";
