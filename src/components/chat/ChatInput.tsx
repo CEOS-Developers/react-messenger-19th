@@ -128,9 +128,11 @@ const FooterContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   background-color: #F7F8FC;
-  width: 354px;
+  width: 100%;
   height: 42px;
-
+  margin-top: 5px;
+  margin-left: 11px;
+  margin-right: 15.62px;
   @media (max-width: 768px) {
     background-color: #ffffff;
   }
@@ -141,7 +143,7 @@ const InputContainer = styled.div<InputContainerProps>`
   align-items: center;
   background-color: white;
   border-radius: 100px;
-  width: ${({ expanded }) => expanded ? '275px' : '246px'};
+  width: ${({ expanded }) => expanded ? '80%' : '65%'};
   height: 35px;
 
   transition: width 0.3s ease;
