@@ -34,12 +34,10 @@ const InputBox = styled.div`
 `;
 
 const Input = styled.input`
-  display: flex;
-  align-items: center;
-  width: 75%;
-  margin-top: 0.22rem;
-  margin-bottom: 0.28rem;
-  margin-left: 0.75rem;
+  width: 78%;
+  position: relative;
+  top: 0.22rem;
+  left: 0.75rem;
   border: none;
   outline: none;
   font-family: 'SF Pro Text';
@@ -48,6 +46,7 @@ const Input = styled.input`
   font-weight: 400;
   line-height: 1.375rem;
   letter-spacing: -0.02563rem;
+  background: transparent;
 `;
 
 export default function ChatInput() {
