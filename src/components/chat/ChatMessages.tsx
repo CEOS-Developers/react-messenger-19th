@@ -300,7 +300,7 @@ align-items: ${({ isSender }) => (isSender ? 'flex-end' : 'flex-start')}};
 const ReceiverMessageContainer = styled(motion.div)`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
 `;
 const SenderMessageContainer = styled(motion.div)`
   display: flex;
