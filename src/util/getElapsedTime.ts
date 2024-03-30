@@ -5,6 +5,7 @@ const day = hour * 24;
 const month = day * 31;
 const year = month * 12;
 
+// 경과 시간 구하는 함수
 export const getElapsedTime = (createdAt: string) => {
   const now = new Date();
   const createdAtDate = new Date(createdAt);

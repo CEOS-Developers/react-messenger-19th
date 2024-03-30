@@ -8,6 +8,7 @@ interface ChatRoomHeaderProps {
   partner: User;
 }
 
+// 상대에 대한 정보가 담겨있는 채팅룸 상단
 function ChatRoomHeader({ toggleParticipants, partner }: ChatRoomHeaderProps) {
   return (
     <ChatRoomHeaderWrapper>

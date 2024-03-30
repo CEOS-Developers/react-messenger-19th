@@ -13,6 +13,7 @@ function ChatRoom() {
 
   const { messages, users } = chatData;
 
+  // 2인 채팅 => 나와 partner로 구분 하나의 state로 관리
   const [participants, setParticipants] = useState({
     me: users[0],
     partner: users[1],
@@ -20,6 +21,7 @@ function ChatRoom() {
 
   const { me, partner } = participants;
 
+  // 상대와 나를 switch 하는 함수
   const toggleParticipants = () => {
     setParticipants((prev) => ({ me: prev.partner, partner: prev.me }));
   };

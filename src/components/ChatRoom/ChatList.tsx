@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { flexCenter, flexColumn } from "styles/CommonStyle";
+import { flexColumn } from "styles/CommonStyle";
 import { Message, User } from "types/ChatData";
 import { formatDateToTime } from "util/formatDateToTime";
 import { getByteSize } from "util/getByteSize";
@@ -9,6 +9,8 @@ interface ChatListProps {
   messages: Message[];
   me: User;
 }
+// 채팅 리스트
+
 function ChatList({ messages, me }: ChatListProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -27,8 +29,11 @@ function ChatList({ messages, me }: ChatListProps) {
       {messages.map((message) => (
         <ChatWrapper $isMyMessage={message.senderId === me.id} key={message.id}>
           <div className="time_wrapper">
+            {/* 현재 시간 */}
             <SentTime>{formatDateToTime(message.createdAt)} </SentTime>
           </div>
+          {/* 사진과 텍스트가 같이 있는 경우는 없음 -> 사진 속성이 존재하는 경우에는 사진을 존재하지 않는 경우에는 일반 텍스트 메세지를 보여줌 */}
+          {/* isMyMessage라는 prop으로 보낸 사람과 me가 같은 사람인지 아닌지에 따라 스타일링을 다르게 해줌 */}
           {message.photo ? (
             <ChatPhoto as="div" $isMyMessage={message.senderId === me.id}>
               <img src={message.photo?.url} alt="Attached photograph" />
@@ -106,6 +111,10 @@ const ChatText = styled.p<{ $isMyMessage: boolean }>`
   font-size: 1.7rem;
   line-height: 2.2rem;
   letter-spacing: -0.04rem;
+  cursor: pointer;
+
+  &:hover {
+  }
 `;
 
 const ChatPhoto = styled(ChatText)<{ $isMyMessage: boolean }>`
