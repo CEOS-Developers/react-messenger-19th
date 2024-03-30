@@ -11,6 +11,11 @@ const GlobalStyle = createGlobalStyle`
         align-items: center;
     }
 
+    #root {
+        height: 100dvh;
+        width: 100%;
+    }
+
     input{
         outline: none;
     }

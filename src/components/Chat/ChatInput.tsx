@@ -34,6 +34,8 @@ const InputBox = styled.div`
 `;
 
 const Input = styled.input`
+  display: flex;
+  align-items: center;
   width: 75%;
   margin-top: 0.22rem;
   margin-bottom: 0.28rem;
