@@ -3,23 +3,12 @@ import { ReactComponent as LeftArrowIcon } from "asset/icons/LeftArrowIcon.svg";
 import { User } from "types/ChatData";
 import { getElapsedTime } from "util/getElapsedTime";
 
-interface ParticipantsId {
-  me: string;
-  partner: string;
-}
-
 interface ChatRoomHeaderProps {
-  toggleParticipantsId: () => void;
-  findUserById: (userId: string) => User | undefined;
-  participantsId: ParticipantsId;
+  toggleParticipants: () => void;
+  partner: User;
 }
 
-function ChatRoomHeader({
-  toggleParticipantsId,
-  findUserById,
-  participantsId,
-}: ChatRoomHeaderProps) {
-  const partner = findUserById(participantsId.partner);
+function ChatRoomHeader({ toggleParticipants, partner }: ChatRoomHeaderProps) {
   return (
     <ChatRoomHeaderWrapper>
       <button>
@@ -34,7 +23,7 @@ function ChatRoomHeader({
       </UserDetailInfo>
       <UserProfileImg
         src={partner?.profileImage}
-        onClick={toggleParticipantsId}
+        onClick={toggleParticipants}
       />
     </ChatRoomHeaderWrapper>
   );

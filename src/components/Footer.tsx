@@ -20,6 +20,7 @@ const FooterWrapper = styled.div`
   ${flexCenter}
   width: 100%;
   height: 3.4rem;
+  border-radius: 0 0 2.4rem 2.4rem;
 `;
 
 const IPhoneLine = styled.div`

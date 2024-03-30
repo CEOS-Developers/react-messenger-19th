@@ -7,10 +7,7 @@ export const device = {
 
 export const GlobalStyle = createGlobalStyle`
 
-/* 배경색 */
-body{
-  background: #f0f6ff;
-}
+
 
 body{
   font-family: 'Pretandard';

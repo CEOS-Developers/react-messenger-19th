@@ -15,7 +15,7 @@ export interface User {
   lastAccess: string;
 }
 
-interface Message {
+export interface Message {
   id: string;
   senderId: string;
   text: string;
