@@ -109,7 +109,7 @@ const ChatInputWrapper = styled.form`
     resize: none;
     overflow: auto;
     width: 28.3rem;
-    height: 3.3rem;
+
     max-height: 5rem;
     border-radius: 1.65rem;
     border: 0.1rem solid var(--gray03);

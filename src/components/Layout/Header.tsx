@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { ReactComponent as HeaderIcons } from "../asset/icons/HeaderIcons.svg";
-import { flexCenter } from "../styles/CommonStyle";
+import { ReactComponent as HeaderIcons } from "asset/icons/HeaderIcons.svg";
+
 import { formatDateToTime } from "util/formatDateToTime";
+import { flexCenter } from "styles/CommonStyle";
 
 function Header() {
   return (
