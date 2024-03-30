@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
+import { flexCenter, flexColumn } from "styles/CommonStyle";
 import { Message, User } from "types/ChatData";
 import { formatDateToTime } from "util/formatDateToTime";
+import { getByteSize } from "util/getByteSize";
 
 interface ChatListProps {
   messages: Message[];
@@ -27,9 +29,19 @@ function ChatList({ messages, me }: ChatListProps) {
           <div className="time_wrapper">
             <SentTime>{formatDateToTime(message.createdAt)} </SentTime>
           </div>
-          <ChatText $isMyMessage={message.senderId === me.id}>
-            {message.text}
-          </ChatText>
+          {message.photo ? (
+            <ChatPhoto as="div" $isMyMessage={message.senderId === me.id}>
+              <img src={message.photo?.url} alt="Attached photograph" />
+              <div className="file_info">
+                <p className="file_name">{message.photo.name}</p>
+                <p className="file_size">{getByteSize(message.photo.size)}</p>
+              </div>
+            </ChatPhoto>
+          ) : (
+            <ChatText $isMyMessage={message.senderId === me.id}>
+              {message.text}
+            </ChatText>
+          )}
         </ChatWrapper>
       ))}
       <div ref={messagesEndRef}></div>
@@ -94,4 +106,44 @@ const ChatText = styled.p<{ $isMyMessage: boolean }>`
   font-size: 1.7rem;
   line-height: 2.2rem;
   letter-spacing: -0.04rem;
+`;
+
+const ChatPhoto = styled(ChatText)<{ $isMyMessage: boolean }>`
+  max-width: fit-content;
+  display: flex;
+  gap: 1.7rem;
+  padding: 0.65rem 1.3rem 0.65rem 0.65rem;
+
+  ${({ $isMyMessage }) =>
+    $isMyMessage &&
+    `
+    background-color: var(--blue02);
+    p {
+    color: var(--gray02);
+  }
+
+  `}
+
+  .file_info {
+    ${flexColumn}
+    justify-content: center;
+  }
+
+  .file_name {
+    font-size: 1.6rem;
+    line-height: 2.1rem;
+    letter-spacing: -0.03rem;
+  }
+
+  .file_size {
+    font-size: 1.3rem;
+    letter-spacing: -0.01rem;
+  }
+
+  img {
+    width: 7.4rem;
+    height: 7.4rem;
+    border-radius: 0.8rem;
+    object-fit: cover;
+  }
 `;

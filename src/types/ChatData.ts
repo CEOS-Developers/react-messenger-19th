@@ -15,9 +15,16 @@ export interface User {
   lastAccess: string;
 }
 
+interface Photo {
+  name: string;
+  url: string;
+  size: number;
+}
+
 export interface Message {
   id: string;
   senderId: string;
-  text: string;
+  text?: string;
   createdAt: string;
+  photo?: Photo;
 }

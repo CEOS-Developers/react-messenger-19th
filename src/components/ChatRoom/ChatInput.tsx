@@ -69,12 +69,50 @@ function ChatInput({ setChatData, me }: ChatInputProps) {
     textArea.current.style.height = textArea?.current?.scrollHeight + "px";
   };
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileButtonClick = () => {
+    if (!fileInputRef.current) return;
+    fileInputRef.current.click(); // 숨겨진 file input의 클릭 이벤트를 실행
+  };
+
+  const fileInputSubmit = (e: ChangeEvent<HTMLInputElement>) => {
+    const targetFile = e.target.files?.[0];
+
+    if (!targetFile) return;
+    const { size, name } = targetFile;
+
+    const url = URL.createObjectURL(targetFile);
+
+    setChatData((prev: Chat) => ({
+      ...prev,
+      messages: [
+        ...prev.messages,
+        {
+          id: Date().toString(),
+          senderId: me.id,
+          createdAt: Date().toString(),
+          photo: { name, url, size },
+        },
+      ],
+    }));
+  };
+
   return (
     <ChatInputWrapper onSubmit={handleInputSubmit}>
       <div className="file_audio_button">
-        <button type="button">
-          <FileInputIcon alt="파일 첨부 아이콘" />
+        <button type="button" onClick={handleFileButtonClick}>
+          <FileInputIcon alt="파일 인풋 아이콘" />
+          <input
+            ref={fileInputRef}
+            id="fileInput"
+            style={{ display: "none" }}
+            type="file"
+            accept=".jpg, .png"
+            onChange={fileInputSubmit}
+          />
         </button>
+
         <button type="button">
           <AudioIcon alt="음성 텍스트 입력 아이콘" />
         </button>
