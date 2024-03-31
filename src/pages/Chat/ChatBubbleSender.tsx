@@ -16,7 +16,7 @@ function ChatBubbleSender({value}: Props) {
 const ChatBubbleWrapper = styled.div`
     display: flex;
     flex-direction: row;
-    width: 297.76px;
+    max-width: 297.76px;
     height: fit-content;
     margin-bottom: 14.88px;
     margin-left: 113.81px;
