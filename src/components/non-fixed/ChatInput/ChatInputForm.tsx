@@ -81,6 +81,7 @@ export default function ChatInputForm() {
   const [userNumber, setUserNumber] = useRecoilState(userNumberState);
 
   function handleMakeIsInputfocusedFalse() {
+    // 사용자가 인풋에 텍스트를 치다가 다른 화면을 눌러 나왔을때, onBlur() 트리거 함수가 작동했을 때 false가 되면 안됨
     if (isInputBoxFocused && inputRef.current?.value !== '') {
       return;
     }
@@ -93,6 +94,7 @@ export default function ChatInputForm() {
   }
 
   function handleUserTypeInput() {
+    // 인풋에 타이핑을 하고 있다가 다 지워버려도 해당 함수는 트리거 됨. 다 비어버리면 false로 만들고 함수 종료
     if (inputRef.current?.value === '') {
       setIsInputBoxFocused(false);
       return;

@@ -34,6 +34,7 @@ const StyledUserNameSpan = styled.span`
   font-weight: 600;
   ${ST.hoverCursor}
   margin-left: 4px;
+  white-space: nowrap;
 `;
 
 export default function ChatHeadNavLeft() {
