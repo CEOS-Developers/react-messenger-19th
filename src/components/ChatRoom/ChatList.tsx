@@ -4,7 +4,6 @@ import { flexColumn } from "styles/CommonStyle";
 import { Message, User } from "types/ChatData";
 import { formatDateToTime } from "util/formatDateToTime";
 import { getByteSize } from "util/getByteSize";
-
 interface ChatListProps {
   messages: Message[];
   me: User;
@@ -112,9 +111,6 @@ const ChatText = styled.p<{ $isMyMessage: boolean }>`
   line-height: 2.2rem;
   letter-spacing: -0.04rem;
   cursor: pointer;
-
-  &:hover {
-  }
 `;
 
 const ChatPhoto = styled(ChatText)<{ $isMyMessage: boolean }>`

@@ -2,6 +2,8 @@ import { ReactComponent as EmogiIcon } from "asset/icons/EmogiIcon.svg";
 import { ReactComponent as FileInputIcon } from "asset/icons/FileInputIcon.svg";
 import { ReactComponent as AudioIcon } from "asset/icons/AudioIcon.svg";
 import { ReactComponent as SendIcon } from "asset/icons/SendIcon.svg";
+import { ReactComponent as CloseIcon } from "asset/icons/CloseIcon.svg";
+
 import {
   ChangeEvent,
   Dispatch,
@@ -21,6 +23,12 @@ interface ChatInputProps {
 }
 function ChatInput({ setChatData, me }: ChatInputProps) {
   const [inputValue, setInputValue] = useState("");
+
+  const [isReplyWindowOpen, setIsReplyWindowOpen] = useState(true);
+
+  const handleReplyWindowToggle = () => {
+    setIsReplyWindowOpen((prev) => !prev);
+  };
 
   // shift + enter로 줄 바꿈 기능
   const handleKeyDownShiftEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -106,49 +114,65 @@ function ChatInput({ setChatData, me }: ChatInputProps) {
   };
 
   return (
-    <ChatInputWrapper onSubmit={handleInputSubmit}>
-      <div className="file_audio_button">
-        <button type="button" onClick={handleFileButtonClick}>
-          <FileInputIcon alt="파일 인풋 아이콘" />
-          <input
-            ref={fileInputRef}
-            id="fileInput"
-            // 파일 인풋을 숨기고, 파일 아이콘 클릭 시 파일 첨부창이 뜨게 함
-            style={{ display: "none" }}
-            type="file"
-            accept=".jpg, .png"
-            onChange={fileInputSubmit}
-          />
-        </button>
-
-        <button type="button">
-          <AudioIcon alt="음성 텍스트 입력 아이콘" />
-        </button>
-      </div>
-      <TextAreaWrapper>
-        <textarea
-          // 초기값은 1줄만
-          rows={1}
-          ref={textArea}
-          onKeyDown={handleKeyDownShiftEnter}
-          placeholder="메시지"
-          onChange={handleChangeInputValue}
-          value={inputValue}
-        />
-        <button>
-          <EmogiIcon
-            type="button"
-            className={`emogi_icon ${inputValue && "move_icon"}`}
-            alt="이모지 아이콘"
-          />
-        </button>
-      </TextAreaWrapper>
-      {inputValue && (
-        <button>
-          <SendIcon alt="보내기아이콘" />
-        </button>
+    <>
+      {isReplyWindowOpen && (
+        <ReplyWindowWrapper>
+          <ReplyWindow>
+            <p className="reply-target">연우에게 답장</p>
+            <p className="message-text">
+              지금 뭐하고 있어?dfasdfasdfsadfsdfsddfdfdfsdfdasdfasdㅇㄹㄴㅇㄹ
+              dfadsfadfadfsdfsdf
+            </p>
+          </ReplyWindow>
+          <button onClick={handleReplyWindowToggle}>
+            <CloseIcon alt="닫기 아이콘" />
+          </button>
+        </ReplyWindowWrapper>
       )}
-    </ChatInputWrapper>
+      <ChatInputWrapper onSubmit={handleInputSubmit}>
+        <div className="file_audio_button">
+          <button type="button" onClick={handleFileButtonClick}>
+            <FileInputIcon alt="파일 인풋 아이콘" />
+            <input
+              ref={fileInputRef}
+              id="fileInput"
+              // 파일 인풋을 숨기고, 파일 아이콘 클릭 시 파일 첨부창이 뜨게 함
+              style={{ display: "none" }}
+              type="file"
+              accept=".jpg, .png"
+              onChange={fileInputSubmit}
+            />
+          </button>
+
+          <button type="button">
+            <AudioIcon alt="음성 텍스트 입력 아이콘" />
+          </button>
+        </div>
+        <TextAreaWrapper>
+          <textarea
+            // 초기값은 1줄만
+            rows={1}
+            ref={textArea}
+            onKeyDown={handleKeyDownShiftEnter}
+            placeholder="메시지"
+            onChange={handleChangeInputValue}
+            value={inputValue}
+          />
+          <button>
+            <EmogiIcon
+              type="button"
+              className={`emogi_icon ${inputValue && "move_icon"}`}
+              alt="이모지 아이콘"
+            />
+          </button>
+        </TextAreaWrapper>
+        {inputValue && (
+          <button>
+            <SendIcon alt="보내기아이콘" />
+          </button>
+        )}
+      </ChatInputWrapper>
+    </>
   );
 }
 
@@ -209,5 +233,48 @@ const TextAreaWrapper = styled.div`
     right: 2.3rem;
     top: 1.5rem;
     transition: 0.1s ease-out;
+  }
+`;
+
+const ReplyWindowWrapper = styled.div`
+  position: relative;
+  width: 37.5rem;
+  height: 6.6rem;
+  background-color: var(--white);
+  padding: 1.6rem 1.6rem 0 1.6rem;
+  display: flex;
+
+  svg {
+    position: absolute;
+    top: 1rem;
+    right: 0.8rem;
+  }
+`;
+
+const ReplyWindow = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  p {
+    color: var(--gray04);
+    letter-spacing: -0.01rem;
+  }
+
+  .reply-target {
+    font-size: 1.3rem;
+  }
+
+  .message-text {
+    display: flex;
+    width: 34.3rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 1.7rem;
+    line-height: 2.2rem;
+    min-width: 0;
+    flex-shrink: 0;
   }
 `;
