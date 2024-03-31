@@ -1,19 +1,22 @@
 import { ThemeProvider } from 'styled-components';
 import theme from '@styles/theme';
 import GlobalStyles from '@styles/globalStyles';
-import AppMain from '@components/AppMain';
+import ChatMain from '@components/ChatMain';
 import { RecoilRoot } from 'recoil';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <GlobalStyles />
       <RecoilRoot>
         <ThemeProvider theme={theme}>
-          <AppMain />
+          <Routes>
+            <Route path="/" element={<ChatMain />} />
+          </Routes>
         </ThemeProvider>
       </RecoilRoot>
-    </>
+    </BrowserRouter>
   );
 }
 

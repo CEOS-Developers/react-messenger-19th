@@ -11,7 +11,7 @@ const StyledAppMain = styled.main`
   height: 100%;
 `;
 
-export default function AppMain() {
+export default function ChatMain() {
   return (
     <StyledAppMain>
       <ChatHead />

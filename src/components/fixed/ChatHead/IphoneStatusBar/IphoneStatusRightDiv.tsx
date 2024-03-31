@@ -9,7 +9,6 @@ const StyledIphoneStatusRightDiv = styled.div`
   display: flex;
   align-items: center;
   margin-right: 23.6px;
-  display: center;
 `;
 
 export default function IphoneStatusRightDiv() {
