@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
-import { messageDataState, userNumberState } from '@context/state/atom';
+import {
+  messageDataState,
+  userNumberState,
+  isMessageLikeButtonClickedState,
+} from '@context/state/atom';
 
 const StyledChatLogRightContainer = styled.div`
   display: flex;
@@ -68,6 +72,8 @@ export default function ChatLogRight({
 }) {
   const [messageData, setMessageData] = useRecoilState(messageDataState);
   const [userNumber, setUserNumber] = useRecoilState(userNumberState);
+  const [isMessageLikeButtonClicked, setIsMessageLikeButtonClicked] =
+    useRecoilState(isMessageLikeButtonClickedState);
 
   const createdHourMinute = createdAt.slice(11, 16);
   const createdDate = createdAt.slice(0, 10);
@@ -88,6 +94,8 @@ export default function ChatLogRight({
       'chatMessageData',
       JSON.stringify(deepCopiedMessageData)
     );
+    // 메시지 버튼이 눌렸는지에 관한 상태를 true로 만들어주고 chatBody에서 useEffect에서 조건부로 검사함
+    setIsMessageLikeButtonClicked(true);
   }
 
   return (

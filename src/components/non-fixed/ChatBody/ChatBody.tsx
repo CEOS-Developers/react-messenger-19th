@@ -1,5 +1,9 @@
 import { useRecoilState } from 'recoil';
-import { messageDataState, messageDateArrayState } from '@context/state/atom';
+import {
+  messageDataState,
+  messageDateArrayState,
+  isMessageLikeButtonClickedState,
+} from '@context/state/atom';
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import OneDateContainer from '@components/non-fixed/ChatBody/OneDateContainer/OneDateContainer';
@@ -18,11 +22,13 @@ const StyledChatBodyContainer = styled.div`
 
 export default function ChatBody() {
   // 여기에서 json 데이터를 불러와서 날짜별로 쪼갠다. 그리고 구분선, 메시지,메시지, 다시 구분선 메시지 메시지 느낌으로 나눠준다
-  const chatBodyContainerRef = useRef<any>(null);
+  const chatBodyContainerRef = useRef<HTMLDivElement>(null);
   const [messageData, setMessageData] = useRecoilState(messageDataState);
   const [messageDateArray, setMessageDateArray] = useRecoilState(
     messageDateArrayState
   );
+  const [isMessageLikeButtonClicked, setIsMessageLikeButtonClicked] =
+    useRecoilState(isMessageLikeButtonClickedState);
 
   const [scrollToBottom, setScrollFunction] = useScrollToBottom();
 
@@ -39,6 +45,11 @@ export default function ChatBody() {
 
   // messageData가 변경된 이후에 dom에 반영되고 그 다음에 scroll이 내려가야 새로 생긴 요소까지 반영
   useEffect(() => {
+    // 좋아요 버튼이 눌린 상태면 하트 UI만 만들어주고 다시 false로 만들어주고 끝내야 다음 상태가 정상적으로 반영
+    setIsMessageLikeButtonClicked(false);
+    if (isMessageLikeButtonClicked === true) {
+      return;
+    }
     scrollToBottom();
   }, [messageData]);
 

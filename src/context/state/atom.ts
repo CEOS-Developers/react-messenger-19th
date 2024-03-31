@@ -26,3 +26,8 @@ export const scrollToBottomState = atom({
   key: 'scrollToBottomState',
   default: () => {},
 });
+
+export const isMessageLikeButtonClickedState = atom({
+  key: 'isMessageLikeButtonClicked',
+  default: false,
+});
