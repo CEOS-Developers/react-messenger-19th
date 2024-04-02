@@ -20,7 +20,11 @@ const ContainerLayout = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 375px;
+  width: 100%;
   height: 100vh;
   background-color: ${theme.colors.blue};
+
+  @media (min-width: 768px) {
+    width: 375px;
+  }
 `;

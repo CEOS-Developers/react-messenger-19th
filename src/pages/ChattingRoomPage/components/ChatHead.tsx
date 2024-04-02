@@ -46,6 +46,11 @@ const Statusbox = styled.div`
   transform: translateX(-50%);
   flex-shrink: 0;
   background-color: ${theme.colors.blue};
+
+  @media (max-width: 768px) {
+    display: none;
+    width: 100&;
+  }
 `;
 
 const ChatHeaderWrapper = styled.section`
@@ -59,6 +64,11 @@ const ChatHeaderWrapper = styled.section`
   padding: 0 16px;
   background-color: ${theme.colors.blue};
   opacity: 0.8;
+
+  @media (max-width: 768px) {
+    top: 0;
+    width: 100%;
+  }
 `;
 
 const GobackBox = styled.div`

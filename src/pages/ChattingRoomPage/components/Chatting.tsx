@@ -137,10 +137,14 @@ const ChatWrapper = styled.section`
   width: 375px;
   height: 100%;
   padding: 0 16px;
-  margin-bottom: 48px;
+  margin-bottom: 52px;
   background-color: ${theme.colors.blue};
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;

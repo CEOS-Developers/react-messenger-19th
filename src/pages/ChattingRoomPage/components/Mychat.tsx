@@ -57,7 +57,6 @@ const MychatBox = styled.div`
   display: flex;
   align-items: flex-end;
   padding: 10px;
-  background-color: ${theme.colors.white};
   border-radius: 12px;
   max-width: 240px;
   word-wrap: break-word;

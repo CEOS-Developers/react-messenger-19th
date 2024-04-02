@@ -39,6 +39,7 @@ export default function ChatBottom() {
   };
 
   const HandleSubmit = () => {
+    if (!inputValue.trim()) return;
     setInputValue('');
     const newChat: Chat = {
       chatId: Date.now().toString(),
@@ -109,6 +110,10 @@ const ChatBottomWrapper = styled.section`
   height: 48px;
   padding: 4px 16px 0 16px;
   background-color: ${theme.colors.white};
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const InputBox = styled.div`
