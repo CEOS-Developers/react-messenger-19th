@@ -1,7 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
-import ChattingPage from './pages/ChattingPage';
 import GlobalStyles from './style/GlobalStyles';
+import ChattingPage from './pages/ChattingPage';
+import ContactInfoPage from './pages/ChattingPage';
+import ChatsPage from './pages/ChattingPage';
+import StatusPage from './pages/ChattingPage';
+import EditContactPage from './pages/ChattingPage';
 import StatusBar from './components/StatusBar';
 import HomeIndicator from './components/HomeIndicator';
 
@@ -26,6 +30,10 @@ function App() {
         <InnerContainer>
           <Routes>
             <Route path="/" element={<ChattingPage />} />
+            <Route path="/contact-info" element={<ContactInfoPage />} />
+            <Route path="/chats" element={<ChatsPage />} />
+            <Route path="/status" element={<StatusPage />} />
+            <Route path="/edit-contact" element={<EditContactPage />} />
           </Routes>
         </InnerContainer>
         <HomeIndicator />

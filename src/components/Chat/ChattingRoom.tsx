@@ -86,7 +86,7 @@ export default function ChattingRoom() {
         const isToday = chatDateDMY === todayDateStringDMY; // 현재 채팅 날짜가 오늘인지 확인
 
         return (
-          <React.Fragment key={chat.id}>
+          <>
             {showDateText && (
               <DateContainer>
                 <DateText>{isToday ? 'Today' : chatDateDMY}</DateText>
@@ -98,7 +98,7 @@ export default function ChattingRoom() {
               time={FormatTime(chat.time)}
               isRead={chat.isRead}
             />
-          </React.Fragment>
+          </>
         );
       })}
     </ChattingRoomContainer>
