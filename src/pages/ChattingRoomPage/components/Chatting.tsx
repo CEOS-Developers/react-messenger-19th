@@ -109,6 +109,7 @@ const DateContainer = styled.div`
   font-size: ${theme.textStyles.caption4.font_size};
   line-height: ${theme.textStyles.caption4.line_height};
   font-weight: ${theme.textStyles.caption4.font_weight};
+  font-family: 'Pretendard'
   text-align: center;
   &::before {
     display: inline-block;

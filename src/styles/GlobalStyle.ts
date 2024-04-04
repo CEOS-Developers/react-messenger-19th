@@ -5,7 +5,7 @@ const GlobalStyle = createGlobalStyle`
   *::before,
   *::after {
     box-sizing: border-box;
-    font-family: 'Pretendard-Regular';
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   }
   * {
     margin: 0;
