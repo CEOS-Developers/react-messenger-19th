@@ -5,7 +5,6 @@ const StyledHomeIndicator = styled.div`
   height: 34px;
   position: absolute;
   bottom: 0;
-  /* z-index: 10; */
   background-color: transparent;
 `;
 
