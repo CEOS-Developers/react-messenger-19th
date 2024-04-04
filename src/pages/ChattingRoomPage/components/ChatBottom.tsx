@@ -103,12 +103,13 @@ export default function ChatBottom() {
 }
 
 const ChatBottomWrapper = styled.section`
-  position: fixed;
+  position: absolute;
   bottom: 0;
   display: flex;
+  align-items: center;
   width: 375px;
-  height: 48px;
-  padding: 4px 16px 0 16px;
+  padding: 4px 16px 12px 16px;
+  gap: 4px;
   background-color: ${theme.colors.white};
 
   @media (max-width: 768px) {
@@ -125,6 +126,7 @@ const InputBox = styled.div`
   padding: 0 8px;
   border-radius: 15px;
   background-color: ${theme.colors.gray_5};
+  border: 1px solid ${theme.colors.gray_4};
 `;
 
 const InputSytle = styled.input`
