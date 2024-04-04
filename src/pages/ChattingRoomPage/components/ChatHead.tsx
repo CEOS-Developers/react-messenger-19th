@@ -1,5 +1,7 @@
 import theme from '@styles/theme';
 import styled from 'styled-components';
+import { ReactComponent as IndicatorsGroupSvg } from '@assets/svg/indicatorsGroup.svg';
+import { ReactComponent as ClockSvg } from '@assets/svg/clock.svg';
 import { ReactComponent as StatusSvg } from '@assets/svg/status.svg';
 import { ReactComponent as ArrowLeftSvg } from '@assets/svg/arrowLeft.svg';
 import { ReactComponent as SearchSvg } from '@assets/svg/search.svg';
@@ -22,46 +24,63 @@ export default function ChatHead() {
   return (
     <ChatHeaderWrapper>
       <Statusbox>
-        <StatusSvg />
+        <ClockSvg />
+        <IndicatorsGroupSvg />
       </Statusbox>
-      <GobackBox>
-        <ArrowLeftSvg />
-        <span>{DUMMYLEFTCOUNT}</span>
-      </GobackBox>
-      <ChatTitle onClick={HandleNameToggle}>{displayName}</ChatTitle>
-      <MenuBox>
-        <SearchSvg />
-        <MenuSvg />
-      </MenuBox>
+      <ChatHeaderContainer>
+        <GobackBox>
+          <ArrowLeftSvg />
+          <span>{DUMMYLEFTCOUNT}</span>
+        </GobackBox>
+        <ChatTitle onClick={HandleNameToggle}>{displayName}</ChatTitle>
+        <MenuBox>
+          <SearchSvg />
+          <MenuSvg />
+        </MenuBox>
+      </ChatHeaderContainer>
     </ChatHeaderWrapper>
   );
 }
 
-const Statusbox = styled.div`
-  position: fixed;
-  z-index: 1;
-  width: 375px;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  flex-shrink: 0;
+const ChatHeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 28px;
+  padding: 0 16px;
   background-color: ${theme.colors.blue};
 
   @media (max-width: 768px) {
-    display: none;
-    width: 100&;
+    padding: 0 16px;
+  }
+`;
+
+const Statusbox = styled.div`
+  /* position: fixed; */
+  /* z-index: 1; */
+  width: 375px;
+  /* top: 0; */
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
+  flex-shrink: 0;
+  background-color: ${theme.colors.blue};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 18px 0 48px;
+  height: 47px;
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 
 const ChatHeaderWrapper = styled.section`
-  position: fixed;
-  top: 47px;
+  position: absolute;
+  top: 0;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   width: 375px;
-  height: 28px;
-  padding: 0 16px;
   background-color: ${theme.colors.blue};
   opacity: 0.8;
 
