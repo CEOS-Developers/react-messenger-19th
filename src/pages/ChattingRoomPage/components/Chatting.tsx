@@ -95,9 +95,10 @@ export default function Chatting() {
 
   return (
     <ChatWrapper ref={chatRef}>
-      <SpaceBox />
+      <SpaceBox1 />
       {chattingData &&
         chattingData?.chat.map((chat, idx) => showMessage(chat, idx))}
+      <SpaceBox2 />
     </ChatWrapper>
   );
 }
@@ -130,8 +131,12 @@ const DateContainer = styled.div`
   }
 `;
 
-const SpaceBox = styled.div`
+const SpaceBox1 = styled.div`
   height: 85px;
+`;
+
+const SpaceBox2 = styled.div`
+  height: 12px;
 `;
 
 const ChatWrapper = styled.section`
@@ -141,7 +146,7 @@ const ChatWrapper = styled.section`
   width: 375px;
   height: 100%;
   padding: 0 16px;
-  margin-bottom: 58px;
+  margin-bottom: 46px;
   background-color: ${theme.colors.blue};
   overflow-y: scroll;
   &::-webkit-scrollbar {
