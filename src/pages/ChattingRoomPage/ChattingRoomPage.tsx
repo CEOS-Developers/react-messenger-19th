@@ -21,7 +21,7 @@ const ContainerLayout = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   background-color: ${theme.colors.blue};
 
   @media (min-width: 768px) {
