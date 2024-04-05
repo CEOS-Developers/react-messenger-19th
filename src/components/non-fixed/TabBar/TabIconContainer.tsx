@@ -55,14 +55,15 @@ export default function TabIconContainer() {
   const navigate = useNavigate();
 
   function handleNavigate(path: string) {
+    if (path === '/') {
+      setUserPageMode('friends');
+    } else if (path === '/messages') {
+      setUserPageMode('messages');
+    } else if (path === '/profile') {
+      setUserPageMode('profile');
+    }
     navigate(path);
   }
-
-  useEffect(() => {
-    if (location.pathname === '/') setUserPageMode('friends');
-    else if (location.pathname === '/messages') setUserPageMode('messages');
-    else if (location.pathname === '/profile') setUserPageMode('profile');
-  }, [location, setUserPageMode]); // useEffect() 내부에서 상태를 변화시키는 것이 맞는가?
 
   return (
     <StyledTabIconContainer>
