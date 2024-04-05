@@ -31,3 +31,9 @@ export const isMessageLikeButtonClickedState = atom({
   key: 'isMessageLikeButtonClicked',
   default: false,
 });
+
+//유저가 '/'에 있으면 friends고, '/messages'에 있으면 messages, '/chat'에 있으면 chat, '/profile에 있으면' profile임
+export const userPageModeState = atom({
+  key: 'userPageMode',
+  default: 'friends', // 추후에 랜딩 페이지가 생기면 그냥 ''이 될 것임
+});

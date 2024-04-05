@@ -1,6 +1,5 @@
 import TabIconContainer from '@components/non-fixed/TabBar/TabIconContainer';
 import BlankSpace from '@components/non-fixed/TabBar/BlankSpace';
-
 import styled from 'styled-components';
 
 const StyledTabBar = styled.footer`

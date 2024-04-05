@@ -1,5 +1,11 @@
+import { useRecoilState } from 'recoil';
+import { userPageModeState } from '@context/state/atom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-// 이미지는 friend.svg, messageLarge.svg, discord24.svg를 사용
+
+interface userPageModeAtt {
+  userPageMode: boolean;
+}
 
 const StyledTabIconContainer = styled.div`
   flex-grow: 1;
@@ -16,35 +22,69 @@ const StyledIconContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
-const StyledImage = styled.img`
+const StyledImage = styled.img<userPageModeAtt>`
   width: 24px;
   height: 24px;
   margin-top: 6px;
+  opacity: ${(props) => (props.userPageMode === true ? 1 : 0.35)};
 `;
 
-const StyledTabSpan = styled.span`
+const StyledTabSpan = styled.span<userPageModeAtt>`
   font-size: 10px;
   font-weight: 500;
   line-height: 15px;
   margin-bottom: 10px;
+
+  color: ${(props) =>
+    props.userPageMode === true
+      ? props.theme.color.black
+      : props.theme.color.grayDark};
 `;
 
 export default function TabIconContainer() {
+  const [userPageMode, setUserPageMode] = useRecoilState(userPageModeState);
+  const navigate = useNavigate();
+
+  function handleNavigate(path: string) {
+    navigate(path);
+  }
+
   return (
     <StyledTabIconContainer>
-      <StyledIconContainer>
-        <StyledImage src="/images/friend.svg" />
-        <StyledTabSpan>친구</StyledTabSpan>
+      <StyledIconContainer onClick={() => handleNavigate('/')}>
+        <StyledImage
+          src="/images/friend.svg"
+          userPageMode={userPageMode === 'friends'}
+        />
+        <StyledTabSpan userPageMode={userPageMode === 'friends'}>
+          친구
+        </StyledTabSpan>
       </StyledIconContainer>
-      <StyledIconContainer>
-        <StyledImage src="/images/messageLarge.svg" />
-        <StyledTabSpan>메시지</StyledTabSpan>
+
+      <StyledIconContainer onClick={() => handleNavigate('/messages')}>
+        <StyledImage
+          src="/images/messageLarge.svg"
+          userPageMode={userPageMode === 'messages'}
+        />
+        <StyledTabSpan userPageMode={userPageMode === 'messages'}>
+          메시지
+        </StyledTabSpan>
       </StyledIconContainer>
-      <StyledIconContainer>
-        <StyledImage src="/images/discord24.svg" />
-        <StyledTabSpan>나</StyledTabSpan>
+
+      <StyledIconContainer onClick={() => handleNavigate('/profile')}>
+        <StyledImage
+          src="/images/discord24.svg"
+          userPageMode={userPageMode === 'profile'}
+        />
+        <StyledTabSpan userPageMode={userPageMode === 'profile'}>
+          나
+        </StyledTabSpan>
       </StyledIconContainer>
     </StyledTabIconContainer>
   );
