@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledFriendsSearchHead = styled.div`
-  widht: 100%;
+  width: 100%;
   height: 114px;
   display: flex;
   justify-content: center;
@@ -64,7 +64,6 @@ const StyledFriendSearchLower = styled.div`
 
 const StyledFriendSearchLowerInput = styled.input`
   border: none;
-  /* text-indent: 36px; */
   width: 100%;
   height: 100%;
   background-color: ${(props) => props.theme.color.grayMedium};

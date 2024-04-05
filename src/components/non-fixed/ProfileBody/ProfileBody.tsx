@@ -1,3 +1,4 @@
+import ProfilePageHead from '@components/non-fixed/ProfileBody/ProfilePageHead/ProfilePageHead';
 import styled from 'styled-components';
 
 const StyledProfileBody = styled.section`
@@ -8,7 +9,7 @@ const StyledProfileBody = styled.section`
 export default function ProfileBody() {
   return (
     <StyledProfileBody className="scroll-box">
-      This is ProfileBody
+      <ProfilePageHead />
     </StyledProfileBody>
   );
 }
