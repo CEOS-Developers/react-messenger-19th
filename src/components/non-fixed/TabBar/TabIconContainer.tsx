@@ -1,10 +1,12 @@
+import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { userPageModeState } from '@context/state/atom';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface userPageModeAtt {
-  userPageMode: boolean;
+  // 속성은 html dom에 부여하는 것이라서 일부러 $ 표시를 붙여준 것이다
+  $userPageMode: boolean;
 }
 
 const StyledTabIconContainer = styled.div`
@@ -32,7 +34,7 @@ const StyledImage = styled.img<userPageModeAtt>`
   width: 24px;
   height: 24px;
   margin-top: 6px;
-  opacity: ${(props) => (props.userPageMode === true ? 1 : 0.35)};
+  opacity: ${(props) => (props.$userPageMode === true ? 1 : 0.35)};
 `;
 
 const StyledTabSpan = styled.span<userPageModeAtt>`
@@ -42,12 +44,13 @@ const StyledTabSpan = styled.span<userPageModeAtt>`
   margin-bottom: 10px;
 
   color: ${(props) =>
-    props.userPageMode === true
+    props.$userPageMode === true
       ? props.theme.color.black
       : props.theme.color.grayDark};
 `;
 
 export default function TabIconContainer() {
+  const location = useLocation();
   const [userPageMode, setUserPageMode] = useRecoilState(userPageModeState);
   const navigate = useNavigate();
 
@@ -55,14 +58,20 @@ export default function TabIconContainer() {
     navigate(path);
   }
 
+  useEffect(() => {
+    if (location.pathname === '/') setUserPageMode('friends');
+    else if (location.pathname === '/messages') setUserPageMode('messages');
+    else if (location.pathname === '/profile') setUserPageMode('profile');
+  }, [location, setUserPageMode]); // useEffect() 내부에서 상태를 변화시키는 것이 맞는가?
+
   return (
     <StyledTabIconContainer>
       <StyledIconContainer onClick={() => handleNavigate('/')}>
         <StyledImage
           src="/images/friend.svg"
-          userPageMode={userPageMode === 'friends'}
+          $userPageMode={userPageMode === 'friends'}
         />
-        <StyledTabSpan userPageMode={userPageMode === 'friends'}>
+        <StyledTabSpan $userPageMode={userPageMode === 'friends'}>
           친구
         </StyledTabSpan>
       </StyledIconContainer>
@@ -70,9 +79,9 @@ export default function TabIconContainer() {
       <StyledIconContainer onClick={() => handleNavigate('/messages')}>
         <StyledImage
           src="/images/messageLarge.svg"
-          userPageMode={userPageMode === 'messages'}
+          $userPageMode={userPageMode === 'messages'}
         />
-        <StyledTabSpan userPageMode={userPageMode === 'messages'}>
+        <StyledTabSpan $userPageMode={userPageMode === 'messages'}>
           메시지
         </StyledTabSpan>
       </StyledIconContainer>
@@ -80,9 +89,9 @@ export default function TabIconContainer() {
       <StyledIconContainer onClick={() => handleNavigate('/profile')}>
         <StyledImage
           src="/images/discord24.svg"
-          userPageMode={userPageMode === 'profile'}
+          $userPageMode={userPageMode === 'profile'}
         />
-        <StyledTabSpan userPageMode={userPageMode === 'profile'}>
+        <StyledTabSpan $userPageMode={userPageMode === 'profile'}>
           나
         </StyledTabSpan>
       </StyledIconContainer>
