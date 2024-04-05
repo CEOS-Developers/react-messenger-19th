@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { userPageModeState } from '@context/state/atom';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -54,14 +53,15 @@ export default function TabIconContainer() {
   const [userPageMode, setUserPageMode] = useRecoilState(userPageModeState);
   const navigate = useNavigate();
 
+  if (location.pathname === '/') {
+    setUserPageMode('friends');
+  } else if (location.pathname === '/messages') {
+    setUserPageMode('messages');
+  } else if (location.pathname === '/profile') {
+    setUserPageMode('profile');
+  }
+
   function handleNavigate(path: string) {
-    if (path === '/') {
-      setUserPageMode('friends');
-    } else if (path === '/messages') {
-      setUserPageMode('messages');
-    } else if (path === '/profile') {
-      setUserPageMode('profile');
-    }
     navigate(path);
   }
 
