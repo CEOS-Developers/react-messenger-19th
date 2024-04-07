@@ -1,10 +1,17 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const tabs = [
-	{ iconSrc: '/icon/TabBarHome.svg', text: '홈' },
-	{ iconSrc: '/icon/TabBarMessage.svg', text: '채팅' },
-	{ iconSrc: '/icon/TabBarCall.svg', text: '통화' },
-	{ iconSrc: '/icon/TabBarProfile.svg', text: '프로필' },
+interface Tab {
+	iconSrc: string;
+	text: string;
+	path: string;
+}
+
+const tabs: Tab[] = [
+	{ iconSrc: '/icon/TabBarHome.svg', text: '홈', path: '/' },
+	{ iconSrc: '/icon/TabBarMessage.svg', text: '채팅', path: '/ChatRoom' },
+	{ iconSrc: '/icon/TabBarCall.svg', text: '통화', path: '/' },
+	{ iconSrc: '/icon/TabBarProfile.svg', text: '프로필', path: '/' },
 ];
 
 export default function FooterMenu(): JSX.Element {
@@ -12,10 +19,12 @@ export default function FooterMenu(): JSX.Element {
 		<>
 			<Wrapper>
 				{tabs.map((tab, index) => (
-					<IconContainer key={index}>
-						<Icon src={tab.iconSrc} />
-						<TabText>{tab.text}</TabText>
-					</IconContainer>
+					<LinkStyle to={tab.path} key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
+						<IconContainer key={index}>
+							<Icon src={tab.iconSrc} />
+							<TabText>{tab.text}</TabText>
+						</IconContainer>
+					</LinkStyle>
 				))}
 			</Wrapper>
 		</>
@@ -28,6 +37,10 @@ const Wrapper = styled.div`
 	display: flex;
 	justify-content: space-evenly;
 	box-shadow: 0px -4px 6px -1px rgba(0, 0, 0, 0.1); /* 상단 그림자 효과 */
+`;
+
+const LinkStyle = styled(Link)`
+	display: flex;
 `;
 
 const IconContainer = styled.div`
