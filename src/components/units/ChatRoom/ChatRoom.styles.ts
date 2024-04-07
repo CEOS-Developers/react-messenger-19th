@@ -4,8 +4,12 @@ export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-
+	height: calc(100vh - 60px);
 	background-color: gray;
+
+	@media (max-width: 768px) {
+		height: auto;
+	}
 `;
 
 export const ChatHeader = styled.div`

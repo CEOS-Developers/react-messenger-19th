@@ -1,4 +1,4 @@
-import { type ChangeEvent, useState, type MouseEvent, useRef, useEffect } from 'react';
+import { type ChangeEvent, useState, useRef, useEffect } from 'react';
 import * as C from './ChatRoom.styles';
 
 import MyFirstMessage from './MyFirstMessage';
