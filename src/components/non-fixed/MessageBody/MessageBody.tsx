@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import MessageSearchHead from '@components/non-fixed/MessageBody/MessageSearchHead/MessageSearchHead';
 
 const StyledMessageBody = styled.section`
   flex-grow: 1;
@@ -8,7 +9,7 @@ const StyledMessageBody = styled.section`
 export default function MessageBody() {
   return (
     <StyledMessageBody className="scroll-box">
-      This is Messages Body
+      <MessageSearchHead />
     </StyledMessageBody>
   );
 }
