@@ -11,7 +11,7 @@ export default function UserList(): JSX.Element {
 				</U.HeaderBar>
 
 				<U.MyProfileContainer>
-					<U.MyProfilePhoto />
+					<U.MyProfilePhoto src="/main/MyProfile.png" />
 
 					<U.ProfileTextContainer>
 						<U.MyName>김동혁</U.MyName>

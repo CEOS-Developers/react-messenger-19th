@@ -3,12 +3,13 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
+
+	padding: 17px;
 `;
 
 export const HeaderBar = styled.div`
 	display: flex;
 	justify-content: right;
-	padding: 0 15px;
 `;
 
 export const Icon = styled.img`
@@ -16,18 +17,48 @@ export const Icon = styled.img`
 	cursor: pointer;
 `;
 
-export const MyProfileContainer = styled.div``;
+export const MyProfileContainer = styled.div`
+	display: flex;
+	margin-bottom: 24px;
+`;
 
-export const MyProfilePhoto = styled.img``;
+export const MyProfilePhoto = styled.img`
+	width: 90px;
+	height: 90px;
+`;
 
-export const ProfileTextContainer = styled.div``;
+export const ProfileTextContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 
-export const MyName = styled.p``;
+	padding: 0 25px;
+`;
 
-export const MyStatusMessage = styled.p``;
+export const MyName = styled.p`
+	font-size: 24px;
+	font-weight: 600;
+`;
 
-export const SubTab = styled.div``;
+export const MyStatusMessage = styled.p`
+	font-size: 16px;
+	color: #5b5454;
 
-export const SubText = styled.p``;
+	padding-top: 7px;
+`;
 
-export const MoreIcon = styled.img``;
+export const SubTab = styled.div`
+	display: flex;
+	justify-content: space-between;
+
+	padding: 10px;
+`;
+
+export const SubText = styled.p`
+	font-size: 16px;
+	font-weight: 700;
+`;
+
+export const MoreIcon = styled.img`
+	cursor: pointer;
+`;
