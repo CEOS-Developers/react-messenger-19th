@@ -2,6 +2,7 @@ import { useRecoilState } from 'recoil';
 import { userPageModeState } from '@context/state/atom';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { useEffect } from 'react';
 
 interface userPageModeAtt {
   // 속성은 html dom에 부여하는 것이라서 일부러 $ 표시를 붙여준 것이다
@@ -53,13 +54,16 @@ export default function TabIconContainer() {
   const [userPageMode, setUserPageMode] = useRecoilState(userPageModeState);
   const navigate = useNavigate();
 
-  if (location.pathname === '/') {
-    setUserPageMode('friends');
-  } else if (location.pathname === '/messages') {
-    setUserPageMode('messages');
-  } else if (location.pathname === '/profile') {
-    setUserPageMode('profile');
-  }
+  // 렌더링 도중에 상태 변경을 진행하면 안됨 => 첫 렌더링 이후에 useEffect() 훅을 통해서 진행해줌ㄴ
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setUserPageMode('friends');
+    } else if (location.pathname === '/messages') {
+      setUserPageMode('messages');
+    } else if (location.pathname === '/profile') {
+      setUserPageMode('profile');
+    }
+  }, [location, setUserPageMode]);
 
   function handleNavigate(path: string) {
     navigate(path);
