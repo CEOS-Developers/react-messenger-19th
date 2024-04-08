@@ -19,14 +19,20 @@ const ChattingRoomContainer = styled.div`
   }
 `;
 
-const DateContainer = styled.div`
+// DateContainer에 전달되는 props의 타입을 정의
+interface DateContainerProps {
+  isToday: boolean;
+}
+
+const DateContainer = styled.div<DateContainerProps>`
   height: 0.875rem;
   display: inline-flex;
   padding: 0.1875rem 1rem;
   align-items: center;
   border-radius: 0.375rem;
   background: #dbdfeb;
-  margin: 0.84rem 9.25rem 0.84rem 9.56rem;
+  margin: ${(props) => (props.isToday ? '0.73rem' : '0.84rem')} 9.25rem 0.84rem
+    9.56rem;
 `;
 
 const DateText = styled.div`
@@ -86,9 +92,9 @@ export default function ChattingRoom() {
         const isToday = chatDateDMY === todayDateStringDMY; // 현재 채팅 날짜가 오늘인지 확인
 
         return (
-          <>
+          <React.Fragment key={chat.id}>
             {showDateText && (
-              <DateContainer>
+              <DateContainer isToday={isToday}>
                 <DateText>{isToday ? 'Today' : chatDateDMY}</DateText>
               </DateContainer>
             )}
@@ -98,7 +104,7 @@ export default function ChattingRoom() {
               time={FormatTime(chat.time)}
               isRead={chat.isRead}
             />
-          </>
+          </React.Fragment>
         );
       })}
     </ChattingRoomContainer>

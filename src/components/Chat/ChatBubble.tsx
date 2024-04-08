@@ -5,7 +5,7 @@ import BubbleGray from '../../assets/img/bubble-gray.svg';
 
 const ChatBubbleContainer = styled.div<{ $isSentByMe: boolean }>`
   width: 18.6rem;
-  margin-top: 0.31rem;
+  margin-bottom: 0.31rem;
   margin-left: ${(props) => (props.$isSentByMe ? 'auto' : '0.44rem')};
   margin-right: ${(props) => (props.$isSentByMe ? '0.44rem' : 'auto')};
   position: relative;
