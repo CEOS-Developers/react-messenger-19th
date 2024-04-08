@@ -2,41 +2,9 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeUser } from '../../features/userSlice';
 import { RootState } from '../../store';
+import TopNavBar from '../TopNavBar/TopNavBar';
 import Left from '../../assets/img/left.svg';
-import VideoCall from '../../assets/img/video-call.svg';
-import AudioCall from '../../assets/img/audio-call.svg';
-
-const TitleBarContainer = styled.div`
-  width: 23.4375rem;
-  height: 2.75rem;
-  border-bottom: 0.03125rem solid #a4a39e;
-  position: relative;
-`;
-
-const LeftContainer = styled.div`
-  display: inline-flex;
-  padding: 0.625rem 0.5625rem;
-  align-items: flex-start;
-  gap: 0.3125rem;
-  position: absolute;
-  bottom: 0.13rem;
-  right: 20.1rem;
-`;
-
-const LeftImg = styled.img`
-  width: 0.75rem;
-  height: 1.25rem;
-`;
-
-const LeftText = styled.div`
-  color: #1bd742;
-  font-family: 'SF Pro Text';
-  font-size: 1.0625rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.375rem; /* 129.412% */
-  letter-spacing: -0.0255rem;
-`;
+import Call from '../../assets/img/call.svg';
 
 const ProfileContainer = styled.div`
   display: inline-flex;
@@ -82,20 +50,6 @@ const OnlineText = styled.div`
   letter-spacing: -0.0015rem;
 `;
 
-const RightContainer = styled.div`
-  display: inline-flex;
-  align-items: flex-start;
-  gap: 1.375rem;
-  position: absolute;
-  top: 0.63rem;
-  right: 0.94rem;
-`;
-
-const CallImg = styled.img`
-  width: 1.5rem;
-  height: 1.5rem;
-`;
-
 interface TitleBarProps {
   name: string;
   profileImg: string;
@@ -117,11 +71,7 @@ export default function TitleBar(props: TitleBarProps) {
   };
 
   return (
-    <TitleBarContainer>
-      <LeftContainer>
-        <LeftImg src={Left} alt="왼쪽 화살표 이미지" />
-        <LeftText>12</LeftText>
-      </LeftContainer>
+    <TopNavBar leftImgSrc={Left} leftText="12" rightImgSrc={Call}>
       <ProfileContainer onClick={handleChangeUser}>
         <ProfileImg src={profileImg} alt="유저 프로필" />
         <ProfileInnerContainer>
@@ -133,10 +83,6 @@ export default function TitleBar(props: TitleBarProps) {
           )}
         </ProfileInnerContainer>
       </ProfileContainer>
-      <RightContainer>
-        <CallImg src={VideoCall} alt="영상 통화 이미지" />
-        <CallImg src={AudioCall} alt="음성 통화 이미지" />
-      </RightContainer>
-    </TitleBarContainer>
+    </TopNavBar>
   );
 }
