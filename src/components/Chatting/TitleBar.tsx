@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeUser } from '../../features/userSlice';
 import { RootState } from '../../store';
@@ -62,6 +63,11 @@ export default function TitleBar(props: TitleBarProps) {
   const nowUser = useSelector((state: RootState) => state.user.nowUser);
   const userList = useSelector((state: RootState) => state.user.userList);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const goToContactInfoPage = () => {
+    navigate('/contact-info');
+  };
 
   const handleChangeUser = () => {
     const currentIndex = userList.indexOf(nowUser); // 현재 nowUser의 인덱스
@@ -72,9 +78,9 @@ export default function TitleBar(props: TitleBarProps) {
 
   return (
     <TopNavBar leftImgSrc={Left} leftText="12" rightImgSrc={Call}>
-      <ProfileContainer onClick={handleChangeUser}>
+      <ProfileContainer onClick={goToContactInfoPage}>
         <ProfileImg src={profileImg} alt="유저 프로필" />
-        <ProfileInnerContainer>
+        <ProfileInnerContainer onClick={handleChangeUser}>
           <ProfileName>{name}</ProfileName>
           {isActive ? (
             <OnlineText>online</OnlineText>

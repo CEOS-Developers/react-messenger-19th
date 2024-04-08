@@ -14,7 +14,6 @@ const LeftContainer = styled.div`
   gap: 0.3125rem;
   position: absolute;
   bottom: 0.13rem;
-  right: 20.1rem;
 `;
 
 const LeftImg = styled.img`
@@ -23,6 +22,7 @@ const LeftImg = styled.img`
 `;
 
 const Text = styled.div`
+  white-space: nowrap;
   color: #1bd742;
   font-family: 'SF Pro Text';
   font-size: 1.0625rem;

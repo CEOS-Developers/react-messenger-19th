@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import userData from '../assets/data/userData.json';
-import TitleBar from '../components/Chat/TitleBar';
-import ChattingRoom from '../components/Chat/ChattingRoom';
-import ChatInput from '../components/Chat/ChatInput';
+import TitleBar from '../components/Chatting/TitleBar';
+import ChattingRoom from '../components/Chatting/ChattingRoom';
+import ChatInput from '../components/Chatting/ChatInput';
 
 interface User {
   id: number;

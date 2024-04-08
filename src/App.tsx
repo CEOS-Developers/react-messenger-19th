@@ -2,10 +2,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import GlobalStyles from './style/GlobalStyles';
 import ChattingPage from './pages/ChattingPage';
-import ContactInfoPage from './pages/ChattingPage';
-import ChatsPage from './pages/ChattingPage';
-import StatusPage from './pages/ChattingPage';
-import EditContactPage from './pages/ChattingPage';
+import ContactInfoPage from './pages/ContactInfoPage';
+import ChatsPage from './pages/ChatsPage';
+import StatusPage from './pages/StatusPage';
+import EditContactPage from './pages/EditContactPage';
 import StatusBar from './components/StatusBar';
 import HomeIndicator from './components/HomeIndicator';
 

@@ -1,5 +1,5 @@
-import React from 'react';
+import ContactNavBar from '../components/ContactInfo/ContactNavBar';
 
 export default function ContactInfoPage() {
-  return <div>ContactInfoPage</div>;
+  return <ContactNavBar />;
 }
