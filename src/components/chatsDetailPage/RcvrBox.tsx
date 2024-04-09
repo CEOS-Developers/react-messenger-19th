@@ -1,24 +1,19 @@
 import styled from 'styled-components';
 import { flexCenter } from '../../styles/GlobalStyle';
+import { ProfileIcon } from '../../assets';
 
-interface IconTypes {
-  iconWidth?: number;
-  iconHeight?: number;
-}
-
-interface RcvrBoxProps extends IconTypes {
-  iconSrc?: string;
+interface RcvrBoxProps {
   name: string;
   text: string;
   time: string;
 }
 
 export default function RcvrBox(props: RcvrBoxProps) {
-  const { iconSrc, iconWidth = 2.8, iconHeight = 2.8, name, text, time } = props;
+  const { name, text, time } = props;
 
   return (
     <ChatBox>
-      <ProfileIcon src={iconSrc} iconHeight={iconHeight} iconWidth={iconWidth} />
+      <ProfileIcon />
       <Details>
         <Name>{name}</Name>
         <Text>{text}</Text>
@@ -32,18 +27,18 @@ const ChatBox = styled.span`
   display: flex;
 
   gap: 0.6rem;
-`;
 
-const ProfileIcon = styled.img<IconTypes>`
-  width: ${({ iconWidth }) => `${iconWidth}rem`};
-  height: ${({ iconHeight }) => `${iconHeight}rem`};
+  & svg {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
 `;
 
 const Details = styled.section`
   display: flex;
   flex-direction: column;
-  margin-left: 3.4rem;
 `;
+/* margin-left: ${({ $iconSrc }) => ($iconSrc ? 'none' : '3.4rem')}; */
 
 const Name = styled.p`
   ${flexCenter}
@@ -51,7 +46,7 @@ const Name = styled.p`
   height: 1.7rem;
   margin-bottom: 0.8rem;
 
-  color: var(--3, ${({ theme }) => theme.colors.black});
+  color: ${({ theme }) => theme.colors.black};
   ${({ theme }) => theme.fonts.sent_person_small};
 `;
 
@@ -61,7 +56,7 @@ const Text = styled.span`
   border-radius: 1.6rem;
 
   ${({ theme }) => theme.fonts.message};
-  color: var(--3, ${({ theme }) => theme.colors.black});
+  color: ${({ theme }) => theme.colors.black};
   background-color: ${({ theme }) => theme.colors.white};
 `;
 

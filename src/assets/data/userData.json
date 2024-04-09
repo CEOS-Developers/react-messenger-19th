@@ -2,28 +2,23 @@
   "data": [
     {
       "id": 0,
-      "name": "백현우",
-      "profileIcon": "src/assets/icon/profile.svg"
+      "name": "백현우"
     },
     {
       "id": 1,
-      "name": "홍해인",
-      "profileIcon": "src/assets/icon/profile.svg"
+      "name": "홍해인"
     },
     {
       "id": 2,
-      "name": "윤은성",
-      "profileIcon": "src/assets/icon/profile.svg"
+      "name": "윤은성"
     },
     {
       "id": 3,
-      "name": "홍수철",
-      "profileIcon": "src/assets/icon/profile.svg"
+      "name": "홍수철"
     },
     {
       "id": 4,
-      "name": "천다혜",
-      "profileIcon": "src/assets/icon/profile.svg"
+      "name": "천다혜"
     }
   ]
 }
