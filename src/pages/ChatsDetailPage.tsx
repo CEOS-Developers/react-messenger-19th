@@ -1,13 +1,13 @@
 import Header from '../components/chatsDetailPage/Header';
 import Footer from '../components/chatsDetailPage/Footer';
-import BoxLayout from '../components/chatsDetailPage/BoxLayout';
+import { Outlet } from 'react-router-dom';
 
 export default function ChatsDetailPage() {
 
   return (
     <>
       <Header />
-      <BoxLayout />
+      <Outlet />
       <Footer />
     </>
   );
