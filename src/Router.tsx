@@ -3,6 +3,7 @@ import Layout from './pages';
 import FriendsPage from './pages/FriendsPage';
 import ChatsPage from './pages/ChatsPage';
 import ChatsDetailPage from './pages/ChatsDetailPage';
+import BoxLayout from './components/chatsDetailPage/BoxLayout';
 
 const Router = () => {
   return (
@@ -10,8 +11,9 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/friends" element={<FriendsPage />} />
-          <Route path="/chats" element={<ChatsPage />}>
-            <Route path=":userId" element={<ChatsDetailPage />} />
+          <Route path="/chats" element={<ChatsPage />} />
+          <Route path="/chatsDetail" element={<ChatsDetailPage />}>
+            <Route path=":userId" element={<BoxLayout />} />
           </Route>
         </Route>
       </Routes>
