@@ -2,11 +2,28 @@
   "data": [
     {
       "id": 0,
-      "name": "세오스"
+      "name": "백현우",
+      "profileIcon": "src/assets/icon/profile.svg"
     },
     {
       "id": 1,
-      "name": "김민영"
+      "name": "홍해인",
+      "profileIcon": "src/assets/icon/profile.svg"
+    },
+    {
+      "id": 2,
+      "name": "윤은성",
+      "profileIcon": "src/assets/icon/profile.svg"
+    },
+    {
+      "id": 3,
+      "name": "홍수철",
+      "profileIcon": "src/assets/icon/profile.svg"
+    },
+    {
+      "id": 4,
+      "name": "천다혜",
+      "profileIcon": "src/assets/icon/profile.svg"
     }
   ]
 }

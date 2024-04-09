@@ -1,100 +1,121 @@
 {
   "data": [
     {
-      "id": 0,
-      "rcvd": true,
-      "isSameTime": false,
-      "isFirst": true,
-      "text": "텍스트 영역 너비는 최대 180까지 가능합니다. 세오스 짱.",
-      "time": "오전 10:06"
+      "id": "chat1",
+      "from": 1,
+      "to": 0,
+      "details": {
+        "text": "텍스트 영역 너비는 최대 180까지 가능합니다. 세오스 짱.",
+        "time": "오전 10:06"
+      }
     },
     {
-      "id": 1,
-      "rcvd": false,
-      "isSameTime": false,
-      "isFirst": true,
-      "text": "텍스트 영역 너비는 최대 180까지 가능합니다. 세오스 짱.",
-      "time": "오전 10:06"
+      "id": "chat2",
+      "from": 2,
+      "to": 0,
+      "details": {
+        "text": "텍스트 영역 너비는 최대 180까지 가능합니다. 세오스 짱.",
+        "time": "오전 10:06"
+      }
     },
     {
-      "id": 2,
-      "rcvd": false,
-      "isSameTime": true,
-      "isFirst": true,
-      "text": "요즘 날씨 진짜 좋다",
-      "time": "오전 10:10"
+      "id": "chat3",
+      "from": 3,
+      "to": 0,
+      "details": {
+        "text": "텍스트 영역 너비는 최대 180까지 가능합니다. 세오스 짱.",
+        "time": "오전 10:06"
+      }
     },
     {
-      "id": 3,
-      "rcvd": false,
-      "isSameTime": true,
-      "isFirst": false,
-      "text": "서울은 이번주 일요일에 벚꽃 핀다더라!?",
-      "time": "오전 10:10"
+      "id": "chat4",
+      "from": 4,
+      "to": 0,
+      "details": {
+        "text": "텍스트 영역 너비는 최대 180까지 가능합니다. 세오스 짱.",
+        "time": "오전 10:06"
+      }
     },
     {
-      "id": 4,
-      "rcvd": true,
-      "isSameTime": true,
-      "isFirst": true,
-      "text": "진짜? ",
-      "time": "오전 10:12"
+      "id": "chat5",
+      "from": 0,
+      "to": 1,
+      "details": {
+        "text": "텍스트 영역 너비는 최대 180까지 가능합니다. 세오스 짱.",
+        "time": "오전 10:06"
+      }
     },
     {
-      "id": 5,
-      "rcvd": true,
-      "isSameTime": true,
-      "isFirst": false,
-      "text": "당장 보러 가자",
-      "time": "오전 10:12"
+      "id": "chat6",
+      "from": 0,
+      "to": 2,
+      "details": {
+        "text": "텍스트 영역 너비는 최대 180까지 가능합니다. 세오스 짱.",
+        "time": "오전 10:06"
+      }
     },
     {
-      "id": 6,
-      "rcvd": true,
-      "isSameTime": false,
-      "isFirst": true,
-      "text": "시간 언제 되는데?",
-      "time": "오전 10:13"
+      "id": "chat7",
+      "from": 0,
+      "to": 3,
+      "details": {
+        "text": "텍스트 영역 너비는 최대 180까지 가능합니다. 세오스 짱.",
+        "time": "오전 10:06"
+      }
     },
     {
-      "id": 7,
-      "rcvd": false,
-      "isSameTime": true,
-      "isFirst": true,
-      "text": "일요일은 스터디 있어서 안되고 월요일 어때? 나 공강임",
-      "time": "오전 10:15"
+      "id": "chat8",
+      "from": 0,
+      "to": 4,
+      "details": {
+        "text": "텍스트 영역 너비는 최대 180까지 가능합니다. 세오스 짱.",
+        "time": "오전 10:06"
+      }
     },
     {
-      "id": 8,
-      "rcvd": false,
-      "isSameTime": true,
-      "isFirst": false,
-      "text": "여의도도 좋고 잠실도 좋아",
-      "time": "오전 10:15"
+      "id": "chat9",
+      "from": 1,
+      "to": 0,
+      "details": {
+        "text": "텍스트 영역 너비는 최대 180까지 가능합니다. 세오스 짱.",
+        "time": "오전 10:06"
+      }
     },
     {
-      "id": 9,
-      "rcvd": true,
-      "isSameTime": true,
-      "isFirst": true,
-      "text": "나도 월요일 오전 수업이라 가능!",
-      "time": "오전 10:30"
+      "id": "chat10",
+      "from": 2,
+      "to": 0,
+      "details": {
+        "text": "텍스트 영역 너비는 최대 180까지 가능합니다. 세오스 짱.",
+        "time": "오전 10:06"
+      }
     },
     {
-      "id": 10,
-      "rcvd": true,
-      "isSameTime": true,
-      "isFirst": false,
-      "text": "여의도 갔다가 더현대가서 밥먹으면 되겠네",
-      "time": "오전 10:30"
+      "id": "chat11",
+      "from": 3,
+      "to": 0,
+      "details": {
+        "text": "텍스트 영역 너비는 최대 180까지 가능합니다. 세오스 짱.",
+        "time": "오전 10:06"
+      }
     },
     {
-      "id": 11,
-      "rcvd": true,
-      "isSameTime": false,
-      "isFirst": true,
-      "text": "먹고 싶은거 있어?",
-      "time": "오전 10:32"
+      "id": "chat12",
+      "from": 4,
+      "to": 0,
+      "details": {
+        "text": "텍스트 영역 너비는 최대 180까지 가능합니다. 세오스 짱.",
+        "time": "오전 10:06"
+      }
+    },
+    {
+      "id": "chat13",
+      "from": 0,
+      "to": 1,
+      "details": {
+        "text": "텍스트 영역 너비는 최대 180까지 가능합니다. 세오스 짱.",
+        "time": "오전 10:06"
+      }
     }
   ]
 }
