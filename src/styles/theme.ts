@@ -57,6 +57,21 @@ const fonts = {
     line-height: 2.1rem;
     letter-spacing: -0.032rem;
   `,
+  chats: css`
+    font-family: Pretendard;
+    font-size: 2.4rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 3.36rem */
+    letter-spacing: -0.048rem;
+  `,
+  iconDetails: css`
+    font-family: Pretendard;
+    font-size: 0.9rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 1.08rem */
+  `,
 };
 
 const theme = {

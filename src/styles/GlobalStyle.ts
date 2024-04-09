@@ -14,6 +14,13 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   
+  button {
+  border: none;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
   html,
   body {
     /* width:100%;
