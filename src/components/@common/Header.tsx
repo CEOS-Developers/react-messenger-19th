@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 import { InfoIcon } from '../../assets';
 import date from '../../utils/date';
+import { useRecoilValue } from 'recoil';
+import { ifChatsDetailPageState } from '../../recoil/atom';
 
 export default function Header() {
+  const ifChatsDetailPage = useRecoilValue(ifChatsDetailPageState);
+
   return (
     <>
-      <Wrapper>
+      <Wrapper $ifChatsDetailPage={ifChatsDetailPage}>
         <Time>{date().split(' ').slice(1)}</Time>
         <div>
           <InfoIcon />
@@ -15,14 +19,19 @@ export default function Header() {
   );
 }
 
-const Wrapper = styled.section`
+interface WrapperBgTypes {
+  $ifChatsDetailPage: boolean;
+}
+
+const Wrapper = styled.section<WrapperBgTypes>`
   display: flex;
   justify-content: space-between;
 
   width: 100%;
   padding: 0rem 1rem;
 
-  background-color: ${({ theme }) => theme.colors.blue_bg};
+  background-color: ${({ theme, $ifChatsDetailPage }) =>
+    $ifChatsDetailPage ? theme.colors.blue_bg : theme.colors.white};
 
   & > div {
     padding: 1.25rem 1.88rem;

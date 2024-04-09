@@ -1,18 +1,25 @@
 import styled from 'styled-components';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { BackArrowIcon, FindIcon, CallIcon, IndexIcon } from '../../assets';
 import { flexCenter } from '../../styles/GlobalStyle';
 import userData from '../../assets/data/userData.json';
-
-import { userIdState } from '../../recoil/atom';
+import { useNavigate } from 'react-router-dom';
+import { userIdState, ifChatsDetailPageState } from '../../recoil/atom';
 
 export default function Header() {
+  const navigate = useNavigate();
   const userId = useRecoilValue(userIdState);
+  const setIfChatsDetailPage = useSetRecoilState(ifChatsDetailPageState);
+
+  function moveToChats() {
+    navigate(`/chats`);
+    setIfChatsDetailPage(false);
+  }
 
   return (
     <Wrapper>
       <Left>
-        <BackArrowIcon />
+        <BackArrowIcon type="button" onClick={moveToChats} />
         <SentName>{userData.data.find((user) => user.id === userId)?.name}</SentName>
       </Left>
       <Right>
