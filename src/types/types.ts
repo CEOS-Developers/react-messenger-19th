@@ -1,8 +1,10 @@
-export interface MsgType {
-  id: number;
-  rcvd: boolean;
-  isSameTime: boolean;
-  isFirst: boolean;
+export interface DetailsType {
   text: string;
   time: string;
+}
+export interface ChatType {
+  id: string;
+  from: number;
+  to: number;
+  details: DetailsType;
 }
