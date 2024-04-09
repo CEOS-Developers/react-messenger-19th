@@ -20,13 +20,12 @@ export default function SenderBox(props: SenderBoxProps) {
 const ChatBox = styled.span`
   display: flex;
   justify-content: end;
-
-  gap: 0.6rem;
 `;
 
 const Details = styled.section`
   display: flex;
-  flex-direction: column;
+
+  gap: 0.6rem;
 `;
 
 const TimeNow = styled.span`
@@ -45,5 +44,5 @@ const Text = styled.span`
 
   ${({ theme }) => theme.fonts.message};
   color: ${({ theme }) => theme.colors.black};
-  background-color: ${({ theme }) => theme.colors.theme.colors.green_bg};
+  background-color: ${({ theme }) => theme.colors.green_bg};
 `;

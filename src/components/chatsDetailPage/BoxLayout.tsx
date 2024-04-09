@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 import { flexCenter } from '../../styles/GlobalStyle';
-import chatData from '../../assets/data/chatData.json';
 import userData from '../../assets/data/userData.json';
 import { useRecoilValue } from 'recoil';
 import { userIdState } from '../../recoil/atom';
 import RcvrBox from './RcvrBox';
 import SenderBox from './SenderBox';
+import { ChatType } from '../../types/types';
 
 export default function BoxLayout() {
   const userId = useRecoilValue(userIdState);
+  const chatData = JSON.parse(localStorage.getItem('chats') || '[]');
 
   // const scrollEndRef = useRef<HTMLDivElement>(null);
 
@@ -20,14 +21,12 @@ export default function BoxLayout() {
     <Wrapper>
       <Date>오늘</Date>
       <Layout>
-        {chatData.data.map((chat) => {
+        {chatData.data?.map((chat: ChatType) => {
           const { id, details } = chat;
           const user = userData.data.find((user) => user.id === userId);
           if (!user) return null; //user undefined 타입스크립트 에러 때문에
           if (chat.from === userId) {
-            return (
-              <RcvrBox key={id} name={user.name} iconSrc={user?.profileIcon} text={details.text} time={details.time} />
-            );
+            return <RcvrBox key={id} name={user.name} text={details.text} time={details.time} />;
           } else if (chat.to === userId) {
             return <SenderBox key={id} time={details.time} text={details.text} />;
           }
