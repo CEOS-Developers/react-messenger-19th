@@ -6,8 +6,8 @@ import ContactInfoPage from './pages/ContactInfoPage';
 import ChatsPage from './pages/ChatsPage';
 import StatusPage from './pages/StatusPage';
 import EditContactPage from './pages/EditContactPage';
-import StatusBar from './components/StatusBar';
-import HomeIndicator from './components/HomeIndicator';
+import StatusBar from './components/iphone/StatusBar';
+import HomeIndicator from './components/iphone/HomeIndicator';
 
 const Container = styled.div`
   background: #f6f6f6;

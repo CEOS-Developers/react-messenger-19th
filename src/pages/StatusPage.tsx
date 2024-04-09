@@ -1,5 +1,11 @@
-import React from 'react';
+import StatusNavBar from '../components/Status/StatusNavBar';
+import BottomTabBar from '../components/BottomTabBar/BottomTabBar';
 
 export default function StatusPage() {
-  return <div>StatusPage</div>;
+  return (
+    <>
+      <StatusNavBar />
+      <BottomTabBar />
+    </>
+  );
 }

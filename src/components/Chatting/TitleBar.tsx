@@ -69,6 +69,10 @@ export default function TitleBar(props: TitleBarProps) {
     navigate('/contact-info');
   };
 
+  const goToChatsPage = () => {
+    navigate('/chats');
+  };
+
   const handleChangeUser = () => {
     const currentIndex = userList.indexOf(nowUser); // 현재 nowUser의 인덱스
     const nextIndex = currentIndex === 0 ? 1 : 0;
@@ -77,7 +81,12 @@ export default function TitleBar(props: TitleBarProps) {
   };
 
   return (
-    <TopNavBar leftImgSrc={Left} leftText="12" rightImgSrc={Call}>
+    <TopNavBar
+      leftImgSrc={Left}
+      leftText="12"
+      rightImgSrc={Call}
+      leftTextOnClick={goToChatsPage}
+    >
       <ProfileContainer onClick={goToContactInfoPage}>
         <ProfileImg src={profileImg} alt="유저 프로필" />
         <ProfileInnerContainer onClick={handleChangeUser}>

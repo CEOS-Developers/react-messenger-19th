@@ -14,6 +14,7 @@ const LeftContainer = styled.div`
   gap: 0.3125rem;
   position: absolute;
   bottom: 0.13rem;
+  cursor: pointer;
 `;
 
 const LeftImg = styled.img`
@@ -21,7 +22,7 @@ const LeftImg = styled.img`
   height: 1.25rem;
 `;
 
-const Text = styled.div`
+const Text = styled.div<TextProps>`
   white-space: nowrap;
   color: #1bd742;
   font-family: 'SF Pro Text';
@@ -30,6 +31,11 @@ const Text = styled.div`
   font-weight: 400;
   line-height: 1.375rem;
   letter-spacing: -0.0255rem;
+  ${(props) =>
+    !props.$hasLeftImg &&
+    `
+      margin-left: 0.44rem; // leftImgSrc가 없을 때 적용될 스타일
+    `}
 `;
 
 const RightContainer = styled.div`
@@ -45,12 +51,18 @@ const IconImg = styled.img`
   height: 1.5rem;
 `;
 
+// Text 컴포넌트의 prop 타입 정의
+interface TextProps {
+  $hasLeftImg: boolean;
+}
+
 interface TopNavBarProps {
   leftImgSrc?: string;
   leftText?: string;
   rightImgSrc?: string;
   rightText?: string;
   children?: React.ReactNode;
+  leftTextOnClick?: () => void;
 }
 
 // props 추가 (leftImgSrc, leftText, rightImgSrcs, rightText)
@@ -60,17 +72,18 @@ export default function TopNavBar({
   rightImgSrc,
   rightText,
   children,
+  leftTextOnClick,
 }: TopNavBarProps) {
   return (
     <NavBarContainer>
-      <LeftContainer>
-        {leftImgSrc && <LeftImg src={leftImgSrc} alt="" />}
-        <Text>{leftText}</Text>
+      <LeftContainer onClick={leftTextOnClick}>
+        {leftImgSrc && <LeftImg src={leftImgSrc} alt="이전 버튼 이미지" />}
+        <Text $hasLeftImg={!!leftImgSrc}>{leftText}</Text>
       </LeftContainer>
       {children} {/* 여기에 children을 렌더링 */}
       <RightContainer>
         {rightImgSrc && <IconImg src={rightImgSrc} alt="" />}
-        {rightText && <Text>{rightText}</Text>}
+        {rightText && <Text $hasLeftImg={true}>{rightText}</Text>}
       </RightContainer>
     </NavBarContainer>
   );
