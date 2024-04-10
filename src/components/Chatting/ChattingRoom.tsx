@@ -19,11 +19,6 @@ const ChattingRoomContainer = styled.div`
   }
 `;
 
-// DateContainer에 전달되는 props의 타입을 정의
-interface DateContainerProps {
-  isToday: boolean;
-}
-
 const DateContainer = styled.div<DateContainerProps>`
   height: 0.875rem;
   display: inline-flex;
@@ -31,7 +26,7 @@ const DateContainer = styled.div<DateContainerProps>`
   align-items: center;
   border-radius: 0.375rem;
   background: #dbdfeb;
-  margin: ${(props) => (props.isToday ? '0.73rem' : '0.84rem')} 9.25rem 0.84rem
+  margin: ${(props) => (props.$isToday ? '0.73rem' : '0.84rem')} 9.25rem 0.84rem
     9.56rem;
 `;
 
@@ -60,6 +55,11 @@ function formatDateToDMY(dateString: Date | string) {
 // 오늘 날짜를 "dd/mm/yy" 형식의 문자열로 반환하는 함수
 function getTodayDateStringDMY() {
   return formatDateToDMY(new Date());
+}
+
+// DateContainer에 전달되는 props의 타입을 정의
+interface DateContainerProps {
+  $isToday: boolean;
 }
 
 export default function ChattingRoom() {
@@ -94,15 +94,15 @@ export default function ChattingRoom() {
         return (
           <React.Fragment key={chat.id}>
             {showDateText && (
-              <DateContainer isToday={isToday}>
+              <DateContainer $isToday={isToday}>
                 <DateText>{isToday ? 'Today' : chatDateDMY}</DateText>
               </DateContainer>
             )}
             <ChatBubble
-              isSentByMe={chat.senderId === nowUser} // 현재 사용자가 보낸 메시지인지 확인
+              $isSentByMe={chat.senderId === nowUser} // 현재 사용자가 보낸 메시지인지 확인
               content={chat.content}
               time={FormatTime(chat.time)}
-              isRead={chat.isRead}
+              $isRead={chat.isRead}
             />
           </React.Fragment>
         );

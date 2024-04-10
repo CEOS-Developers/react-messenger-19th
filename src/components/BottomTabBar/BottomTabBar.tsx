@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import StatusGray from '../../assets/img/status-gray.svg';
 import StatusGreen from '../../assets/img/status-green.svg';
 import Calls from '../../assets/img/calls-gray.svg';
@@ -12,7 +12,7 @@ import Settings from '../../assets/img/settings-gray.svg';
 const TabBarContainer = styled.div`
   width: 23.4375rem;
   height: 3.06rem;
-  border-top: 0.03125rem #a4a39e;
+  border-top: 0.03125rem solid #a4a39e;
   position: relative;
   background: #f6f6f6;
   display: flex;
@@ -27,6 +27,7 @@ const IconContainer = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
+  cursor: pointer;
 `;
 
 const IconImg = styled.img`
@@ -55,26 +56,18 @@ interface TextProps {
 
 export default function BotttomTabBar() {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<string | null>(null);
-
-  const handleTabClick = (tabName: string) => {
-    setActiveTab(tabName); // 클릭한 탭으로 activeTab 상태 업데이트
-    if (tabName === 'Status') {
-      navigate('/status');
-    } else if (tabName === 'Chats') {
-      navigate('/chats');
-    }
-  };
+  const location = useLocation();
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <TabBarContainer>
-      <IconContainer onClick={() => handleTabClick('Status')}>
+      <IconContainer onClick={() => navigate('/status')}>
         <IconImg
           style={{ top: '0.42rem' }}
-          src={activeTab === 'Status' ? StatusGreen : StatusGray}
+          src={isActive('/status') ? StatusGreen : StatusGray}
           alt="Status 아이콘"
         />
-        <Text $active={activeTab === 'Status'}>Status</Text>
+        <Text $active={isActive('/status')}>Status</Text>
       </IconContainer>
       <IconContainer>
         <IconImg style={{ top: '0.43rem' }} src={Calls} alt="Calls 아이콘" />
@@ -84,13 +77,13 @@ export default function BotttomTabBar() {
         <IconImg style={{ top: '0.48rem' }} src={Camera} alt="Camera 아이콘" />
         <Text>Camera</Text>
       </IconContainer>
-      <IconContainer onClick={() => handleTabClick('Chats')}>
+      <IconContainer onClick={() => navigate('/chats')}>
         <IconImg
           style={{ top: '0.56rem' }}
-          src={activeTab === 'Chats' ? ChatsGreen : ChatsGray}
+          src={isActive('/chats') ? ChatsGreen : ChatsGray}
           alt="Chats 아이콘"
         />
-        <Text $active={activeTab === 'Chats'}>Chats</Text>
+        <Text $active={isActive('/chats')}>Chats</Text>
       </IconContainer>
       <IconContainer>
         <IconImg

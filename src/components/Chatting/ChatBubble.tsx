@@ -3,7 +3,7 @@ import CheckMark from '../../assets/img/checkmark.svg';
 import BubbleGreen from '../../assets/img/bubble-green.svg';
 import BubbleGray from '../../assets/img/bubble-gray.svg';
 
-const ChatBubbleContainer = styled.div<{ $isSentByMe: boolean }>`
+const ChatBubbleContainer = styled.div<ChatBubbleBaseProps>`
   width: 18.6rem;
   margin-bottom: 0.31rem;
   margin-left: ${(props) => (props.$isSentByMe ? 'auto' : '0.44rem')};
@@ -11,7 +11,7 @@ const ChatBubbleContainer = styled.div<{ $isSentByMe: boolean }>`
   position: relative;
 `;
 
-const BubbleImg = styled.img<{ $isSentByMe: boolean }>`
+const BubbleImg = styled.img<ChatBubbleBaseProps>`
   width: 0.5rem;
   height: 0.9375rem;
   position: absolute;
@@ -20,7 +20,7 @@ const BubbleImg = styled.img<{ $isSentByMe: boolean }>`
   bottom: 0;
 `;
 
-const BubbleRectangle = styled.div<{ $isSentByMe: boolean }>`
+const BubbleRectangle = styled.div<ChatBubbleBaseProps>`
   display: flex;
   width: 17.125rem;
   padding: 0.5rem;
@@ -59,7 +59,7 @@ const MessageInfoContainer = styled.div`
   margin-top: 0.25rem;
 `;
 
-const TimeText = styled.div<{ $isSentByMe: boolean }>`
+const TimeText = styled.div<ChatBubbleBaseProps>`
   color: rgba(0, 0, 0, 0.15);
   font-family: 'SF Pro Display';
   font-size: 0.75rem;
@@ -69,7 +69,7 @@ const TimeText = styled.div<{ $isSentByMe: boolean }>`
   margin-right: ${(props) => (props.$isSentByMe ? '0.25rem' : '0')};
 `;
 
-const CheckImg = styled.img<{ $isRead: boolean; $isSentByMe: boolean }>`
+const CheckImg = styled.img<ChatBubbleBaseProps>`
   width: 0.9375rem;
   height: 0.875rem;
   position: relative;
@@ -79,33 +79,36 @@ const CheckImg = styled.img<{ $isRead: boolean; $isSentByMe: boolean }>`
     props.$isRead && props.$isSentByMe ? 'inline' : 'none'};
 `;
 
-interface ChatBubbleProps {
-  isSentByMe: boolean;
+interface ChatBubbleBaseProps {
+  $isSentByMe?: boolean;
+  $isRead?: boolean;
+}
+
+interface ChatBubbleProps extends ChatBubbleBaseProps {
   content: string;
   time: string;
-  isRead: boolean;
 }
 
 export default function ChatBubble(props: ChatBubbleProps) {
-  const { isSentByMe, content, time, isRead } = props;
+  const { $isSentByMe, content, time, $isRead } = props;
 
   return (
-    <ChatBubbleContainer $isSentByMe={isSentByMe}>
+    <ChatBubbleContainer $isSentByMe={$isSentByMe}>
       <BubbleImg
-        src={isSentByMe ? BubbleGreen : BubbleGray}
-        $isSentByMe={isSentByMe}
+        src={$isSentByMe ? BubbleGreen : BubbleGray}
+        $isSentByMe={$isSentByMe}
         alt="채팅 버블 이미지"
       />
-      <BubbleRectangle $isSentByMe={isSentByMe}>
+      <BubbleRectangle $isSentByMe={$isSentByMe}>
         <TextContainer>
           <ChatText>{content}</ChatText>
           <MessageInfoContainer>
-            <TimeText $isSentByMe={isSentByMe}>{time}</TimeText>
+            <TimeText $isSentByMe={$isSentByMe}>{time}</TimeText>
             <CheckImg
               src={CheckMark}
               alt="읽음 확인용 체크 이미지"
-              $isRead={isRead}
-              $isSentByMe={isSentByMe}
+              $isRead={$isRead}
+              $isSentByMe={$isSentByMe}
             />
           </MessageInfoContainer>
         </TextContainer>
