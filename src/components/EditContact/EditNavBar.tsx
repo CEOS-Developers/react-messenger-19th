@@ -15,6 +15,8 @@ export default function EditNavBar() {
       rightText="Save"
       leftTextOnClick={goBack}
       $noBorderBottom={true}
+      $isEditPage={true}
+      title="Edit Contact"
     />
   );
 }

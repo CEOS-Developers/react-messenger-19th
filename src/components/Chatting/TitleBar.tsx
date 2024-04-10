@@ -87,8 +87,12 @@ export default function TitleBar(props: TitleBarProps) {
       rightImgSrc={Call}
       leftTextOnClick={goToChatsPage}
     >
-      <ProfileContainer onClick={goToContactInfoPage}>
-        <ProfileImg src={profileImg} alt="유저 프로필" />
+      <ProfileContainer>
+        <ProfileImg
+          src={profileImg}
+          alt="유저 프로필"
+          onClick={goToContactInfoPage}
+        />
         <ProfileInnerContainer onClick={handleChangeUser}>
           <ProfileName>{name}</ProfileName>
           {isActive ? (

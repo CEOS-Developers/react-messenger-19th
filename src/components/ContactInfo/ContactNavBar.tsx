@@ -16,6 +16,7 @@ export default function ContactNavBar() {
       leftText="Dain Park"
       rightText="Edit"
       leftTextOnClick={goBack}
+      title="Contact Info"
     />
   );
 }
