@@ -13,3 +13,4 @@ export { ReactComponent as MoreIcon } from '../assets/icon/more.svg';
 export { ReactComponent as MoreColumnIcon } from '../assets/icon/moreColumn.svg';
 export { ReactComponent as ConversationIcon } from '../assets/icon/conversation.svg';
 export { ReactComponent as HomeFilledIcon } from '../assets/icon/homeFilled.svg';
+export { ReactComponent as FriendsPageIcon } from '../assets/icon/friendsPage.svg';

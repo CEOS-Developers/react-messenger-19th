@@ -6,11 +6,6 @@ export const userIdState = atom<number>({
   default: 1,
 });
 
-export const ifChatsDetailPageState = atom<boolean>({
-  key: 'ifChatDetailPage',
-  default: false,
-});
-
 export const newChatState = atom<ChatType>({
   key: 'newChatState',
   default: {
