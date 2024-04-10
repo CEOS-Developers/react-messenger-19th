@@ -18,12 +18,12 @@ export default function Header() {
 
   return (
     <>
-      <Wrapper>
+      <Nav>
         <Time>{date().split(' ').slice(1)}</Time>
         <div>
           <InfoIcon />
         </div>
-      </Wrapper>
+      </Nav>
       <SubTitle>
         <Left>
           <BackArrowIcon type="button" onClick={moveToChats} />
@@ -39,7 +39,7 @@ export default function Header() {
   );
 }
 
-const Wrapper = styled.section`
+const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
 

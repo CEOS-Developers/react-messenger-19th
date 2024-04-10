@@ -14,12 +14,12 @@ export default function Header() {
 
   return (
     <>
-      <Wrapper>
+      <Nav>
         <Time>{date().split(' ').slice(1)}</Time>
         <div>
           <InfoIcon />
         </div>
-      </Wrapper>
+      </Nav>
       <SubTitle>
         <Title>대화</Title>
         <Right>
@@ -32,7 +32,7 @@ export default function Header() {
   );
 }
 
-const Wrapper = styled.section`
+const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
 
