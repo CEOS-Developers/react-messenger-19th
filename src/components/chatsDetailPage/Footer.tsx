@@ -2,54 +2,38 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { PlusIcon, VoiceIcon, EmojiIcon } from '../../assets';
 import date from '../../utils/date';
-
+import { ChatType } from '../../types/types';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { userIdState, chatsState } from '../../recoil/atom';
 
 export default function Footer() {
   const [input, setInput] = useState('');
+  const setChats = useSetRecoilState(chatsState);
+  const userId = useRecoilValue(userIdState);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (input.trim() !== '') {
-      handleList(input);
+      storeChat(input);
       setInput('');
+      // const prevData = JSON.parse(localStorage.getItem('backup') || '[]');
+      // setUpdataedChatData([...prevData, newChat]);
+      // localStorage.setItem('backup', JSON.stringify(updatedChatData));
     }
-  }
-
-  function checkSameTime(): boolean {
-    const lastMsg = list[list.length - 1];
-    if (lastMsg && lastMsg.time === date()) {
-      return true;
-    }
-    return false;
-  }
-
-  function handleList(input: string) {
-    let isFirst = true;
-
-    if (checkSameTime()) {
-      const filterSameTimeIndex = list.findIndex((msg) => msg.time === date());
-      if (filterSameTimeIndex !== -1) {
-        if (filterSameTimeIndex !== list.length) {
-          isFirst = false;
-        }
-        const updatedList = list.map((msg, index) => (index === filterSameTimeIndex ? { ...msg, isFirst: true } : msg));
-        setList([]);
-        setList(updatedList);
-      }
-    }
-    const newMsg: MsgType = {
-      id: Date.now(),
-      rcvd: false,
-      isSameTime: checkSameTime(),
-      isFirst: isFirst,
-      text: input,
-      time: date(),
-    };
-    setList((prevList) => [...prevList, newMsg]);
   }
 
   function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
     setInput(event.target.value);
+  }
+
+  function storeChat(input: string) {
+    const newChat: ChatType = {
+      id: Date.now().toString(),
+      from: 0,
+      to: userId,
+      details: { text: input, time: date() },
+    };
+    setChats((prevChats) => [...prevChats, newChat]);
   }
 
   return (
@@ -93,12 +77,12 @@ const InputBox = styled.form`
   }
 `;
 
-const InputField = styled.text`
+const InputField = styled.input`
   display: block;
   width: 100%;
   border: none;
   border-radius: 1.7rem;
-  padding: 0.2rem;
+  padding: 1rem;
 
   background-color: ${({ theme }) => theme.colors.grey_bg};
 `;
