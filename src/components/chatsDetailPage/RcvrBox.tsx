@@ -37,12 +37,12 @@ const ChatBox = styled.span`
 const Details = styled.section`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 `;
 /* margin-left: ${({ $iconSrc }) => ($iconSrc ? 'none' : '3.4rem')}; */
 
 const Name = styled.p`
   ${flexCenter}
-  width: 3.1rem;
   height: 1.7rem;
   margin-bottom: 0.8rem;
 
