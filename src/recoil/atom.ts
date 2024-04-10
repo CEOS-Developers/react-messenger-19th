@@ -6,12 +6,7 @@ export const userIdState = atom<number>({
   default: 1,
 });
 
-export const newChatState = atom<ChatType>({
-  key: 'newChatState',
-  default: {
-    id: 'newChat',
-    from: 0,
-    to: 0,
-    details: { text: '', time: '' },
-  },
+export const chatsState = atom<ChatType[]>({
+  key: 'chatsState',
+  default: [],
 });
