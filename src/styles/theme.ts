@@ -39,7 +39,6 @@ const fonts = {
     font-style: normal;
     font-weight: 400;
     line-height: 140%;
-    letter-spacing: -0.024rem;
   `,
   sent_person_large: css`
     font-family: 'Pretendard';
