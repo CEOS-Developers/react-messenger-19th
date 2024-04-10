@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect, useState, ReactNode } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import GlobalStyles from './style/GlobalStyles';
 import ChattingPage from './pages/ChattingPage';
@@ -9,8 +10,8 @@ import EditContactPage from './pages/EditContactPage';
 import StatusBar from './components/iphone/StatusBar';
 import HomeIndicator from './components/iphone/HomeIndicator';
 
-const Container = styled.div`
-  background: #f6f6f6;
+const Container = styled.div<{ $bgColor: string }>`
+  background: ${({ $bgColor }) => $bgColor};
   border-radius: 1.25rem;
 `;
 
@@ -21,11 +22,27 @@ const InnerContainer = styled.div`
   position: relative;
 `;
 
+// useLocation을 사용하기 위한 Wrapper 컴포넌트
+function AppContainer({ children }: { children: ReactNode }) {
+  const location = useLocation();
+  const [bgColor, setBgColor] = useState('#f6f6f6');
+
+  useEffect(() => {
+    if (location.pathname === '/edit-contact') {
+      setBgColor('#fff'); // edit-contact 경로일 때만 배경색을 #fff로 설정
+    } else {
+      setBgColor('#f6f6f6');
+    }
+  }, [location]);
+
+  return <Container $bgColor={bgColor}>{children}</Container>;
+}
+
 function App() {
   return (
     <BrowserRouter>
       <GlobalStyles />
-      <Container>
+      <AppContainer>
         <StatusBar />
         <InnerContainer>
           <Routes>
@@ -37,7 +54,7 @@ function App() {
           </Routes>
         </InnerContainer>
         <HomeIndicator />
-      </Container>
+      </AppContainer>
     </BrowserRouter>
   );
 }

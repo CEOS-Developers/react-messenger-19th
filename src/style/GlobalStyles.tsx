@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
         display: flex;
         justify-content: center;
         align-items: center;
+        background: #A7A7A7;
     }
 
     body{

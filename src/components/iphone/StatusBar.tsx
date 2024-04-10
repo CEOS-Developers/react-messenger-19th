@@ -5,7 +5,6 @@ import rightSide from '../../assets/img/right-side.svg';
 const StatusBarContainer = styled.div`
   width: 23.4375rem;
   height: 2.75rem;
-  flex-shrink: 0;
   position: relative;
 `;
 

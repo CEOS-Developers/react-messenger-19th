@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
-const NavBarContainer = styled.div`
+const NavBarContainer = styled.div<{ $noBorderBottom?: boolean }>`
   width: 23.4375rem;
   height: 2.75rem;
-  border-bottom: 0.03125rem solid #a4a39e;
+  border-bottom: ${(props) =>
+    props.$noBorderBottom ? 'none' : '0.03125rem solid #a4a39e'};
   position: relative;
 `;
 
@@ -51,7 +52,6 @@ const IconImg = styled.img`
   height: 1.5rem;
 `;
 
-// Text 컴포넌트의 prop 타입 정의
 interface TextProps {
   $hasLeftImg: boolean;
 }
@@ -62,10 +62,10 @@ interface TopNavBarProps {
   rightImgSrc?: string;
   rightText?: string;
   children?: React.ReactNode;
-  leftTextOnClick?: () => void;
+  leftTextOnClick?: () => void; // 클릭을 통해 이전 페이지로 돌아가기 위함
+  $noBorderBottom?: boolean; // edit-contact page에서는 테두리 없애기 위함
 }
 
-// props 추가 (leftImgSrc, leftText, rightImgSrcs, rightText)
 export default function TopNavBar({
   leftImgSrc,
   leftText,
@@ -73,9 +73,10 @@ export default function TopNavBar({
   rightText,
   children,
   leftTextOnClick,
+  $noBorderBottom,
 }: TopNavBarProps) {
   return (
-    <NavBarContainer>
+    <NavBarContainer $noBorderBottom={$noBorderBottom}>
       <LeftContainer onClick={leftTextOnClick}>
         {leftImgSrc && <LeftImg src={leftImgSrc} alt="이전 버튼 이미지" />}
         <Text $hasLeftImg={!!leftImgSrc}>{leftText}</Text>
