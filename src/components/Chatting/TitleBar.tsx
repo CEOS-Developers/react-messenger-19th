@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeUser } from '../../features/userSlice';
 import { RootState } from '../../store';
+import { TitleBarProps } from '../../types/type';
 import TopNavBar from '../TopNavBar/TopNavBar';
 import Left from '../../assets/img/left.svg';
 import Call from '../../assets/img/call.svg';
@@ -51,12 +52,6 @@ const OnlineText = styled.div`
   letter-spacing: -0.0015rem;
 `;
 
-interface TitleBarProps {
-  name: string;
-  profileImg: string;
-  isActive: boolean;
-}
-
 export default function TitleBar(props: TitleBarProps) {
   const { name, profileImg, isActive } = props;
 
@@ -64,14 +59,6 @@ export default function TitleBar(props: TitleBarProps) {
   const userList = useSelector((state: RootState) => state.user.userList);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const goToContactInfoPage = () => {
-    navigate('/contact-info');
-  };
-
-  const goToChatsPage = () => {
-    navigate('/chats');
-  };
 
   const handleChangeUser = () => {
     const currentIndex = userList.indexOf(nowUser); // 현재 nowUser의 인덱스
@@ -85,13 +72,13 @@ export default function TitleBar(props: TitleBarProps) {
       leftImgSrc={Left}
       leftText="12"
       rightImgSrc={Call}
-      leftTextOnClick={goToChatsPage}
+      leftTextOnClick={() => navigate('/chats')}
     >
       <ProfileContainer>
         <ProfileImg
           src={profileImg}
           alt="유저 프로필"
-          onClick={goToContactInfoPage}
+          onClick={() => navigate('/contact-info')}
         />
         <ProfileInnerContainer onClick={handleChangeUser}>
           <ProfileName>{name}</ProfileName>

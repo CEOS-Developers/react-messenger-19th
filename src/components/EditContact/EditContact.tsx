@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import RightArrow from '../../assets/img/edit-arrow.svg';
 
-const Container = styled.div`
+const EditPageContainer = styled.div`
   width: 22.4375rem;
   height: 40.93rem;
   padding: 2.19rem 0rem 0rem 1rem;
@@ -54,7 +54,7 @@ const RightArrowImg = styled.img`
 
 export default function EditContact() {
   return (
-    <Container>
+    <EditPageContainer>
       <TextContainer>
         <EditText style={{ fontWeight: '600', marginTop: '0.94rem' }}>
           Name
@@ -118,6 +118,6 @@ export default function EditContact() {
           Delete Contact
         </EditText>
       </TextContainer>
-    </Container>
+    </EditPageContainer>
   );
 }

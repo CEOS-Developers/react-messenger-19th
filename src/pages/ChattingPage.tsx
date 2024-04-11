@@ -1,17 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
+import { User } from '../types/type';
 import userData from '../assets/data/userData.json';
 import TitleBar from '../components/Chatting/TitleBar';
 import ChattingRoom from '../components/Chatting/ChattingRoom';
 import ChatInput from '../components/Chatting/ChatInput';
-
-interface User {
-  id: number;
-  name: string;
-  profileImg: string;
-  isActive: boolean;
-}
 
 export default function ChattingPage() {
   const nowUser = useSelector((state: RootState) => state.user.nowUser);

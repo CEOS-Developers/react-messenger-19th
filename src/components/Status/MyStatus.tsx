@@ -4,7 +4,7 @@ import MyProfile from '../../assets/img/my-profile.svg';
 import camera from '../../assets/img/status-camera.svg';
 import edit from '../../assets/img/status-edit.svg';
 
-const Container = styled.div`
+const StatusPageContainer = styled.div`
   width: 23.4375rem;
   height: 40.06rem;
   background: #efeff4;
@@ -85,7 +85,7 @@ export default function MyStatus() {
   const navigate = useNavigate();
 
   return (
-    <Container>
+    <StatusPageContainer>
       <MyStatusContainer>
         <ProfileImg src={MyProfile} alt="나의 프로필 이미지" />
         <MyStatusText>My Status</MyStatusText>
@@ -107,6 +107,6 @@ export default function MyStatus() {
           No recent updates to show right now.
         </SubText>
       </TipContainer>
-    </Container>
+    </StatusPageContainer>
   );
 }

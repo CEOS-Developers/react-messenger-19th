@@ -5,7 +5,7 @@ import { RootState } from '../../store';
 import ChatBubble from './ChatBubble';
 import FormatTime from './FormatTime';
 
-const ChattingRoomContainer = styled.div`
+const ChattingPageContainer = styled.div`
   width: 23.4375rem;
   height: 40.37rem;
   flex-direction: column;
@@ -78,7 +78,7 @@ export default function ChattingRoom() {
   let lastDate = '';
 
   return (
-    <ChattingRoomContainer ref={ChattingRoomRef}>
+    <ChattingPageContainer ref={ChattingRoomRef}>
       {chatList.map((chat) => {
         const chatDateDMY = formatDateToDMY(chat.time); // 현재 채팅의 날짜를 "dd/mm/yy" 형식으로 변환
         let showDateText = false;
@@ -107,6 +107,6 @@ export default function ChattingRoom() {
           </React.Fragment>
         );
       })}
-    </ChattingRoomContainer>
+    </ChattingPageContainer>
   );
 }
