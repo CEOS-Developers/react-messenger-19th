@@ -3,7 +3,7 @@ import * as ST from '@styles/styledComponents';
 import { useRecoilState } from 'recoil';
 import { userNumberState } from '@context/state/atom';
 
-const StyledChatHeadNavLeft = styled.div`
+export const StyledChatHeadNavLeft = styled.div`
   width: 122px;
   height: 32px;
   display: flex;
@@ -12,14 +12,14 @@ const StyledChatHeadNavLeft = styled.div`
   margin-left: 16px;
 `;
 
-const StyledChatHeavNavLeftBackImg = styled.img`
+export const StyledChatHeavNavLeftBackImg = styled.img`
   width: 24px;
   height: 24px;
   ${ST.hoverCursor}
   margin-right: 8px;
 `;
 
-const StyledChatHeadNavLeftDiscordImage = styled.img`
+export const StyledChatHeadNavLeftDiscordImage = styled.img`
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -28,7 +28,7 @@ const StyledChatHeadNavLeftDiscordImage = styled.img`
   margin-right: 4px;
 `;
 
-const StyledUserNameSpan = styled.span`
+export const StyledUserNameSpan = styled.span`
   font-size: ${(props) => props.theme.textStyle.fontSize.h3};
   line-height: ${(props) => props.theme.textStyle.lineHeight.h3};
   font-weight: 600;

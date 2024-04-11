@@ -8,6 +8,7 @@ import CommonLayout from '@pages/CommonLayout';
 import Friends from '@pages/Friends';
 import Messages from '@pages/Messages';
 import Profile from '@pages/Profile';
+import EmptyChat from '@pages/EmptyChat';
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
               <Route path="profile" element={<Profile />}></Route>
             </Route>
             <Route path="/chat" index element={<ChatMain />}></Route>
+            <Route path="/chat" element={<CommonLayout />}>
+              <Route path=":username" element={<EmptyChat />} />
+            </Route>
           </Routes>
         </ThemeProvider>
       </RecoilRoot>

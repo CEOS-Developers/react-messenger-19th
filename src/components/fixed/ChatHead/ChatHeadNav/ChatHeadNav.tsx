@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import ChatHeadNavLeft from '@components/fixed/ChatHead/ChatHeadNav/ChatHeadNavLeft';
 import ChatHeadNavRight from '@components/fixed/ChatHead/ChatHeadNav/ChatHeadNavRight';
 
-const StyledChatHeadNav = styled.nav`
+export const StyledChatHeadNav = styled.nav`
   flex-grow: 1;
   flex-shrink: 0;
   display: flex;
