@@ -5,6 +5,9 @@ const StyledMessageListItemRight = styled.div`
   flex-direction: column;
   width: 287px;
   height: 46px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 interface messageListItemRightInnerType {
@@ -28,6 +31,7 @@ const StyledNameSpan = styled.span`
 
 const StyledContentdiv = styled.div`
   width: 229px;
+  height: 22.5px;
   font-family: Pretendard;
   font-weight: 400;
   font-size: ${(props) => props.theme.textStyle.fontSize.body2};

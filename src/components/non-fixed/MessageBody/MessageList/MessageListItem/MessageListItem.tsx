@@ -11,12 +11,18 @@ const StyledMessageListItem = styled.div`
   column-gap: 8px;
 `;
 
+interface navigateFunction {
+  (pathname: string): void;
+}
+
 interface messageListItemType {
   discordLogoColor: string;
   name: string;
   ifBlueSignal: boolean;
   content: string;
   dateString: string;
+  navigateToChatFunc: navigateFunction;
+  path: string;
 }
 
 export default function MessageListItem({
@@ -25,9 +31,11 @@ export default function MessageListItem({
   ifBlueSignal,
   content,
   dateString,
+  navigateToChatFunc,
+  path,
 }: messageListItemType) {
   return (
-    <StyledMessageListItem>
+    <StyledMessageListItem onClick={() => navigateToChatFunc(path)}>
       <MessageListItemLeft discordLogoColor={discordLogoColor} />
       <MessageListItemRight
         name={name}

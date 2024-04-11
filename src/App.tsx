@@ -21,7 +21,7 @@ function App() {
               <Route path="messages" element={<Messages />}></Route>
               <Route path="profile" element={<Profile />}></Route>
             </Route>
-            <Route path="/chat" element={<ChatMain />} />
+            <Route path="/chat" index element={<ChatMain />}></Route>
           </Routes>
         </ThemeProvider>
       </RecoilRoot>
