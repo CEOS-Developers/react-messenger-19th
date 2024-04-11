@@ -1,11 +1,10 @@
-import { StyledChatHeadNav } from './ChatHeadNav';
 import {
   StyledChatHeadNavLeft,
   StyledChatHeavNavLeftBackImg,
   StyledChatHeadNavLeftDiscordImage,
   StyledUserNameSpan,
-} from './ChatHeadNavLeft';
-import ChatHeadNavRight from './ChatHeadNavRight';
+} from '@components/fixed/ChatHead/ChatHeadNav/ChatHeadNavLeft';
+import ChatHeadNavRight from '@components/fixed/ChatHead/ChatHeadNav/ChatHeadNavRight';
 import styled from 'styled-components';
 
 const StyledEmptyChatHeadNav = styled.nav`
