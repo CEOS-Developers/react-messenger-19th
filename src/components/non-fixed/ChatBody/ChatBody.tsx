@@ -58,9 +58,11 @@ export default function ChatBody() {
     async function loadMessageData() {
       try {
         const tmpDateArray: string[] = [];
-        const tmpMessageDataObject: messageDataObject = {};
+        const tmpMessageDataObject: messageDataObject = {}; // 상태로도 사용하고 로컬 스토리지에도 동기화를 해줄 객체
+
         const response = await fetch('/Dummy/Dummy.json');
         const messageJsonData = await response.json();
+
         for (const messageData of messageJsonData) {
           const { content, createdAt, from, like } = messageData;
           const slicedCreatedDate: string = createdAt.slice(0, 10);
