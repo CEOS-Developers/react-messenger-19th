@@ -121,6 +121,18 @@ const ExtraText = styled.div`
   letter-spacing: -0.02063rem;
 `;
 
+const ExtraDetailText = styled.div`
+  color: rgba(60, 60, 67, 0.6);
+  text-align: right;
+  font-family: 'SF Pro Text';
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.375rem;
+  letter-spacing: -0.0235rem;
+  margin-left: auto;
+`;
+
 const RightArrowImg = styled.img`
   width: 0.4375rem;
   height: 0.75rem;
@@ -158,32 +170,14 @@ export default function ContactInfo(props: TitleBarProps) {
             alt="Media, Links, and Docs 아이콘 이미지"
           />
           <ExtraText>Media, Links, and Docs</ExtraText>
-          <ExtraText
-            style={{
-              color: 'rgba(60, 60, 67, 0.60)',
-              textAlign: 'right',
-              letterSpacing: '-0.0235rem',
-              marginLeft: 'auto',
-            }}
-          >
-            12
-          </ExtraText>
+          <ExtraDetailText>12</ExtraDetailText>
           <RightArrowImg src={RightArrow} alt="오른쪽 화살표 이미지" />
         </DetailContainer>
         <Seperator style={{ width: '19.75rem' }} />
         <DetailContainer>
           <ExtraIconImg src={Star} alt="Starred Messages 아이콘 이미지" />
           <ExtraText>Starred Messages</ExtraText>
-          <ExtraText
-            style={{
-              color: 'rgba(60, 60, 67, 0.60)',
-              textAlign: 'right',
-              letterSpacing: '-0.0235rem',
-              marginLeft: 'auto',
-            }}
-          >
-            None
-          </ExtraText>
+          <ExtraDetailText>None</ExtraDetailText>
           <RightArrowImg src={RightArrow} alt="오른쪽 화살표 이미지" />
         </DetailContainer>
         <Seperator style={{ width: '19.75rem' }} />
@@ -198,32 +192,14 @@ export default function ContactInfo(props: TitleBarProps) {
         <DetailContainer>
           <ExtraIconImg src={Mute} alt="Mute 아이콘 이미지" />
           <ExtraText>Mute</ExtraText>
-          <ExtraText
-            style={{
-              color: 'rgba(60, 60, 67, 0.60)',
-              textAlign: 'right',
-              letterSpacing: '-0.0235rem',
-              marginLeft: 'auto',
-            }}
-          >
-            No
-          </ExtraText>
+          <ExtraDetailText>No</ExtraDetailText>
           <RightArrowImg src={RightArrow} alt="오른쪽 화살표 이미지" />
         </DetailContainer>
         <Seperator style={{ width: '19.75rem' }} />
         <DetailContainer>
           <ExtraIconImg src={Tone} alt="Custom Tone 아이콘 이미지" />
           <ExtraText>Custom Tone</ExtraText>
-          <ExtraText
-            style={{
-              color: 'rgba(60, 60, 67, 0.60)',
-              textAlign: 'right',
-              letterSpacing: '-0.0235rem',
-              marginLeft: 'auto',
-            }}
-          >
-            Default (Note)
-          </ExtraText>
+          <ExtraDetailText>Default (Note)</ExtraDetailText>
           <RightArrowImg src={RightArrow} alt="오른쪽 화살표 이미지" />
         </DetailContainer>
         <Seperator style={{ width: '19.75rem' }} />
