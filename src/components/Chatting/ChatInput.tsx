@@ -13,6 +13,7 @@ const InputContainer = styled.div`
   height: 2.87rem;
   border-top: 0.03125rem solid #a4a39e;
   position: relative;
+  margin-bottom: 2.125rem;
 `;
 
 const IconImg = styled.img`

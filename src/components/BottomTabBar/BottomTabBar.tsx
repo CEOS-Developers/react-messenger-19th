@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate, useLocation } from 'react-router-dom';
 import StatusGray from '../../assets/img/status-gray.svg';
@@ -18,6 +17,7 @@ const TabBarContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  margin-bottom: 2.125rem;
 `;
 
 const IconContainer = styled.div`

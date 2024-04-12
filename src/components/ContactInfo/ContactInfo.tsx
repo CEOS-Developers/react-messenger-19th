@@ -13,9 +13,18 @@ import RightArrow from '../../assets/img/edit-arrow.svg';
 
 const ContactPageContainer = styled.div`
   width: 23.4375rem;
-  height: 43.12rem;
+  height: 45.245rem;
   background: #efeff4;
   position: relative;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // Internet Explorer/Edge
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari
+  }
 `;
 
 const ProfileImg = styled.img`
