@@ -53,6 +53,12 @@
       "name": "Declan Walker",
       "profileImg": "/img/DeclanWalker.svg",
       "isActive": false
+    },
+    {
+      "id": 9,
+      "name": "Joshua Lawrence",
+      "profileImg": "/img/JoshuaLawrence.svg",
+      "isActive": true
     }
   ]
 }

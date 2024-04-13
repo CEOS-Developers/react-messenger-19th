@@ -30,7 +30,7 @@ export default function ContactInfoPage() {
         <>
           <TopNavBar
             leftImgSrc={Left}
-            leftText="Dain Park"
+            leftText={partner.name}
             rightText="Edit"
             leftTextOnClick={goBack}
             title="Contact Info"

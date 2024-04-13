@@ -139,6 +139,19 @@
           "isRead": false
         }
       ]
+    },
+    {
+      "chatRoomId": 8,
+      "userList": [0, 9],
+      "chatList": [
+        {
+          "id": 0,
+          "senderId": 0,
+          "content": "Do you like WhatsApp UI?",
+          "time": "2019-10-20T09:41:00",
+          "isRead": true
+        }
+      ]
     }
   ]
 }

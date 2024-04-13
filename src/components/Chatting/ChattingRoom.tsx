@@ -19,15 +19,15 @@ const ChattingPageContainer = styled.div`
   }
 `;
 
-const DateContainer = styled.div<DateContainerProps>`
+const DateContainer = styled.div`
+  width: fit-content;
   height: 0.875rem;
-  display: inline-flex;
+  display: block;
+  text-align: center;
   padding: 0.1875rem 1rem;
-  align-items: center;
   border-radius: 0.375rem;
   background: #dbdfeb;
-  margin: ${(props) => (props.$isToday ? '0.73rem' : '0.84rem')} 9.25rem 0.84rem
-    9.56rem;
+  margin: 0.63rem auto;
 `;
 
 const DateText = styled.div`
@@ -55,11 +55,6 @@ function formatDateToDMY(dateString: Date | string) {
 // 오늘 날짜를 "dd/mm/yy" 형식의 문자열로 반환하는 함수
 function getTodayDateStringDMY() {
   return formatDateToDMY(new Date());
-}
-
-// DateContainer에 전달되는 props의 타입을 정의
-interface DateContainerProps {
-  $isToday: boolean;
 }
 
 export default function ChattingRoom() {
@@ -94,7 +89,7 @@ export default function ChattingRoom() {
         return (
           <React.Fragment key={chat.id}>
             {showDateText && (
-              <DateContainer $isToday={isToday}>
+              <DateContainer>
                 <DateText>{isToday ? 'Today' : chatDateDMY}</DateText>
               </DateContainer>
             )}
