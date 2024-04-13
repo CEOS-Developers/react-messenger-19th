@@ -4,43 +4,46 @@ import BubbleGreen from '../../assets/img/bubble-green.svg';
 import BubbleGray from '../../assets/img/bubble-gray.svg';
 
 const ChatBubbleContainer = styled.div<ChatBubbleBaseProps>`
-  width: 18.6rem;
+  display: flex;
+  justify-content: ${(props) =>
+    props.$isSentByMe ? 'flex-end' : 'flex-start'};
   margin-bottom: 0.31rem;
   margin-left: ${(props) => (props.$isSentByMe ? 'auto' : '0.44rem')};
   margin-right: ${(props) => (props.$isSentByMe ? '0.44rem' : 'auto')};
   position: relative;
 `;
 
-const BubbleImg = styled.img<ChatBubbleBaseProps>`
+const BubbleWrapper = styled.div<ChatBubbleBaseProps>`
+  display: flex;
+  flex-direction: ${(props) => (props.$isSentByMe ? 'row-reverse' : 'row')};
+  align-items: flex-end;
+`;
+
+const BubbleImg = styled.img`
   width: 0.5rem;
   height: 0.9375rem;
-  position: absolute;
-  left: ${(props) => (props.$isSentByMe ? '18.125rem' : '0')};
-  right: ${(props) => (props.$isSentByMe ? '0' : '18.125rem')};
-  bottom: 0;
 `;
 
 const BubbleRectangle = styled.div<ChatBubbleBaseProps>`
-  display: flex;
-  width: 17.125rem;
+  display: inline-flex;
+  min-width: 7.06rem;
+  max-width: 17.125rem;
   padding: 0.5rem;
   flex-direction: column;
   gap: 0.625rem;
   border-radius: 0.375rem;
   background: ${(props) => (props.$isSentByMe ? '#E1F3D2' : '#eaeaea')};
-  margin-left: ${(props) => (props.$isSentByMe ? '0' : 'auto')};
-  margin-right: ${(props) => (props.$isSentByMe ? 'auto' : '0')};
 `;
 
 const TextContainer = styled.div`
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   align-items: flex-end;
   position: relative;
 `;
 
 const ChatText = styled.div`
-  width: 17.125rem;
+  width: 100%;
   color: #000;
   font-family: 'SF Pro Text';
   font-size: 1.0625rem;
@@ -94,25 +97,26 @@ export default function ChatBubble(props: ChatBubbleProps) {
 
   return (
     <ChatBubbleContainer $isSentByMe={$isSentByMe}>
-      <BubbleImg
-        src={$isSentByMe ? BubbleGreen : BubbleGray}
-        $isSentByMe={$isSentByMe}
-        alt="채팅 버블 이미지"
-      />
-      <BubbleRectangle $isSentByMe={$isSentByMe}>
-        <TextContainer>
-          <ChatText>{content}</ChatText>
-          <MessageInfoContainer>
-            <TimeText $isSentByMe={$isSentByMe}>{time}</TimeText>
-            <CheckImg
-              src={CheckMark}
-              alt="읽음 확인용 체크 이미지"
-              $isRead={$isRead}
-              $isSentByMe={$isSentByMe}
-            />
-          </MessageInfoContainer>
-        </TextContainer>
-      </BubbleRectangle>
+      <BubbleWrapper $isSentByMe={$isSentByMe}>
+        <BubbleImg
+          src={$isSentByMe ? BubbleGreen : BubbleGray}
+          alt="채팅 버블 이미지"
+        />
+        <BubbleRectangle $isSentByMe={$isSentByMe}>
+          <TextContainer>
+            <ChatText>{content}</ChatText>
+            <MessageInfoContainer>
+              <TimeText $isSentByMe={$isSentByMe}>{time}</TimeText>
+              <CheckImg
+                src={CheckMark}
+                alt="읽음 확인용 체크 이미지"
+                $isRead={$isRead}
+                $isSentByMe={$isSentByMe}
+              />
+            </MessageInfoContainer>
+          </TextContainer>
+        </BubbleRectangle>
+      </BubbleWrapper>
     </ChatBubbleContainer>
   );
 }
