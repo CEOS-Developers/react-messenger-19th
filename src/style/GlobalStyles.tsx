@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
         background: #A7A7A7;
     }
 
-    body{
+    body {
         width: 23.4375rem;
         height: 100%;
         display: flex;
@@ -22,7 +22,11 @@ const GlobalStyle = createGlobalStyle`
     #root {
         height: 100dvh;
         width: 100%;
-      }
+    }
+
+    input {
+        padding: 0;
+    }
 `;
 
 export default GlobalStyle;
