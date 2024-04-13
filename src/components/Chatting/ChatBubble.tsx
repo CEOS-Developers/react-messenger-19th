@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import CheckMark from '../../assets/img/checkmark.svg';
 import BubbleGreen from '../../assets/img/bubble-green.svg';
@@ -6,7 +7,9 @@ import BubbleGray from '../../assets/img/bubble-gray.svg';
 const ChatBubbleContainer = styled.div<ChatBubbleBaseProps>`
   display: flex;
   justify-content: ${(props) =>
-    props.$isSentByMe ? 'flex-end' : 'flex-start'};
+    props.$isSentByMe
+      ? 'flex-end'
+      : 'flex-start'}; // 나와 상대방의 채팅 버블을 각자 정렬
   margin-bottom: 0.31rem;
   margin-left: ${(props) => (props.$isSentByMe ? 'auto' : '0.44rem')};
   margin-right: ${(props) => (props.$isSentByMe ? '0.44rem' : 'auto')};
@@ -15,7 +18,8 @@ const ChatBubbleContainer = styled.div<ChatBubbleBaseProps>`
 
 const BubbleWrapper = styled.div<ChatBubbleBaseProps>`
   display: flex;
-  flex-direction: ${(props) => (props.$isSentByMe ? 'row-reverse' : 'row')};
+  flex-direction: ${(props) =>
+    props.$isSentByMe ? 'row-reverse' : 'row'}; // 말풍선과 버블의 순서
   align-items: flex-end;
 `;
 
@@ -26,7 +30,7 @@ const BubbleImg = styled.img`
 
 const BubbleRectangle = styled.div<ChatBubbleBaseProps>`
   display: inline-flex;
-  min-width: 7.06rem;
+  min-width: 5.5625rem;
   max-width: 17.125rem;
   padding: 0.5rem;
   flex-direction: column;
@@ -35,9 +39,9 @@ const BubbleRectangle = styled.div<ChatBubbleBaseProps>`
   background: ${(props) => (props.$isSentByMe ? '#E1F3D2' : '#eaeaea')};
 `;
 
-const TextContainer = styled.div`
+const TextContainer = styled.div<TextContainerProps>`
   display: inline-flex;
-  flex-direction: column;
+  flex-direction: ${(props) => props.direction};
   align-items: flex-end;
   position: relative;
 `;
@@ -55,11 +59,12 @@ const ChatText = styled.div`
   margin-left: 0;
 `;
 
-const MessageInfoContainer = styled.div`
+const MessageInfoContainer = styled.div<TextContainerProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-top: 0.25rem;
+  margin-left: ${(props) => (props.direction === 'row' ? '0.75rem' : '0')};
 `;
 
 const TimeText = styled.div<ChatBubbleBaseProps>`
@@ -92,7 +97,34 @@ interface ChatBubbleProps extends ChatBubbleBaseProps {
   time: string;
 }
 
+interface TextContainerProps {
+  direction: string;
+}
+
 export default function ChatBubble(props: ChatBubbleProps) {
+  const chatTextRef = useRef<HTMLDivElement>(null);
+  const [flexDirection, setFlexDirection] = useState<string>('column');
+
+  useEffect(() => {
+    const checkTextWidth = () => {
+      if (chatTextRef.current) {
+        const width = chatTextRef.current.offsetWidth;
+        const maxWidth = 17 * 16; // rem을 px로 변환 (가정: 1rem = 16px)
+        if (width > maxWidth) {
+          setFlexDirection('column');
+        } else {
+          setFlexDirection('row');
+        }
+      }
+    };
+
+    checkTextWidth();
+
+    // 창 크기 변경에 따라 다시 검사
+    window.addEventListener('resize', checkTextWidth);
+    return () => window.removeEventListener('resize', checkTextWidth);
+  }, []);
+
   const { $isSentByMe, content, time, $isRead } = props;
 
   return (
@@ -103,9 +135,9 @@ export default function ChatBubble(props: ChatBubbleProps) {
           alt="채팅 버블 이미지"
         />
         <BubbleRectangle $isSentByMe={$isSentByMe}>
-          <TextContainer>
-            <ChatText>{content}</ChatText>
-            <MessageInfoContainer>
+          <TextContainer direction={flexDirection}>
+            <ChatText ref={chatTextRef}>{content}</ChatText>
+            <MessageInfoContainer direction={flexDirection}>
               <TimeText $isSentByMe={$isSentByMe}>{time}</TimeText>
               <CheckImg
                 src={CheckMark}
