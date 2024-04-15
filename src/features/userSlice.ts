@@ -1,14 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import initialChatData from '../assets/data/initialChatData.json';
+import { User } from '../types/type';
+import UserData from '../assets/data/userData.json';
 
 interface UserState {
   nowUser: number;
-  userList: number[];
+  userList: User[];
 }
 
 const initialState: UserState = {
   nowUser: 0,
-  userList: initialChatData.chattings[0].userList, // 첫 번째 채팅방의 userList를 초기 상태로 설정
+  userList: UserData.users,
 };
 
 export const userSlice = createSlice({

@@ -76,7 +76,7 @@ const InfoText = styled.div`
 `;
 
 const Seperator = styled.div`
-  height: 0.0625rem;
+  height: 1px;
   background: rgba(60, 60, 67, 0.29);
   margin-left: auto;
 `;

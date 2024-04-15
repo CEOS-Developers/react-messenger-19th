@@ -8,6 +8,7 @@ import FormatTime from './FormatTime';
 const ChattingPageContainer = styled.div`
   width: 23.4375rem;
   height: 40.25rem;
+  display: flex;
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;

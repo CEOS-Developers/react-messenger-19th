@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { changeUser } from '../../features/userSlice';
 import { RootState } from '../../store';
 import { TitleBarProps } from '../../types/type';
+import { User } from '../../types/type';
 import TopNavBar from '../TopNavBar/TopNavBar';
 import Left from '../../assets/img/left.svg';
 import Call from '../../assets/img/call.svg';
@@ -61,10 +62,14 @@ export default function TitleBar(props: TitleBarProps) {
   const navigate = useNavigate();
 
   const handleChangeUser = () => {
-    const currentIndex = userList.indexOf(nowUser); // 현재 nowUser의 인덱스
+    // 현재 nowUser와 일치하는 사용자 객체를 찾습니다.
+    const currentIndex = userList.findIndex(
+      (user: User) => user.id === nowUser
+    );
     const nextIndex = currentIndex === 0 ? 1 : 0;
     const nextUser = userList[nextIndex];
-    dispatch(changeUser(nextUser));
+    // 여기서 nextUser.id를 전달해야 합니다. changeUser 액션이 사용자 ID를 기대한다고 가정합니다.
+    dispatch(changeUser(nextUser.id));
   };
 
   return (
