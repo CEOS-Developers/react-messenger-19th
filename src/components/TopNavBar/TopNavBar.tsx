@@ -81,17 +81,18 @@ interface TopNavBarProps {
   $isEditPage?: boolean; // edit-contact page에서 오른쪽 텍스트가 회색
 }
 
-export default function TopNavBar({
-  leftImgSrc,
-  leftText,
-  rightImgSrc,
-  rightText,
-  children,
-  title,
-  leftTextOnClick,
-  $noBorderBottom,
-  $isEditPage = false, // 기본값 false 설정
-}: TopNavBarProps) {
+export default function TopNavBar(props: TopNavBarProps) {
+  const {
+    leftImgSrc,
+    leftText,
+    rightImgSrc,
+    rightText,
+    children,
+    title,
+    leftTextOnClick,
+    $noBorderBottom,
+    $isEditPage = false,
+  } = props;
   return (
     <NavBarContainer $noBorderBottom={$noBorderBottom}>
       <LeftContainer onClick={leftTextOnClick}>

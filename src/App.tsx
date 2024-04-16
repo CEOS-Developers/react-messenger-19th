@@ -40,9 +40,9 @@ function App() {
       <AppContainer>
         <StatusBar />
         <Routes>
-          <Route path="/" element={<ChattingPage />} />
+          <Route path="/" element={<ChatsPage />} />
+          <Route path="/chatroom/:chatRoomId" element={<ChattingPage />} />
           <Route path="/contact-info" element={<ContactInfoPage />} />
-          <Route path="/chats" element={<ChatsPage />} />
           <Route path="/status" element={<StatusPage />} />
           <Route path="/edit-contact" element={<EditContactPage />} />
         </Routes>

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
-import { User } from '../types/type';
+import { User } from '../types/interface';
 import userData from '../assets/data/userData.json';
 import TopNavBar from '../components/TopNavBar/TopNavBar';
 import ContactInfo from '../components/ContactInfo/ContactInfo';

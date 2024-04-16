@@ -55,7 +55,7 @@
       "chatList": [
         {
           "id": 0,
-          "senderId": 2,
+          "senderId": 0,
           "content": "Is that yours?",
           "time": "2024-03-05T09:41:00",
           "isRead": true
@@ -81,7 +81,7 @@
       "chatList": [
         {
           "id": 0,
-          "senderId": 4,
+          "senderId": 0,
           "content": "Mate where???",
           "time": "2024-02-15T09:41:00",
           "isRead": true
@@ -120,7 +120,7 @@
       "chatList": [
         {
           "id": 0,
-          "senderId": 7,
+          "senderId": 0,
           "content": "언니 이거 봄?",
           "time": "2024-01-15T09:41:00",
           "isRead": true

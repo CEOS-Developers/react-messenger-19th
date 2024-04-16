@@ -77,13 +77,13 @@ export default function BotttomTabBar() {
         <IconImg style={{ top: '0.48rem' }} src={Camera} alt="Camera 아이콘" />
         <Text>Camera</Text>
       </IconContainer>
-      <IconContainer onClick={() => navigate('/chats')}>
+      <IconContainer onClick={() => navigate('/')}>
         <IconImg
           style={{ top: '0.56rem' }}
-          src={isActive('/chats') ? ChatsGreen : ChatsGray}
+          src={isActive('/') ? ChatsGreen : ChatsGray}
           alt="Chats 아이콘"
         />
-        <Text $active={isActive('/chats')}>Chats</Text>
+        <Text $active={isActive('/')}>Chats</Text>
       </IconContainer>
       <IconContainer>
         <IconImg

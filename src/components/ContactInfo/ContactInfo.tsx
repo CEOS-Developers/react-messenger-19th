@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TitleBarProps } from '../../types/type';
+import { TitleBarProps } from '../../types/interface';
 import Instagram from '../../assets/img/contact-instagram.svg';
 import Github from '../../assets/img/contact-github.svg';
 import Message from '../../assets/img/contact-message.svg';

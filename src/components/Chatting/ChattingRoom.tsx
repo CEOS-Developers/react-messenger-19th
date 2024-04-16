@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import { Chats } from '../../types/interface';
 import ChatBubble from './ChatBubble';
 import FormatTimeToAMPM from './FormatTimeToAMPM';
 import FormatDateToDMY from './FormatDateToDMY';
@@ -47,11 +48,8 @@ function getTodayDateStringDMY() {
   return FormatDateToDMY(new Date());
 }
 
-export default function ChattingRoom() {
+export default function ChattingRoom({ chatList }: Chats) {
   const nowUser = useSelector((state: RootState) => state.user.nowUser); // 현재 사용자 상태 가져오기
-  const chatList = useSelector(
-    (state: RootState) => state.chat.chattings[0].chatList
-  );
   const ChattingRoomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

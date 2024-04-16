@@ -11,6 +11,18 @@ export interface User {
   isActive: boolean;
 }
 
+export interface Chats {
+  chatRoomId: number;
+  userList: number[];
+  chatList: {
+    id: number;
+    senderId: number;
+    content: string;
+    time: string;
+    isRead: boolean;
+  }[];
+}
+
 export interface ChatProps {
   lastChatContent: string;
   lastChatTime: string;

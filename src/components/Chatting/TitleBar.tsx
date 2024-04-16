@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeUser } from '../../features/userSlice';
 import { RootState } from '../../store';
-import { TitleBarProps } from '../../types/type';
-import { User } from '../../types/type';
+import { TitleBarProps } from '../../types/interface';
+import { User } from '../../types/interface';
 import TopNavBar from '../TopNavBar/TopNavBar';
 import Left from '../../assets/img/left.svg';
 import Call from '../../assets/img/call.svg';
@@ -77,7 +77,7 @@ export default function TitleBar(props: TitleBarProps) {
       leftImgSrc={Left}
       leftText="12"
       rightImgSrc={Call}
-      leftTextOnClick={() => navigate('/chats')}
+      leftTextOnClick={() => navigate('/')}
     >
       <ProfileContainer>
         <ProfileImg

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { TitleBarProps } from '../../types/type';
-import { ChatProps } from '../../types/type';
+import { TitleBarProps } from '../../types/interface';
+import { ChatProps } from '../../types/interface';
 import FormatDateToDMY from '../Chatting/FormatDateToDMY';
 import checkmark from '../../assets/img/checkmark.svg';
 
@@ -91,7 +91,6 @@ const ChatText = styled.div<{ $isRead: boolean }>`
 type CombinedProps = TitleBarProps & ChatProps;
 
 export default function Chat(props: CombinedProps) {
-  const navigate = useNavigate();
   const { name, profileImg, lastChatTime, lastChatContent, $isRead } = props;
 
   return (
