@@ -1,11 +1,9 @@
 import { useEffect, useState, useRef } from "react"
 import styled from "styled-components"
-import Header from "../../components/Header"
 import TopBarIcons from "../../components/TopBarIcons"
 import ChatInput from "./ChatInput"
 import friendProfile from "../../assets/img/friendProfile.png"
 import myProfile from "../../assets/img/myProfile.png"
-import Footer from "../../components/Footer"
 import dayjs from "dayjs"
 import ChatBubbleReceiver from "../Chat/ChatBubbleReceiver"
 import ChatBubbleSender from "./ChatBubbleSender"
@@ -59,7 +57,7 @@ function ChattingPage() {
 
    //유저 전환
    const toggleUser = () =>{
-    if(sender == '김다희'){
+    if(sender === '김다희'){
       setSender('김유빈');
       setReceiver('김다희');
       setRImg(myProfile);
@@ -106,7 +104,6 @@ function ChattingPage() {
 
   return (
     <Wrapper>
-       <Header/> 
        <TopBarIcons/>
        <ProfileInfoWrapper>
           <FriendProfileImg src = {rImg} onClick={toggleUser}/>
@@ -128,8 +125,7 @@ function ChattingPage() {
             profileImg={chat.r_img}
             //조건 추후 수정 예정
             isSameTime = {  key > 0 &&
-              chatData.chat[key - 1].sender === chat.sender &&
-              chatData.chat[key - 1].time === chat.time}
+              chatData.chat[key - 1].sender === chat.sender}
             />)
           ))}
         {/* 스크롤을 위한 빈 div */}
@@ -140,7 +136,7 @@ function ChattingPage() {
         value={value}
         setValue={setValue}
        />
-       <Footer/>
+      
     </Wrapper>
   )
 }
@@ -175,7 +171,7 @@ const FriendProfileName = styled.div`
 const ChatBody = styled.div`
   //background-color: beige;
   width: 100%;
-  flex: 1;
+  height: 545.33px;
   padding-top: 14.88px;
   overflow-y: auto;
   overflow-x: hidden;

@@ -16,14 +16,14 @@ function ChatBubbleSender({value}: Props) {
 const ChatBubbleWrapper = styled.div`
     display: flex;
     flex-direction: row;
-    max-width: 297.76px;
+    justify-content: flex-end;
+    max-width: 243.76px;
     height: fit-content;
     margin-bottom: 14.88px;
-    margin-left: 113.81px;
-    margin-right: 0;
+    margin-left: 113.82px;
 `
 const BubbleText = styled.div`
-    width: 243.76px;
+    max-width: 213.76px;
     height: fit-content;
     background-color: ${({theme})=> theme.colors.green};
     border: none;

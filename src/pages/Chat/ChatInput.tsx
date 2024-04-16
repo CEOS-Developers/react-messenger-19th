@@ -46,7 +46,7 @@ const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         value={value}
         />
         
-        <StickerIcon><img src = {stickerIcon}/></StickerIcon>
+        <StickerIcon type="button"><img src = {stickerIcon}/></StickerIcon>
       </InputFiledWrapper>
 
       <RecordIcon><img src={recordIcon}/></RecordIcon>
@@ -56,7 +56,7 @@ const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 
 const ChatInputWrapper = styled.div`
     width: 100%;
-    height: 35px;
+    height:49px;
     margin-bottom: 14px;
     display: flex;
     flex-direction: row;

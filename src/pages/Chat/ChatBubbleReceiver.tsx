@@ -50,7 +50,7 @@ const ProfileImg = styled.img`
     height: 39px;
 `
 const BubbleText = styled.div`
-    width: 243.76px;
+    max-width: 243.76px;
     height: fit-content;
     background-color: ${({theme})=> theme.colors.grey2};
     border: none;
