@@ -35,29 +35,27 @@ export default function ChattingPage() {
     }
   }, [chatRoomId, nowUser, userList, chattings]); // 넷 중 하나라도 변경될 때마다 effect를 실행
 
-  return (
-    <>
-      {partner !== null ? (
-        <>
-          <TitleBar
-            name={partner.name}
-            profileImg={partner.profileImg}
-            isActive={partner.isActive}
-          />
-          {chatRoom ? (
-            <ChattingRoom
-              chatRoomId={chatRoom.chatRoomId}
-              userList={chatRoom.userList}
-              chatList={chatRoom.chatList}
-            />
-          ) : (
-            <p>채팅 내용이 없습니다.</p>
-          )}
-          <ChatInput />
-        </>
-      ) : (
-        <p>파트너 정보가 없습니다.</p>
-      )}
-    </>
-  );
+  if (chatRoom && partner !== null) {
+    return (
+      <>
+        <TitleBar
+          name={partner.name}
+          profileImg={partner.profileImg}
+          isActive={partner.isActive}
+        />
+        <ChattingRoom
+          chatRoomId={chatRoom.chatRoomId}
+          userList={chatRoom.userList}
+          chatList={chatRoom.chatList}
+        />
+        <ChatInput
+          chatRoomId={chatRoom.chatRoomId}
+          userList={chatRoom.userList}
+          chatList={chatRoom.chatList}
+        />
+      </>
+    );
+  } else {
+    return <p>파트너 정보가 없습니다.</p>;
+  }
 }

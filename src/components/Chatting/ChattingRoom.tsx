@@ -10,7 +10,7 @@ import FormatDateToDMY from './FormatDateToDMY';
 const ChattingPageContainer = styled.div`
   width: 23.4375rem;
   height: 40.25rem;
-  display: flex;
+  display: block; // DateContainer와 ChatBubble 사이 마진 겹침 현상을 위함
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;

@@ -41,8 +41,9 @@ const TitleText = styled.div`
 
 export default function ChatsList() {
   const navigate = useNavigate();
-  const chattings = useSelector((state: RootState) => state.chat.chattings);
+  const nowUser = useSelector((state: RootState) => state.user.nowUser);
   const userList = useSelector((state: RootState) => state.user.userList);
+  const chattings = useSelector((state: RootState) => state.chat.chattings);
 
   // 채팅방 클릭 핸들러 함수
   const handleChatClick = (chatRoomId: number) => {
@@ -60,7 +61,7 @@ export default function ChatsList() {
         // 현재 채팅방에서 현재 사용자를 제외한 상대방의 정보를 찾기
         const partner =
           userList.find(
-            (user) => chatRoom.userList.includes(user.id) && user.id !== 0
+            (user) => chatRoom.userList.includes(user.id) && user.id !== nowUser
           ) ?? null;
 
         // 마지막 채팅 정보를 추출

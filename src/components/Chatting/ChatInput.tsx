@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { addChat } from '../../features/chatSlice';
+import { Chats } from '../../types/interface';
 import Plus from '../../assets/img/plus.svg';
 import Attachment from '../../assets/img/attachment.svg';
 import Camera from '../../assets/img/camera.svg';
@@ -50,7 +51,7 @@ const Input = styled.input`
   background: transparent;
 `;
 
-export default function ChatInput() {
+export default function ChatInput({ chatRoomId }: Chats) {
   const nowUser = useSelector((state: RootState) => state.user.nowUser); // 현재 사용자 상태 가져오기
   const [value, setValue] = useState<string>('');
   const dispatch = useDispatch();
@@ -63,7 +64,6 @@ export default function ChatInput() {
       return;
     }
 
-    const chatRoomId = 0; // 이번 과제 예시
     const senderId = nowUser;
     const time = new Date().toISOString(); // 현재 시각을 string으로 변환
     const isRead = true; // 상황에 따라 설정
