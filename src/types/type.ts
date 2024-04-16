@@ -10,3 +10,9 @@ export interface User {
   profileImg: string;
   isActive: boolean;
 }
+
+export interface ChatProps {
+  lastChatContent: string;
+  lastChatTime: string;
+  $isRead: boolean;
+}

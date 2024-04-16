@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import ChatBubble from './ChatBubble';
-import FormatTime from './FormatTime';
+import FormatTimeToAMPM from './FormatTimeToAMPM';
+import FormatDateToDMY from './FormatDateToDMY';
 
 const ChattingPageContainer = styled.div`
   width: 23.4375rem;
@@ -41,21 +42,9 @@ const DateText = styled.div`
   line-height: normal;
 `;
 
-// 채팅 시간을 "dd/mm/yy" 형식의 문자열로 변환하는 함수
-function formatDateToDMY(dateString: Date | string) {
-  const date = new Date(dateString);
-  const day = date.getDate();
-  const month = date.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줌
-  const year = date.getFullYear() % 100; // 년도의 마지막 두 자리만 가져옴
-
-  return `${day < 10 ? `0${day}` : day}/${
-    month < 10 ? `0${month}` : month
-  }/${year}`;
-}
-
 // 오늘 날짜를 "dd/mm/yy" 형식의 문자열로 반환하는 함수
 function getTodayDateStringDMY() {
-  return formatDateToDMY(new Date());
+  return FormatDateToDMY(new Date());
 }
 
 export default function ChattingRoom() {
@@ -76,7 +65,7 @@ export default function ChattingRoom() {
   return (
     <ChattingPageContainer ref={ChattingRoomRef}>
       {chatList.map((chat) => {
-        const chatDateDMY = formatDateToDMY(chat.time); // 현재 채팅의 날짜를 "dd/mm/yy" 형식으로 변환
+        const chatDateDMY = FormatDateToDMY(chat.time); // 현재 채팅의 날짜를 "dd/mm/yy" 형식으로 변환
         let showDateText = false;
 
         if (chatDateDMY !== lastDate) {
@@ -97,7 +86,7 @@ export default function ChattingRoom() {
             <ChatBubble
               $isSentByMe={chat.senderId === nowUser} // 현재 사용자가 보낸 메시지인지 확인
               content={chat.content}
-              time={FormatTime(chat.time)}
+              time={FormatTimeToAMPM(chat.time)}
               $isRead={chat.isRead}
             />
           </React.Fragment>

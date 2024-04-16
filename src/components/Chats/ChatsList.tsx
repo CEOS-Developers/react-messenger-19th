@@ -1,8 +1,6 @@
-import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { User } from '../../types/type';
 import Chat from '../Chats/Chat';
 
 const ChatsListPageContainer = styled.div`
@@ -52,19 +50,25 @@ export default function ChatsList() {
       </TitleContainer>
 
       {chattings.map((chatRoom) => {
-        // 현재 채팅방에서 현재 사용자를 제외한 상대방의 정보를 찾습니다.
+        // 현재 채팅방에서 현재 사용자를 제외한 상대방의 정보를 찾기
         const partner =
           userList.find(
             (user) => chatRoom.userList.includes(user.id) && user.id !== 0
           ) ?? null;
 
-        // 각 채팅방에 대한 상대방의 프로필을 출력합니다.
+        // 마지막 채팅 정보를 추출
+        const lastChat =
+          chatRoom.chatList[chatRoom.chatList.length - 1] || null;
+
+        // 각 채팅방에 대한 상대방의 프로필을 출력
         return (
           <Chat
             key={chatRoom.chatRoomId}
-            name={partner ? partner.name : 'Unknown'}
-            profileImg={partner ? partner.profileImg : 'defaultProfileImg.jpg'}
-            isActive={partner ? partner.isActive : false}
+            name={partner ? partner.name : ''}
+            profileImg={partner ? partner.profileImg : ''}
+            lastChatContent={lastChat ? lastChat.content : 'No messages yet'}
+            lastChatTime={lastChat ? lastChat.time : ''}
+            $isRead={lastChat ? lastChat.isRead : false}
           />
         );
       })}
