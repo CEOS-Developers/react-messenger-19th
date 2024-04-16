@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import Chat from '../Chats/Chat';
@@ -39,8 +40,14 @@ const TitleText = styled.div`
 `;
 
 export default function ChatsList() {
+  const navigate = useNavigate();
   const chattings = useSelector((state: RootState) => state.chat.chattings);
   const userList = useSelector((state: RootState) => state.user.userList);
+
+  // 채팅방 클릭 핸들러 함수
+  const handleChatClick = (chatRoomId: number) => {
+    navigate(`/chatroom/${chatRoomId}`); // `/chatroom/{id}` 경로로 이동
+  };
 
   return (
     <ChatsListPageContainer>
@@ -62,14 +69,16 @@ export default function ChatsList() {
 
         // 각 채팅방에 대한 상대방의 프로필을 출력
         return (
-          <Chat
-            key={chatRoom.chatRoomId}
-            name={partner ? partner.name : ''}
-            profileImg={partner ? partner.profileImg : ''}
-            lastChatContent={lastChat ? lastChat.content : 'No messages yet'}
-            lastChatTime={lastChat ? lastChat.time : ''}
-            $isRead={lastChat ? lastChat.isRead : false}
-          />
+          <div onClick={() => handleChatClick(chatRoom.chatRoomId)}>
+            <Chat
+              key={chatRoom.chatRoomId}
+              name={partner ? partner.name : ''}
+              profileImg={partner ? partner.profileImg : ''}
+              lastChatContent={lastChat ? lastChat.content : 'No messages yet'}
+              lastChatTime={lastChat ? lastChat.time : ''}
+              $isRead={lastChat ? lastChat.isRead : false}
+            />
+          </div>
         );
       })}
     </ChatsListPageContainer>
