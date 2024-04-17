@@ -45,6 +45,11 @@ export default function ChatsList() {
   const userList = useSelector((state: RootState) => state.user.userList);
   const chattings = useSelector((state: RootState) => state.chat.chattings);
 
+  // 현재 nowUser가 포함된 채팅방만 필터링
+  const filteredChattings = chattings.filter((chatRoom) =>
+    chatRoom.userList.includes(nowUser)
+  );
+
   // 채팅방 클릭 핸들러 함수
   const handleChatClick = (chatRoomId: number) => {
     navigate(`/chatroom/${chatRoomId}`); // `/chatroom/{id}` 경로로 이동
@@ -57,7 +62,7 @@ export default function ChatsList() {
         <TitleText>New Group</TitleText>
       </TitleContainer>
 
-      {chattings.map((chatRoom) => {
+      {filteredChattings.map((chatRoom) => {
         // 현재 채팅방에서 현재 사용자를 제외한 상대방의 정보를 찾기
         const partner =
           userList.find(

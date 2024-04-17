@@ -62,13 +62,13 @@ export default function TitleBar(props: TitleBarProps) {
   const navigate = useNavigate();
 
   const handleChangeUser = () => {
-    // 현재 nowUser와 일치하는 사용자 객체를 찾습니다.
+    // 현재 nowUser와 일치하는 사용자 객체를 찾기
     const currentIndex = userList.findIndex(
       (user: User) => user.id === nowUser
     );
     const nextIndex = currentIndex === 0 ? 1 : 0;
     const nextUser = userList[nextIndex];
-    // 여기서 nextUser.id를 전달해야 합니다. changeUser 액션이 사용자 ID를 기대한다고 가정합니다.
+    // 여기서 nextUser.id를 전달. changeUser 액션이 사용자 ID를 기대한다고 가정
     dispatch(changeUser(nextUser.id));
   };
 
