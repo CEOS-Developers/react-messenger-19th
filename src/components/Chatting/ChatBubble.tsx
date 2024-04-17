@@ -104,7 +104,9 @@ interface TextContainerProps {
 export default function ChatBubble(props: ChatBubbleProps) {
   const chatTextRef = useRef<HTMLDivElement>(null);
   const [flexDirection, setFlexDirection] = useState<string>('column');
+  const { $isSentByMe, content, time, $isRead } = props;
 
+  // TextContainer의 flex-direction을 텍스트의 길이에 따라 결정
   useEffect(() => {
     const checkTextWidth = () => {
       if (chatTextRef.current) {
@@ -124,8 +126,6 @@ export default function ChatBubble(props: ChatBubbleProps) {
     window.addEventListener('resize', checkTextWidth);
     return () => window.removeEventListener('resize', checkTextWidth);
   }, []);
-
-  const { $isSentByMe, content, time, $isRead } = props;
 
   return (
     <ChatBubbleContainer $isSentByMe={$isSentByMe}>

@@ -75,7 +75,10 @@ export default function ChatsList() {
 
         // 각 채팅방에 대한 상대방의 프로필을 출력
         return (
-          <div onClick={() => handleChatClick(chatRoom.chatRoomId)}>
+          <div
+            key={chatRoom.chatRoomId}
+            onClick={() => handleChatClick(chatRoom.chatRoomId)}
+          >
             <Chat
               key={chatRoom.chatRoomId}
               name={partner ? partner.name : ''}

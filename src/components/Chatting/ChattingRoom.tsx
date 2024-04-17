@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { Chats } from '../../types/interface';
 import ChatBubble from './ChatBubble';
-import FormatTimeToAMPM from './FormatTimeToAMPM';
-import FormatDateToDMY from './FormatDateToDMY';
+import FormatTimeToAMPM from '../../utils/formatTimeToAMPM';
+import FormatDateToDMY from '../../utils/formatDateToDMY';
 
 const ChattingPageContainer = styled.div`
   width: 23.4375rem;
@@ -73,6 +73,7 @@ export default function ChattingRoom({ chatList }: Chats) {
 
         const todayDateStringDMY = getTodayDateStringDMY();
         const isToday = chatDateDMY === todayDateStringDMY; // 현재 채팅 날짜가 오늘인지 확인
+        const isSentByMe = chat.senderId === nowUser;
 
         return (
           <React.Fragment key={chat.id}>
@@ -82,7 +83,7 @@ export default function ChattingRoom({ chatList }: Chats) {
               </DateContainer>
             )}
             <ChatBubble
-              $isSentByMe={chat.senderId === nowUser} // 현재 사용자가 보낸 메시지인지 확인
+              $isSentByMe={isSentByMe} // 현재 사용자가 보낸 메시지인지 확인
               content={chat.content}
               time={FormatTimeToAMPM(chat.time)}
               $isRead={chat.isRead}

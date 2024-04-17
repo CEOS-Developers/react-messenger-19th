@@ -1,5 +1,5 @@
 // 채팅 시간을 "09:41am" 형식의 문자열로 변환하는 함수
-export default function FormatTimeToAMPM(dateInput: Date | string): string {
+export default function formatTimeToAMPM(dateInput: Date | string): string {
   const date = typeof dateInput === 'string' ? new Date(dateInput) : dateInput;
 
   let hours = date.getHours();

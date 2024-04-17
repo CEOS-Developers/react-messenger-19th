@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import { TitleBarProps } from '../../types/interface';
 import { ChatProps } from '../../types/interface';
-import FormatDateToDMY from '../Chatting/FormatDateToDMY';
+import FormatDateToDMY from '../../utils/formatDateToDMY';
 import checkmark from '../../assets/img/checkmark.svg';
 
 // 각각의 채팅

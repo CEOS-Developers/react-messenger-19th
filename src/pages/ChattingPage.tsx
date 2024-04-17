@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { User } from '../types/interface';
-import { useParams } from 'react-router-dom';
 import { Chats } from '../types/interface';
 import TitleBar from '../components/Chatting/TitleBar';
 import ChattingRoom from '../components/Chatting/ChattingRoom';

@@ -1,10 +1,12 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeUser } from '../../features/userSlice';
 import { RootState } from '../../store';
 import { TitleBarProps } from '../../types/interface';
 import { User } from '../../types/interface';
+import { Chats } from '../../types/interface';
 import TopNavBar from '../TopNavBar/TopNavBar';
 import Left from '../../assets/img/left.svg';
 import Call from '../../assets/img/call.svg';
@@ -55,21 +57,32 @@ const OnlineText = styled.div`
 
 export default function TitleBar(props: TitleBarProps) {
   const { name, profileImg, isActive } = props;
-
+  const { chatRoomId } = useParams();
   const nowUser = useSelector((state: RootState) => state.user.nowUser);
-  const userList = useSelector((state: RootState) => state.user.userList);
+  const chattings = useSelector((state: RootState) => state.chat.chattings);
+  const [chatRoom, setChatRoom] = useState<Chats | null>(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleChangeUser = () => {
-    // 현재 nowUser와 일치하는 사용자 객체를 찾기
-    const currentIndex = userList.findIndex(
-      (user: User) => user.id === nowUser
+  useEffect(() => {
+    // chatRoomId를 사용하여 해당 채팅방 찾기 및 설정
+    const foundChatRoom = chattings.find(
+      (chat) => chat.chatRoomId.toString() === chatRoomId
     );
-    const nextIndex = currentIndex === 0 ? 1 : 0;
-    const nextUser = userList[nextIndex];
-    // 여기서 nextUser.id를 전달. changeUser 액션이 사용자 ID를 기대한다고 가정
-    dispatch(changeUser(nextUser.id));
+    setChatRoom(foundChatRoom ?? null);
+  }, [chatRoomId, chattings]); // chattings 또는 chatRoomId 변경 시 effect 실행
+
+  const handleChangeUser = () => {
+    if (chatRoom && chatRoom.userList && chatRoom.userList.length > 0) {
+      const currentChatRoomUserList = chatRoom.userList;
+      const currentIndex = currentChatRoomUserList.findIndex(
+        (userId) => userId === nowUser
+      );
+      const nextUserIndex = (currentIndex + 1) % currentChatRoomUserList.length;
+      const nextUserId = currentChatRoomUserList[nextUserIndex];
+
+      dispatch(changeUser(nextUserId));
+    }
   };
 
   return (
@@ -83,7 +96,9 @@ export default function TitleBar(props: TitleBarProps) {
         <ProfileImg
           src={profileImg}
           alt="유저 프로필"
-          onClick={() => navigate('/contact-info')}
+          onClick={() =>
+            navigate('/contact-info', { state: { userId: nowUser } })
+          }
         />
         <ProfileInnerContainer onClick={handleChangeUser}>
           <ProfileName>{name}</ProfileName>

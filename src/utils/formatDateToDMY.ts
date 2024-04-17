@@ -1,5 +1,5 @@
 // 채팅 시간을 "dd/mm/yy" 형식의 문자열로 변환하는 함수
-export default function FormatDateToDMY(dateString: Date | string) {
+export default function formatDateToDMY(dateString: Date | string) {
   const date = new Date(dateString);
   const day = date.getDate();
   const month = date.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줌
