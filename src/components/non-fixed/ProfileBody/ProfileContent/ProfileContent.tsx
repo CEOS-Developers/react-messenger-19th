@@ -104,7 +104,7 @@ export default function ProfileContent() {
         </a>
       </StyledSnsContainer>
       <StyledSnsContainer>
-        <SnsImage src="/images/Github.svg" />
+        <SnsImage src="/images/GitHub.svg" />
         <SnsName>Github</SnsName>
         <a
           href={'https://github.com/Programming-Seungwan'}
