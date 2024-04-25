@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { isMessageOwnerEqualsWithModeProps } from 'type/type';
+import { isMessageOwnerEqualsWithModeProps } from 'types/type';
 
 const StyledChatLogLeft = styled.div`
   width: auto;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { dateStringProps } from 'type/type';
+import { dateStringProps } from 'types/type';
 import { dateBeforeAfter } from '@styles/styledComponents';
 import { chatBodyDivElementGap } from '@styles/styledComponents';
 

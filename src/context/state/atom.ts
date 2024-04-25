@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { messageDataObject } from '@_type/type';
+import { messageDataObject } from 'types/type';
 
 export const messageDataState = atom({
   key: 'messageData',

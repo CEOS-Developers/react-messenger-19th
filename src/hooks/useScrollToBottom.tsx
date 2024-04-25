@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
 import { scrollToBottomState } from '@context/state/atom';
-import { voidFunction } from '@_type/type';
+import { voidFunction } from 'types/type';
 
 export default function useScrollToBottom() {
   const [scrollToBottom, setScrollToBottom] =

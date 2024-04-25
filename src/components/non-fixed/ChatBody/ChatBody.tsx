@@ -7,7 +7,7 @@ import {
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import OneDateContainer from '@components/non-fixed/ChatBody/OneDateContainer/OneDateContainer';
-import { messageDataObject, voidFunction } from '@_type/type';
+import { messageDataObject, voidFunction } from 'types/type';
 import sortByDate from '@utils/sortArrayByDate';
 import useScrollToBottom from '@hooks/useScrollToBottom';
 
