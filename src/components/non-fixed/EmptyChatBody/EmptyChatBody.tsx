@@ -16,7 +16,7 @@ const StyledEmptyChatBody = styled.div`
 const StyledProfileGroupUIContainer = styled.div`
   width: 100%;
   height: fit-content;
-  /* padding: 16px 94px 0px 94px; */
+
   padding-top: 16px;
   display: flex;
   justify-content: center;

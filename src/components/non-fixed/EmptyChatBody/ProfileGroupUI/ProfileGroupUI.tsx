@@ -2,11 +2,9 @@
 import styled from 'styled-components';
 
 const StyledProfileGroupUI = styled.div`
-  /* width: 187px; */
   width: 100%;
   height: 187px;
-  /* margin: 16px 94px 0px 94px; */
-  /* background-color: black; */
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -15,12 +13,11 @@ const StyledProfileGroupUI = styled.div`
 `;
 
 const StyledEightyDiscordImage = styled.img`
-  widh: 80px;
+  width: 80px;
   height: 80px;
 `;
 
 const StyledNameComponent = styled.div`
-  /* width: 116px; */
   width: 100%;
   height: 68px;
   display: flex;
@@ -31,7 +28,6 @@ const StyledNameComponent = styled.div`
 `;
 
 const StyledBigName = styled.p`
-  /* width: 83px; */
   width: 100%;
   height: 41px;
   font-size: ${(props) => props.theme.textStyle.fontSize.h1};
