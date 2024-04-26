@@ -18,7 +18,7 @@ interface navigateFunction {
 interface messageListItemType {
   discordLogoColor: string;
   name: string;
-  ifBlueSignal: boolean;
+  $ifBlueSignal: boolean;
   content: string;
   dateString: string;
   navigateToChatFunc: navigateFunction;
@@ -28,7 +28,7 @@ interface messageListItemType {
 export default function MessageListItem({
   discordLogoColor,
   name,
-  ifBlueSignal,
+  $ifBlueSignal,
   content,
   dateString,
   navigateToChatFunc,
@@ -39,7 +39,7 @@ export default function MessageListItem({
       <MessageListItemLeft discordLogoColor={discordLogoColor} />
       <MessageListItemRight
         name={name}
-        ifBlueSignal={ifBlueSignal}
+        $ifBlueSignal={$ifBlueSignal}
         content={content}
         dateString={dateString}
       />

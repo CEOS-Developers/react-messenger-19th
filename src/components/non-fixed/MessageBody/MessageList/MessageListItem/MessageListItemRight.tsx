@@ -11,7 +11,7 @@ const StyledMessageListItemRight = styled.div`
 `;
 
 interface messageListItemRightInnerType {
-  ifBlueSignal: boolean;
+  $ifBlueSignal: boolean;
 }
 
 const StyledMessageListItemRightInner = styled.div<messageListItemRightInnerType>`
@@ -52,7 +52,7 @@ const StyledDateString = styled.div`
 
 interface messageListItemRightType {
   name: string;
-  ifBlueSignal: boolean;
+  $ifBlueSignal: boolean;
   content: string;
   dateString: string;
 }
@@ -61,19 +61,19 @@ const StyledBlueSignalImage = styled.img``;
 
 export default function MessageListItemRight({
   name,
-  ifBlueSignal,
+  $ifBlueSignal,
   content,
   dateString,
 }: messageListItemRightType) {
   return (
     <StyledMessageListItemRight>
-      <StyledMessageListItemRightInner ifBlueSignal={ifBlueSignal}>
+      <StyledMessageListItemRightInner $ifBlueSignal={$ifBlueSignal}>
         <StyledNameSpan>{name}</StyledNameSpan>
-        {ifBlueSignal === true ? (
+        {$ifBlueSignal === true ? (
           <StyledBlueSignalImage src="/images/blueSignal.svg" />
         ) : null}
       </StyledMessageListItemRightInner>
-      <StyledMessageListItemRightInner ifBlueSignal={true}>
+      <StyledMessageListItemRightInner $ifBlueSignal={true}>
         <StyledContentdiv>{content}</StyledContentdiv>
         <StyledDateString>{dateString}</StyledDateString>
       </StyledMessageListItemRightInner>

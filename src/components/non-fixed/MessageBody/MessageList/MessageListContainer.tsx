@@ -19,7 +19,7 @@ export default function MessageListContainer() {
       <MessageListItem
         discordLogoColor="green"
         name="김정민"
-        ifBlueSignal={true}
+        $ifBlueSignal={true}
         content={'내일 회의 괜찮으실까요?'}
         dateString={'20:45'}
         navigateToChatFunc={handleClickMessageListItem}
@@ -28,7 +28,7 @@ export default function MessageListContainer() {
       <MessageListItem
         discordLogoColor="purple"
         name="CEOS2024"
-        ifBlueSignal={true}
+        $ifBlueSignal={true}
         content={'내일 숙제 제출 마감일입니다! 늦지 않게 제출해주세요!'}
         dateString={'어제'}
         navigateToChatFunc={handleClickMessageListItem}
@@ -37,7 +37,7 @@ export default function MessageListContainer() {
       <MessageListItem
         discordLogoColor="purple"
         name="홍길동"
-        ifBlueSignal={false}
+        $ifBlueSignal={false}
         content={'내일 회의 괜찮으실까요?'}
         dateString={'3월 10일'}
         navigateToChatFunc={handleClickMessageListItem}
@@ -46,7 +46,7 @@ export default function MessageListContainer() {
       <MessageListItem
         discordLogoColor="purple"
         name="discord_design"
-        ifBlueSignal={false}
+        $ifBlueSignal={false}
         content={'내일 회의 괜찮으실까요?'}
         dateString={'2월 29일'}
         navigateToChatFunc={handleClickMessageListItem}

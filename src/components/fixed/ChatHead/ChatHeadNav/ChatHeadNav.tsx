@@ -3,6 +3,7 @@ import ChatHeadNavLeft from '@components/fixed/ChatHead/ChatHeadNav/ChatHeadNavL
 import ChatHeadNavRight from '@components/fixed/ChatHead/ChatHeadNav/ChatHeadNavRight';
 
 export const StyledChatHeadNav = styled.nav`
+  height: 64px;
   flex-grow: 1;
   flex-shrink: 0;
   display: flex;

@@ -9,6 +9,7 @@ const StyledIphoneStatusBar = styled.div`
   justify-content: space-between;
   align-items: center;
   column-gap: 195px;
+  flex-shrink: 0;
 `;
 
 export default function IphoneStatusBar() {
