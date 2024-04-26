@@ -6,7 +6,6 @@ const StyledFriendsList = styled.div`
   height: fit-content;
 `;
 
-// 임시 UI를 위한 텍스트 집합
 const tmpFriendsList = [
   'discord_redesign1',
   '김정민',
@@ -17,6 +16,8 @@ const tmpFriendsList = [
 ];
 
 export default function FriendsList() {
+  // 임시 UI를 위한 텍스트 집합
+
   return (
     <StyledFriendsList>
       {tmpFriendsList.map((friendsName, index) => (

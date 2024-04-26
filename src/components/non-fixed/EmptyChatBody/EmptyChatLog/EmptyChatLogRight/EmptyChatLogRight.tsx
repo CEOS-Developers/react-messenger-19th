@@ -93,7 +93,7 @@ export default function EmptytChatLogRight({
     }
     setMessageData(deepCopiedMessageData);
     localStorage.setItem(
-      'chatMessageData',
+      `chatMessageData${username}`,
       JSON.stringify(deepCopiedMessageData)
     );
     // 메시지 버튼이 눌렸는지에 관한 상태를 true로 만들어주고 chatBody에서 useEffect에서 조건부로 검사함
