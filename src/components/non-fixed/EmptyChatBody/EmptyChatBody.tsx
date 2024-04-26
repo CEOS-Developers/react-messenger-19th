@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 import ProfileGroupUI from '@components/non-fixed/EmptyChatBody/ProfileGroupUI/ProfileGroupUI';
-import { useEffect } from 'react';
-import { messageDataObject } from 'types/type';
+import EmptyOneDateContainer from './EmptyOneDateContainer/EmptyOneDateContainer';
+import { useEffect, useRef } from 'react';
+import { messageDataObject, voidFunction } from 'types/type';
 import { useRecoilState } from 'recoil';
-import { messageDataState, messageDateArrayState } from '@context/state/atom';
+import {
+  messageDataState,
+  messageDateArrayState,
+  isMessageLikeButtonClickedState,
+} from '@context/state/atom';
 import ldsh from 'lodash'; // 객체의 깊은 비교를 위한 라이브러리에 해당
+import useScrollToBottom from '@hooks/useScrollToBottom';
 
 const StyledEmptyChatBody = styled.div`
   flex-grow: 1;
@@ -13,7 +19,7 @@ const StyledEmptyChatBody = styled.div`
   margin-left: 16px;
   width: 343px;
   overflow-y: scroll;
-  display: flex;
+  /* display: flex; */
   /* flex-direction: column; */
 `;
 
@@ -31,10 +37,36 @@ export default function EmptyChatBody({
 }: {
   username: string | undefined;
 }) {
+  const emptyChatBodyContainerRef = useRef<HTMLDivElement>(null);
   const [messageData, setMessageData] = useRecoilState(messageDataState);
   const [messageDateArray, setMessageDateArray] = useRecoilState(
     messageDateArrayState
   );
+
+  const [isMessageLikeButtonClicked, setIsMessageLikeButtonClicked] =
+    useRecoilState(isMessageLikeButtonClickedState);
+
+  const [scrollToBottom, setScrollFunction] = useScrollToBottom();
+
+  const scrollToBottomFunction: voidFunction = function () {
+    if (emptyChatBodyContainerRef.current) {
+      emptyChatBodyContainerRef.current.scrollTop =
+        emptyChatBodyContainerRef.current.scrollHeight;
+    }
+  };
+
+  useEffect(() => {
+    setScrollFunction(scrollToBottomFunction);
+  }, []);
+
+  useEffect(() => {
+    // 좋아요 버튼이 눌린 상태면 하트 UI만 만들어주고 다시 false로 만들어주고 끝내야 다음 상태가 정상적으로 반영
+    setIsMessageLikeButtonClicked(false);
+    if (isMessageLikeButtonClicked === true) {
+      return;
+    }
+    scrollToBottom();
+  }, [messageData]);
 
   // 기존의 데이터가 없으면 로고를 보여주고, 아니면 이에 맞는 메시지 데이터들을 보여주면 된다
 
@@ -63,12 +95,22 @@ export default function EmptyChatBody({
   }, []);
 
   return (
-    <StyledEmptyChatBody className="scroll-box">
+    <StyledEmptyChatBody className="scroll-box" ref={emptyChatBodyContainerRef}>
       {ldsh.isEqual(messageData, {}) && messageDateArray.length === 0 && (
         <StyledProfileGroupUIContainer>
           <ProfileGroupUI username={username} />
         </StyledProfileGroupUIContainer>
       )}
+      {!ldsh.isEqual(messageData, {}) &&
+        !(messageDateArray.length === 0) &&
+        messageDateArray.map((messageDate) => {
+          return (
+            <EmptyOneDateContainer
+              key={messageDate}
+              messageDate={messageDate}
+            />
+          );
+        })}
     </StyledEmptyChatBody>
   );
 }

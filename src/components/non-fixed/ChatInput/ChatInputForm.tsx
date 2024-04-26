@@ -8,9 +8,9 @@ import {
   messageDateArrayState,
   userNumberState,
 } from '@context/state/atom';
-import { flushSync } from 'react-dom';
 import { adjustTimeForUserLocation } from '@utils/makeTimeString';
 import sortByDate from '@utils/sortArrayByDate';
+import { useParams } from 'react-router-dom';
 
 const StyledChatInputForm = styled.form`
   width: 100%;
@@ -70,6 +70,8 @@ const StyledClearSendIcon = styled.img`
 `;
 
 export default function ChatInputForm() {
+  const { username } = useParams(); // input form은 chat에서도 나타나고 chat/다른사용자에서도 나타남
+
   const inputRef = useRef<HTMLInputElement>(null);
   const [isInputBoxFocused, setIsInputBoxFocused] = useRecoilState(
     isInputBoxFocusedState
@@ -143,9 +145,13 @@ export default function ChatInputForm() {
       }
       setMessageData(tmpMessageData);
       setMessageDateArray(tmpMessageDateArray);
-      localStorage.setItem('chatMessageData', JSON.stringify(tmpMessageData));
+      const usernameVariable = username === undefined ? '' : username; // chat/뭐시기 url에서도 inputform을 낭낭하게 써먹기 위한 설정
       localStorage.setItem(
-        'chatMessageDateArray',
+        `chatMessageData${usernameVariable}`,
+        JSON.stringify(tmpMessageData)
+      );
+      localStorage.setItem(
+        `chatMessageDateArray${usernameVariable}`,
         JSON.stringify(tmpMessageDateArray)
       );
       if (inputRef.current !== null) {
