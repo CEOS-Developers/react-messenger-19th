@@ -14,37 +14,37 @@
     },
     {
       "id": 2,
-      "name": "Leah S.",
+      "name": "Leah Stimptson",
       "profileImg": "/img/LeahStimptson.svg",
       "isActive": true
     },
     {
       "id": 3,
-      "name": "Colin B.",
+      "name": "Colin Bearman",
       "profileImg": "/img/ColinBearman.svg",
       "isActive": false
     },
     {
       "id": 4,
-      "name": "Charile M.",
+      "name": "Charile Moore",
       "profileImg": "/img/CharileMoore.svg",
       "isActive": true
     },
     {
       "id": 5,
-      "name": "Hailey S.",
+      "name": "Hailey Stephenson",
       "profileImg": "/img/HaileyStephenson.svg",
       "isActive": false
     },
     {
       "id": 6,
-      "name": "Sena A.",
+      "name": "Sena Adams",
       "profileImg": "/img/SenaAdams.svg",
       "isActive": false
     },
     {
       "id": 7,
-      "name": "Sienna H.",
+      "name": "Sienna Hwang",
       "profileImg": "/img/SiennaHwang.svg",
       "isActive": true
     },

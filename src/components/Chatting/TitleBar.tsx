@@ -72,6 +72,16 @@ export default function TitleBar(props: TitleBarProps) {
     setChatRoom(foundChatRoom ?? null);
   }, [chatRoomId, chattings]); // chattings 또는 chatRoomId 변경 시 effect 실행
 
+  // 이름 변환 로직
+  const getFormattedName = (name: string) => {
+    const parts = name.split(' ');
+    if (parts.length > 1) {
+      const lastInitial = parts.pop()!.charAt(0); // 띄어쓰기 다음 첫 글자 구하기. parts.pop()의 결과가 undefined가 아니라는 것을 명시하기 위해 !를 사용함
+      return `${parts.join(' ')} ${lastInitial}.`;
+    }
+    return name; // 이름에 공백이 없는 경우 변환 없이 반환
+  };
+
   const handleChangeUser = () => {
     if (chatRoom && chatRoom.userList && chatRoom.userList.length > 0) {
       const currentChatRoomUserList = chatRoom.userList;
@@ -101,7 +111,7 @@ export default function TitleBar(props: TitleBarProps) {
           }
         />
         <ProfileInnerContainer onClick={handleChangeUser}>
-          <ProfileName>{name}</ProfileName>
+          <ProfileName>{getFormattedName(name)}</ProfileName>
           {isActive ? (
             <OnlineText>online</OnlineText>
           ) : (
