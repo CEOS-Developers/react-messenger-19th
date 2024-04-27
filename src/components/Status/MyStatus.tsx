@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import MyProfile from '../../assets/img/my-profile.svg';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import add from '../../assets/img/status-add.svg';
 import camera from '../../assets/img/status-camera.svg';
 import edit from '../../assets/img/status-edit.svg';
 
@@ -23,9 +25,18 @@ const MyStatusContainer = styled.div`
 const ProfileImg = styled.img`
   width: 3.625rem;
   height: 3.625rem;
+  border-radius: 3.625rem;
   position: absolute;
   left: 0.81rem;
   top: 0.56rem;
+`;
+
+const AddImg = styled.img`
+  width: 1.25rem;
+  height: 1.25rem;
+  position: absolute;
+  left: 3.19rem;
+  top: 2.97rem;
 `;
 
 const MyStatusText = styled.div`
@@ -83,12 +94,16 @@ const TipContainer = styled.div`
 
 export default function MyStatus() {
   const navigate = useNavigate();
+  const nowUser = useSelector((state: RootState) => state.user.nowUser); // 현재 사용자 ID
+  const userList = useSelector((state: RootState) => state.user.userList);
+  const currentUser = userList.find((user) => user.id === nowUser); // 현재 사용자 정보 찾기
 
   return (
     <StatusPageContainer>
       <MyStatusContainer>
-        <ProfileImg src={MyProfile} alt="나의 프로필 이미지" />
-        <MyStatusText>My Status</MyStatusText>
+        <ProfileImg src={currentUser?.profileImg} alt="나의 프로필 이미지" />
+        <AddImg src={add} alt="프로필 플러스 이미지" />
+        <MyStatusText>{currentUser?.name}</MyStatusText>
         <SubText style={{ top: '2.62rem', left: '5rem' }}>
           Give me magarita
         </SubText>

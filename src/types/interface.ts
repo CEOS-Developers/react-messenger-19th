@@ -1,3 +1,4 @@
+// 재사용하는 경우 분리해놓음
 export interface TitleBarProps {
   name: string;
   profileImg: string;
