@@ -4,11 +4,11 @@ import { messagesState, Message } from '../state/messageState';
 import { selectedUserState } from '../state/selectedUserState';
 import styled from 'styled-components';
 
-const plusIcon = "./assets/icon.png";
-const emojiIcon = "./assets/icon (1).png";
-const cameraIcon = "./assets/icon (2).png";
-const recordIcon = "./assets/icon (3).png";
-const sendIcon = "./assets/send icon.png";
+const plusIcon = "/assets/icon.png";
+const emojiIcon = "/assets/icon (1).png";
+const cameraIcon = "/assets/icon (2).png";
+const recordIcon = "/assets/icon (3).png";
+const sendIcon = "/assets/send icon.png";
 
 interface InputBoxProps {
     expanded: boolean;

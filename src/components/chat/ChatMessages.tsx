@@ -154,7 +154,7 @@ const loadEmojisFromLocalStorage = () => {
                         <MessageItem 
                           key={message.id}
                           isSender={message.senderId === selectedUserId}
-                          onDoubleClick={() =>  toggleEmojiModalForMessage(message.id.toString())} 
+                          onDoubleClick={() => toggleEmojiModalForMessage(message.id.toString())} 
                           style={{ cursor: "pointer" }}
                           >
                           {message.text}

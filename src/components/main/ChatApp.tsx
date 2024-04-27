@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './Header'; 
 import styled from 'styled-components';
 import UserProfile from '../chat/UserProfile';
@@ -13,24 +14,11 @@ const ChatApp: React.FC = () => {
   const [messages, setMessages] = useRecoilState(messagesState); 
   const [selectedFriend, setSelectedFriend] = useState({profileImage: '', name: '', phoneNumber: ''});
   
-  const handleBackButtonClick = () => {
-    console.log('Back button clicked');
-  };
-
-  const handleCallButtonClick = () => {
-    console.log('Call button clicked');
-  };
-
   return (
     <Container>
     <AppContainer>
-    <IphoneHeader src='./assets/Status Bar.png'/>
-      <Header
-        onBackButtonClick={handleBackButtonClick}
-        profilePic={selectedFriend.profileImage}
-        name={selectedFriend.name}
-        onCallButtonClick={handleCallButtonClick}
-      />
+    <IphoneHeader src='/assets/Status Bar.png'/>
+      <Header/>
       {messages.length > 0 ? ( // 조건부 렌더링: 이전에 나눈 대화가 있으면 ChatMessages 보여줌
         <ChatMessages />
       ) : ( // 이전에 나눈 대화 없으면 UserProfile 보여줌 (기본)
@@ -41,7 +29,7 @@ const ChatApp: React.FC = () => {
         />
       )}
         <ChatInput />
-        <IphoneFooter src='./assets/Home Indicator.png'/>
+        <IphoneFooter src='/assets/Home Indicator.png'/>
     </AppContainer>
     </Container>
   );

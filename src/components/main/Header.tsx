@@ -1,21 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
-import {useRecoilState} from 'recoil';
+import { useRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
 import { selectedUserState } from '../state/selectedUserState';
 import { usersState } from '../state/userState';
 
-interface HeaderProps {
-  onBackButtonClick: () => void;
-  profilePic: string;
-  name: string;
-  onCallButtonClick: () => void;
-}
 
-const Header: React.FC<HeaderProps> = ({ onBackButtonClick, onCallButtonClick }) => {
+const Header: React.FC = () => {
+  const navigate = useNavigate();
   const [selectedUserId, setSelectedUserId] = useRecoilState(selectedUserState);
   const [users] = useRecoilState(usersState);
 
   const selectedUser = users.find(user => user.id === selectedUserId) ?? users[0];
+
+  const handleBackButtonClick = () => {
+    navigate(-1); // 뒤로가기 로직
+  };
+
+  const handleCallButtonClick = () => {
+    console.log('Call button clicked'); // 전화 걸기 로직
+  };
+
+
 
   const toggleUser = () => {
     // 1번이랑 2번만 토글,,
@@ -27,13 +33,13 @@ const Header: React.FC<HeaderProps> = ({ onBackButtonClick, onCallButtonClick })
     return (
       <HeaderContainer>
         <LeftContainer>
-          <BackButton src='./assets/back.png' alt='Back' onClick={onBackButtonClick}/>
+          <BackButton src='/assets/back.png' alt='Back' onClick={handleBackButtonClick}/>
           <ProfileContainer onClick={toggleUser}>
             <ProfilePic src={selectedUser.profileImage} alt="Profile" />
             <Name>{selectedUser.name}</Name>
           </ProfileContainer>
         </LeftContainer>
-        <CallButton src='./assets/Call.png' alt='Call' onClick={onCallButtonClick}/>
+        <CallButton src='/assets/Call.png' alt='Call' onClick={handleCallButtonClick}/>
       </HeaderContainer>
     );
   };
