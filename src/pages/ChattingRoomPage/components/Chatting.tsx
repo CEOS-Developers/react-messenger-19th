@@ -76,7 +76,7 @@ export default function Chatting() {
       const month = chat.date.slice(5, 7);
       const day = chat.date.slice(8, 10);
       return (
-        <Fragment key={idx + 100}>
+        <Fragment key={chat.date}>
           <DateContainer>
             {year}년 {month}월 {day}일
           </DateContainer>
