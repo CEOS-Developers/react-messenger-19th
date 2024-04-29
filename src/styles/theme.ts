@@ -11,13 +11,27 @@ const colors = {
 };
 
 const fonts = {
+  friendsName: css`
+    font-family: 'Pretendard';
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%; /* 22.4px */
+    letter-spacing: -0.32px;
+  `,
+  mainUser: css`
+    font-family: 'Pretendard';
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 28px */
+  `,
   message: css`
     font-family: 'Pretendard';
     font-size: 1.4rem;
     font-style: normal;
     font-weight: 500;
     line-height: 140%;
-    letter-spacing: -0.028rem;
   `,
   date: css`
     font-family: 'Pretendard';
