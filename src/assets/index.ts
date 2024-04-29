@@ -14,3 +14,7 @@ export { ReactComponent as MoreColumnIcon } from '../assets/icon/moreColumn.svg'
 export { ReactComponent as ConversationIcon } from '../assets/icon/conversation.svg';
 export { ReactComponent as HomeFilledIcon } from '../assets/icon/homeFilled.svg';
 export { ReactComponent as FriendsPageIcon } from '../assets/icon/friendsPage.svg';
+export { ReactComponent as MainProfileIcon } from '../assets/icon/mainProfile.svg';
+export { ReactComponent as DownArrowIcon } from '../assets/icon/downArrow.svg';
+export { ReactComponent as InstaIcon } from '../assets/icon/insta.svg';
+export { ReactComponent as GithubIcon } from '../assets/icon/github.svg';
