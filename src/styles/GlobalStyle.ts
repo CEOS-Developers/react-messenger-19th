@@ -11,6 +11,13 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
+  [id="root"] {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+  }
   body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
