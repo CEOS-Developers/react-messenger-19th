@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { HomeIndicatorIcon } from '../../assets';
 
-export default function Footer() {
+export default function FooterIcon() {
   return (
     <Wrapper>
       <HomeIndicatorIcon />
