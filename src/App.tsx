@@ -5,6 +5,8 @@ import { RecoilRoot } from 'recoil';
 import Main from './pages/Main';
 
 import MergeFooter from './components/common/MergeFooter';
+import ChatList from './pages/ChatList';
+import Header from './components/common/Header';
 
 function App(): JSX.Element {
 	return (
@@ -14,9 +16,10 @@ function App(): JSX.Element {
 					<MobileContainer>
 						<BrowserRouter>
 							<div style={{ position: 'relative', height: '100%' }}>
+								<Header color="white" />
 								<Routes>
 									<Route path="/" element={<Main />} />
-									{/* <Route path="" element={<ChatList />}> */}
+									<Route path="/ChatList" element={<ChatList />} />
 									<Route path="/ChatRoom" element={<ChatRoom />} />
 									{/* </Route> */}
 									{/* <Route path="my-page" element={<MyPage />} /> */}
