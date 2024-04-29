@@ -9,7 +9,7 @@ interface Tab {
 
 const tabs: Tab[] = [
 	{ iconSrc: '/icon/TabBarHome.svg', text: '홈', path: '/' },
-	{ iconSrc: '/icon/TabBarMessage.svg', text: '채팅', path: '/ChatRoom' },
+	{ iconSrc: '/icon/TabBarMessage.svg', text: '채팅', path: '/ChatList' },
 	{ iconSrc: '/icon/TabBarCall.svg', text: '통화', path: '/' },
 	{ iconSrc: '/icon/TabBarProfile.svg', text: '프로필', path: '/' },
 ];
