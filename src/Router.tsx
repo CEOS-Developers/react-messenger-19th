@@ -11,6 +11,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route path="" element={<FriendsPage />} />
           <Route path="/friends" element={<FriendsPage />} />
           <Route path="/chats" element={<ChatsPage />} />
           <Route path="/chatsDetail" element={<ChatsDetailPage />}>
