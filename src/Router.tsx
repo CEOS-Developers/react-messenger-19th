@@ -3,6 +3,7 @@ import Layout from './pages';
 import FriendsPage from './pages/FriendsPage';
 import ChatsPage from './pages/ChatsPage';
 import ChatsDetailPage from './pages/ChatsDetailPage';
+import ProfilePage from './pages/ProfilePage';
 import BoxLayout from './components/chatsDetailPage/BoxLayout';
 
 const Router = () => {
@@ -15,6 +16,7 @@ const Router = () => {
           <Route path="/chatsDetail" element={<ChatsDetailPage />}>
             <Route path=":userId" element={<BoxLayout />} />
           </Route>
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
       </Routes>
     </BrowserRouter>
