@@ -18,3 +18,4 @@ export { ReactComponent as MainProfileIcon } from '../assets/icon/mainProfile.sv
 export { ReactComponent as DownArrowIcon } from '../assets/icon/downArrow.svg';
 export { ReactComponent as InstaIcon } from '../assets/icon/insta.svg';
 export { ReactComponent as GithubIcon } from '../assets/icon/github.svg';
+export { ReactComponent as SendIcon } from '../assets/icon/send.svg';
