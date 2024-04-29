@@ -6,19 +6,9 @@ import UserList from '../components/units/Main/UserList';
 
 export default function Main(): JSX.Element {
 	return (
-		<div style={{ position: 'relative', height: '100%' }}>
+		<div>
 			<Header color="white" />
 			<UserList />
-			<MainFooter>
-				<FooterMenu />
-				<Footer />
-			</MainFooter>
 		</div>
 	);
 }
-
-const MainFooter = styled.div`
-	width: 100%;
-	position: absolute;
-	bottom: 0;
-`;

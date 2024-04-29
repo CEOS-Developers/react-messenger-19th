@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import ChatRoom from './pages/ChatRoom';
 import { RecoilRoot } from 'recoil';
 import Main from './pages/Main';
-import Header from './components/common/Header';
+
+import MergeFooter from './components/common/MergeFooter';
 
 function App(): JSX.Element {
 	return (
@@ -12,15 +13,18 @@ function App(): JSX.Element {
 				<FullContainer>
 					<MobileContainer>
 						<BrowserRouter>
-							<Routes>
-								<Route path="/" element={<Main />} />
-								{/* <Route path="" element={<ChatList />}> */}
-								<Route path="/ChatRoom" element={<ChatRoom />} />
-								{/* </Route> */}
-								{/* <Route path="my-page" element={<MyPage />} /> */}
-								{/* <Route path="menu1" element={<Menu1 />} /> */}
-							</Routes>
-							{/* <Footer /> */}
+							<div style={{ position: 'relative', height: '100%' }}>
+								<Routes>
+									<Route path="/" element={<Main />} />
+									{/* <Route path="" element={<ChatList />}> */}
+									<Route path="/ChatRoom" element={<ChatRoom />} />
+									{/* </Route> */}
+									{/* <Route path="my-page" element={<MyPage />} /> */}
+									{/* <Route path="menu1" element={<Menu1 />} /> */}
+								</Routes>
+
+								<MergeFooter />
+							</div>
 						</BrowserRouter>
 					</MobileContainer>
 				</FullContainer>
