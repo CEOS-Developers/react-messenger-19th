@@ -5,7 +5,7 @@ import ChatsBox from './ChatsBox';
 import formatDate from '../../utils/formatDate';
 
 export default function ChatsLayout() {
-  const backupChats = JSON.parse(localStorage.getItem('t') || '[]');
+  const backupChats = JSON.parse(localStorage.getItem('bckup') || '[]');
 
   return (
     <Wrapper>

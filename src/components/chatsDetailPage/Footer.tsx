@@ -32,8 +32,8 @@ export default function Footer() {
       details: { text: input, time: date()},
     };
     setChats((prevChats) => [...prevChats, newChat]);
-    const existingChats = JSON.parse(localStorage.getItem('t') || '[]');
-    localStorage.setItem('t', JSON.stringify([...existingChats, newChat]));
+    const existingChats = JSON.parse(localStorage.getItem('bckup') || '[]');
+    localStorage.setItem('bckup', JSON.stringify([...existingChats, newChat]));
   }
 
   return (

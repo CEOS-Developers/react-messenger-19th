@@ -14,19 +14,13 @@ export default function BoxLayout() {
   const currentId = parseInt(localStorage.getItem('userId') || '');
 
   const chats = useRecoilValue(chatsState);
-  const backupChats = JSON.parse(localStorage.getItem('t') || '[]');
+  const backupChats = JSON.parse(localStorage.getItem('bckup') || '[]');
 
   const scrollEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     scrollEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [chats]);
-
-  // chatData.data.forEach((chat) => {
-  //   const { details } = chat;
-  //   formatDate(details.time);
-  //   console.log(formatDate(details.time));
-  // });
 
   return (
     <Wrapper>
