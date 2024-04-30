@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { GithubIcon, InstaIcon, MainProfileIcon } from '../../assets';
+import { GithubIcon, InstaIcon, BhwProfileIcon } from '../../assets';
 
 export default function ProfileBox() {
   return (
     <Wrapper>
       <Header>
-        <MainProfileIcon />
+        <BhwProfileIcon />
         <Name>백현우</Name>
       </Header>
       <BorderLine />
@@ -39,6 +39,11 @@ const Header = styled.section`
 
   padding: 1rem 1.4rem;
   gap: 1.2rem;
+
+  & svg {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
 `;
 
 const BorderLine = styled.div`

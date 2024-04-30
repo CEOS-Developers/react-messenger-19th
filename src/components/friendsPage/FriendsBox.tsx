@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { DownArrowIcon, MainProfileIcon, ProfileIcon } from '../../assets';
+import { BhwProfileIcon, DownArrowIcon, ProfileIcon } from '../../assets';
 import userData from '../../assets/data/userData.json';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ export default function FriendsBox() {
   return (
     <Wrapper>
       <Header type="button" onClick={moveToProfile}>
-        <MainProfileIcon />
+        <BhwProfileIcon />
         <Name>백현우</Name>
       </Header>
       <BorderLine />
@@ -49,6 +49,11 @@ const Header = styled.button`
   margin-top: 1rem;
   padding: 1rem 1.4rem;
   gap: 1.2rem;
+
+  & svg {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
 `;
 
 const Name = styled.h2`

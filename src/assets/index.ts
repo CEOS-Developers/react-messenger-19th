@@ -19,3 +19,8 @@ export { ReactComponent as DownArrowIcon } from '../assets/icon/downArrow.svg';
 export { ReactComponent as InstaIcon } from '../assets/icon/insta.svg';
 export { ReactComponent as GithubIcon } from '../assets/icon/github.svg';
 export { ReactComponent as SendIcon } from '../assets/icon/send.svg';
+export { ReactComponent as BhwProfileIcon } from '../assets/icon/bhw.svg';
+export { ReactComponent as CdhProfileIcon } from '../assets/icon/cdh.svg';
+export { ReactComponent as HhiProfileIcon } from '../assets/icon/hhi.svg';
+export { ReactComponent as HscProfileIcon } from '../assets/icon/hsc.svg';
+export { ReactComponent as YesProfileIcon } from '../assets/icon/yes.svg';
