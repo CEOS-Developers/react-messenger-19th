@@ -2,11 +2,10 @@ import styled from 'styled-components';
 import userData from '../../assets/data/userData.json';
 import chatData from '../../assets/data/chatData.json';
 import ChatsBox from './ChatsBox';
-import { chatsState } from '../../recoil/atom';
-import { useRecoilValue } from 'recoil';
+import formatDate from '../../utils/formatDate';
 
 export default function ChatsLayout() {
-  const chats = useRecoilValue(chatsState);
+  const backupChats = JSON.parse(localStorage.getItem('t') || '[]');
 
   return (
     <Wrapper>
@@ -15,7 +14,7 @@ export default function ChatsLayout() {
         .map((user) => {
           const { id, name } = user;
 
-          const filteredChats = [...chatData.data, ...chats].filter((chat) => {
+          const filteredChats = [...chatData.data, ...backupChats].filter((chat) => {
             return (chat.from === 0 && chat.to === id) || (chat.to === 0 && chat.from === id);
           });
 
@@ -23,7 +22,7 @@ export default function ChatsLayout() {
           const text = lastChat ? lastChat.details.text : '';
           const time = lastChat ? lastChat.details.time : '';
 
-          return <ChatsBox key={id} id={id} name={name} text={text} time={time} />;
+          return <ChatsBox key={id} id={id} name={name} text={text} time={formatDate(time)} />;
         })}
     </Wrapper>
   );

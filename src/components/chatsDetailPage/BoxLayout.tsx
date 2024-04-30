@@ -3,37 +3,47 @@ import { flexCenter } from '../../styles/GlobalStyle';
 import userData from '../../assets/data/userData.json';
 import chatData from '../../assets/data/chatData.json';
 import { useRecoilValue } from 'recoil';
-import { chatsState, userIdState } from '../../recoil/atom';
+import { chatsState } from '../../recoil/atom';
 import RcvrBox from './RcvrBox';
 import SenderBox from './SenderBox';
 import { ChatType } from '../../types/types';
+import { useEffect, useRef } from 'react';
+import formatDate from '../../utils/formatDate';
 
 export default function BoxLayout() {
-  const userId = useRecoilValue(userIdState);
+  const currentId = parseInt(localStorage.getItem('userId') || '');
+
   const chats = useRecoilValue(chatsState);
+  const backupChats = JSON.parse(localStorage.getItem('t') || '[]');
 
-  // const scrollEndRef = useRef<HTMLDivElement>(null);
+  const scrollEndRef = useRef<HTMLDivElement>(null);
 
-  // useEffect(() => {
-  //   scrollEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  // }, [list]);
+  useEffect(() => {
+    scrollEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chats]);
+
+  // chatData.data.forEach((chat) => {
+  //   const { details } = chat;
+  //   formatDate(details.time);
+  //   console.log(formatDate(details.time));
+  // });
 
   return (
     <Wrapper>
       <Date>오늘</Date>
       <Layout>
-        {[...chatData.data, ...chats].map((chat: ChatType) => {
+        {[...chatData.data, ...backupChats].map((chat: ChatType) => {
           const { id, details } = chat;
-          const user = userData.data.find((user) => user.id === userId);
+          const user = userData.data.find((user) => user.id === currentId);
           if (!user) return null; //user undefined 타입스크립트 에러 때문에
-          if (chat.from === userId) {
-            return <RcvrBox key={id} name={user.name} text={details.text} time={details.time} />;
-          } else if (chat.to === userId) {
-            return <SenderBox key={id} time={details.time} text={details.text} />;
+          if (chat.from === currentId) {
+            return <RcvrBox key={id} name={user.name} text={details.text} time={formatDate(details.time)} />;
+          } else if (chat.to === currentId) {
+            return <SenderBox key={id} time={formatDate(details.time)} text={details.text} />;
           }
           return null; //chat undefined 타입스크립트 에러 때문에
         })}
-        {/* <div ref={scrollEndRef} /> */}
+        <div ref={scrollEndRef} />
       </Layout>
     </Wrapper>
   );

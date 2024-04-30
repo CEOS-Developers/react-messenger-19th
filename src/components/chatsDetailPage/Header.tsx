@@ -4,22 +4,31 @@ import { BackArrowIcon, FindIcon, CallIcon, IndexIcon } from '../../assets';
 import { flexCenter } from '../../styles/GlobalStyle';
 import userData from '../../assets/data/userData.json';
 import { useNavigate } from 'react-router-dom';
-import { userIdState } from '../../recoil/atom';
+import { userIdState, chatsState } from '../../recoil/atom';
 import date from '../../utils/date';
 import { InfoIcon } from '../../assets';
+import formatDate from '../../utils/formatDate';
+import { useEffect } from 'react';
 
 export default function Header() {
-  const navigate = useNavigate();
   const userId = useRecoilValue(userIdState);
+
+  const currentId = parseInt(localStorage.getItem('userId') || '');
+  console.log('지금 아이디', currentId);
+  const navigate = useNavigate();
+  const chats = useRecoilValue(chatsState);
 
   function moveToChats() {
     navigate(`/chats`);
+
+    // localStorage.setItem('aa', JSON.stringify(chats));
+    // console.log(JSON.parse(localStorage.getItem('aa') || '[]'));
   }
 
   return (
     <>
       <Nav>
-        <Time>{date().split(' ').slice(1)}</Time>
+        <Time>{formatDate(date()).split(' ').slice(1)}</Time>
         <div>
           <InfoIcon />
         </div>
@@ -27,7 +36,7 @@ export default function Header() {
       <SubTitle>
         <Left>
           <BackArrowIcon type="button" onClick={moveToChats} />
-          <SentName>{userData.data.find((user) => user.id === userId)?.name}</SentName>
+          <SentName>{userData.data.find((user) => user.id === currentId)?.name}</SentName>
         </Left>
         <Right>
           <FindIcon />

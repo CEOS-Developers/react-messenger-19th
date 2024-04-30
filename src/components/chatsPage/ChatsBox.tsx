@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import { useSetRecoilState } from 'recoil';
-import { ifChatsDetailPageState, userIdState } from '../../recoil/atom';
+import { userIdState } from '../../recoil/atom';
 import { useNavigate } from 'react-router-dom';
 import { ProfileIcon } from '../../assets';
-import chatData from '../../assets/data/chatData.json';
 
 interface ChatsBoxProps {
   id: number;
@@ -15,14 +14,13 @@ interface ChatsBoxProps {
 export default function ChatsBox(props: ChatsBoxProps) {
   const { id, name, text, time } = props;
   const setUserId = useSetRecoilState(userIdState);
-  const setIfChatsDetailPage = useSetRecoilState(ifChatsDetailPageState);
+
   const navigate = useNavigate();
 
   const handleChatBoxClick = () => {
     setUserId(id);
-    setIfChatsDetailPage(true);
     navigate(`/chatsDetail/${id}`);
-    localStorage.setItem('chats', JSON.stringify(chatData));
+    localStorage.setItem('userId', JSON.stringify(id));
   };
 
   return (
@@ -39,6 +37,7 @@ export default function ChatsBox(props: ChatsBoxProps) {
 
 const Wrapper = styled.button`
   display: flex;
+
   padding: 1.2rem 1.4rem;
 
   & svg {
@@ -55,9 +54,8 @@ const TextBox = styled.section`
   align-items: flex-start;
 
   gap: 0.2rem;
-  padding: 0.1rem 0 0.2rem;
+  padding: 0.1rem 1rem 0.2rem 0;
   width: 24.8rem;
-  height: 4.2rem;
 `;
 
 const Name = styled.p`

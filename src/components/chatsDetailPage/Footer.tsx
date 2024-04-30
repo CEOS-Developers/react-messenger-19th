@@ -1,24 +1,22 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { PlusIcon, VoiceIcon, EmojiIcon } from '../../assets';
+import { PlusIcon, VoiceIcon, EmojiIcon, SendIcon } from '../../assets';
 import date from '../../utils/date';
 import { ChatType } from '../../types/types';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { userIdState, chatsState } from '../../recoil/atom';
+import { useSetRecoilState } from 'recoil';
+import { chatsState } from '../../recoil/atom';
 
 export default function Footer() {
   const [input, setInput] = useState('');
   const setChats = useSetRecoilState(chatsState);
-  const userId = useRecoilValue(userIdState);
+
+  const currentId = parseInt(localStorage.getItem('userId') || '');
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (input.trim() !== '') {
       storeChat(input);
       setInput('');
-      // const prevData = JSON.parse(localStorage.getItem('backup') || '[]');
-      // setUpdataedChatData([...prevData, newChat]);
-      // localStorage.setItem('backup', JSON.stringify(updatedChatData));
     }
   }
 
@@ -30,10 +28,12 @@ export default function Footer() {
     const newChat: ChatType = {
       id: Date.now().toString(),
       from: 0,
-      to: userId,
-      details: { text: input, time: date() },
+      to: currentId,
+      details: { text: input, time: date()},
     };
     setChats((prevChats) => [...prevChats, newChat]);
+    const existingChats = JSON.parse(localStorage.getItem('t') || '[]');
+    localStorage.setItem('t', JSON.stringify([...existingChats, newChat]));
   }
 
   return (
@@ -43,7 +43,7 @@ export default function Footer() {
         <InputField type="text" value={input} onChange={handleInput} autoFocus />
         <EmojiIcon />
       </InputBox>
-      <VoiceIcon />
+      {!input ? <VoiceIcon /> : <SendIcon />}
     </Wrapper>
   );
 }
@@ -80,9 +80,12 @@ const InputBox = styled.form`
 const InputField = styled.input`
   display: block;
   width: 100%;
+
   border: none;
   border-radius: 1.7rem;
-  padding: 1rem;
+  padding: 1rem 3.4rem 1rem 1rem;
+  resize: none; /* Disable resizing by user */
 
   background-color: ${({ theme }) => theme.colors.grey_bg};
+  outline: none; /* Remove default outline */
 `;
