@@ -7,7 +7,7 @@ import {
 import ChatHeadNavRight from '@components/fixed/ChatHead/ChatHeadNav/ChatHeadNavRight';
 import styled from 'styled-components';
 import { userNumberState } from '@context/state/atom';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { makeUserIdNumber } from '@utils/makeUserIdNumber';
 

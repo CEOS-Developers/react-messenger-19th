@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import ProfileGroupUI from '@components/non-fixed/EmptyChatBody/ProfileGroupUI/ProfileGroupUI';
 import EmptyOneDateContainer from './EmptyOneDateContainer/EmptyOneDateContainer';
 import { useEffect, useRef } from 'react';
-import { messageDataObject, voidFunction } from 'types/type';
+import { voidFunction } from 'types/type';
 import { useRecoilState } from 'recoil';
 import {
   messageDataState,
@@ -19,8 +19,6 @@ const StyledEmptyChatBody = styled.div`
   margin-left: 16px;
   width: 343px;
   overflow-y: scroll;
-  /* display: flex; */
-  /* flex-direction: column; */
 `;
 
 const StyledProfileGroupUIContainer = styled.div`

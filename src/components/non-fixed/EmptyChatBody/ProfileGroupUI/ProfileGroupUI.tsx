@@ -1,4 +1,3 @@
-// empty 메시지 창에 아직 메시지 데이터가 없을 때 보여줄 UI이다
 import styled from 'styled-components';
 
 const StyledProfileGroupUI = styled.div`
