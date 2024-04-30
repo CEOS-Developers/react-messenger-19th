@@ -2,12 +2,13 @@ import styled from 'styled-components';
 import { FriendsPageIcon } from '../../assets';
 import { InfoIcon } from '../../assets';
 import date from '../../utils/date';
+import formatDate from '../../utils/formatDate';
 
 export default function Header() {
   return (
     <>
       <Nav>
-        <Time>{date().split(' ').slice(1)}</Time>
+        <Time>{formatDate(date()).split(' ').slice(1)}</Time>
         <div>
           <InfoIcon />
         </div>

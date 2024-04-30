@@ -1,21 +1,16 @@
 import styled from 'styled-components';
-import { useRecoilValue } from 'recoil';
 import { FindIcon, AlbumsIcon, MoreIcon } from '../../assets';
 import { flexCenter } from '../../styles/GlobalStyle';
-import userData from '../../assets/data/userData.json';
-import { useNavigate } from 'react-router-dom';
-import { userIdState } from '../../recoil/atom';
 import { InfoIcon } from '../../assets';
 import date from '../../utils/date';
+import formatDate from '../../utils/formatDate';
 
 export default function Header() {
-  const navigate = useNavigate();
-  const userId = useRecoilValue(userIdState);
-
   return (
     <>
       <Nav>
-        <Time>{date().split(' ').slice(1)}</Time>
+        {/* <Time>{date().split(' ').slice(1)}</Time> */}
+        <Time>{formatDate(date()).split(' ').slice(1)}</Time>
         <div>
           <InfoIcon />
         </div>
