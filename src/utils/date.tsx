@@ -1,14 +1,10 @@
+//서버가 저장할 수 있는 형태 T10:04:20로 바꾸는 포맷
 export default function date() {
   const today = new Date();
   const hours = today.getHours();
   const minutes = String(today.getMinutes()).padStart(2, '0');
-  let timePeriod = '오전';
+  const seconds = String(today.getSeconds()).padStart(2, '0');
+  let timePeriod = 'T';
 
-  if (hours >= 12) {
-    timePeriod = '오후';
-  }
-
-  const formatHours = hours % 12 || 12;
-
-  return `${timePeriod} ${formatHours}:${minutes}`;
+  return `${timePeriod}${hours.toString().padStart(2, '0')}:${minutes}:${seconds}`;
 }
