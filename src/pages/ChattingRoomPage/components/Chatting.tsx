@@ -104,6 +104,7 @@ export default function Chatting() {
 }
 
 const DateContainer = styled.div`
+  align-self: center;
   margin: 10px 0;
   color: ${theme.colors.gray_1};
   font-size: ${theme.textStyles.caption4.font_size};

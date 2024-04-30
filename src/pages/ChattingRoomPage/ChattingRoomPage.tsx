@@ -23,7 +23,6 @@ const ContainerLayout = styled.div`
   width: 100%;
   height: 100dvh;
   background-color: ${theme.colors.blue};
-
   @media (min-width: 768px) {
     width: 375px;
   }

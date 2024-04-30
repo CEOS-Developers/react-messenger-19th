@@ -38,7 +38,7 @@ export default function ChatBottom() {
     return `${hour}:${minute}`;
   };
 
-  const HandleSubmit = () => {
+  const handleSubmit = () => {
     if (!inputValue.trim()) return;
     setInputValue('');
     const newChat: Chat = {
@@ -59,7 +59,6 @@ export default function ChatBottom() {
           ...prev[0].chat[lastChatIndex],
           isDisplay: false,
         };
-        lastChat.isDisplay = false;
         const newChats = [
           ...prev[0].chat.slice(0, lastChatIndex),
           lastChat,
@@ -85,13 +84,13 @@ export default function ChatBottom() {
           }}
           onKeyPress={(e) => {
             if (e.key === 'Enter') {
-              HandleSubmit();
+              handleSubmit();
             }
           }}
         />
         <EmojiSvg />
         {inputValue ? (
-          <div onClick={HandleSubmit}>
+          <div onClick={handleSubmit}>
             <SendSvg />
           </div>
         ) : (

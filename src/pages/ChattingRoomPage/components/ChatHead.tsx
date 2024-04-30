@@ -14,7 +14,7 @@ const DUMMYLEFTCOUNT = 3;
 export default function ChatHead() {
   const [userName, setUserName] = useRecoilState(UserState);
   const displayName = userName === '송은수' ? '플래시' : '송은수';
-  const HandleNameToggle = () => {
+  const handleNameToggle = () => {
     if (userName === '송은수') {
       setUserName('플래시');
     } else {
@@ -32,7 +32,7 @@ export default function ChatHead() {
           <ArrowLeftSvg />
           <span>{DUMMYLEFTCOUNT}</span>
         </GobackBox>
-        <ChatTitle onClick={HandleNameToggle}>{displayName}</ChatTitle>
+        <ChatTitle onClick={handleNameToggle}>{displayName}</ChatTitle>
         <MenuBox>
           <SearchSvg />
           <MenuSvg />

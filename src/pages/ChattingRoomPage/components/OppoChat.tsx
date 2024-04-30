@@ -61,7 +61,6 @@ const OppochatBox = styled.div`
   border-radius: 12px;
   max-width: 240px;
   word-wrap: break-word;
-  background-color: ${theme.colors.white};
   color: ${theme.colors.black};
   font-size: ${theme.textStyles.body1_1.font_size};
   line-height: ${theme.textStyles.body1_1.line_height};
