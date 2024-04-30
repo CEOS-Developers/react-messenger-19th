@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 
 const StyledProfileContent = styled.div`
   flex-grow: 1;
-  margin-top: 16px;
-  padding-top: 57px;
+  /* margin-top: 16px; */
+  /* padding-top: 57px; */
+  margin-top: 44px;
   background-color: ${(props) => props.theme.color.grayLight};
   display: flex;
   flex-direction: column;
