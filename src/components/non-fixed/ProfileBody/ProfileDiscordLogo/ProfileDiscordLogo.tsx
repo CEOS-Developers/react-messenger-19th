@@ -5,7 +5,8 @@ const StyledProfileDiscordLogoContainer = styled.div`
   width: 90px;
   height: 90px;
   top: 65px;
-  left: 147.5px;
+  left: 142.5px;
+  right: 142.5px;
   border-radius: 50%;
   background-color: white;
   z-index: 100;
@@ -14,9 +15,7 @@ const StyledProfileDiscordLogoContainer = styled.div`
   align-items: center;
 `;
 
-const StyledProfileDiscordLogo = styled.img`
-  /* border-radius: 50%; */
-`;
+const StyledProfileDiscordLogo = styled.img``;
 
 export default function ProfileDiscordLogo() {
   return (
