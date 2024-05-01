@@ -7,17 +7,7 @@ import styled from 'styled-components';
 import Mychat from './Mychat';
 import OppoChangeChat from './OppoChangeChat';
 import Oppochat from './OppoChat';
-
-interface Chat {
-  chatId: string;
-  to: string;
-  from: string;
-  content: string;
-  date: string;
-  time: string;
-  isDisplay: boolean;
-  isRead: boolean;
-}
+import { type Chat } from '@type/common';
 
 //이번 과제는 한 명뿐이라 채팅방은 1개
 const DUMMYID = '1';
@@ -104,7 +94,6 @@ export default function Chatting() {
 }
 
 const DateContainer = styled.div`
-  align-self: center;
   margin: 10px 0;
   color: ${theme.colors.gray_1};
   font-size: ${theme.textStyles.caption4.font_size};

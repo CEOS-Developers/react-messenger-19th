@@ -2,7 +2,6 @@ import theme from '@styles/theme';
 import styled from 'styled-components';
 import { ReactComponent as IndicatorsGroupSvg } from '@assets/svg/indicatorsGroup.svg';
 import { ReactComponent as ClockSvg } from '@assets/svg/clock.svg';
-import { ReactComponent as StatusSvg } from '@assets/svg/status.svg';
 import { ReactComponent as ArrowLeftSvg } from '@assets/svg/arrowLeft.svg';
 import { ReactComponent as SearchSvg } from '@assets/svg/search.svg';
 import { ReactComponent as MenuSvg } from '@assets/svg/menu.svg';

@@ -1,12 +1,8 @@
 import theme from '@styles/theme';
 import styled from 'styled-components';
+import { type MychatProps } from '@type/common';
 
-interface MychatProps {
-  content: string;
-  time: string;
-  isDisplay: boolean;
-  isRead: boolean;
-}
+
 
 export default function Mychat({
   content,

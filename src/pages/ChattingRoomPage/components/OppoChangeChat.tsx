@@ -3,13 +3,9 @@ import styled from 'styled-components';
 import Pic from '@assets/img/pic.png';
 import useDoubleClick from '@hooks/useDoubleClick';
 import HeartBox from './HeartBox';
+import { type OppoChangeChatProps } from '@type/common';
 
-interface OppoChangeChatProps {
-  content: string;
-  time: string;
-  isDisplay: boolean;
-  from: string;
-}
+
 
 export default function OppoChangeChat({
   content,

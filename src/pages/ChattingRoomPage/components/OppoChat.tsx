@@ -1,14 +1,8 @@
 import useDoubleClick from '@hooks/useDoubleClick';
 import theme from '@styles/theme';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import HeartBox from './HeartBox';
-
-interface OppochatProps {
-  content: string;
-  time: string;
-  isDisplay: boolean;
-}
+import { type OppochatProps } from '@type/common';
 
 export default function Oppochat({ content, time, isDisplay }: OppochatProps) {
   const { handleClick, isDoubleClicked } = useDoubleClick();

@@ -8,17 +8,7 @@ import { useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { chatDataState } from '@recoil/chatAtom';
 import { UserState } from '@recoil/userAtom';
-
-interface Chat {
-  chatId: string;
-  to: string;
-  from: string;
-  content: string;
-  date: string;
-  time: string;
-  isDisplay: boolean;
-  isRead: boolean;
-}
+import { type Chat } from '@type/common';
 
 export default function ChatBottom() {
   const [inputValue, setInputValue] = useState('');
