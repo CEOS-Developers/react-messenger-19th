@@ -23,7 +23,7 @@
 기본적으로 다음 구조를 사용해 라우팅을 구현한다.
 
 ```js
-const Router = () => {
+const App = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -35,6 +35,40 @@ const Router = () => {
   );
 };
 ```
+
+하지만 `React Router v6.4`에서는 `RouterProvider`와 `CreateBrowerRouter`를 사용하여 다른 방식으로도 라우팅이 가능하다.
+
+```js
+//routes.js
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        path: 'path1',
+        element: <Component1 />,
+      },
+    ],
+  },
+  ...
+]);
+
+//
+import { RouterProvider } from 'react-router-dom';
+import { router } from '@util/routes';
+
+function App() {
+  return (
+    <Fragment>
+      <RouterProvider router={router} />
+    </Fragment>
+  );
+}
+
+export default App;
+```
+페이지가 많아지면 이 방법이 가독성이 좋아보여 이 방법을 사용해서 개발했다.
 
 ### Link
 
@@ -143,11 +177,12 @@ redux의 복잡한 패턴을 해결하기 위해 만들어진 라이브러리 �
 
 ### jotai
 
-recoil과 유사하게 `atom`단위를 사용한다. 이후 `useAtom`을 통해 `atom`을 사용할 수 있다. 
+recoil과 유사하게 `atom`단위를 사용한다. 이후 `useAtom`을 통해 `atom`을 사용할 수 있다.
 
 `recoil`과의 차이점은 `key`값 없이도 그 자체만으로 구분이 된다는 것과 `selector()`를 사용하지 않고도 다른 `atom`을 만들 수 있다는 것, 즉 `jotai`가 더 미니멀리즘하게 구현할 수 있다는 것이다. 하지만 `recoil`은 SSR과 코드스플리팅을 내장지원하고, `jotai`에 비해 큰 지원과 커뮤니티를 가지고 있다.
 
 ### React Query
+
 `React Query`는 서버와의 통신간 데이터 관리를 도와주는 상태관리 라이브러리이다. 소개했던 상태관리 라이브러리들에서도 비동기처리를 할 수 있지만, 캐싱, 동기화등은 직접 구현해줘야 한다. `React Query`는 데이터 fetching, 캐싱, 동기화, 서버쪽 데이터 업데이트 등을 쉽게 만들어 준다.
 
-비동기처리를 할 때 다른 라이브러리에 비해 보일러플레이트가 적고, 빌트인 함수가 많아서 현재 로딩상태, 에러가 났는지 여부등을 쉽게 확인할 수 있다. 또한 캐시처리 기능도 지원해 주기적으로 최신데이터로 갱신해준다. 
+비동기처리를 할 때 다른 라이브러리에 비해 보일러플레이트가 적고, 빌트인 함수가 많아서 현재 로딩상태, 에러가 났는지 여부등을 쉽게 확인할 수 있다. 또한 캐시처리 기능도 지원해 주기적으로 최신데이터로 갱신해준다.

@@ -15,15 +15,11 @@ export default function ChattingRoomPage() {
 }
 
 const ContainerLayout = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100dvh;
+  height: 100%;
   background-color: ${theme.colors.blue};
-  @media (min-width: 768px) {
-    width: 375px;
-  }
 `;

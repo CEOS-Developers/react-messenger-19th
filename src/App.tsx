@@ -1,10 +1,11 @@
-import ChattingRoomPage from '@pages/ChattingRoomPage/ChattingRoomPage';
+import { router } from '@util/routes';
+import { RouterProvider } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 
 function App() {
   return (
     <RecoilRoot>
-      <ChattingRoomPage />
+      <RouterProvider router={router} />
     </RecoilRoot>
   );
 }

@@ -8,7 +8,9 @@
       "@type/*": ["./types/*"],
       "@hooks/*": ["./hooks/*"],
       "@pages/*": ["./pages/*"],
-      "@recoil/*": ["./recoil/*"]
+      "@recoil/*": ["./recoil/*"],
+      "@layout/*": ["./layout/*"],
+      "@util/*": ["./util/*"]
     }
   }
 }
