@@ -17,6 +17,7 @@ ${reset}
 button{
   cursor: pointer;
   padding: 0;
+  all: unset;
 }
 
 img{
