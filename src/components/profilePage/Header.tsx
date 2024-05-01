@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import { BackArrowIcon } from '../../assets';
+import { BackArrowIcon, InfoIcon } from '../../assets';
 import { useNavigate } from 'react-router-dom';
 import date from '../../utils/date';
-import { InfoIcon } from '../../assets';
 
 export default function Header() {
   const navigate = useNavigate();

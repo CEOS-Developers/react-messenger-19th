@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { FriendsPageIcon } from '../../assets';
-import { InfoIcon } from '../../assets';
+import { FriendsPageIcon, InfoIcon } from '../../assets';
 import date from '../../utils/date';
 import formatDate from '../../utils/formatDate';
 

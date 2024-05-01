@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useSetRecoilState } from 'recoil';
 import { userIdState } from '../../recoil/atom';
 import { useNavigate } from 'react-router-dom';
-import { ProfileIcon } from '../../assets';
+import { profileIcons } from '../../assets/data/profile';
 
 interface ChatsBoxProps {
   id: number;
@@ -22,10 +22,11 @@ export default function ChatsBox(props: ChatsBoxProps) {
     navigate(`/chatsDetail/${id}`);
     localStorage.setItem('userId', JSON.stringify(id));
   };
+  const UserIcon = profileIcons[id];
 
   return (
     <Wrapper type="button" onClick={handleChatBoxClick}>
-      <ProfileIcon />
+      {UserIcon && <UserIcon />}
       <TextBox>
         <Name>{name}</Name>
         <Text>{text}</Text>

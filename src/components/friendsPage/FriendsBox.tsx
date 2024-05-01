@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { BhwProfileIcon, DownArrowIcon, ProfileIcon } from '../../assets';
+import { BhwProfileIcon, DownArrowIcon } from '../../assets';
 import userData from '../../assets/data/userData.json';
 import { useNavigate } from 'react-router-dom';
+import { profileIcons } from '../../assets/data/profile';
 
 export default function FriendsBox() {
   const navigate = useNavigate();
@@ -26,9 +27,10 @@ export default function FriendsBox() {
           .filter((user) => user.id >= 1)
           .map((user) => {
             const { id, name } = user;
+            const UserIcon = profileIcons[id];
             return (
               <Friends key={id}>
-                <ProfileIcon />
+                {UserIcon && <UserIcon />}
                 <FriendsName>{name}</FriendsName>
               </Friends>
             );

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { FindIcon, AlbumsIcon, MoreIcon } from '../../assets';
+import { FindIcon, AlbumsIcon, MoreIcon, InfoIcon } from '../../assets';
 import { flexCenter } from '../../styles/GlobalStyle';
-import { InfoIcon } from '../../assets';
 import date from '../../utils/date';
 import formatDate from '../../utils/formatDate';
 
@@ -9,7 +8,6 @@ export default function Header() {
   return (
     <>
       <Nav>
-        {/* <Time>{date().split(' ').slice(1)}</Time> */}
         <Time>{formatDate(date()).split(' ').slice(1)}</Time>
         <div>
           <InfoIcon />

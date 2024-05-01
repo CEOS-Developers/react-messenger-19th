@@ -1,19 +1,21 @@
 import styled from 'styled-components';
 import { flexCenter } from '../../styles/GlobalStyle';
-import { ProfileIcon } from '../../assets';
+import { profileIcons } from '../../assets/data/profile';
 
 interface RcvrBoxProps {
   name: string;
   text: string;
   time: string;
+  id: number;
 }
 
 export default function RcvrBox(props: RcvrBoxProps) {
-  const { name, text, time } = props;
+  const { name, text, time, id } = props;
+  const UserIcon = profileIcons[id];
 
   return (
     <ChatBox>
-      <ProfileIcon />
+      {UserIcon && <UserIcon />}
       <Details>
         <Name>{name}</Name>
         <Text>{text}</Text>

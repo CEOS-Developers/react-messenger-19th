@@ -1,28 +1,17 @@
 import styled from 'styled-components';
-import { useRecoilValue } from 'recoil';
-import { BackArrowIcon, FindIcon, CallIcon, IndexIcon } from '../../assets';
+import { BackArrowIcon, FindIcon, CallIcon, IndexIcon, InfoIcon } from '../../assets';
 import { flexCenter } from '../../styles/GlobalStyle';
 import userData from '../../assets/data/userData.json';
 import { useNavigate } from 'react-router-dom';
-import { userIdState, chatsState } from '../../recoil/atom';
 import date from '../../utils/date';
-import { InfoIcon } from '../../assets';
 import formatDate from '../../utils/formatDate';
-import { useEffect } from 'react';
 
 export default function Header() {
-  const userId = useRecoilValue(userIdState);
-
   const currentId = parseInt(localStorage.getItem('userId') || '');
-  console.log('지금 아이디', currentId);
   const navigate = useNavigate();
-  const chats = useRecoilValue(chatsState);
 
   function moveToChats() {
     navigate(`/chats`);
-
-    // localStorage.setItem('aa', JSON.stringify(chats));
-    // console.log(JSON.parse(localStorage.getItem('aa') || '[]'));
   }
 
   return (
