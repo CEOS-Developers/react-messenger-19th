@@ -1,12 +1,11 @@
 import theme from '@styles/theme';
 import styled from 'styled-components';
-import { ReactComponent as IndicatorsGroupSvg } from '@assets/svg/indicatorsGroup.svg';
-import { ReactComponent as ClockSvg } from '@assets/svg/clock.svg';
 import { ReactComponent as ArrowLeftSvg } from '@assets/svg/arrowLeft.svg';
 import { ReactComponent as SearchSvg } from '@assets/svg/search.svg';
 import { ReactComponent as MenuSvg } from '@assets/svg/menu.svg';
 import { useRecoilState } from 'recoil';
 import { UserState } from '@recoil/userAtom';
+import StatusBox from '@components/StatusBox';
 
 const DUMMYLEFTCOUNT = 3;
 
@@ -22,10 +21,7 @@ export default function ChatHead() {
   };
   return (
     <ChatHeaderWrapper>
-      <Statusbox>
-        <ClockSvg />
-        <IndicatorsGroupSvg />
-      </Statusbox>
+      <StatusBox />
       <ChatHeaderContainer>
         <GobackBox>
           <ArrowLeftSvg />
@@ -51,26 +47,6 @@ const ChatHeaderContainer = styled.div`
 
   @media (max-width: 768px) {
     padding: 0 16px;
-  }
-`;
-
-const Statusbox = styled.div`
-  /* position: fixed; */
-  /* z-index: 1; */
-  width: 375px;
-  /* top: 0; */
-  /* left: 50%; */
-  /* transform: translateX(-50%); */
-  flex-shrink: 0;
-  background-color: ${theme.colors.blue};
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 18px 0 48px;
-  height: 47px;
-
-  @media (max-width: 768px) {
-    width: 100%;
   }
 `;
 
