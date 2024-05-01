@@ -31,7 +31,9 @@ export default function BoxLayout() {
           const user = userData.data.find((user) => user.id === currentId);
           if (!user) return null; //user undefined 타입스크립트 에러 때문에
           if (chat.from === currentId) {
-            return <RcvrBox key={id} name={user.name} text={details.text} time={formatDate(details.time)} />;
+            return (
+              <RcvrBox key={id} id={currentId} name={user.name} text={details.text} time={formatDate(details.time)} />
+            );
           } else if (chat.to === currentId) {
             return <SenderBox key={id} time={formatDate(details.time)} text={details.text} />;
           }
