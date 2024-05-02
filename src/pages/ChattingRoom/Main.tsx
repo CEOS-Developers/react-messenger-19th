@@ -15,6 +15,7 @@ import { colors } from "../../style/colors";
 import { typography } from "../../style/typography";
 
 const Main = ({ chats, setChats }) => {
+  const opponent = useSelector((state: RootState) => state.opponent.opponent);
   const currOpponent = useSelector(
     (state: RootState) => state.currOpponent.currOpponent
   );
@@ -50,19 +51,19 @@ const Main = ({ chats, setChats }) => {
     return formattedTimeStamp;
   };
 
-  // const handleSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   if (!isEmpty) {
-  //     const newChat = {
-  //       text: value,
-  //       sender: currentUser,
-  //       timestamp: getDate(),
-  //     };
-  //     setChats([...chats, newChat]);
-  //     setValue("");
-  //     setIsEmpty(true);
-  //   }
-  // };
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isEmpty) {
+      const newChat = {
+        text: value,
+        sender: currOpponent === 0 ? opponent : 0,
+        timestamp: getDate(),
+      };
+      setChats([...chats, newChat]);
+      setValue("");
+      setIsEmpty(true);
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -100,7 +101,7 @@ const Main = ({ chats, setChats }) => {
         })}
       </ChattingWrapper>
 
-      <InputWrapper onSubmit={() => {}}>
+      <InputWrapper onSubmit={handleSubmit}>
         <img src={smallAdd} />
         <Input>
           <InputText
