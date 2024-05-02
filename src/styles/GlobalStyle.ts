@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export const device = {
   tablet: `(min-width: 768px) and (max-width: 1199px)`,
@@ -49,6 +49,8 @@ body{
   padding: 0;
   font: inherit;
   color: inherit;
+  -ms-overflow-style: none; /* IE and 엣지 */
+  scrollbar-width: none; /* 파이어폭스 */
 }
 
 html,
@@ -57,6 +59,8 @@ body {
   -ms-overflow-style: none; /* IE and 엣지 */
   scrollbar-width: none; /* 파이어폭스 */
 }
+
+
 
 /*
   Typographic tweaks!

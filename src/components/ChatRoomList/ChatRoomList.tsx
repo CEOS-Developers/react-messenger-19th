@@ -6,34 +6,42 @@ import SearchBar from 'components/common/SearchBar';
 import BottomNavBar from 'components/common/BottomNavBar';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
+import { useState } from 'react';
 
 export default function ChatRoomList() {
-  const chatRoomData = useSelector((state: RootState) => state.chat.allChats);
+  const chatData = useSelector((state: RootState) => state.chat.allChats);
+  const [inputValue, setInputValue] = useState('');
+
+  const filteredChatData = chatData.filter((chat) => chat.partner.name.includes(inputValue));
   return (
     <>
-      <div>
-        <ChatNavigationBar>
-          <button>편집</button>
-          <p>대화</p>
-          <EditIcon alt="채팅방 수정 아이콘" />
-        </ChatNavigationBar>
-        <SearchBar />
-
-        {chatRoomData.map((chat) => (
+      <ChatNavigationBar>
+        <button>편집</button>
+        <p>대화</p>
+        <EditIcon alt="채팅방 수정 아이콘" />
+      </ChatNavigationBar>
+      <SearchBar inputValue={inputValue} setInputValue={setInputValue} />
+      <ChatRoomListWrapper>
+        {filteredChatData.map((chat) => (
           <ChatRoomsContainer key={chat.id}>
             <ChatRoomIcon alt="각 채팅방을 나타내는 아이콘" />
             <div>
               <h3 className="name">{chat.partner.name}</h3>
-              <p className="message">CEOS 디팟 파이팅</p>
+              <p className="message">{chat.messages[chat.messages.length - 1].text}</p>
             </div>
           </ChatRoomsContainer>
         ))}
-      </div>
-      <BottomNavBar />
+      </ChatRoomListWrapper>
     </>
   );
 }
 
+const ChatRoomListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 55rem;
+`;
 const ChatNavigationBar = styled.div`
   display: flex;
   padding: 1rem 1.6rem;
@@ -47,7 +55,8 @@ const ChatNavigationBar = styled.div`
 `;
 
 const ChatRoomsContainer = styled.div`
-  width: 37.5rem;
+  cursor: pointer;
+  width: 100%;
   height: 7.6rem;
   padding: 0.7rem 0.9rem;
   background-color: var(--white);

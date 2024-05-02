@@ -2,17 +2,20 @@ import styled from 'styled-components';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from './Header';
 import Footer from 'components/Layout/Footer';
+import BottomNavBar from 'components/common/BottomNavBar';
 
 function Layout() {
   const location = useLocation();
   const pathSegments = location.pathname.split('/').filter(Boolean); // 빈 문자열 제거
 
   const backgroundColor = determineBackgroundColor(pathSegments);
-  console.log(pathSegments);
+  const isChatRoom = pathSegments.length === 2 && pathSegments[0] === 'chats';
+
   return (
     <LayoutContainer $backgroundColor={backgroundColor}>
       <Header />
       <Outlet />
+      {!isChatRoom && <BottomNavBar />}
       <Footer />
     </LayoutContainer>
   );

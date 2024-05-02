@@ -1,12 +1,28 @@
 import styled from 'styled-components';
 import { ReactComponent as SearchIcon } from 'asset/icons/SearchIcon.svg';
 import { ReactComponent as CloseIcon } from 'asset/icons/CloseIcon.svg';
-export default function SearchBar() {
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
+
+interface SearchBarProp {
+  inputValue: string;
+  setInputValue: Dispatch<SetStateAction<string>>;
+}
+export default function SearchBar({ inputValue, setInputValue }: SearchBarProp) {
+  const handleInputValueChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleCloseButtonClick = () => {
+    setInputValue('');
+  };
+
   return (
     <InputWrapper>
       <SearchIcon className="icon" alt="검색 아이콘" />
-      <Input placeholder="이름으로 검색" />
-      <button>
+      <Input onChange={handleInputValueChange} value={inputValue} placeholder="이름으로 검색" />
+      <button onClick={handleCloseButtonClick}>
         <CloseIcon alt="검색어 제거 아이콘" />
       </button>
     </InputWrapper>
