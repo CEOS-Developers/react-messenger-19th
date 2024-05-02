@@ -3,14 +3,14 @@ import * as C from './ChatRoom.styles';
 
 import MyFirstMessage from './MyFirstMessage';
 import YourFirstMessage from './YourFirstMessage';
-import userData from '../../../lib/UserData.json';
+import { UserData } from '../../../lib/data';
 import { useRecoilState } from 'recoil';
 import { chatMessagesState } from '../../../context/ChatDataState';
 import type { Message } from '../../../lib/types';
 
 export default function ChatRoomComponent(): JSX.Element {
-	const me = userData.users[0];
-	const opposite = userData.users[1]; // 임시 지정 대화 상대
+	const me = UserData[0];
+	const opposite = UserData[1]; // 임시 지정 대화 상대
 	const [oppositeChat, setOppositeChat] = useState<string>(opposite.name);
 
 	const [user, setUser] = useState<string>(me.name);

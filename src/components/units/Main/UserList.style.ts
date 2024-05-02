@@ -47,6 +47,11 @@ export const MyStatusMessage = styled.p`
 	padding-top: 7px;
 `;
 
+export const FriendList = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
+
 export const SubTab = styled.div`
 	display: flex;
 	justify-content: space-between;
@@ -61,4 +66,39 @@ export const SubText = styled.p`
 
 export const MoreIcon = styled.img`
 	cursor: pointer;
+`;
+
+export const RecommandFriendContainer = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 15px 10px 10px;
+`;
+export const PrivateFriend = styled.div`
+	display: flex;
+	align-items: center;
+	padding: 10px 15px 10px 10px;
+	gap: 18px;
+`;
+
+export const Circle = styled.div`
+	border-radius: 999px;
+	background-color: #54c269;
+	width: 56px;
+	height: 56px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`;
+export const Profile = styled.img``;
+
+export const InnerDiv = styled.div`
+	width: 77%;
+	display: flex;
+	justify-content: space-between;
+`;
+
+export const Text = styled.p`
+	font-size: 16px;
+	font-weight: 400;
 `;
