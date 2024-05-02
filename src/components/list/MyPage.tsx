@@ -8,46 +8,25 @@ import NavigatingFooter from './NavigateFooter';
 import MyPageHeader from './MyPageHeader';
 
 const MyPage = () => {
-  const users = useRecoilValue(usersState);
-  const [friendCount, setFriendCount] = useState(0); 
-
-  const handleEditClick = () => {
-    // 편집 버튼 핸들러..
-  };
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // 검색핸들러
-  };
-
-  
-  useEffect(() => {
-    setFriendCount(users.filter(user => user.id !== 0).length); // 자기 자신을 뺀 친구 수
-  }, [users]);
-
+   
   
   return (
     <Container>
       <AppContainer>
         <IphoneHeader src='/assets/Status Bar.png'/>
         <MyPageHeader/>
-        <FriendListContainer>
-          <FriendListUl>
-          <FriendCount>친구 {friendCount}명</FriendCount>
-
-          {users.filter(user => user.id !== 0).map(user => {
-              return (
-                  <FriendListItem>
-                    <FriendImage src={user.profileImage} alt={user.name} style={{width:"37px", height:"37px"}}/>
-                    <FriendInfo>
-                        <FriendName>{user.name}</FriendName>  
-                        <CallIcon src="/assets/Call (1).svg"/>   
-                    </FriendInfo>
-                  </FriendListItem>
-              );
-            })}
-          </FriendListUl>
-        </FriendListContainer>
-        <NavigatingFooter/>
+        <ProfileContainer>
+          <EditProfileLabel>프로필 수정</EditProfileLabel>
+          <EditProfileLabel>바로가기</EditProfileLabel>
+          <SNSContainer>
+            <SNSLogo src="/assets/Instagram.svg"/>
+            <Label>Instagram</Label>
+          </SNSContainer>
+          <SNSContainer>
+            <SNSLogo src="/assets/Youtube.svg"/>
+            <Label>Youtube</Label>
+          </SNSContainer>
+        </ProfileContainer>
         <IphoneFooter src='/assets/Home Indicator.png'/>
       </AppContainer>
     </Container>
@@ -80,50 +59,37 @@ const AppContainer = styled.div`
   }
 `;
 
-const FriendListContainer = styled.div`
-  flex: 1;
-  overflow-y: auto;
+const ProfileContainer = styled.div`
+display:flex;
+padding-top: 31px;
+flex-direction: column;
+height: calc(100vh - 31px);
 `;
 
-const FriendListUl = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-const FriendListItem = styled.li`
-  padding: 11px 15px;
-  display: flex;
-  margin-bottom: 4px;
-`;
-
-const FriendImage = styled.img`
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-`;
-
-const FriendInfo = styled.span`
-font-family: pretendard;
-  margin: 6px 0px 6px 11px;
-  width:280px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-
-const FriendName = styled.div`
-font-size: 17px;
+const EditProfileLabel = styled.span`
+  font-family: Pretenard;
+  font-size: 17px;
   font-weight: 600;
-`;
-
-const CallIcon = styled.img`
-`;
-
-const FriendCount = styled.div`
-  font-family: Pretanard;
-  font-size: 15px;
+  color: #1F1F1F;
   margin-left: 15px;
-  margin-bottom: 2px;
-  color: #63666A;
+  margin-bottom: 24px;
+  `;
+
+const SNSLogo = styled.img`
+  width: 37px;
+  height:37px;
+  margin-left: 16px;
+   
+`;
+
+const Label = styled.span`
+font-size: 17px;
+font-weight: 500;
+margin-left: 17px;
+`;
+
+const SNSContainer = styled.div`
+display: flex;
+align-items: center;
+margin-bottom: 24px;
 `;

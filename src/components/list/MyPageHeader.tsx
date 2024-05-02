@@ -93,16 +93,18 @@ const ProfileImg = styled.img`
   height: 110px;
 `;
 const ProfileInfo = styled.div`
+width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
 
 `;
 const PhoneNumber = styled.span`
+
   font-size: 15px;
   color: #63666A;
   margin-top: 12px;
-  padding-bottom:31px;
+  margin-bottom:31px;
 `;
 
 export default Header;
