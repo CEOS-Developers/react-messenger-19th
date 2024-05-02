@@ -24,8 +24,10 @@ const Header: React.FC = () => {
       {userProfile && (
         <UserProfileSection>
           <ProfileImg src={userProfile.profileImage} alt="Profile" />
-          <ProfileLabel>{userProfile.name}</ProfileLabel>
-          <PhoneNumber>{userProfile.phoneNumber}</PhoneNumber>
+          <ProfileInfo>
+            <ProfileName>{userProfile.name}</ProfileName>
+            <PhoneNumber>{userProfile.phoneNumber}</PhoneNumber>
+          </ProfileInfo>
         </UserProfileSection>
       )}
     </HeaderContainer>
@@ -47,12 +49,18 @@ const TopBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  height: 53px;
+  background-color: #F7F8FC;
+
 `;
 
 const UserProfileSection = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 16px;
+  padding-top: 26px;
+  background-color: #F7F8FC;
+
 `;
 
 const ProfileLabel = styled.span`
@@ -74,17 +82,27 @@ const BackButton = styled.img`
     transform: scale(0.9);
   }
 `;
-
+const ProfileName = styled.span`
+font-size: 17px;
+color: #1F1F1F;
+font-weight: Bold;
+margin-top: 20px;
+`
 const ProfileImg = styled.img`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
+  width: 110px;
+  height: 110px;
 `;
+const ProfileInfo = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 
+`;
 const PhoneNumber = styled.span`
-  font-size: 14px;
-  color: #6E7582;
+  font-size: 15px;
+  color: #63666A;
+  margin-top: 12px;
+  padding-bottom:31px;
 `;
 
 export default Header;
