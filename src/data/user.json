@@ -2,23 +2,28 @@
   "users": [
     {
       "id": 0,
-      "name": "나현",
+      "name": "지원",
       "profileImg": "mine.svg"
     },
     {
       "id": 1,
-      "name": "CEOS 19기",
+      "name": "신짱구",
       "profileImg": "all.svg"
     },
     {
       "id": 2,
-      "name": "지원",
+      "name": "나현",
       "profileImg": "rabbit.svg"
     },
     {
       "id": 3,
       "name": "김철수",
       "profileImg": "frog.svg"
+    },
+    {
+      "id": 4,
+      "name": "이훈이",
+      "profileImg": "food.svg"
     }
   ]
 }
