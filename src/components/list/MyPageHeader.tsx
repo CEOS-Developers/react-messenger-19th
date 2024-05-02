@@ -48,7 +48,7 @@ background-color: #F7F8FC;
 const TopBar = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   height: 53px;
   background-color: #F7F8FC;
 
@@ -67,7 +67,7 @@ const ProfileLabel = styled.span`
   font-size: 17px;
   color: #1F1F1F;
   font-weight: 600;
-  margin-left: 136.5px; 
+  margin: 0 auto; 
 `;
 
 const BackButton = styled.img`
@@ -78,14 +78,15 @@ const BackButton = styled.img`
   height: 17px;
   transition: transform 0.1s ease;
   margin-left: 16px;
+  margin-right: -16px;
   &:active {
     transform: scale(0.9);
   }
 `;
 const ProfileName = styled.span`
-font-size: 17px;
+font-size: 25px;
 color: #1F1F1F;
-font-weight: Bold;
+font-weight: 700;
 margin-top: 20px;
 `
 const ProfileImg = styled.img`

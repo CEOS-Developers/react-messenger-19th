@@ -1,15 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { usersState } from '../state/userState';
+import React from 'react';
 import styled from 'styled-components';
 import IphoneHeader from '../main/IphoneHeader';
 import IphoneFooter from '../main/IphoneFooter';
-import NavigatingFooter from './NavigateFooter';
 import MyPageHeader from './MyPageHeader';
+
 
 const MyPage = () => {
    
   
+  const INSTAGRAM_URL = 'https://instagram.com/dreamforxou/';
+  const YOUTUBE_URL = 'https://www.youtube.com/@user-ul9qv5cc8m';
+  
+  const handleInstagramClick = () => {
+    window.location.href = INSTAGRAM_URL;
+  };
+  
+  const handleYoutubeClick = () => {
+    window.location.href = YOUTUBE_URL;
+  };
   return (
     <Container>
       <AppContainer>
@@ -19,12 +27,18 @@ const MyPage = () => {
           <EditProfileLabel>프로필 수정</EditProfileLabel>
           <EditProfileLabel>바로가기</EditProfileLabel>
           <SNSContainer>
-            <SNSLogo src="/assets/Instagram.svg"/>
-            <Label>Instagram</Label>
+            <Logogroup onClick={handleInstagramClick}>
+              <SNSLogo src="/assets/Instagram.svg"/>
+              <Label>Instagram</Label>
+            </Logogroup>
+            <Clip src="/assets/Clip.svg" onClick={handleInstagramClick}/>
           </SNSContainer>
           <SNSContainer>
-            <SNSLogo src="/assets/Youtube.svg"/>
-            <Label>Youtube</Label>
+            <Logogroup onClick={handleYoutubeClick}>
+              <SNSLogo src="/assets/Youtube.svg"/>
+              <Label>Youtube</Label>
+            </Logogroup>
+            <Clip src="/assets/Clip.svg" onClick={handleInstagramClick}/>
           </SNSContainer>
         </ProfileContainer>
         <IphoneFooter src='/assets/Home Indicator.png'/>
@@ -32,6 +46,8 @@ const MyPage = () => {
     </Container>
   );
 };
+
+
 export default MyPage;
 
 const Container = styled.div`
@@ -82,6 +98,11 @@ const SNSLogo = styled.img`
    
 `;
 
+const Logogroup = styled.div`
+display: flex;
+align-items: center;
+cursor: pointer;
+`;
 const Label = styled.span`
 font-size: 17px;
 font-weight: 500;
@@ -91,5 +112,11 @@ margin-left: 17px;
 const SNSContainer = styled.div`
 display: flex;
 align-items: center;
+justify-content: space-between;
 margin-bottom: 24px;
+`;
+
+const Clip = styled.img`
+margin-right: 11px;
+cursor: pointer;
 `;
