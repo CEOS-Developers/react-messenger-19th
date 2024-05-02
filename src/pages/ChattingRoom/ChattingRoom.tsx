@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import styled from "styled-components";
 
 import Header from "./Header";
 import Main from "./Main";
@@ -33,11 +34,15 @@ const ChattingRoom = () => {
   }, [chats, opponent]);
 
   return (
-    <>
+    <Wrapper>
       <Header />
       <Main chats={chats} setChats={setChats} />
-    </>
+    </Wrapper>
   );
 };
 
 export default ChattingRoom;
+
+const Wrapper = styled.div`
+  background-color: white;
+`;

@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Messenger from "../components/Messenger";
+import ChattingRoom from "../pages/ChattingRoom/ChattingRoom";
 
 function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Messenger />} />
+        <Route path="/" element={<ChattingRoom />} />
       </Routes>
     </BrowserRouter>
   );
