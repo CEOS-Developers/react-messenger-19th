@@ -1,21 +1,28 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 import theme from '@styles/theme';
 import { ReactComponent as IndicatorsGroupSvg } from '@assets/svg/indicatorsGroup.svg';
 import { ReactComponent as ClockSvg } from '@assets/svg/clock.svg';
+import { useLocation } from 'react-router-dom';
 
-export default function StatusBox() {
-  return (
-    <Statusbox>
-        <ClockSvg />
-        <IndicatorsGroupSvg />
-      </Statusbox>
-  )
+interface StatusBoxStyleProps {
+  path: string;
 }
 
-const Statusbox = styled.div`
+export default function StatusBox() {
+  const path = useLocation().pathname;
+  return (
+    <StatusboxStyle path={path}>
+      <ClockSvg />
+      <IndicatorsGroupSvg />
+    </StatusboxStyle>
+  );
+}
+
+const StatusboxStyle = styled.div<StatusBoxStyleProps>`
   width: 375px;
   flex-shrink: 0;
-  background-color: ${theme.colors.blue};
+  background-color: ${(props) =>
+    props.path === '/chattingroom' ? theme.colors.blue : theme.colors.white};
   display: flex;
   justify-content: space-between;
   align-items: center;
