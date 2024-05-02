@@ -1,27 +1,37 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+import { ReactComponent as HomeIcon } from '../../icons/TabBarHome.svg';
+import { ReactComponent as MessageIcon } from '../../icons/TabBarMessage.svg';
+import { ReactComponent as CallIcon } from '../../icons/TabBarCall.svg';
+import { ReactComponent as ProfileIcon } from '../../icons/TabBarProfile.svg';
 
 interface Tab {
-	iconSrc: string;
+	Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 	text: string;
 	path: string;
+	isActive?: boolean;
 }
 
 const tabs: Tab[] = [
-	{ iconSrc: '/icon/TabBarHome.svg', text: '홈', path: '/' },
-	{ iconSrc: '/icon/TabBarMessage.svg', text: '채팅', path: '/ChatList' },
-	{ iconSrc: '/icon/TabBarCall.svg', text: '통화', path: '/' },
-	{ iconSrc: '/icon/TabBarProfile.svg', text: '프로필', path: '/' },
+	{ Icon: HomeIcon, text: '홈', path: '/' },
+	{ Icon: MessageIcon, text: '채팅', path: '/ChatList' },
+	{ Icon: CallIcon, text: '통화', path: '/' },
+	{ Icon: ProfileIcon, text: '프로필', path: '/' },
 ];
 
-export default function FooterMenu(): JSX.Element {
+interface FooterMenuProps {
+	currentPath: string; // Prop to determine the current path
+}
+
+export default function FooterMenu({ currentPath }: FooterMenuProps): JSX.Element {
 	return (
 		<>
 			<Wrapper>
 				{tabs.map((tab, index) => (
 					<LinkStyle to={tab.path} key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
 						<IconContainer key={index}>
-							<Icon src={tab.iconSrc} />
+							<tab.Icon fill={tab.path === currentPath ? 'black' : 'none'} />
 							<TabText>{tab.text}</TabText>
 						</IconContainer>
 					</LinkStyle>
@@ -52,7 +62,17 @@ const IconContainer = styled.div`
 	cursor: pointer;
 `;
 
-const Icon = styled.img``;
+const Icon = styled.img<{ isActive: boolean }>`
+	${({ isActive }) =>
+		isActive
+			? css`
+					filter: invert(0%) sepia(100%) saturate(7500%) hue-rotate(180deg) brightness(30%)
+						contrast(100%);
+				`
+			: css`
+					filter: none;
+				`}
+`;
 
 const TabText = styled.p`
 	font-size: 8px;

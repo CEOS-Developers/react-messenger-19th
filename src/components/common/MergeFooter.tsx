@@ -15,7 +15,7 @@ export default function MergeFooter(): React.ReactNode {
 	return (
 		<div>
 			<MainFooter>
-				<FooterMenu />
+				<FooterMenu currentPath={location.pathname} />
 				<Footer />
 			</MainFooter>
 		</div>
