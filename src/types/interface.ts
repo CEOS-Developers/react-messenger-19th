@@ -1,15 +1,9 @@
 // 재사용하는 경우 분리해놓음
-export interface TitleBarProps {
+export interface UserProps {
+  id?: number;
   name: string;
   profileImg: string;
   isActive?: boolean;
-}
-
-export interface User {
-  id: number;
-  name: string;
-  profileImg: string;
-  isActive: boolean;
 }
 
 export interface Chats {

@@ -52,7 +52,7 @@ const Input = styled.input`
 `;
 
 export default function ChatInput({ chatRoomId }: Chats) {
-  const nowUser = useSelector((state: RootState) => state.user.nowUser); // 현재 사용자 상태 가져오기
+  const nowUser = useSelector((state: RootState) => state.user.nowUser); // 현재 사용자 ID 가져오기
   const [value, setValue] = useState<string>('');
   const dispatch = useDispatch();
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TitleBarProps } from '../../types/interface';
+import { UserProps } from '../../types/interface';
 import { ChatProps } from '../../types/interface';
 import FormatDateToDMY from '../../utils/formatDateToDMY';
 import checkmark from '../../assets/img/checkmark.svg';
@@ -87,7 +87,7 @@ const ChatText = styled.div<{ $isRead: boolean }>`
 `;
 
 // 두 타입을 결합하여 새로운 타입 정의
-type CombinedProps = TitleBarProps & ChatProps;
+type CombinedProps = UserProps & ChatProps;
 
 export default function Chat(props: CombinedProps) {
   const { name, profileImg, lastChatTime, lastChatContent, $isRead } = props;

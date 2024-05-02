@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TitleBarProps } from '../../types/interface';
+import { UserProps } from '../../types/interface';
 import Instagram from '../../assets/img/contact-instagram.svg';
 import Github from '../../assets/img/contact-github.svg';
 import Message from '../../assets/img/contact-message.svg';
@@ -148,7 +148,7 @@ const RightArrowImg = styled.img`
   margin-left: 0.75rem;
 `;
 
-export default function ContactInfo(props: TitleBarProps) {
+export default function ContactInfo(props: UserProps) {
   const { name, profileImg } = props;
 
   return (

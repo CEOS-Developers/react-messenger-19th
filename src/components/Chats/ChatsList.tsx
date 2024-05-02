@@ -66,7 +66,8 @@ export default function ChatsList() {
         // 현재 채팅방에서 현재 사용자를 제외한 상대방의 정보를 찾기
         const partner =
           userList.find(
-            (user) => chatRoom.userList.includes(user.id) && user.id !== nowUser
+            (user) =>
+              chatRoom.userList.includes(user.id!) && user.id !== nowUser
           ) ?? null;
 
         // 마지막 채팅 정보를 추출

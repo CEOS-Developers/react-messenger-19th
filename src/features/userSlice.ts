@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User } from '../types/interface';
+import { UserProps } from '../types/interface';
 import UserData from '../assets/data/userData.json';
 
 interface UserState {
   nowUser: number;
-  userList: User[];
+  userList: UserProps[];
 }
 
 const initialState: UserState = {

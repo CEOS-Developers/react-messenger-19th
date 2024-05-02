@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
-import { User } from '../types/interface';
+import { UserProps } from '../types/interface';
 import { Chats } from '../types/interface';
 import TitleBar from '../components/Chatting/TitleBar';
 import ChattingRoom from '../components/Chatting/ChattingRoom';
@@ -13,7 +13,7 @@ export default function ChattingPage() {
   const nowUser = useSelector((state: RootState) => state.user.nowUser);
   const userList = useSelector((state: RootState) => state.user.userList);
   const chattings = useSelector((state: RootState) => state.chat.chattings);
-  const [partner, setPartner] = useState<User | null>(null);
+  const [partner, setPartner] = useState<UserProps | null>(null);
   const [chatRoom, setChatRoom] = useState<Chats | null>(null);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function ChattingPage() {
       const nextUser =
         userList.find(
           (user) =>
-            foundChatRoom.userList.includes(user.id) && user.id !== nowUser
+            foundChatRoom.userList.includes(user.id!) && user.id !== nowUser
         ) ?? null;
       setPartner(nextUser);
     } else {
@@ -42,6 +42,7 @@ export default function ChattingPage() {
           name={partner.name}
           profileImg={partner.profileImg}
           isActive={partner.isActive}
+          userId={partner.id!} // '!'를 사용하여 'undefined'가 아니라고 단언
         />
         <ChattingRoom
           chatRoomId={chatRoom.chatRoomId}

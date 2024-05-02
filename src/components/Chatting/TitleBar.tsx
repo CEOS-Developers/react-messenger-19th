@@ -4,8 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeUser } from '../../features/userSlice';
 import { RootState } from '../../store';
-import { TitleBarProps } from '../../types/interface';
-import { User } from '../../types/interface';
+import { UserProps } from '../../types/interface';
 import { Chats } from '../../types/interface';
 import TopNavBar from '../TopNavBar/TopNavBar';
 import Left from '../../assets/img/left.svg';
@@ -55,7 +54,8 @@ const OnlineText = styled.div`
   letter-spacing: -0.0015rem;
 `;
 
-export default function TitleBar(props: TitleBarProps) {
+export default function TitleBar(props: UserProps & { userId: number }) {
+  // 파트너 유저 아이디도 전달
   const { name, profileImg, isActive } = props;
   const { chatRoomId } = useParams();
   const nowUser = useSelector((state: RootState) => state.user.nowUser);
@@ -71,16 +71,6 @@ export default function TitleBar(props: TitleBarProps) {
     );
     setChatRoom(foundChatRoom ?? null);
   }, [chatRoomId, chattings]); // chattings 또는 chatRoomId 변경 시 effect 실행
-
-  // 이름 변환 로직
-  const getFormattedName = (name: string) => {
-    const parts = name.split(' ');
-    if (parts.length > 1) {
-      const lastInitial = parts.pop()!.charAt(0); // 띄어쓰기 다음 첫 글자 구하기. parts.pop()의 결과가 undefined가 아니라는 것을 명시하기 위해 !를 사용함
-      return `${parts.join(' ')} ${lastInitial}.`;
-    }
-    return name; // 이름에 공백이 없는 경우 변환 없이 반환
-  };
 
   const handleChangeUser = () => {
     if (chatRoom && chatRoom.userList && chatRoom.userList.length > 0) {
@@ -106,12 +96,12 @@ export default function TitleBar(props: TitleBarProps) {
         <ProfileImg
           src={profileImg}
           alt="유저 프로필"
-          onClick={() =>
-            navigate('/contact-info', { state: { userId: nowUser } })
+          onClick={
+            () => navigate('/contact-info', { state: { userId: props.userId } }) // 클릭된 이미지에 해당하는 유저 아이디 넘김
           }
         />
         <ProfileInnerContainer onClick={handleChangeUser}>
-          <ProfileName>{getFormattedName(name)}</ProfileName>
+          <ProfileName>{name}</ProfileName>
           {isActive ? (
             <OnlineText>online</OnlineText>
           ) : (

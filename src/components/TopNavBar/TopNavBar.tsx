@@ -78,7 +78,7 @@ interface TopNavBarProps {
   title?: string;
   leftTextOnClick?: () => void; // 클릭을 통해 이전 페이지로 돌아가기 위함
   $noBorderBottom?: boolean; // edit-contact page에서는 테두리 없애기 위함
-  $isEditPage?: boolean; // edit-contact page에서 오른쪽 텍스트가 회색
+  $isEditPage?: boolean; // edit-contact page에서 오른쪽 텍스트를 회색으로 지정하기 위함
 }
 
 export default function TopNavBar(props: TopNavBarProps) {
@@ -99,9 +99,8 @@ export default function TopNavBar(props: TopNavBarProps) {
         {leftImgSrc && <LeftImg src={leftImgSrc} alt="이전 버튼 이미지" />}
         <Text $hasLeftImg={!!leftImgSrc}>{leftText}</Text>
       </LeftContainer>
-      {children} {/* 여기에 children을 렌더링 */}
+      {children}
       {title && <TitleText>{title}</TitleText>}{' '}
-      {/* 여기에 TitleText를 렌더링 */}
       <RightContainer>
         {rightImgSrc && <IconImg src={rightImgSrc} alt="" />}
         {rightText && (
