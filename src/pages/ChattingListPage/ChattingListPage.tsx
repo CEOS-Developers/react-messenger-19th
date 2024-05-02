@@ -5,6 +5,7 @@ import StatusBox from '@components/StatusBox';
 import ChatCard from './components/ChatCard';
 import MainHeader from '@components/MainHeader';
 import Input from '@components/Input';
+import MainFooter from '@components/MainFooter';
 
 const DUMMYChatCards: ChatCardProps[] = [
   {
@@ -32,6 +33,7 @@ export default function ChattingListPage() {
       {DUMMYChatCards.map((chatCard, index) => (
         <ChatCard key={index} {...chatCard} />
       ))}
+      <MainFooter />
     </ChattingListContainer>
   );
 }
