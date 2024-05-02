@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import FriendsListPage from "./pages/FriendsList/FriendsListPage";
 import ChattingListPage from "./pages/ChattingList/ChattingListPage";
 import ChattingPage from "./pages/Chat/ChattingPage";
+import MyProfilePage from "./pages/MyProfile/MyProfilePage";
 
 
 
@@ -15,6 +16,7 @@ function App() {
 				<Header/>
 				<Routes>
 					<Route path="/" element={<FriendsListPage/>}></Route>
+					<Route path="/my-profile-page" element={<MyProfilePage/>}></Route>
 					<Route path="/chatting-list-page" element={<ChattingListPage/>}></Route>
 					<Route path="/chatting-page" element={<ChattingPage/>}></Route>
 				</Routes>

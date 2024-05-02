@@ -1,106 +1,106 @@
 [
     {
-      "f_id": 4,
+      "f_id": 1,
       "f_name": "Emily",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 5,
+      "f_id": 2,
       "f_name": "Michael",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 6,
+      "f_id": 3,
       "f_name": "Sarah",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 7,
+      "f_id": 4,
       "f_name": "David",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 8,
+      "f_id": 5,
       "f_name": "Sophia",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 9,
+      "f_id": 6,
       "f_name": "James",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 10,
+      "f_id": 7,
       "f_name": "Emma",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 11,
+      "f_id": 8,
       "f_name": "Daniel",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 12,
+      "f_id": 9,
       "f_name": "Olivia",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 13,
+      "f_id": 10,
       "f_name": "William",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 14,
+      "f_id": 11,
       "f_name": "Ava",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 15,
+      "f_id": 12,
       "f_name": "Benjamin",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 16,
+      "f_id": 13,
       "f_name": "Mia",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 17,
+      "f_id": 14,
       "f_name": "Logan",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 18,
+      "f_id": 15,
       "f_name": "Ethan",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 19,
+      "f_id": 16,
       "f_name": "Charlotte",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 20,
+      "f_id": 17,
       "f_name": "Harper",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 21,
+      "f_id": 18,
       "f_name": "Liam",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 22,
+      "f_id": 19,
       "f_name": "Evelyn",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 23,
+      "f_id": 20,
       "f_name": "Lucas",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     },
     {
-      "f_id": 24,
+      "f_id": 21,
       "f_name": "Amelia",
       "f_profile": "/Users/dahee/react-messenger-19th/src/assets/img/friendProfile.png"
     }
