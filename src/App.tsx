@@ -7,6 +7,7 @@ import Main from './pages/Main';
 import MergeFooter from './components/common/MergeFooter';
 import ChatList from './pages/ChatList';
 import Header from './components/common/Header';
+import Profile from './pages/Profile';
 
 function App(): JSX.Element {
 	return (
@@ -22,7 +23,7 @@ function App(): JSX.Element {
 									<Route path="/ChatList" element={<ChatList />} />
 									<Route path="/ChatRoom" element={<ChatRoom />} />
 									{/* </Route> */}
-									{/* <Route path="my-page" element={<MyPage />} /> */}
+									<Route path="/Profile" element={<Profile />} />
 									{/* <Route path="menu1" element={<Menu1 />} /> */}
 								</Routes>
 
@@ -50,13 +51,14 @@ const FullContainer = styled.div`
 
 const MobileContainer = styled.div`
 	width: 375px;
-	height: 100vh; // 화면 높이와 동일하게 설정
+	height: calc(100vh - 88px);
 	background-color: white;
 	overflow-y: scroll; // 내용이 이 높이를 초과할 경우에만 스크롤바 활성화
 	padding-top: 29px;
 
 	@media (max-width: 768px) {
 		width: 100%;
+		height: 100%;
 		padding-top: 0px;
 	}
 `;
