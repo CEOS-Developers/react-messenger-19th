@@ -4,7 +4,7 @@ export interface ChatData {
 
 export interface Chat {
   id: string;
-  users: User[];
+  partner: User;
   messages: Message[];
 }
 

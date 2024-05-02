@@ -4,9 +4,7 @@ import { ReactComponent as CloseIcon } from 'asset/icons/CloseIcon.svg';
 export default function SearchBar() {
   return (
     <InputWrapper>
-      <button>
-        <SearchIcon className="icon" alt="검색 아이콘" />
-      </button>
+      <SearchIcon className="icon" alt="검색 아이콘" />
       <Input placeholder="이름으로 검색" />
       <button>
         <CloseIcon alt="검색어 제거 아이콘" />
@@ -21,7 +19,7 @@ const InputWrapper = styled.div`
   padding: 2.2rem;
   .icon {
     position: absolute;
-    top: 3rem;
+    top: 3.2rem;
     left: 6rem;
   }
   gap: 1rem;
@@ -33,6 +31,7 @@ const Input = styled.input`
   height: 3.6rem;
   flex-shrink: 0;
   padding-left: 12rem;
+  font-size: 1.7rem;
   background-color: var(--gray02);
   &::placeholder {
     color: var(--gray04);
