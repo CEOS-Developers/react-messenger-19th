@@ -16,8 +16,8 @@ interface Tab {
 const tabs: Tab[] = [
 	{ Icon: HomeIcon, text: '홈', path: '/' },
 	{ Icon: MessageIcon, text: '채팅', path: '/ChatList' },
-	{ Icon: CallIcon, text: '통화', path: '/' },
-	{ Icon: ProfileIcon, text: '프로필', path: '/' },
+	{ Icon: CallIcon, text: '통화', path: '/Call' },
+	{ Icon: ProfileIcon, text: '프로필', path: '/Profile' },
 ];
 
 interface FooterMenuProps {
