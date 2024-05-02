@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect, useRef } from "react";
 import { useSenderContext } from "../../assets/SenderContext";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 // image
 import smallAdd from "../../assets/smallAdd.svg";
@@ -9,14 +11,30 @@ import voice from "../../assets/voice.svg";
 import send from "../../assets/send.svg";
 // data
 import userData from "../../data/user.json";
+import chattingData from "../../data/chatting.json";
 
 import { colors } from "../../style/colors";
 import { typography } from "../../style/typography";
 
 const Main = () => {
-  const { currentUser, chats, setChats } = useSenderContext();
-  const currentOpponent = currentUser === 0 ? 2 : 0;
-  const currentOpponentData = userData.users[currentOpponent];
+  const findChats = (opponent) => {
+    const chats = [];
+    for (const item of chattingData) {
+      if (item.opponent === opponent) {
+        chats.push(...item.chats);
+      }
+    }
+    return chats;
+  };
+  const opponent = useSelector((state: RootState) => state.opponent.opponent);
+  const chats = findChats(opponent);
+  const currentOpponentData = userData.users[opponent];
+
+  //임시
+  const currentUser = 0;
+
+  //const { currentUser, chats, setChats } = useSenderContext();
+  //const currentOpponent = currentUser === 0 ? 2 : 0;
 
   const [value, setValue] = useState("");
   const [isEmpty, setIsEmpty] = useState(true); // input란에 텍스트 입력 여부
@@ -48,19 +66,19 @@ const Main = () => {
     return formattedTimeStamp;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!isEmpty) {
-      const newChat = {
-        text: value,
-        sender: currentUser,
-        timestamp: getDate(),
-      };
-      setChats([...chats, newChat]);
-      setValue("");
-      setIsEmpty(true);
-    }
-  };
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (!isEmpty) {
+  //     const newChat = {
+  //       text: value,
+  //       sender: currentUser,
+  //       timestamp: getDate(),
+  //     };
+  //     setChats([...chats, newChat]);
+  //     setValue("");
+  //     setIsEmpty(true);
+  //   }
+  // };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -98,7 +116,7 @@ const Main = () => {
         })}
       </ChattingWrapper>
 
-      <InputWrapper onSubmit={handleSubmit}>
+      <InputWrapper onSubmit={() => {}}>
         <img src={smallAdd} />
         <Input>
           <InputText

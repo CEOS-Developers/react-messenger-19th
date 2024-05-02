@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import StatusBar from "../../components/common/StatusBar";
 import { RootState } from "../../store";
+import StatusBar from "../../components/common/StatusBar";
 
 import userData from "../../data/user.json";
 
