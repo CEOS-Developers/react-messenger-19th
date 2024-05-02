@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 import StatusBar from "../../components/common/StatusBar";
-import { useSenderContext } from "../../assets/SenderContext";
+import { RootState } from "../../store";
 
 import userData from "../../data/user.json";
 
@@ -12,21 +13,20 @@ import { colors } from "../../style/colors";
 import { typography } from "../../style/typography";
 
 const Header = () => {
-  const { currentUser, setCurrentUser } = useSenderContext();
-  const currentOpponent = currentUser === 0 ? 2 : 0;
-  const currentOpponentData = userData.users[currentOpponent];
+  const opponent = useSelector((state: RootState) => state.opponent.opponent);
+  const currentOpponentData = userData.users[opponent];
 
-  const toggleSender = () => {
-    const newSender = currentOpponent;
-    setCurrentUser(newSender);
-  };
+  // const toggleSender = () => {
+  //   const newSender = currentOpponent;
+  //   setCurrentUser(newSender);
+  // };
 
   return (
     <Wrapper>
       <StatusBar />
       <RoomInfoWrapper>
         <img src={back} />
-        <RoomInfo onClick={toggleSender}>
+        <RoomInfo onClick={() => {}}>
           <RoomProfile
             src={`img/userProfile/${currentOpponentData.profileImg}`}
           />
