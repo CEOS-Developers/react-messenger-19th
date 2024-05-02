@@ -38,10 +38,10 @@ const ChatMessages: React.FC = () => { //상턔관리 변수들
   };
 
 
+ // 필터링된 메시지: 현재 유저와 선택된 유저 간의 메시지만 표시
   const filteredMessages = messages.filter(
-    message => message.senderId === selectedUserId || message.receiverId === selectedUserId
+    message => (message.senderId === selectedUserId || message.receiverId === selectedUserId)
   );
-
 
   //날짜로 메세지 그룹화하기 (꼬리물기)
   const groupMessagesByDate = (messages: Message[]) => {

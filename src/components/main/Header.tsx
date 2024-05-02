@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import { selectedUserState } from '../state/selectedUserState';
 import { usersState } from '../state/userState';
 
-
 const Header: React.FC = () => {
   const navigate = useNavigate();
   const [selectedUserId, setSelectedUserId] = useRecoilState(selectedUserState);
   const [users] = useRecoilState(usersState);
+  const [initialSelectedUserId, setInitialSelectedUserId] = useState(selectedUserId);
+
+  // selectedUserId가 변경될 때마다 초기 selectedUserId를 업데이트합니다.
+  useEffect(() => {
+    if (selectedUserId !== 0) {
+      setInitialSelectedUserId(selectedUserId);
+    }
+  }, [selectedUserId]);
 
   const selectedUser = users.find(user => user.id === selectedUserId) ?? users[0];
 
@@ -21,29 +28,24 @@ const Header: React.FC = () => {
     console.log('Call button clicked'); // 전화 걸기 로직
   };
 
-
-
   const toggleUser = () => {
-    // 1번이랑 2번만 토글,,
-    const newSelectedUserId = selectedUserId === 1 ? 2 : 1;
-    setSelectedUserId(newSelectedUserId);
+    setSelectedUserId(prevSelectedUserId => prevSelectedUserId === 0 ? initialSelectedUserId : 0);
+    console.log(selectedUser.id); 
   };
 
-
-    return (
-      <HeaderContainer>
-        <LeftContainer>
-          <BackButton src='/assets/back.png' alt='Back' onClick={handleBackButtonClick}/>
-          <ProfileContainer onClick={toggleUser}>
-            <ProfilePic src={selectedUser.profileImage} alt="Profile" />
-            <Name>{selectedUser.name}</Name>
-          </ProfileContainer>
-        </LeftContainer>
-        <CallButton src='/assets/Call.png' alt='Call' onClick={handleCallButtonClick}/>
-      </HeaderContainer>
-    );
-  };
-  
+  return (
+    <HeaderContainer>
+      <LeftContainer>
+        <BackButton src='/assets/back.png' alt='Back' onClick={handleBackButtonClick}/>
+        <ProfileContainer onClick={toggleUser}>
+          <ProfilePic src={selectedUser.profileImage} alt="Profile" />
+          <Name>{selectedUser.name}</Name>
+        </ProfileContainer>
+      </LeftContainer>
+      <CallButton src='/assets/Call.png' alt='Call' onClick={handleCallButtonClick}/>
+    </HeaderContainer>
+  );
+};
 
 const HeaderContainer = styled.div`
   display: flex;

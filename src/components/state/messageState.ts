@@ -17,8 +17,8 @@ const loadMessagesFromLocalStorage = () => {
 
   // id기준으로 중복 메세지 제거
   const uniqueMessages = Array.from(new Map(combinedMessages.map(msg => [msg.id, msg])).values());
-
   return uniqueMessages;
+
 };
 
 

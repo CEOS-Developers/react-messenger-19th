@@ -1,4 +1,9 @@
-[
+[   {
+    "id": 0,
+    "name": "김수현",
+    "profileImage": "/assets/Profile (3).svg",
+    "phoneNumber": "+82 010 3716 9600"
+  },
     {
       "id": 1,
       "name": "석사랑",
@@ -14,13 +19,13 @@
     {
       "id": 3,
       "name": "학사랑",
-      "profileImage": "/assets/size=big.png",
+      "profileImage": "/assets/profile.svg",
       "phoneNumber": "+82 010 1234 5678"
     },
     {
       "id": 4,
       "name": "면접중",
-      "profileImage": "/assets/size=big.png",
+      "profileImage": "/assets/profile (1).svg",
       "phoneNumber": "+82 010 1234 5678"
     },
     {

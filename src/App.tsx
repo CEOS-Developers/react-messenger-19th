@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { RecoilRoot } from 'recoil'; 
 import ChatList from './components/list/ChatList';
 import ChatApp from './components/main/ChatApp'; 
+import FriendList from './components/list/FriendList';
 import GlobalStyle from './components/style/GlobalStyle';
+import MyPage from './components/list/MyPage'
 
 const App: React.FC = () => {
   return (
@@ -13,6 +15,8 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<ChatList />} />
           <Route path="/chat/:userId" element={<ChatApp />} />
+          <Route path="/friends" element={<FriendList />} />
+          <Route path="/mypage" element={<MyPage/>}/>
         </Routes>
       </Router>
     </RecoilRoot>
