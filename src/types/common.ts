@@ -39,3 +39,11 @@ export interface OppoChangeChatProps {
   isDisplay: boolean;
   from: string;
 }
+
+export interface ChatCardProps {
+  img: string;
+  name: string;
+  lastMessage: string;
+  date: string;
+  unReadCount: number;
+}
