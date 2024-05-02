@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
+import { currOpponentActions } from "../../store";
 import StatusBar from "../../components/common/StatusBar";
 
 import userData from "../../data/user.json";
@@ -12,26 +13,33 @@ import profileArrow from "../../assets/profileArrow.svg";
 import { colors } from "../../style/colors";
 import { typography } from "../../style/typography";
 
-const Header = () => {
+const Header = ({ chats, setChats }) => {
+  const dispatch = useDispatch();
   const opponent = useSelector((state: RootState) => state.opponent.opponent);
-  const currentOpponentData = userData.users[opponent];
+  const currOpponent = useSelector(
+    (state: RootState) => state.currOpponent.currOpponent
+  );
+  const currOpponentData = userData.users[currOpponent];
 
-  // const toggleSender = () => {
-  //   const newSender = currentOpponent;
-  //   setCurrentUser(newSender);
-  // };
+  const toggleCurrOpponent = () => {
+    const index = currOpponent === 0 ? opponent : 0;
+    dispatch(currOpponentActions.setCurrOpponent(index));
+    const updatedChats = [...chats];
+    updatedChats.forEach((chat) => {
+      chat.sender = chat.sender === 0 ? opponent : 0;
+    });
+    setChats(updatedChats);
+  };
 
   return (
     <Wrapper>
       <StatusBar />
       <RoomInfoWrapper>
         <img src={back} />
-        <RoomInfo onClick={() => {}}>
-          <RoomProfile
-            src={`img/userProfile/${currentOpponentData.profileImg}`}
-          />
+        <RoomInfo onClick={toggleCurrOpponent}>
+          <RoomProfile src={`img/userProfile/${currOpponentData.profileImg}`} />
           <RoomNameWrapper>
-            <RoomName>{currentOpponentData.name}</RoomName>
+            <RoomName>{currOpponentData.name}</RoomName>
             <img src={profileArrow} />
           </RoomNameWrapper>
         </RoomInfo>

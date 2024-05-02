@@ -17,7 +17,7 @@ import { colors } from "../../style/colors";
 import { typography } from "../../style/typography";
 
 const Main = () => {
-  const findChats = (opponent) => {
+  const findChats = (opponent: number) => {
     const chats = [];
     for (const item of chattingData) {
       if (item.opponent === opponent) {
