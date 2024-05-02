@@ -70,13 +70,14 @@ const RoomProfile = styled.img`
 `;
 
 const RoomNameWrapper = styled.div`
-  display: flex;
+  display: grid;
   align-items: center;
   justify-content: center;
+  grid-template-columns: auto 0;
+  padding-top: 0.25rem;
 `;
 
 const RoomName = styled.span`
   ${typography.body3};
   padding-right: 0.25rem;
-  padding-top: 0.25rem;
 `;
