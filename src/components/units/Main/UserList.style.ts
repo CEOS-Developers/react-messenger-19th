@@ -72,12 +72,12 @@ export const RecommandFriendContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 10px 15px 10px 10px;
+	padding: 10px 12px 10px 5px;
 `;
 export const PrivateFriend = styled.div`
 	display: flex;
 	align-items: center;
-	padding: 10px 15px 10px 10px;
+	padding: 10px 12px 10px 5px;
 	gap: 18px;
 `;
 
