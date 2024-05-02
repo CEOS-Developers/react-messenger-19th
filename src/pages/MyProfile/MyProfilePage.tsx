@@ -3,11 +3,14 @@ import backButton from "../../assets/icons/back.png"
 import profileUpload from "../../assets/img/profileUpload.png"
 import showIcon from "../../assets/icons/show.png"
 import linkIcon from "../../assets/icons/link.png"
+import { Link } from "react-router-dom"
 
 function MyProfilePage() {
   return (
     <MyProfileConatainer>
-        <BackButton><img src = {backButton}/></BackButton>
+        <BackButton>
+            <Link to = "/"><img src = {backButton}/></Link>
+        </BackButton>
         <MyProfileImgWrapper><img src={profileUpload}/></MyProfileImgWrapper>
         <MyProfileInfoWrapper>
             <UserInfo>

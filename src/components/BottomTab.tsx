@@ -5,6 +5,7 @@ import homeClicked from "../assets/icons/homeClick.png"
 import chatIcon from "../assets/icons/chat.png"
 import chatClicked from "../assets/icons/chatClick.png"
 import callIcon from "../assets/icons/call.png"
+import { Link } from "react-router-dom"
 
 
 
@@ -12,8 +13,8 @@ import callIcon from "../assets/icons/call.png"
 function BottomTab() {
   return (
     <BottomTabContainer>
-      <HomeIcon type="button"><img src={homeIcon}/></HomeIcon>
-      <ChatIcon type="button"><img src={chatIcon}/></ChatIcon>
+      <Link to = "/"><HomeIcon type="button"><img src={homeIcon}/></HomeIcon></Link>
+      <Link to = "/chatting-list-page"><ChatIcon type="button"><img src={chatIcon}/></ChatIcon></Link>
       <CallIcon type="button"><img src={callIcon}/></CallIcon>
     </BottomTabContainer>
   )

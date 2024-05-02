@@ -5,13 +5,15 @@ import BottomTab from "../../components/BottomTab"
 import ServiceTab from "./ServiceTab"
 import AddGroup from "./AddGroup"
 import FriendList from "../FriendsList/FriendList"
+import { Link } from "react-router-dom"
 
 
 function FriendsListPage() {
+
   return (
     <FriendsListPageContainer>
         <TopBarIconsMain/>
-        <UserInfo/>
+        <Link to = "/my-profile-page" style={{ textDecoration: 'none', color: 'inherit' }}><UserInfo/></Link>
         <ServiceTab/>
         <AddGroup/>
         <FriendsListsWrapper>
