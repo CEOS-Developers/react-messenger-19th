@@ -4,6 +4,7 @@ import Pic from '@assets/img/pic.png';
 import StatusBox from '@components/StatusBox';
 import ChatCard from './components/ChatCard';
 import MainHeader from '@components/MainHeader';
+import Input from '@components/Input';
 
 const DUMMYChatCards: ChatCardProps[] = [
   {
@@ -27,6 +28,7 @@ export default function ChattingListPage() {
     <ChattingListContainer>
       <StatusBox />
       <MainHeader title="채팅" />
+      <Input />
       {DUMMYChatCards.map((chatCard, index) => (
         <ChatCard key={index} {...chatCard} />
       ))}
