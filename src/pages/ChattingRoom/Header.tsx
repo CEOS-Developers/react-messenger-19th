@@ -24,11 +24,6 @@ const Header = ({ chats, setChats }) => {
   const toggleCurrOpponent = () => {
     const index = currOpponent === 0 ? opponent : 0;
     dispatch(currOpponentActions.setCurrOpponent(index));
-    const updatedChats = [...chats];
-    updatedChats.forEach((chat) => {
-      chat.sender = chat.sender === 0 ? opponent : 0;
-    });
-    setChats(updatedChats);
   };
 
   return (

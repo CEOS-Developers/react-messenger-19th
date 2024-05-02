@@ -11,30 +11,15 @@ import voice from "../../assets/voice.svg";
 import send from "../../assets/send.svg";
 // data
 import userData from "../../data/user.json";
-import chattingData from "../../data/chatting.json";
 
 import { colors } from "../../style/colors";
 import { typography } from "../../style/typography";
 
-const Main = () => {
-  const findChats = (opponent: number) => {
-    const chats = [];
-    for (const item of chattingData) {
-      if (item.opponent === opponent) {
-        chats.push(...item.chats);
-      }
-    }
-    return chats;
-  };
-  const opponent = useSelector((state: RootState) => state.opponent.opponent);
-  const chats = findChats(opponent);
-  const currentOpponentData = userData.users[opponent];
-
-  //임시
-  const currentUser = 0;
-
-  //const { currentUser, chats, setChats } = useSenderContext();
-  //const currentOpponent = currentUser === 0 ? 2 : 0;
+const Main = ({ chats, setChats }) => {
+  const currOpponent = useSelector(
+    (state: RootState) => state.currOpponent.currOpponent
+  );
+  const currOpponentData = userData.users[currOpponent];
 
   const [value, setValue] = useState("");
   const [isEmpty, setIsEmpty] = useState(true); // input란에 텍스트 입력 여부
@@ -89,18 +74,18 @@ const Main = () => {
     <Wrapper>
       <ChattingWrapper ref={chatWrapperRef}>
         {chats.map((chat, index) => {
-          const isMine = chat.sender === currentUser;
+          const isMine = chat.sender !== currOpponent;
           return (
             <ChattingItemWrapper key={index}>
               <TimeStamp>{chat.timestamp}</TimeStamp>
               <MsgBox align={isMine ? "end" : "start"}>
                 {isMine || (
                   <ProfileImg
-                    src={`img/userProfile/${currentOpponentData.profileImg}`}
+                    src={`img/userProfile/${currOpponentData.profileImg}`}
                   />
                 )}
                 <Contents>
-                  {isMine || <Name>{currentOpponentData.name}</Name>}
+                  {isMine || <Name>{currOpponentData.name}</Name>}
                   <MsgText
                     maxwidth={isMine ? 12 : 17.125}
                     bgcolor={isMine ? colors.blurple : colors.gray200}

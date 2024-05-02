@@ -35,7 +35,7 @@ const ChattingRoom = () => {
   return (
     <>
       <Header chats={chats} setChats={setChats} />
-      <Main />
+      <Main chats={chats} setChats={setChats} />
     </>
   );
 };
