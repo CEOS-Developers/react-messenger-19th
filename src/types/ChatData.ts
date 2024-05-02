@@ -28,12 +28,3 @@ export interface Message {
   createdAt: string;
   photo?: Photo;
 }
-
-export interface initial {
-  allChats: Chat[];
-  selectedChatId: null | string;
-  participants: {
-    me: null | User;
-    partner: null | User;
-  };
-}

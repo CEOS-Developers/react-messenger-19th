@@ -1,10 +1,19 @@
 // src/features/chat/chatSlice.js
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import mockData from 'data/chatData.json';
 import myData from 'data/myData.json';
-import { initial } from 'types/ChatData';
+import { Chat, User } from 'types/ChatData';
 
-const initialState: initial = {
+export interface InitialStateType {
+  allChats: Chat[];
+  selectedChatId: null | string;
+  participants: {
+    me: null | User;
+    partner: null | User;
+  };
+}
+
+const initialState: InitialStateType = {
   allChats: mockData.chats, // 전체 채팅방 데이터
   selectedChatId: null, // 선택된 채팅방 ID
   participants: {
@@ -18,7 +27,7 @@ export const chatSlice = createSlice({
   name: 'chat',
   initialState,
   reducers: {
-    selectChat: (state, action) => {
+    selectChat: (state, action: PayloadAction<string>) => {
       const selectedChat = state.allChats.find((chat) => chat.id === action.payload);
       state.selectedChatId = action.payload;
       if (!selectedChat) return;

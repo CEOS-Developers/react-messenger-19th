@@ -4,8 +4,11 @@ import { ReactComponent as EditIcon } from 'asset/icons/EditIcon.svg';
 import { ReactComponent as ChatRoomIcon } from 'asset/icons/ChatRoomIcon.svg';
 import SearchBar from 'components/common/SearchBar';
 import BottomNavBar from 'components/common/BottomNavBar';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
 
 export default function ChatRoomList() {
+  const chatRoomData = useSelector((state: RootState) => state.chat.allChats);
   return (
     <>
       <div>
@@ -16,34 +19,15 @@ export default function ChatRoomList() {
         </ChatNavigationBar>
         <SearchBar />
 
-        <ChatRoomsContainer>
-          <ChatRoomIcon alt="각 채팅방을 나타내는 아이콘" />
-          <div>
-            <h3 className="name">CEOS 디팟</h3>
-            <p className="message">CEOS 디팟 파이팅</p>
-          </div>
-        </ChatRoomsContainer>
-        <ChatRoomsContainer>
-          <ChatRoomIcon alt="각 채팅방을 나타내는 아이콘" />
-          <div>
-            <h3 className="name">CEOS 디팟</h3>
-            <p className="message">CEOS 디팟 파이팅</p>
-          </div>
-        </ChatRoomsContainer>
-        <ChatRoomsContainer>
-          <ChatRoomIcon alt="각 채팅방을 나타내는 아이콘" />
-          <div>
-            <h3 className="name">CEOS 디팟</h3>
-            <p className="message">CEOS 디팟 파이팅</p>
-          </div>
-        </ChatRoomsContainer>
-        <ChatRoomsContainer>
-          <ChatRoomIcon alt="각 채팅방을 나타내는 아이콘" />
-          <div>
-            <h3 className="name">CEOS 디팟</h3>
-            <p className="message">CEOS 디팟 파이팅</p>
-          </div>
-        </ChatRoomsContainer>
+        {chatRoomData.map((chat) => (
+          <ChatRoomsContainer key={chat.id}>
+            <ChatRoomIcon alt="각 채팅방을 나타내는 아이콘" />
+            <div>
+              <h3 className="name">{chat.partner.name}</h3>
+              <p className="message">CEOS 디팟 파이팅</p>
+            </div>
+          </ChatRoomsContainer>
+        ))}
       </div>
       <BottomNavBar />
     </>
