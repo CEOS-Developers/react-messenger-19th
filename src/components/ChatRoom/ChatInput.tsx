@@ -1,34 +1,30 @@
-import { ReactComponent as EmogiIcon } from "asset/icons/EmogiIcon.svg";
-import { ReactComponent as FileInputIcon } from "asset/icons/FileInputIcon.svg";
-import { ReactComponent as AudioIcon } from "asset/icons/AudioIcon.svg";
-import { ReactComponent as SendIcon } from "asset/icons/SendIcon.svg";
-import { ReactComponent as CloseIcon } from "asset/icons/CloseIcon.svg";
+import { ReactComponent as EmogiIcon } from 'asset/icons/EmogiIcon.svg';
+import { ReactComponent as FileInputIcon } from 'asset/icons/FileInputIcon.svg';
+import { ReactComponent as AudioIcon } from 'asset/icons/AudioIcon.svg';
+import { ReactComponent as SendIcon } from 'asset/icons/SendIcon.svg';
+import { ReactComponent as CloseIcon } from 'asset/icons/CloseIcon.svg';
 
-import {
-  ChangeEvent,
-  Dispatch,
-  FormEvent,
-  KeyboardEvent,
-  SetStateAction,
-  useRef,
-  useState,
-} from "react";
-import styled from "styled-components";
-import { flexCenter } from "styles/CommonStyle";
-import { Chat, User } from "types/ChatData";
+import { ChangeEvent, Dispatch, FormEvent, KeyboardEvent, SetStateAction, useRef, useState } from 'react';
+import styled from 'styled-components';
+import { flexCenter } from 'styles/CommonStyle';
+import { Chat, User } from 'types/ChatData';
+import { useDispatch } from 'react-redux';
+import { addNewChat } from 'store/chat';
 
 interface ChatInputProps {
-  setChatData: Dispatch<SetStateAction<Chat>>;
+  // setChatData: Dispatch<SetStateAction<Chat>>;
   me: User;
 }
-function ChatInput({ setChatData, me }: ChatInputProps) {
-  const [inputValue, setInputValue] = useState("");
+function ChatInput({ me }: ChatInputProps) {
+  const [inputValue, setInputValue] = useState('');
 
-  const [isReplyWindowOpen, setIsReplyWindowOpen] = useState(true);
+  const dispatch = useDispatch();
 
-  const handleReplyWindowToggle = () => {
-    setIsReplyWindowOpen((prev) => !prev);
-  };
+  // const [isReplyWindowOpen, setIsReplyWindowOpen] = useState(true);
+
+  // const handleReplyWindowToggle = () => {
+  //   setIsReplyWindowOpen((prev) => !prev);
+  // };
 
   // shift + enter로 줄 바꿈 기능
   const handleKeyDownShiftEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -37,7 +33,7 @@ function ChatInput({ setChatData, me }: ChatInputProps) {
       return; // 조합 중이므로 동작을 막는다.
     }
 
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey) {
       handleInputSubmit(e);
     }
   };
@@ -55,21 +51,18 @@ function ChatInput({ setChatData, me }: ChatInputProps) {
     if (!inputValue.trim()) {
       return;
     }
-    setChatData((prev: Chat) => ({
-      ...prev,
-      messages: [
-        ...prev.messages,
-        {
-          id: Date().toString(),
-          // me가 보내는 사람임
-          senderId: me.id,
-          text: inputValue,
-          createdAt: Date().toString(),
-        },
-      ],
-    }));
 
-    setInputValue("");
+    dispatch(
+      addNewChat({
+        id: Date().toString(),
+        // me가 보내는 사람임
+        senderId: me.id,
+        text: inputValue,
+        createdAt: Date().toString(),
+      }),
+    );
+
+    setInputValue('');
   };
 
   const textArea = useRef<HTMLTextAreaElement>(null);
@@ -78,9 +71,9 @@ function ChatInput({ setChatData, me }: ChatInputProps) {
     if (!textArea.current) {
       return;
     }
-    textArea.current.style.height = "auto"; //height 초기화
+    textArea.current.style.height = 'auto'; //height 초기화
     // 스크롤이 생길 경우, textarea의 height를 늘려줌 => 특정 Height 이상 늘어나지 못하게 max-height를 css에 지정해줌
-    textArea.current.style.height = textArea?.current?.scrollHeight + "px";
+    textArea.current.style.height = textArea?.current?.scrollHeight + 'px';
   };
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -99,23 +92,20 @@ function ChatInput({ setChatData, me }: ChatInputProps) {
 
     const url = URL.createObjectURL(targetFile);
 
-    setChatData((prev: Chat) => ({
-      ...prev,
-      messages: [
-        ...prev.messages,
-        {
-          id: Date().toString(),
-          senderId: me.id,
-          createdAt: Date().toString(),
-          photo: { name, url, size },
-        },
-      ],
-    }));
+    dispatch(
+      addNewChat({
+        id: Date().toString(),
+        // me가 보내는 사람임
+        senderId: me.id,
+        text: inputValue,
+        createdAt: Date().toString(),
+      }),
+    );
   };
 
   return (
     <>
-      {isReplyWindowOpen && (
+      {/* {isReplyWindowOpen && (
         <ReplyWindowWrapper>
           <ReplyWindow>
             <p className="reply-target">연우에게 답장</p>
@@ -128,7 +118,7 @@ function ChatInput({ setChatData, me }: ChatInputProps) {
             <CloseIcon alt="닫기 아이콘" />
           </button>
         </ReplyWindowWrapper>
-      )}
+      )} */}
       <ChatInputWrapper onSubmit={handleInputSubmit}>
         <div className="file_audio_button">
           <button type="button" onClick={handleFileButtonClick}>
@@ -137,7 +127,7 @@ function ChatInput({ setChatData, me }: ChatInputProps) {
               ref={fileInputRef}
               id="fileInput"
               // 파일 인풋을 숨기고, 파일 아이콘 클릭 시 파일 첨부창이 뜨게 함
-              style={{ display: "none" }}
+              style={{ display: 'none' }}
               type="file"
               accept=".jpg, .png"
               onChange={fileInputSubmit}
@@ -159,11 +149,7 @@ function ChatInput({ setChatData, me }: ChatInputProps) {
             value={inputValue}
           />
           <button>
-            <EmogiIcon
-              type="button"
-              className={`emogi_icon ${inputValue && "move_icon"}`}
-              alt="이모지 아이콘"
-            />
+            <EmogiIcon type="button" className={`emogi_icon ${inputValue && 'move_icon'}`} alt="이모지 아이콘" />
           </button>
         </TextAreaWrapper>
         {inputValue && (
@@ -199,8 +185,6 @@ const TextAreaWrapper = styled.div`
     position: relative;
     display: flex;
     justify-content: space-between;
-    -ms-overflow-style: none; /* IE, Edge */
-    scrollbar-width: none; /* Firefox */
     border: none;
     outline: none;
     resize: none;

@@ -1,11 +1,11 @@
-import { useEffect, useRef } from "react";
-import styled from "styled-components";
-import { flexColumn } from "styles/CommonStyle";
-import { Message, User } from "types/ChatData";
-import { formatDateToTime } from "util/formatDateToTime";
-import { getByteSize } from "util/getByteSize";
+import { useEffect, useRef } from 'react';
+import styled from 'styled-components';
+import { flexColumn } from 'styles/CommonStyle';
+import { Message, User } from 'types/ChatData';
+import { formatDateToTime } from 'util/formatDateToTime';
+import { getByteSize } from 'util/getByteSize';
 interface ChatListProps {
-  messages: Message[];
+  messages: Message[] | null;
   me: User;
 }
 // 채팅 리스트
@@ -15,7 +15,7 @@ function ChatList({ messages, me }: ChatListProps) {
 
   // 스크롤을 맨 아래로 이동시키는 함수
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   // 메시지 목록이 업데이트될 때마다 scrollToBottom 함수를 호출
@@ -25,7 +25,7 @@ function ChatList({ messages, me }: ChatListProps) {
 
   return (
     <ChatListWrapper>
-      {messages.map((message) => (
+      {messages?.map((message) => (
         <ChatWrapper $isMyMessage={message.senderId === me.id} key={message.id}>
           <div className="time_wrapper">
             {/* 현재 시간 */}
@@ -42,9 +42,7 @@ function ChatList({ messages, me }: ChatListProps) {
               </div>
             </ChatPhoto>
           ) : (
-            <ChatText $isMyMessage={message.senderId === me.id}>
-              {message.text}
-            </ChatText>
+            <ChatText $isMyMessage={message.senderId === me.id}>{message.text}</ChatText>
           )}
         </ChatWrapper>
       ))}
@@ -61,8 +59,6 @@ const ChatListWrapper = styled.div`
   flex-direction: column;
   padding: 2.5rem 0;
   overflow-y: auto;
-  -ms-overflow-style: none; /* 인터넷 익스플로러 */
-  scrollbar-width: none; /* 파이어폭스 */
 `;
 
 const ChatWrapper = styled.div<{ $isMyMessage: boolean }>`
@@ -70,8 +66,7 @@ const ChatWrapper = styled.div<{ $isMyMessage: boolean }>`
   gap: 1.2rem;
   justify-content: flex-end;
 
-  flex-direction: ${({ $isMyMessage }) =>
-    $isMyMessage ? "row" : "row-reverse"};
+  flex-direction: ${({ $isMyMessage }) => ($isMyMessage ? 'row' : 'row-reverse')};
   .time_wrapper {
     display: flex;
   }
@@ -92,8 +87,8 @@ const ChatText = styled.p<{ $isMyMessage: boolean }>`
   word-wrap: break-word;
   white-space: pre-wrap;
   font-feature-settings:
-    "clig" off,
-    "liga" off;
+    'clig' off,
+    'liga' off;
 
   border-radius: 1.8rem 1.8rem 1.75rem 0rem;
   border: 1px solid var(--blue03);

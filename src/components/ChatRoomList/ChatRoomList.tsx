@@ -3,16 +3,25 @@ import styled from 'styled-components';
 import { ReactComponent as EditIcon } from 'asset/icons/EditIcon.svg';
 import { ReactComponent as ChatRoomIcon } from 'asset/icons/ChatRoomIcon.svg';
 import SearchBar from 'components/common/SearchBar';
-import BottomNavBar from 'components/common/BottomNavBar';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { selectChat } from 'store/chat';
 
 export default function ChatRoomList() {
   const chatData = useSelector((state: RootState) => state.chat.allChats);
   const [inputValue, setInputValue] = useState('');
-
+  const navigate = useNavigate();
   const filteredChatData = chatData.filter((chat) => chat.partner.name.includes(inputValue));
+
+  const dispatch = useDispatch();
+
+  const handleChatRoomClick = (chatId: string) => {
+    navigate(`/chats/${chatId}`); // chatId를 이용하여 URL 경로를 설정
+    dispatch(selectChat(chatId));
+  };
+
   return (
     <>
       <ChatNavigationBar>
@@ -23,7 +32,7 @@ export default function ChatRoomList() {
       <SearchBar inputValue={inputValue} setInputValue={setInputValue} />
       <ChatRoomListWrapper>
         {filteredChatData.map((chat) => (
-          <ChatRoomsContainer key={chat.id}>
+          <ChatRoomsContainer key={chat.id} onClick={() => handleChatRoomClick(chat.id)}>
             <ChatRoomIcon alt="각 채팅방을 나타내는 아이콘" />
             <div>
               <h3 className="name">{chat.partner.name}</h3>

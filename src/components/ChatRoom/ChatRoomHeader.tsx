@@ -1,7 +1,11 @@
-import styled from "styled-components";
-import { ReactComponent as LeftArrowIcon } from "asset/icons/LeftArrowIcon.svg";
-import { User } from "types/ChatData";
-import { getElapsedTime } from "util/getElapsedTime";
+import styled from 'styled-components';
+import { ReactComponent as LeftArrowIcon } from 'asset/icons/LeftArrowIcon.svg';
+import { User } from 'types/ChatData';
+import { getElapsedTime } from 'util/getElapsedTime';
+import { useDispatch } from 'react-redux';
+import { toggleParticipants } from 'store/chat';
+import { AppDispatch } from 'store';
+import { Link } from 'react-router-dom';
 
 interface ChatRoomHeaderProps {
   toggleParticipants: () => void;
@@ -9,12 +13,17 @@ interface ChatRoomHeaderProps {
 }
 
 // 상대에 대한 정보가 담겨있는 채팅룸 상단
-function ChatRoomHeader({ toggleParticipants, partner }: ChatRoomHeaderProps) {
+function ChatRoomHeader({ partner }: ChatRoomHeaderProps) {
+  const dispatch: AppDispatch = useDispatch();
+
+  const toggleParticipant = () => {
+    dispatch(toggleParticipants());
+  };
   return (
     <ChatRoomHeaderWrapper>
-      <button>
+      <Link to={'/chats'}>
         <LeftArrowIcon className="arrow_icon" alt="뒤로 가기 아이콘" />
-      </button>
+      </Link>
       <UserDetailInfo>
         <h1 className="user_name">{partner?.name}</h1>
         <p className="last_access">
@@ -22,10 +31,7 @@ function ChatRoomHeader({ toggleParticipants, partner }: ChatRoomHeaderProps) {
           {partner?.lastAccess && getElapsedTime(partner?.lastAccess)}
         </p>
       </UserDetailInfo>
-      <UserProfileImg
-        src={partner?.profileImage}
-        onClick={toggleParticipants}
-      />
+      <UserProfileImg src={partner?.profileImage} onClick={toggleParticipant} />
     </ChatRoomHeaderWrapper>
   );
 }

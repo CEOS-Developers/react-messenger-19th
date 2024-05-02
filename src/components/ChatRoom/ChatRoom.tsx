@@ -1,41 +1,33 @@
 import styled from 'styled-components';
 import { flexColumn } from 'styles/CommonStyle';
-import { useState } from 'react';
-import mockData from 'data/chatData.json';
-import { Chat } from 'types/ChatData';
 import ChatRoomHeader from 'components/ChatRoom/ChatRoomHeader';
 import ChatList from 'components/ChatRoom/ChatList';
 import ChatInput from 'components/ChatRoom/ChatInput';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from 'store';
+import { toggleParticipants } from 'store/chat';
 
 function ChatRoom() {
-  // // 대화창 하나만 구현하는 거니, 첫 번째 채팅방 데이터만 가져옴
-  // const [chatData, setChatData] = useState<Chat>(mockData.chats[0]);
+  const chatData = useSelector((state: RootState) => state.chat);
 
-  // const { messages, users } = chatData;
+  const { me, partner } = chatData.participants;
+  const messages = chatData.selectedChats;
 
-  // // 2인 채팅 => 나와 partner로 구분 하나의 state로 관리
-  // const [participants, setParticipants] = useState({
-  //   me: users[0],
-  //   partner: users[1],
-  // });
+  const dispatch: AppDispatch = useDispatch();
 
-  // const { me, partner } = participants;
+  const toggleParticipant = () => {
+    dispatch(toggleParticipants());
+  };
 
-  // // 상대와 나를 switch 하는 함수
-  // const toggleParticipants = () => {
-  //   setParticipants((prev) => ({ me: prev.partner, partner: prev.me }));
-  // };
+  if (!partner) return null;
 
   return (
     <>
-      {/* <ChatRoomContainer>
-        <ChatRoomHeader
-          toggleParticipants={toggleParticipants}
-          partner={partner}
-        />
+      <ChatRoomContainer>
+        <ChatRoomHeader toggleParticipants={toggleParticipant} partner={partner} />
         <ChatList messages={messages} me={me} />
       </ChatRoomContainer>
-      <ChatInput setChatData={setChatData} me={me} /> */}
+      <ChatInput me={me} />
     </>
   );
 }
