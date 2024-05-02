@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useState, useEffect, useRef } from "react";
-import { useSenderContext } from "../../assets/SenderContext";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 

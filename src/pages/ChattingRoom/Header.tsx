@@ -13,7 +13,7 @@ import profileArrow from "../../assets/profileArrow.svg";
 import { colors } from "../../style/colors";
 import { typography } from "../../style/typography";
 
-const Header = ({ chats, setChats }) => {
+const Header = () => {
   const dispatch = useDispatch();
   const opponent = useSelector((state: RootState) => state.opponent.opponent);
   const currOpponent = useSelector(
