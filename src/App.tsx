@@ -1,7 +1,11 @@
-import Messenger from "./components/Messenger";
+import Router from "./core/router";
 
 function App() {
-  return <Messenger />;
+  return (
+    <>
+      <Router />
+    </>
+  );
 }
 
 export default App;
