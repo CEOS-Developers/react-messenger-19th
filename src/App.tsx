@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
-import ChattingPage from "./pages/Chat/ChattingPage";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import FriendsListPage from "./pages/FriendsList/FriendsListPage";
 import ChattingListPage from "./pages/ChattingList/ChattingListPage";
+import ChattingPage from "./pages/Chat/ChattingPage";
 
 
 
@@ -13,7 +14,8 @@ function App() {
 			<BrowserRouter>
 				<Header/>
 				<Routes>
-					<Route path="/" element={<ChattingListPage/>}></Route>
+					<Route path="/" element={<FriendsListPage/>}></Route>
+					<Route path="/chatting-list-page" element={<ChattingListPage/>}></Route>
 					<Route path="/chatting-page" element={<ChattingPage/>}></Route>
 				</Routes>
 				<Footer/>
