@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { usersState } from '../state/userState';
 import styled from 'styled-components';
@@ -10,18 +10,20 @@ import ChatListHeader from './ChatListHeader';
 import { selectedUserState } from '../state/selectedUserState'; // selectedUserId 상태 추가
 import { messagesState } from '../state/messageState'; 
 
-const ChataList = () => {
+const ChatList = () => {
   const users = useRecoilValue(usersState);
   const [selectedUserId, setSelectedUserId] = useRecoilState(selectedUserState); // selectedUserId 상태 추가
   const messages = useRecoilValue(messagesState);
-  
+  const [searchTerm, setSearchTerm] = useState('');
+
   const handleEditClick = () => {
     // 편집 버튼 핸들러..
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // 검색핸들러
+    setSearchTerm(e.target.value);
   };
+
 
   const handleUserClick = (userId: number) => {
     setSelectedUserId(userId); // 사용자 클릭시 selectedUserId 상태 업데이트
@@ -43,6 +45,11 @@ const ChataList = () => {
     }).replace('오전', 'AM').replace('오후', 'PM').replace('AM', '오전').replace('PM', '오후'); // 'AM'과 'PM'을 한국어 '오전', '오후'로 변경
   };
   
+  const filteredUsers = users.filter(user => user.id !== 0 && (
+    user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    messages.some(msg => (msg.senderId === user.id || msg.receiverId === user.id) && msg.text.toLowerCase().includes(searchTerm.toLowerCase()))
+  ));
+
   return (
     <Container>
       <AppContainer>
@@ -52,30 +59,38 @@ const ChataList = () => {
           onSearchChange={handleSearchChange} 
         />
         <ChatListContainer>
-          <ChatListUl>
-          {users.filter(user => user.id !== 0).map(user => {
-              const lastMessage = getLastMessage(user.id);
-              return (
-                <Link 
-                  to={`/chat/${user.id}`} 
-                  key={user.id} 
-                  style={{ textDecoration: 'none', color: 'inherit' }}
-                  onClick={() => handleUserClick(user.id)}
-                >
-                  <FriendListItem>
-                    <FriendImage src={user.profileImage} alt={user.name} />
-                    <FriendInfo>
-                      <NameTimeContainer>
-                        <FriendName>{user.name}</FriendName>
-                        <MessageTime>{lastMessage ? `${formatMessageTime(lastMessage.timestamp)}`: null}</MessageTime>
-                      </NameTimeContainer>
-                      <LastMessageText>{lastMessage ? lastMessage.text : "No messages"}</LastMessageText>
-                    </FriendInfo>
-                  </FriendListItem>
-                </Link>
-              );
-            })}
-          </ChatListUl>
+          {filteredUsers.length > 0 ? (
+            <ChatListUl>
+              {filteredUsers.map(user => {
+                const lastMessage = getLastMessage(user.id);
+                return (
+                  <Link 
+                    to={`/chat/${user.id}`} 
+                    key={user.id} 
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                    onClick={() => handleUserClick(user.id)}
+                  >
+                    <FriendListItem>
+                      <FriendImage src={user.profileImage} alt={user.name} />
+                      <FriendInfo>
+                        <NameTimeContainer>
+                          <FriendName>{user.name}</FriendName>
+                          <MessageTime>{lastMessage ? `${formatMessageTime(lastMessage.timestamp)}`: null}</MessageTime>
+                        </NameTimeContainer>
+                        <LastMessageText>{lastMessage ? lastMessage.text : "No messages"}</LastMessageText>
+                      </FriendInfo>
+                    </FriendListItem>
+                  </Link>
+                );
+              })}
+            </ChatListUl>
+          ) : (
+            <NoResultsContainer>
+              <MagnifyingGlass src="/assets/Group 7.svg"/>
+              <NoResults>{`'${searchTerm}'에 대한 결과 없음`}</NoResults>
+              <NoResults2>맞춤법을 확인하거나 새로운 검색을 시도하십시오.</NoResults2>
+            </NoResultsContainer>
+          )}
         </ChatListContainer>
         <NavigatingFooter/>
         <IphoneFooter src='/assets/Home Indicator.png'/>
@@ -83,8 +98,8 @@ const ChataList = () => {
     </Container>
   );
 };
-export default ChataList;
 
+export default ChatList;
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -112,8 +127,12 @@ const AppContainer = styled.div`
 
 const ChatListContainer = styled.div`
   flex: 1;
-  overflow-y: auto;
-`;
+  display: flex;            
+  justify-content: center;   
+  align-items: center;      
+  overflow-y: auto;          
+  width: 100%;            
+  position: relative;`;
 
 const ChatListUl = styled.ul`
   list-style: none;
@@ -160,3 +179,31 @@ const NameTimeContainer = styled.div`
   justify-content: space-between;
   width: 100%; 
   `
+
+  const NoResults = styled.div`
+  max-width:292px;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 19px;
+  color: #1F1F1F;
+  font-weight: 600;
+`;
+const NoResults2 = styled.div`
+max-width:292px;
+text-align: center;
+font-size: 16px;
+font-weight: 500;
+color: #8D949E;
+margin-top: 8px;
+`;
+const MagnifyingGlass=styled.img`
+width:40px;
+height:40px;
+`;
+const NoResultsContainer = styled.div`
+display:flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 100%;
+`;
