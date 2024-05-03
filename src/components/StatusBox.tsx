@@ -9,7 +9,7 @@ interface StatusBoxStyleProps {
 }
 
 export default function StatusBox() {
-  const path = useLocation().pathname.slice(0,13);
+  const path = useLocation().pathname.slice(0, 13);
   return (
     <StatusboxStyle $path={path}>
       <ClockSvg />
@@ -22,7 +22,11 @@ const StatusboxStyle = styled.div<StatusBoxStyleProps>`
   width: 375px;
   flex-shrink: 0;
   background-color: ${(props) =>
-    props.$path === '/chattingroom' ? theme.colors.blue : theme.colors.white};
+    props.$path === '/chattingroom'
+      ? theme.colors.blue
+      : props.$path === '/myprofile'
+      ? theme.colors.gray_3
+      : theme.colors.white};
   display: flex;
   justify-content: space-between;
   align-items: center;
