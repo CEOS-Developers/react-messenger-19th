@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { colors } from "../../style/colors";
 
 import friend_selected from "../../assets/footer/friend_selected.svg";
@@ -12,7 +12,7 @@ import you_unSelected from "../../assets/footer/you_unSelected.svg";
 
 const buttonData = [
   {
-    id: "friends",
+    id: "",
     text: "친구",
     selectedIcon: friend_selected,
     unselectedIcon: friend_unSelected,
@@ -33,11 +33,20 @@ const buttonData = [
 
 const Footer = () => {
   const navigate = useNavigate();
-  const [activeButton, setActiveButton] = useState("friends");
+  const location = useLocation();
+  const [activeButton, setActiveButton] = useState("");
+
+  useEffect(() => {
+    // 현재 URL에서 path 부분만 추출하여 activeButton을 설정
+    const path = location.pathname.substring(1);
+    setActiveButton(path);
+  }, [location.pathname]);
 
   const handleButtonClick = (id) => {
-    setActiveButton(id);
-    navigate(`/${id}`);
+    if (activeButton !== id) {
+      setActiveButton(id);
+      navigate(`/${id}`);
+    }
   };
 
   return (
@@ -71,12 +80,15 @@ const Wrapper = styled.div`
   margin-top: auto;
 `;
 
-const ButtonWrapper = styled.div`
+const ButtonWrapper = styled.div<{ isactive: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
   align-items: center;
   cursor: pointer;
+
+  // 선택된 상태일 때 스타일 적용
+  color: ${(props) => (props.isactive ? colors.black : colors.gray300)};
 `;
 
 const Category = styled.span<{ isactive: boolean }>`
