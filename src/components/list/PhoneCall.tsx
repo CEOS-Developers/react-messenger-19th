@@ -40,11 +40,15 @@ const PhoneCall: React.FC = () => {
   };
 
   useEffect(() => { //넘겨받은 유저의 폰번호로 input값 설정하기
-    console.log(location);
-
     if (location.state && location.state.phoneNumber) {
-      setInputValue(location.state.phoneNumber);
-    }
+      let phoneNumber = location.state.phoneNumber;
+      if (phoneNumber.startsWith('+82 ')) {
+          phoneNumber = phoneNumber.slice(4); // "+82 " 제거하기
+      }
+// 공백을 하이픈으로 변경
+      phoneNumber = phoneNumber.replace(/\s/g, '-');      
+      console.log('phoneNumber:', phoneNumber);
+      setInputValue(phoneNumber);  }
   }, [location]);
 
 
