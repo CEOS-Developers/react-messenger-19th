@@ -3,21 +3,19 @@
       "r_id": 1,
       "isGroup": false,
       "r_name": "John",
-      "r_profile": "https://example.com/profiles/john.jpg",
+      "r_profile": "",
       "chat": [
         {
           "c_id": 1711688718759,
           "sender": "John",
-          "receiver": "me",
-          "r_img": "https://example.com/profiles/you.jpg",
+          "receiver": "user",
           "value": "Hello, how are you?",
           "time": "15:00"
         },
         {
           "c_id": 2,
-          "sender": "You",
-          "receiver": "me",
-          "r_img": "https://example.com/profiles/john.jpg",
+          "sender": "user",
+          "receiver": "John",
           "value": "I'm good, thanks!",
           "time": "20:00"
         }
@@ -27,21 +25,19 @@
       "r_id": 2,
       "isGroup": true,
       "r_name": "Group Chat",
-      "r_profile": "https://example.com/profiles/group.jpg",
+      "r_profile": "",
       "chat": [
         {
           "c_id": 1711688718760,
           "sender": "Alice",
-          "receiver": "me",
-          "r_img": "https://example.com/profiles/group.jpg",
+          "receiver": "user",
           "value": "Hey everyone!",
           "time": "13:00"
         },
         {
           "c_id": 1711688718761,
           "sender": "Bob",
-          "receiver": "me",
-          "r_img": "https://example.com/profiles/group.jpg",
+          "receiver": "user",
           "value": "Hello!",
           "time": "15:00"
         }
@@ -51,13 +47,12 @@
       "r_id": 3,
       "isGroup": false,
       "r_name": "Sarah",
-      "r_profile": "https://example.com/profiles/sarah.jpg",
+      "r_profile": "",
       "chat": [
         {
           "c_id": 1711688718763,
-          "sender": "me",
+          "sender": "user",
           "receiver": "Sarah",
-          "r_img": "https://example.com/profiles/sarah.jpg",
           "value": "Hi Sarah!",
           "time": "19:00"
         }
@@ -67,28 +62,40 @@
       "r_id": 4,
       "isGroup": false,
       "r_name": "Mark",
-      "r_profile": "https://example.com/profiles/mark.jpg",
-      "chat": []
+      "chat": [
+        {
+          "c_id": 1711688718764,
+          "sender": "user",
+          "receiver": "Mark",
+          "value": "Hello Mark!",
+          "time": "02:00"
+        },
+        {
+          "c_id": 1711688718767,
+          "sender": "Mark",
+          "receiver": "user",
+          "value": "Hi there!😎",
+          "time": "05:00"
+        }
+      ]
     },
     {
       "r_id": 5,
       "isGroup": false,
-      "r_name": "Emma's Chat",
-      "r_profile": "https://example.com/profiles/emma.jpg",
+      "r_name": "Emma",
+      "r_profile": "",
       "chat": [
         {
           "c_id": 1711688718764,
-          "sender": "me",
+          "sender": "user",
           "receiver": "Emma",
-          "r_img": "https://example.com/profiles/emma.jpg",
           "value": "Hello Emma!",
           "time": "02:00"
         },
         {
           "c_id": 1711688718767,
           "sender": "Emma",
-          "receiver": "me",
-          "r_img": "https://example.com/profiles/you.jpg",
+          "receiver": "user",
           "value": "Hi there!",
           "time": "05:00"
         }

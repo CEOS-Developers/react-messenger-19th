@@ -1,16 +1,33 @@
 import styled from "styled-components"
+import groupImg from "../../assets/img/groupProfile.png"
 import friendImg from "../../assets/img/friendProfile.png"
 
-function ChatRoomLIst() {
+
+interface ChatListProps {
+    r_name : string
+    isGroup : Boolean
+    r_profile? : string
+    lastMessage? : string
+    lastTime ? : string
+}
+
+function ChatRoomLIst({r_name, isGroup, r_profile, lastMessage, lastTime}: ChatListProps) {
+
+
   return (
     <ChatRoomLIstContainer>
-        <FriendImg><img src={friendImg}/></FriendImg>
+        <FriendImg>
+        {isGroup ? 
+        (<img src={groupImg}/>) : 
+        (<img src={r_profile || friendImg}/>)
+        }
+        </FriendImg>
         <ChatRoomInfo>
             <Wrapper>
-                <ReceiverName>김다희</ReceiverName>
-                <CurrentChatTime>00:29</CurrentChatTime>
+                <ReceiverName>{r_name}</ReceiverName>
+                <CurrentChatTime>{lastTime}</CurrentChatTime>
             </Wrapper>
-            <LastChat>마지막 채팅 내용</LastChat>              
+            <LastChat>{lastMessage}</LastChat>              
         </ChatRoomInfo>
     </ChatRoomLIstContainer>
   )
