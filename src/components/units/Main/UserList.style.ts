@@ -73,12 +73,14 @@ export const RecommandFriendContainer = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	padding: 10px 12px 10px 5px;
+	cursor: pointer;
 `;
 export const PrivateFriend = styled.div`
 	display: flex;
 	align-items: center;
 	padding: 10px 12px 10px 5px;
 	gap: 18px;
+	cursor: pointer;
 `;
 
 export const Circle = styled.div`
