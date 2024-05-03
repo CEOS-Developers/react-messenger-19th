@@ -8,24 +8,37 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 // 여기선 opponent를 id로 업데이트 해주고 currOpponent도 id로 업데이트 해주면됨
-const ChattingItem = ({ id, chatArray }) => {
+interface ChatArrayItem {
+  text: string;
+  sender: number;
+  timestamp: string;
+}
+
+interface ChattingItemProps {
+  id: string;
+  chatArray: ChatArrayItem[];
+}
+
+const ChattingItem = ({ id, chatArray }: ChattingItemProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const idNum = parseInt(id);
+
   const handleChattingItemClick = () => {
-    dispatch(opponentActions.setOpponent(id));
-    dispatch(currOpponentActions.setCurrOpponent(id));
+    dispatch(opponentActions.setOpponent(idNum));
+    dispatch(currOpponentActions.setCurrOpponent(idNum));
     navigate("/room");
   };
 
   return (
     <Wrapper onClick={handleChattingItemClick}>
       <Profile
-        src={`img/userProfile/${userData.users[id].profileImg}`}
+        src={`img/userProfile/${userData.users[idNum].profileImg}`}
       ></Profile>
       <ContentWrapper>
         <RoomInfoWrapper>
-          <RoomInfoLeft>{userData.users[id].name}</RoomInfoLeft>
+          <RoomInfoLeft>{userData.users[idNum].name}</RoomInfoLeft>
           <RoomInfoRight>
             <Time>{chatArray[chatArray.length - 1].timestamp}</Time>
             <Icon src={arrow}></Icon>

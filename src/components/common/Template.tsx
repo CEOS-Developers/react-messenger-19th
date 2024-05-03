@@ -1,6 +1,11 @@
 import styled from "styled-components";
+import { ReactNode } from "react";
 
-const Template = ({ children }) => {
+interface TemplateProps {
+  children: ReactNode;
+}
+
+const Template = ({ children }: TemplateProps) => {
   return <Wrapper>{children}</Wrapper>;
 };
 

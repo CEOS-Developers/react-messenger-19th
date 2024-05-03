@@ -24,12 +24,9 @@ const Main = () => {
   );
   const currOpponentData = userData.users[currOpponent];
   const currChat = chats[opponent - 1].chats;
-  console.log(currChat);
 
   const [value, setValue] = useState("");
   const [isEmpty, setIsEmpty] = useState(true); // input란에 텍스트 입력 여부
-
-  console.log(`chattingRoom 컴포넌트 가져온 후 ${opponent}, ${currOpponent}`);
 
   // 스크롤 이동
   const chatWrapperRef = useRef<HTMLDivElement>(null);
@@ -82,7 +79,6 @@ const Main = () => {
       <ChattingWrapper ref={chatWrapperRef}>
         {currChat.map((chat, index) => {
           const isMine = chat.sender !== currOpponent;
-          console.log(isMine);
           return (
             <ChattingItemWrapper key={index}>
               <TimeStamp>{chat.timestamp}</TimeStamp>

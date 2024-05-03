@@ -32,7 +32,6 @@ const Header = () => {
     navigate(-1);
   };
 
-  console.log(`${opponent}, ${currOpponent}`);
   return (
     <Wrapper>
       <StatusBar />

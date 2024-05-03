@@ -42,7 +42,7 @@ const Footer = () => {
     setActiveButton(path);
   }, [location.pathname]);
 
-  const handleButtonClick = (id) => {
+  const handleButtonClick = (id: string) => {
     if (activeButton !== id) {
       setActiveButton(id);
       navigate(`/${id}`);
@@ -57,7 +57,10 @@ const Footer = () => {
           onClick={() => handleButtonClick(id)}
           isactive={activeButton === id}
         >
-          <img src={activeButton === id ? selectedIcon : unselectedIcon} />
+          <img
+            src={activeButton === id ? selectedIcon : unselectedIcon}
+            alt={text}
+          />
           <Category isactive={activeButton === id}>{text}</Category>
         </ButtonWrapper>
       ))}

@@ -7,8 +7,12 @@ const Main = () => {
   return (
     <Wrapper>
       {keys.map((key) => {
-        const chatArray = JSON.parse(localStorage.getItem(key));
-        return <ChattingItem key={key} id={key} chatArray={chatArray} />;
+        if (typeof key === "string" && key !== "") {
+          const chatArray = JSON.parse(localStorage.getItem(key)!);
+          return <ChattingItem key={key} id={key} chatArray={chatArray} />;
+        } else {
+          return null;
+        }
       })}
     </Wrapper>
   );

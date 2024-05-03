@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import StatusBar from "../../components/common/StatusBar";
 import PageHeader from "../../components/common/PageHeader";
 

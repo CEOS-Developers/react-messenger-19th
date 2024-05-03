@@ -3,7 +3,13 @@ import { typography } from "../../style/typography";
 import editprofile from "../../assets/editProfile.svg";
 import SearchBar from "./SearchBar";
 
-const PageHeader = ({ title, search, icon }) => {
+interface PageHeaderProps {
+  title: string;
+  search?: boolean;
+  icon?: string | null;
+}
+
+const PageHeader = ({ title, search, icon }: PageHeaderProps) => {
   return (
     <Wrapper>
       <TopWrapper>
