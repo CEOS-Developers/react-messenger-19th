@@ -1,7 +1,7 @@
 // src/App.tsx
 
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes,useLocation } from 'react-router-dom';
 import ChattingRoom from './pages/ChattingRoom';
 import UserList from './pages/UserList';
 import ChattingList from './pages/ChattingList';
@@ -9,6 +9,9 @@ import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
 
 const App = () => {
+	const { pathname } = useLocation();
+	const isChattingRoomPage = pathname.startsWith('/chattingroom');
+
 	return (
 		<>
 			<Routes>
@@ -17,9 +20,10 @@ const App = () => {
 				<Route path='/chattinglist' element={<ChattingList />} />
 				<Route path='/profile' element={<Profile />} />
 			</Routes>
-			<Navbar />
+			{isChattingRoomPage ? null : <Navbar />}
 		</>
 	);
 };
+
 
 export default App;

@@ -8,24 +8,30 @@ const NavbarContainer = styled.div`
     display: flex;
     justify-content: space-around;
     position: fixed;
-    bottom: 0;
-    width: 100%;
+    font-size:20px;
+    width: 375px;
+    bottom:-33px;
+    height: 80px;
     background: #f0f0f0;
-    padding: 10px 0;
+    padding-top: 30px;
+	
+    
+   
 `;
 
 const NavbarLink = styled(Link)`
     text-decoration: none;
     color: black;
-    font-weight: bold;
+    
+    
 `;
 
 const Navbar = () => {
     return (
         <NavbarContainer>
-            <NavbarLink to="/userlist">친구 목록</NavbarLink>
-            <NavbarLink to="/chattinglist">대화 목록</NavbarLink>
-            <NavbarLink to="/profile">내 프로필</NavbarLink>
+            <NavbarLink to="/userlist">친구</NavbarLink>
+            <NavbarLink to="/chattinglist">대화</NavbarLink>
+            <NavbarLink to="/profile">프로필</NavbarLink>
         </NavbarContainer>
     );
 };
