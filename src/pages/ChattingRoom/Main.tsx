@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState, currOpponentActions, opponentActions } from "../../store";
+import { RootState } from "../../store";
 import { chatsActions } from "../../store";
 
 // image
@@ -24,6 +24,7 @@ const Main = () => {
   );
   const currOpponentData = userData.users[currOpponent];
   const currChat = chats[opponent - 1].chats;
+  console.log(currChat);
 
   const [value, setValue] = useState("");
   const [isEmpty, setIsEmpty] = useState(true); // input란에 텍스트 입력 여부

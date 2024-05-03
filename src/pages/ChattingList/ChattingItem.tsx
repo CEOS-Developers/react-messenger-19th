@@ -4,16 +4,19 @@ import { typography } from "../../style/typography";
 import { colors } from "../../style/colors";
 import arrow from "../../assets/arrow.svg";
 import { opponentActions, currOpponentActions } from "../../store";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+// 여기선 opponent를 id로 업데이트 해주고 currOpponent도 id로 업데이트 해주면됨
 const ChattingItem = ({ id, chatArray }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const opponent = useSelector((state) => state.opponent.opponent);
-  const currOpponent = useSelector((state) => state.currOpponent.currOpponent);
 
-  const handleChattingItemClick = () => {};
+  const handleChattingItemClick = () => {
+    dispatch(opponentActions.setOpponent(id));
+    dispatch(currOpponentActions.setCurrOpponent(id));
+    navigate("/room");
+  };
 
   return (
     <Wrapper onClick={handleChattingItemClick}>

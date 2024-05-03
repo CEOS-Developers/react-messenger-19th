@@ -10,10 +10,12 @@ import userData from "../../data/user.json";
 import back from "../../assets/back.svg";
 import profileArrow from "../../assets/profileArrow.svg";
 
+import { useNavigate } from "react-router-dom";
 import { colors } from "../../style/colors";
 import { typography } from "../../style/typography";
 
 const Header = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const opponent = useSelector((state: RootState) => state.opponent.opponent);
   const currOpponent = useSelector(
@@ -26,12 +28,18 @@ const Header = () => {
     dispatch(currOpponentActions.setCurrOpponent(index));
   };
 
+  const goPageBack = () => {
+    navigate(-1);
+  };
+
   console.log(`${opponent}, ${currOpponent}`);
   return (
     <Wrapper>
       <StatusBar />
       <RoomInfoWrapper>
-        <img src={back} />
+        <BackButton onClick={goPageBack}>
+          <img src={back} />
+        </BackButton>
         <RoomInfo onClick={toggleCurrOpponent}>
           <RoomProfile src={`img/userProfile/${currOpponentData.profileImg}`} />
           <RoomNameWrapper>
@@ -57,6 +65,11 @@ const RoomInfoWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
+`;
+
+const BackButton = styled.button`
+  display: flex;
+  cursor: pointer;
 `;
 
 const RoomInfo = styled.div`
