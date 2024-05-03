@@ -1,66 +1,272 @@
-# 서론
+# 배포링크
+**3주차 때 저장했던 localStorage값이 남아있으면 개발자도구에서 초기화시키고 실행해주세요!**   
+[카카오톡](https://ceos-week3-react-messenger.vercel.app/)
+# 구현기능 및 후기
+- 3주차 피드백 반영
+- `FriendListPage`, `MyProfilePage`, `NotFoundPage` 구현
+- `react-router-dom`을 사용한 라우팅기능 구현
+- 채팅전송 시
+  - `lastMessage` 갱신
+  - `lastMessageDate` 갱신, 오늘이면 시간, 오늘 이전이면 날짜가 뜨도록 구현
+  - `unReadCount`말풍선 있었다면 제거
 
-안녕하세요 🙌🏻 19기 프론트 운영진 배성준입니다. 이번 미션에서는 드디어 투두리스트에서 벗어나 새로운 프로젝트인 **messenger** 만들기를 진행합니다.
+src
+ ┣ assets
+ ┃ ┣ data
+ ┃ ┣ img
+ ┃ ┣ svg
+ ┣ components
+ ┃ ┣ FooterCard.tsx
+ ┃ ┣ Hr.tsx
+ ┃ ┣ Input.tsx
+ ┃ ┣ MainFooter.tsx
+ ┃ ┣ MainHeader.tsx
+ ┃ ┗ StatusBox.tsx
+ ┣ hooks
+ ┣ layout
+ ┣ pages
+ ┃ ┣ ChattingListPage
+ ┃ ┃ ┣ components
+ ┃ ┃ ┗ ChattingListPage.tsx
+ ┃ ┣ ChattingRoomPage
+ ┃ ┃ ┣ components
+ ┃ ┃ ┗ ChattingRoomPage.tsx
+ ┃ ┣ FriendListPage
+ ┃ ┃ ┣ components
+ ┃ ┃ ┗ FriendListPage.tsx
+ ┃ ┣ MyProfilePage
+ ┃ ┃ ┣ components
+ ┃ ┃ ┗ MyProfilePage.tsx
+ ┃ ┗ NotFoundPage
+ ┃ ┃ ┗ NotFoundPage.tsx
+ ┣ recoil
+ ┃ ┣ chatAtom.ts
+ ┃ ┗ userAtom.ts
+ ┣ styles
+ ┃ ┣ GlobalStyle.ts
+ ┃ ┗ theme.ts
+ ┣ types
+ ┃ ┗ common.ts
+ ┣ util
+ ┃ ┣ calculateDate.ts
+ ┃ ┗ routes.tsx
+ ┣ App.tsx
+ ┣ index.tsx
+ ┣ svg.d.ts
+ ┗ types.d.ts
+ 공통으로 사용되는 컴포넌트는 `src/components`폴더에서 사용했고, 각 페이지에서 사용하는 컴포넌트는 `src/pages/*/components`폴더에서 개별적으로만 사용했다.
 
-이번주는 특별히 **디자이너와의 협업**으로 진행되는 미션입니다. 디자이너분께서 열심히 리디자인 한 메신저 프로젝트를 여러분들께서 구현해주시면 됩니다.
+`chattingRoomData.json`하나만으로 모든 상태를 제어하려고 시간을 많이 쓴 거 같다.
 
-동시에, 이번주부터는 새로 **TypeScript**를 적용해보려고 합니다.
+### `tsconfig.paths.json`
+```json
+{
+	"compilerOptions": {
+		"baseUrl": "./src",
+		"paths": {
+		"@components/*": ["./components/*"],
+		"@assets/*": ["./assets/*"],
+		"@styles/*": ["./styles/*"],
+		"@types/*": ["./types/*"],
+		"@hooks/*": ["./hooks/*"],
+		"@pages/*": ["./pages/*"],
+		"@recoil/*": ["./recoil/*"]
+		}
+	}
+}
+```
+`tsconfig.paths.json`파일을 다음과 작성했더니 `@types`가 호출이 되지 않았다. 다른 것들엔 문제가 없는데 이것만 안돼서 도대체 뭐가 문제지 싶었다.
 
-프로젝트의 규모가 커지게 될 수록, 컴포넌트가 가지는 props의 종류 또한 다양해지게 됩니다. 무지성 코딩을 하다보면 가끔 이 props의 구성과 이름, 어떤 타입이 들어가야 하는지 헷갈리기 마련이죠. 보통 그럴 때 다시 컴포넌트 정의 부분으로 돌아가 props의 구성을 보고 오곤 합니다.
+이유는 `@types/` 접두사는 DefinitelyTyped에서 제공하는 타입 정의 패키지에 사용됨으로, 표준 JavaScript 라이브러리에서 사용하는 예약어이기 때문에 생기는 오류인 듯 했다. `@type`으로 변경하니 정상적으로 별칭을 사용할 수 있었다. 
 
-하지만 이럴 때, typescript를 적용한다면 컴포넌트의 구성과 그 이름, 심지어 타입까지 한번에 자동완성으로 편리하게 관리할 수 있고, 생산성이 증대되겠죠.
+라우팅을 사용하면서 기본적인 뷰의 틀로 모바일화면 사이즈를 원했기 때문에 `<Layout>`을 라우팅하고 중첩라우팅을 사용해 내부에 페이지들을 구현했다.
 
-또한, **React Hooks**에 조금 더 익숙해지는 것을 목표로 합니다. 여러 Hook들이 있지만 그 중에서도 `useState`, `useEffect`, `useRef`를 중점적으로 사용해 보는 미션인데요, React를 사용하면서 굉장히 자주 쓰이는 Hook들이기 때문에 이 부분을 집중적으로 공부해 보아요!
+채팅방에서 이름을 클릭하여 사용자가 전환된 상태에서 나가면 `user`가 달라져 꼬일 수 있기에 `unmount`시 `user`를 기본값으로 바꿔줬다.
 
-그럼 이번 미션도 파이팅입니다!!🎉
 
-# 미션
 
-## Key Questions
+# Key Questions
 
-- JavaScript를 사용할때에 비해 TypeScript를 사용할 때의 장점은 무엇인가요?
-- 디자이너로부터 전달받은 피그마 링크 혹은, 피그마 캡처본
-- 컴포넌트를 분리한 기준은 무엇인가요?
-- 디자인 시스템을 적용하면서 느낀 점은 무엇인가요?
-- 디자이너와 소통하며 느낀점은 무엇인가요?
+## Routing이란?
 
-## 미션 목표
+라우팅이란 하나의 `URL`에 하나의 페이지를 맵핑해주는 것을 말한다. 네트워크에서도 라우팅이라는 단어가 있는데 이는 다른 개념이다. 네트워킹에서는 출발지에서 목적지까지 라우터간 이동의 최적경로를 찾는 방법을 라우팅이라 하고, 리액트에서 라우팅은 `URL`에 따른 데이터를 받아와 화면에 렌더링 해주는 것이다.
 
-- TypeScript를 사용해봅시다.
-- useState로 컴포넌트의 상태를 관리합니다.
-- useEffect와 useRef의 사용법을 이해합니다.
-- styled-components를 통한 CSS-in-JS 및 CSS Preprocessor의 사용법에 익숙해집니다.
+라우팅을 사용하면 페이지가 새로고침되지 않고 흐름을 유지하면서 필요한 부분이 렌더링되어 화면이 전환된다.
 
-## 기한
+### 흐름 유지
 
-2024년 3월 29일 금요일
+흐름을 유지한다는 것은 상태가 유지된다는 것이다. 기존 js에서 사용하는 <a>를 사용하면 화면은 새로고침된다. 그러면 이전 페이지에서 가지고 있던 상태를 잊어버려 초기화된다.
 
-## 필수 구현 기능
+### UX 향상
 
-- 피그마를 보고 [결과화면](https://3th-fb-messenger.netlify.app)과 같이 구현합니다.
-- 디자인 시스템을 구축합니다.
-- 채팅방 상단의 프로필을 클릭하면 사용자를 변경할 수 있습니다.
-- 메세지를 보내면 채팅방 하단으로 스크롤을 이동시킵니다.
-- 메세지에 유저 정보(프로필 사진, 이름)를 표시합니다.
-- user와 message 데이터를 json 파일에 저장합니다.
-- UI는 **반응형을 제외**하고 피그마파일을 따라서 진행합니다.
+새로운 페이지를 여는게 아니고 필요한 UI만 업데이트 하기 때문에 더 나은 UX를 제공한다.
 
-### 추가 구현 기능
+리액트에서는 `react-router-dom`을 사용해 라우팅을 구현한다.
 
-- 더블 클릭 하면 감정표현을 추가합니다.
-- 그 외 추가하고 싶은 기능이 있다면 마음껏 추가해 주세요!
+기본적으로 다음 구조를 사용해 라우팅을 구현한다.
 
-참고로 이번 과제는 다음주까지 이어지는 과제이므로 **확장성**을 충분히 고려해 주세요. 참고로 **4주차 과제에서는 유저 및 기능 추가와 Routing을** 진행합니다. 이를 위해 [recoil](https://recoiljs.org/ko/)이나 [redux](https://ko.redux.js.org/introduction/getting-started/)를 이용한 상태관리를 미리 해보시는 것을 추천합니다!! 모두 공식문서 많이 읽어보시고 자신만의 상태관리 조합도 찾아보면 재밌을 거에요 XD
+```js
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/link1" element={<Component1 />} />
+        <Route path="/link2" element={<Component2 />} />
+        ...
+      </Routes>
+    </BrowserRouter>
+  );
+};
+```
 
-## 링크 및 참고자료
+하지만 `React Router v6.4`에서는 `RouterProvider`와 `CreateBrowerRouter`를 사용하여 다른 방식으로도 라우팅이 가능하다.
 
-- [React docs - Hook](https://ko.reactjs.org/docs/hooks-intro.html)
-- [React의 Hooks 완벽 정복하기](https://velog.io/@velopert/react-hooks#1-usestate)
-- [useEffect 완벽 가이드](https://overreacted.io/ko/a-complete-guide-to-useeffect/)
-- [코딩 컨벤션](https://ui.toast.com/fe-guide/ko_CODING-CONVENTION)
-- [타입스크립트 핸드북](https://joshua1988.github.io/ts/intro.html)
-- [리액트 프로젝트에서 타입스크립트 사용하기 (시리즈)](https://velog.io/@velopert/series/react-with-typescript)
-- [디자인 시스템 구축기](https://yozm.wishket.com/magazine/detail/1830/)
-- [[영상] : 컴포넌트에 대한 이해](https://www.youtube.com/watch?v=21eiJc90ggo)
-- [Styled Component로 디자인 시스템 구축하기](https://zaat.dev/blog/building-a-design-system-in-react-with-styled-components/)
-- [ts 절대경로 설정하기](https://tesseractjh.tistory.com/232)
+```js
+//routes.js
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        path: 'path1',
+        element: <Component1 />,
+      },
+    ],
+    errorElement: <NotFoundPage />,
+  },
+  ...
+]);
+
+//App.js
+import { RouterProvider } from 'react-router-dom';
+import { router } from '@util/routes';
+
+function App() {
+  return (
+    <Fragment>
+      <RouterProvider router={router} />
+    </Fragment>
+  );
+}
+
+export default App;
+```
+페이지가 많아지면 가독성이 좋아보이고 `Error`페이지도 한눈에 들어오는 방식이라 이 방법을 사용했다.
+
+### Link
+
+라우터 내에서 페이지 간 이동을 위해 <a>대신 사용된다.
+
+```js
+<Link to="/"> ... </Link>
+```
+
+### useNavigate
+
+태그를 감싸는 용도로 사용되는 `Link`와 달리 특정상황에 호출해 사용할 수 있다.
+
+```js
+const navigate = useNavigate();
+
+const onClick = () => {
+  navigate('/');
+};
+```
+
+### 중첩라우팅
+
+다음과 같이 `outlet`을 활용해 사용할 수 있다.
+
+```ts
+//App.js
+<Route path="/first" element={<First />}>
+  <Route path="second" element={<Second />}></Route>
+</Route>;
+
+//Second.js
+function About() {
+  return (
+    <div>
+      ...
+      <Outlet />
+    </div>
+  );
+}
+```
+
+중첩된 라우팅의 `path`에는 `/`를 사용하지 않는다. `/first`에서 `/first/second`페이로 이동하면 <Second /> 컴포넌트가 <Outlet />자리에 렌더링 될 것이다. 하지만 나는 비슷한 상황에서 중첩라우팅을 사용하지 않고 분기처리를 사용해 `display:none`을 부여하거나 부여하지 않는 방식으로 해결했었다. 그래서 중첩라우팅을 어떻게 활용할 수 있을까 찾아보았다.
+
+페이지는 동일한데 사용자가 고객인지 관리자인지에 따라 다른 사이드바를 표기해야 할 수 있다. 사이드바를 열기 위해 새로운 변수를 선언할 수도 있지만 대신 중첩라우팅을 활요해 고객이면 고객맞춤 사이드바가, 관리자라면 관리자맞춤 사이드바가 나오게 할 수 있다. 두 방법 다 가능하기 때문에 개발하면서 상황에 맞춰 활용할 수 있을 것 같다.
+
+### 파라미터
+
+- url 파라미터
+  주소경로 내부에 특정한 매개변수를 집어넣어 사용한다. `useParams()`를 사용해 값을 파라미터를 꺼내온다.
+- 쿼리스트링(쿼리파라미터)
+  URL 뒤에 물음표와 함께 붙는 `Key`-`Value` 쌍. `useLocation()`이나 `useSearchParams()`를 사용해 값을 꺼내온다.
+
+아이디나 이름처럼 특정데이터만을 필요로한다면 url 파라미터를, 여러 개의 변수가 필요하다면 쿼리스트링을 사용하면 되겠다.
+
+## SPA란?
+
+Single Page Application의 약자로 직역하면 한 페이지에서 수행되는 어플리케이션이다.
+
+전통적인 웹페이지는 다른 페이지로 넘어갈 때마다 새로운 html을 받아오는데, 리액트같은 라이브러리를 사용하여 뷰 렌더링은 브라우저에게 맡기고 주소변경이 이루어지면 필요한 부분을 자바스크립트를 사용하여 업데이트 해주는 것이다. 모든 작업이 한 페이지에서 이루어지기 때문에 `URL`(주소)를 통해 다른 페이지로 넘어가는 것은 사실 같은페이지에서 컴포넌트가 리렌더링 되는 것이다. 리액트 라우터는 SPA를 수행하기 위한 툴이다.
+
+공부를 하다보니 궁금한 점이 생겼다. SPA를 사용하면 모든 파일들이 번들러를 통해 번들링 되어 하나의 파일로 만들어지고, 하나의 HTML에서 JS를 사용해 DOM을 수정하여 리렌더링 하는 방식으로 작동한다고 이해했다. 그렇게 되면 합쳐진 파일을 `URL`에 따라 관리하는 건 브라우저에서 할 일이고, 이게 CSR이다. 그렇다면 Next.js는 어떻게 SPA에서 SSR를 구현한거지? SPA는 CSR인거고, MPA가 SSR인거 아닌가?
+
+CSR과 SSR는 렌더링 방식이고, SPA와 MPA는 웹페이지의 구성방식일 뿐 정확히 일치한다고 할수는 없다.
+
+Next.js는 SSR과 `hydration`을 사용한다.
+
+SSR방식을 사용하면 `pre-rendering`이 된다. `pre-rendering`이란 서버사이드에서 DOM 요소들을 `build`하여 HTML 문서를 렌더링하는 것이다. 이렇게 `pre-rendering`된 HTML이 먼저 뷰에 보이기 때문에 빈화면이 보이지 않고 HTML문서들을 볼 수 있다. 이후 `hydration`과정을 통해 미리 렌더링된 HTML에 JS가 결합된다.
+
+SSR 방식은 크게 SSR방식과 SSG방식으로 구분된다. 상황에 따라 필요한 아키텍처를 사용한다.
+
+- Server Side Rendering 방식
+  사용자가 페이지를 요청할 때마다 새로운 HTML문서가 생성된다. 즉 클라이언트의 요청에 따라 `pre-rendering`이 진행된다.
+- Static Site Generation 방식
+  빌드 시 HTML이 생성되고 매 요청마다 HTML을 재사용한다. `pre-rendering`이 `build`될때 진행되고 이후 계속 재활용된다. 데이터가 변경되면 다시빌드해야되기 때문에 ISR을 사용해 일정시간마다 특정페이지만 다시 빌드해 페이지를 업데이트 할 수 있다.
+
+Next.js는 자체 웹서버를 가지고 있기 때문에 서버에서 수행되는 로직들은 여기서(자체 웹서버에서) 수행되어 값이 다시 컴포넌트로 반환된다. 이렇게 하여 Next.js는 SPA에서 SSR방식을 수행한다.
+
+## 상태관리란?
+
+컴포넌트에는 현재 상태가 있고, `useState`을 통해 상태가 생성되고 관리된다. 하지만 `useState`를 사용한 상태관리는 본인 컴포넌트만 관리하여 다른 컴포넌트에서 무슨일이 일어나는지 알지 못한다. 여러 컴포넌트에서 동일한 상태를 공유할 때 이 상태들을 어떻게 해야할 지 관리해야한다.
+
+가장 일반적인 방식으로 `props drilling`을 사용할 수 있다. 상태를 `props`로 전달해 다른 컴포넌트에서도 사용할 수 있게 한다. 하지만 `drilling`이 깊어 질수록 로직이 복잡해지고, 어디서부터 온 데이터인지 알 수 없기 때문에 전역상태관리를 사용한다.
+
+전역상태관리는 말 그대로 상태를 모든 컴포넌트에서 접근 가능하게 만들어준다. 리액트는 기본적으로 `context API`를 제공한다.
+
+### Context API
+
+`createContext()`로 초기값을 선언하고 `context.provider`로 컴포넌트를 감싼다. `useContext()`를 통해 구독한 컴포넌트에서는 특정 값을 꺼내와 사용할 수 있다.
+
+다만 값이 변경되면 무슨 값이든 구독중인 모든 컴포넌트가 리렌더링이 발생 불필요한 리렌더링이 발생한다. 이를 보안하기 위해 여러가지 대체 전역상태관리 라이브러리가 존재한다. 대표적으로 `redux`, `zustand`, `recoil`, `jotai`가 있다. 이들은 모두 구독중인 값이 바뀔때에만 변경되고, 구독중이지 않은 값이 변경될 때는 변경되지 않아 불필요한 리렌더링이 발생하지 않는다.
+
+### redux
+
+대중화된 라이브러리이다. FLUX패턴을 사용한다. FLUX패턴은 ACTION -> DISPATCHER -> MODEL(store) -> VIEW -> ACTION -> DISPATCHER -> MODEL(store) -> VIEW ... 방식으로 단방향 순환구조를 보여줘서 MODEL과 VIEW간 단방향 통신이 가능하게 도와준다. `redux`는 하나의 `store`공간을 사용하고 안에 상태(상태라는 것은 읽기 전용)와 리듀서를 정의한다. `ACTION`이 발생하면 `dispatcher`가 실행되어 액션과 이전 상태를 참조해 상태를 갱신한다.
+
+`redux`는 많은 보일러플레이트를 사용하고, 비동기처리를 하기 쉽지 않다. 이를 위해 `redux toolkit`이 존재하고 미들웨어가 존재하지만 러닝커브가 있고 여전히 복잡하다.
+
+### zuztand
+
+redux의 복잡한 패턴을 해결하기 위해 만들어진 라이브러리 이다. 똑같이 FLUX패턴을 사용하는데 보일러플레이트가 없고 필요하다면 비동기 처리가 가능하다.
+
+### recoil
+
+각각의 상태를 쪼개어 `atom`이란 단위로 저장한다. 이후 `useState`처럼 `useRecoilState`를 사용해 `atom`을 사용할 수 있다. `selector`를 사용해 비동기처리를 할 수도 있다.
+
+### jotai
+
+recoil과 유사하게 `atom`단위를 사용한다. 이후 `useAtom`을 통해 `atom`을 사용할 수 있다.
+
+`recoil`과의 차이점은 `key`값 없이도 그 자체만으로 구분이 된다는 것과 `selector()`를 사용하지 않고도 다른 `atom`을 만들 수 있다는 것, 즉 `jotai`가 더 미니멀리즘하게 구현할 수 있다는 것이다. 하지만 `recoil`은 SSR과 코드스플리팅을 내장지원하고, `jotai`에 비해 큰 지원과 커뮤니티를 가지고 있다.
+
+### React Query
+
+`React Query`는 서버와의 통신간 데이터 관리를 도와주는 상태관리 라이브러리이다. 소개했던 상태관리 라이브러리들에서도 비동기처리를 할 수 있지만, 캐싱, 동기화등은 직접 구현해줘야 한다. `React Query`는 데이터 fetching, 캐싱, 동기화, 서버쪽 데이터 업데이트 등을 쉽게 만들어 준다.
+
+비동기처리를 할 때 다른 라이브러리에 비해 보일러플레이트가 적고, 빌트인 함수가 많아서 현재 로딩상태, 에러가 났는지 여부등을 쉽게 확인할 수 있다. 또한 캐시처리 기능도 지원해 주기적으로 최신데이터로 갱신해준다.

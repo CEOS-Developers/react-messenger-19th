@@ -1,0 +1,204 @@
+{
+  "chattings": [
+    {
+      "id": "1",
+      "name": "플래시",
+      "img": "/pic.png",
+      "isUpdated": true,
+      "stateMessage": "오늘은 비가올거야. 막걸리 먹을사람",
+      "unReadCount": 0,
+      "chat": [
+        {
+          "chatId": "1",
+          "to": "송은수",
+          "from": "플래시",
+          "content": "내일 저녁은 햄버거를 먹을거야. 왜냐하면 어제 파스타를 먹었고 오늘은 한끼도 못먹었거든.",
+          "date": "2024-03-01",
+          "time": "19:00",
+          "isDisplay": false,
+          "isRead": true
+        },
+        {
+          "chatId": "2",
+          "to": "송은수",
+          "from": "플래시",
+          "content": "너는 먹고 싶은게 있어?",
+          "date": "2024-03-01",
+          "time": "19:00",
+          "isDisplay": true,
+          "isRead": true
+        },
+        {
+          "chatId": "3",
+          "to": "플래시",
+          "from": "송은수",
+          "content": "음...",
+          "date": "2024-03-01",
+          "time": "19:01",
+          "isDisplay": true,
+          "isRead": true
+        },
+        {
+          "chatId": "4",
+          "to": "송은수",
+          "from": "플래시",
+          "content": "현기증 나니깐 얼른 답변해줘.",
+          "date": "2024-03-02",
+          "time": "08:31",
+          "isDisplay": true,
+          "isRead": true
+        },
+        {
+          "chatId": "5",
+          "to": "플래시",
+          "from": "송은수",
+          "content": "조금만 기다려",
+          "date": "2024-03-03",
+          "time": "12:02",
+          "isDisplay": false,
+          "isRead": false
+        },
+        {
+          "chatId": "6",
+          "to": "플래시",
+          "from": "송은수",
+          "content": "고민좀 해볼게",
+          "date": "2024-03-03",
+          "time": "12:02",
+          "isDisplay": true,
+          "isRead": false
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "이그나이트",
+      "img": "/HappEmo.png",
+      "isUpdated": false,
+      "stateMessage": "뜨거운 감자",
+      "unReadCount": 1,
+      "chat": [
+        {
+          "chatId": "1",
+          "to": "송은수",
+          "from": "이그나이트",
+          "content": "야야야양야",
+          "date": "2024-03-01",
+          "time": "19:00",
+          "isDisplay": false,
+          "isRead": true
+        },
+        {
+          "chatId": "2",
+          "to": "송은수",
+          "from": "이그나이트",
+          "content": "하이하이하이하이",
+          "date": "2024-03-01",
+          "time": "19:01",
+          "isDisplay": false,
+          "isRead": true
+        },
+        {
+          "chatId": "3",
+          "to": "송은수",
+          "from": "이그나이트",
+          "content": "너는 먹고 싶은게 있어?",
+          "date": "2024-03-01",
+          "time": "19:00",
+          "isDisplay": true,
+          "isRead": true
+        },
+        {
+          "chatId": "4",
+          "to": "이그나이트",
+          "from": "송은수",
+          "content": "음...",
+          "date": "2024-03-01",
+          "time": "19:01",
+          "isDisplay": true,
+          "isRead": true
+        },
+        {
+          "chatId": "5",
+          "to": "송은수",
+          "from": "이그나이트",
+          "content": "걍 나가.",
+          "date": "2024-03-02",
+          "time": "08:31",
+          "isDisplay": true,
+          "isRead": true
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "마이크",
+      "img": "/computer.png",
+      "isUpdated": true,
+      "stateMessage": "나는야 경찰관",
+      "unReadCount": 1,
+      "chat": [
+        {
+          "chatId": "1",
+          "to": "송은수",
+          "from": "마이크",
+          "content": "mic drop let's go",
+          "date": "2024-02-11",
+          "time": "08:31",
+          "isDisplay": true,
+          "isRead": true
+        },
+        {
+          "chatId": "2",
+          "to": "송은수",
+          "from": "마이크",
+          "content": "읽씹노노",
+          "date": "2024-02-11",
+          "time": "08:34",
+          "isDisplay": true,
+          "isRead": true
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "몬스터",
+      "img": "/logo192.png",
+      "isUpdated": false,
+      "stateMessage": "해치지 않아요",
+      "unReadCount": 0,
+      "chat": [
+        {
+          "chatId": "1",
+          "to": "송은수",
+          "from": "몬스터",
+          "content": "걍 나가.",
+          "date": "2024-02-02",
+          "time": "08:31",
+          "isDisplay": true,
+          "isRead": true
+        },
+        {
+          "chatId": "2",
+          "to": "몬스터",
+          "from": "송은수",
+          "content": "엥",
+          "date": "2024-02-02",
+          "time": "08:31",
+          "isDisplay": false,
+          "isRead": true
+        },
+        {
+          "chatId": "3",
+          "to": "몬스터",
+          "from": "송은수",
+          "content": "무슨소리임",
+          "date": "2024-02-02",
+          "time": "08:31",
+          "isDisplay": true,
+          "isRead": true
+        }
+      ]
+    }
+  ]
+}

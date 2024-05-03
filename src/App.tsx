@@ -1,9 +1,13 @@
+import { router } from '@util/routes';
+import { RouterProvider } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
+
 function App() {
-	return (
-		<div>
-			<h1>19기 프론트엔드 파이팅!!! 디자인과 사이좋게 지내요~~~</h1>
-		</div>
-	);
+  return (
+    <RecoilRoot>
+      <RouterProvider router={router} />
+    </RecoilRoot>
+  );
 }
 
 export default App;

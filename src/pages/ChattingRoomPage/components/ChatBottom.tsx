@@ -1,0 +1,165 @@
+import theme from '@styles/theme';
+import styled from 'styled-components';
+import { ReactComponent as PlusSvg } from '@assets/svg/plus.svg';
+import { ReactComponent as SendSvg } from '@assets/svg/send.svg';
+import { ReactComponent as EmojiSvg } from '@assets/svg/emoji.svg';
+import { ReactComponent as MicSvg } from '@assets/svg/mic.svg';
+import { useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { chatDataState, currentChatRoomIdState } from '@recoil/chatAtom';
+import { UserState } from '@recoil/userAtom';
+import { type Chat } from '@type/common';
+import { useParams } from 'react-router-dom';
+import { formatDate, formatTime } from '@util/calculateDate';
+
+export default function ChatBottom() {
+  const [inputValue, setInputValue] = useState('');
+  const userName = useRecoilValue(UserState).user;
+  const [chattingData, setChattingData] = useRecoilState(chatDataState);
+  const params = useParams().id || '';
+  const currentIndex = chattingData.findIndex((chat) => chat.id === params);
+  const opponentName =
+    useRecoilValue(currentChatRoomIdState(params))?.name || '';
+
+  const handleSubmit = () => {
+    if (!inputValue.trim()) return;
+    setInputValue('');
+    const newChat: Chat = {
+      chatId: Date.now().toString(),
+      to: userName === '송은수' ? opponentName : '송은수',
+      from: userName === '송은수' ? '송은수' : opponentName,
+      content: inputValue,
+      date: formatDate(new Date()),
+      time: formatTime(new Date()),
+      isDisplay: true,
+      isRead: false,
+    };
+    const lastChat =
+      chattingData[currentIndex].chat[
+        chattingData[currentIndex].chat.length - 1
+      ];
+
+    if (lastChat.from === newChat.from && lastChat.time === newChat.time) {
+      setChattingData((prev) => {
+        const lastChatIndex = prev[currentIndex].chat.length - 1;
+        const lastChat = {
+          ...prev[currentIndex].chat[lastChatIndex],
+          isDisplay: false,
+        };
+        const newChats = [
+          ...prev[currentIndex].chat.slice(0, lastChatIndex),
+          lastChat,
+          newChat,
+        ];
+        if (currentIndex === 0) {
+          //처음 채팅방일 경우
+          return [
+            { ...prev[currentIndex], chat: newChats, unReadCount: 0 },
+            ...prev.slice(1),
+          ];
+        } else if (currentIndex === chattingData.length - 1) {
+          //마지막 채팅방일 경우
+          return [
+            ...prev.slice(0, currentIndex),
+            { ...prev[currentIndex], chat: newChats, unReadCount: 0 },
+          ];
+        } else {
+          //중간 채팅방일 경우
+          return [
+            ...prev.slice(0, currentIndex),
+            { ...prev[currentIndex], chat: newChats, unReadCount: 0 },
+            ...prev.slice(currentIndex + 1),
+          ];
+        }
+      });
+    } else {
+      setChattingData((prev) => {
+        const newChats = [...prev[currentIndex].chat, newChat];
+        if (currentIndex === 0) {
+          //처음 채팅방일 경우
+          return [
+            { ...prev[currentIndex], chat: newChats, unReadCount: 0 },
+            ...prev.slice(1),
+          ];
+        } else if (currentIndex === chattingData.length - 1) {
+          //마지막 채팅방일 경우
+          return [
+            ...prev.slice(0, currentIndex),
+            { ...prev[currentIndex], chat: newChats, unReadCount: 0 },
+          ];
+        } else {
+          //중간 채팅방일 경우
+          return [
+            ...prev.slice(0, currentIndex),
+            { ...prev[currentIndex], chat: newChats, unReadCount: 0 },
+            ...prev.slice(currentIndex + 1),
+          ];
+        }
+      });
+    }
+  };
+  return (
+    <ChatBottomWrapper>
+      <PlusSvg />
+      <InputBox>
+        <InputSytle
+          value={inputValue}
+          onChange={(e) => {
+            setInputValue(e.target.value);
+          }}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+              handleSubmit();
+            }
+          }}
+        />
+        <EmojiSvg />
+        {inputValue ? (
+          <div onClick={handleSubmit}>
+            <SendSvg />
+          </div>
+        ) : (
+          <MicSvg />
+        )}
+      </InputBox>
+    </ChatBottomWrapper>
+  );
+}
+
+const ChatBottomWrapper = styled.section`
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  width: 375px;
+  padding: 4px 16px 12px 16px;
+  gap: 4px;
+  background-color: ${theme.colors.white};
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+const InputBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-grow: 1;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 15px;
+  background-color: ${theme.colors.gray_5};
+  border: 1px solid ${theme.colors.gray_4};
+`;
+
+const InputSytle = styled.input`
+  flex-grow: 1;
+  font-size: ${theme.textStyles.body3.font_size};
+  line-height: ${theme.textStyles.body3.line_height};
+  font-weight: ${theme.textStyles.body3.font_weight};
+  color: ${theme.colors.black};
+  border: none;
+  outline: none;
+  background-color: ${theme.colors.gray_5};
+`;
