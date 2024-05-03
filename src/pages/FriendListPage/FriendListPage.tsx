@@ -1,3 +1,4 @@
+import Hr from '@components/Hr';
 import Input from '@components/Input';
 import MainFooter from '@components/MainFooter';
 import MainHeader from '@components/MainHeader';
@@ -12,6 +13,7 @@ export default function FriendListPage() {
       <MainHeader title="친구" />
       <Input />
       <ProfileCard />
+      <Hr />
       <MainFooter />
     </FriendListPageContainer>
   );
