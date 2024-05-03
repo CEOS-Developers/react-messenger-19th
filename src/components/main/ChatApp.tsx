@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Header from './Header'; 
 import styled from 'styled-components';
 import UserProfile from '../chat/UserProfile';
 import ChatInput from '../chat/ChatInput';
 import ChatMessages from '../chat/ChatMessages'; 
 import { useRecoilValue } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { messagesState } from '../state/messageState'; 
 import IphoneHeader from './IphoneHeader';
 import IphoneFooter from './IphoneFooter';
@@ -12,23 +14,29 @@ import { usersState } from '../state/userState';
 import {selectedUserState} from '../state/selectedUserState'
 
 const ChatApp = () => {
+  const { userId } = useParams<{ userId?: string }>();
   const messages = useRecoilValue(messagesState); 
   const users = useRecoilValue(usersState);
-  const selectedUserId = useRecoilValue(selectedUserState);
+  const setSelectedUserId = useSetRecoilState(selectedUserState);
   const [selectedFriend, setSelectedFriend] = useState({profileImage: '', name: '', phoneNumber: ''}); // Default empty values to avoid null errors
 
   useEffect(() => {
-    const user = users.find(user => user.id === selectedUserId);
+    // userId가 제공 X -> 기본값: 0
+    const numericUserId = userId ? parseInt(userId, 10) : 0; 
+    setSelectedUserId(numericUserId);
+
+    const user = users.find(user => user.id === numericUserId);
     if (user) {
       setSelectedFriend(user);
     } else {
       setSelectedFriend({profileImage: '', name: '', phoneNumber: ''});
     }
-  }, [selectedUserId, users]);
+  }, [userId, users, setSelectedUserId]);
 
-  const friendMessages = messages.filter(message => //대화내용 잇는애들만 필터링
-    message.senderId === selectedUserId || message.receiverId === selectedUserId
+  const friendMessages = messages.filter(message => 
+    message.senderId === parseInt(userId || '0', 10) || message.receiverId === parseInt(userId || '0', 10)
   );
+
   return (
     <Container>
     <AppContainer>

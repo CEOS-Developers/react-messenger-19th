@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import { selectedUserState } from '../state/selectedUserState';
 import { usersState } from '../state/userState';
+import { messagesState } from '../state/messageState';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
   const [selectedUserId, setSelectedUserId] = useRecoilState(selectedUserState);
   const [users] = useRecoilState(usersState);
   const [initialSelectedUserId, setInitialSelectedUserId] = useState(selectedUserId);
+  const messages = useRecoilValue(messagesState);
 
   // selectedUserId가 변경될 때마다 초기 selectedUserId를 업데이트합니다.
   useEffect(() => {
@@ -29,8 +31,14 @@ const Header: React.FC = () => {
   };
 
   const toggleUser = () => {
+    // 메시지가 있는지 확인
+    const hasMessages = messages.some(message => message.senderId === selectedUserId || message.receiverId === selectedUserId);
+    if (!hasMessages && selectedUserId !== 0) {
+      console.log("No messages available for toggling.");
+      return; // 메시지가 없으면 토글못하게막음
+    }
     setSelectedUserId(prevSelectedUserId => prevSelectedUserId === 0 ? initialSelectedUserId : 0);
-    console.log(selectedUser.id); 
+    console.log(selectedUser.id);
   };
 
   return (
