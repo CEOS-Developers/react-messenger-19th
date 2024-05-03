@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
+import { chatsActions } from "../../store";
 
 // image
 import smallAdd from "../../assets/smallAdd.svg";
@@ -10,40 +11,19 @@ import voice from "../../assets/voice.svg";
 import send from "../../assets/send.svg";
 // data
 import userData from "../../data/user.json";
-import chattingData from "../../data/chatting.json";
 
 import { colors } from "../../style/colors";
 import { typography } from "../../style/typography";
 
 const Main = () => {
-  const findChats = (opponent: number) => {
-    const chats = [];
-    for (const item of chattingData) {
-      if (item.opponent === opponent) {
-        chats.push(...item.chats);
-      }
-    }
-    console.log(chats);
-    return chats;
-  };
-
+  const dispatch = useDispatch();
+  const chats = useSelector((state: RootState) => state.chats);
   const opponent = useSelector((state: RootState) => state.opponent.opponent);
-
-  const storedChatsJSON = localStorage.getItem(opponent.toString());
-  const initialData = storedChatsJSON
-    ? JSON.parse(storedChatsJSON)
-    : findChats(opponent);
-
-  const [chats, setChats] = useState(initialData);
-
-  useEffect(() => {
-    localStorage.setItem(opponent.toString(), JSON.stringify(chats));
-  }, [chats, opponent]);
-
   const currOpponent = useSelector(
     (state: RootState) => state.currOpponent.currOpponent
   );
   const currOpponentData = userData.users[currOpponent];
+  const currChat = chats[opponent - 1].chats;
 
   const [value, setValue] = useState("");
   const [isEmpty, setIsEmpty] = useState(true); // input란에 텍스트 입력 여부
@@ -83,7 +63,7 @@ const Main = () => {
         sender: currOpponent === 0 ? opponent : 0,
         timestamp: getDate(),
       };
-      setChats([...chats, newChat]);
+      dispatch(chatsActions.addChat({ newChat, opponent }));
       setValue("");
       setIsEmpty(true);
     }
@@ -97,7 +77,7 @@ const Main = () => {
   return (
     <Wrapper>
       <ChattingWrapper ref={chatWrapperRef}>
-        {chats.map((chat, index) => {
+        {currChat.map((chat, index) => {
           const isMine = chat.sender !== currOpponent;
           return (
             <ChattingItemWrapper key={index}>
