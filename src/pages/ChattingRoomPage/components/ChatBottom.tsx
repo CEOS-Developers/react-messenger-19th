@@ -38,6 +38,7 @@ export default function ChatBottom() {
       chattingData[currentIndex].chat[
         chattingData[currentIndex].chat.length - 1
       ];
+
     if (lastChat.from === newChat.from && lastChat.time === newChat.time) {
       setChattingData((prev) => {
         const lastChatIndex = prev[currentIndex].chat.length - 1;
@@ -52,18 +53,21 @@ export default function ChatBottom() {
         ];
         if (currentIndex === 0) {
           //처음 채팅방일 경우
-          return [{ ...prev[currentIndex], chat: newChats }, ...prev.slice(1)];
+          return [
+            { ...prev[currentIndex], chat: newChats, unReadCount: 0 },
+            ...prev.slice(1),
+          ];
         } else if (currentIndex === chattingData.length - 1) {
           //마지막 채팅방일 경우
           return [
             ...prev.slice(0, currentIndex),
-            { ...prev[currentIndex], chat: newChats },
+            { ...prev[currentIndex], chat: newChats, unReadCount: 0 },
           ];
         } else {
           //중간 채팅방일 경우
           return [
             ...prev.slice(0, currentIndex),
-            { ...prev[currentIndex], chat: newChats },
+            { ...prev[currentIndex], chat: newChats, unReadCount: 0 },
             ...prev.slice(currentIndex + 1),
           ];
         }
@@ -73,18 +77,21 @@ export default function ChatBottom() {
         const newChats = [...prev[currentIndex].chat, newChat];
         if (currentIndex === 0) {
           //처음 채팅방일 경우
-          return [{ ...prev[currentIndex], chat: newChats }, ...prev.slice(1)];
+          return [
+            { ...prev[currentIndex], chat: newChats, unReadCount: 0 },
+            ...prev.slice(1),
+          ];
         } else if (currentIndex === chattingData.length - 1) {
           //마지막 채팅방일 경우
           return [
             ...prev.slice(0, currentIndex),
-            { ...prev[currentIndex], chat: newChats },
+            { ...prev[currentIndex], chat: newChats, unReadCount: 0 },
           ];
         } else {
           //중간 채팅방일 경우
           return [
             ...prev.slice(0, currentIndex),
-            { ...prev[currentIndex], chat: newChats },
+            { ...prev[currentIndex], chat: newChats, unReadCount: 0 },
             ...prev.slice(currentIndex + 1),
           ];
         }
