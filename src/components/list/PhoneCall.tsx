@@ -58,7 +58,7 @@ const PhoneCall: React.FC = () => {
              <CallButton onClick={handleCall}>
               <img src="/assets/Call-icon.svg" alt="Call" style={{ width: '24px', height: '24px' }} />
               </CallButton>
-            <BackspaceButton onClick={handleBackspace}>⌫</BackspaceButton>
+            <BackspaceButton onClick={handleBackspace} src="/assets/DeletePhoneCall.svg"/>
           </Keypad>
         </KeypadContainer>
         <NavigatingFooter/>
@@ -129,6 +129,8 @@ const Keypad = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   width: 100%;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Button = styled.button`
@@ -163,14 +165,15 @@ const LettersText = styled.div`
   color: #000000;
 `;
 
-const BackspaceButton = styled.button`
+const BackspaceButton = styled.img`
   font-size: 20px;
   grid-column:3;
   background-color: transparent;
   border: none;
   color: #B6B6B6;
   cursor: pointer;
-
+  width: 45px;
+margin-left:12px;
   &:active {
     transform: scale(0.95); 
   }
@@ -179,6 +182,7 @@ const BackspaceButton = styled.button`
 const CallButton = styled(Button)`
 grid-column: 2 / span 1; 
 background-color: #31C75C; 
+
   &:hover {
     background-color: #45A049; 
   }
