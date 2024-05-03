@@ -1,9 +1,19 @@
-function App() {
+// src/App.tsx
+
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+
+const App = () => {
 	return (
-		<div>
-			<h1>19기 프론트엔드 파이팅!!! 디자인과 사이좋게 지내요~~~</h1>
-		</div>
+		<>
+			<Routes>
+				<Route path='/chattingroom/:userId' />
+				<Route path='/userlist' />
+				<Route path='/chattinglist' />
+				<Route path='/profile' />
+			</Routes>
+		</>
 	);
-}
+};
 
 export default App;
