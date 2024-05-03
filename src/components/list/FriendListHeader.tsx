@@ -34,7 +34,7 @@ const FriendListHeader: React.FC<FriendListHeaderProps> = ({ onEditClick, onSear
             />
             <NewChatContainer>
                 <Button onClick={handleGoMyPage}>
-                    <NewChatButton src="/assets/UserProfile.svg"/>
+                    <NewChatButton src="/assets/SmallProfile.png"/>
                 </Button>
                 <NewChatLabel onClick={handleGoMyPage}>김수현</NewChatLabel>
             </NewChatContainer>
@@ -103,6 +103,8 @@ const DivideLine = styled.img`
 `;
 const NewChatButton = styled.img`
 display: block;
+width: 52px;
+height: 52px;
 `;
 const NewChatContainer = styled.div`
 display: flex;

@@ -28,14 +28,14 @@ const MyPage = () => {
           <EditProfileLabel>바로가기</EditProfileLabel>
           <SNSContainer>
             <Logogroup onClick={handleInstagramClick}>
-              <SNSLogo src="/assets/Instagram.svg"/>
+              <SNSLogo src="/assets/Instagram.png"/>
               <Label>Instagram</Label>
             </Logogroup>
             <Clip src="/assets/Clip.svg" onClick={handleInstagramClick}/>
           </SNSContainer>
           <SNSContainer>
             <Logogroup onClick={handleYoutubeClick}>
-              <SNSLogo src="/assets/Youtube.svg"/>
+              <SNSLogo src="/assets/YouTube.png"/>
               <Label>Youtube</Label>
             </Logogroup>
             <Clip src="/assets/Clip.svg" onClick={handleInstagramClick}/>

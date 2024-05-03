@@ -190,6 +190,6 @@ background-color: #31C75C;
 `;
 
 const CallImg = styled.img`
- width: '24px';
- height: '24px'  
+ width: 30.96px;
+ height: 30px;  
 `;
