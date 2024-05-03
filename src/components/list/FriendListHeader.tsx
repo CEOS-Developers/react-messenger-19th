@@ -22,29 +22,26 @@ const FriendListHeader: React.FC<FriendListHeaderProps> = ({ onEditClick, onSear
     };
     return (
         <HeaderContainer>
-          <EditContainer>
-            <Button onClick={onEditClick}>
-              <EditButton2 src="/assets/icon.svg"></EditButton2>
-            </Button>
-          </EditContainer>
-          <Title>대화</Title>
-          <SearchInput
-            type="text"
-            onChange={onSearchChange}
-          />
-          {!searchTerm && (
+            <EditContainer>
+                <Button onClick={onEditClick}>
+                    <EditButton2 onClick={onEditClick} src="/assets/icon.svg"></EditButton2>
+                </Button>
+            </EditContainer>
+            <Title>친구</Title>
+            <SearchInput
+                type="text"
+                onChange={onSearchChange}
+            />
             <NewChatContainer>
-              <Button onClick={handleNewChatClick}>
-                <NewChatButton src="/assets/Group 6 (1).svg"/>
-              </Button>
-              <NewChatLabel>새로운 대화</NewChatLabel>
+                <Button onClick={handleGoMyPage}>
+                    <NewChatButton src="/assets/profile (3).svg"/>
+                </Button>
+                <NewChatLabel onClick={handleGoMyPage}>김수현</NewChatLabel>
             </NewChatContainer>
-          )}
-          <DivideLine src="/assets/Vector 564.svg"/>
+            <DivideLine src="/assets/Vector 564.svg"/>
         </HeaderContainer>
-      );
-    };
-
+    );
+};
 export default FriendListHeader;
 
 const HeaderContainer = styled.div`

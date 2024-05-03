@@ -45,7 +45,6 @@ const FooterContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 42px; 
   background-color: #f7f8fc;
 `;
 
@@ -54,6 +53,7 @@ const IconContainer = styled.div`
   margin-top: 14px;
   justify-content: space-between;
   width: 212px;
+  margin-bottom:4px;
 `;
 
 const NavIcon = styled.img<{ width: string; height: string}>`

@@ -6,6 +6,7 @@ import ChatApp from './components/main/ChatApp';
 import FriendList from './components/list/FriendList';
 import GlobalStyle from './components/style/GlobalStyle';
 import MyPage from './components/list/MyPage'
+import PhoneCall from './components/list/PhoneCall';
 
 const App: React.FC = () => {
   return (
@@ -17,6 +18,8 @@ const App: React.FC = () => {
           <Route path="/chat/:userId" element={<ChatApp />} />
           <Route path="/friends" element={<FriendList />} />
           <Route path="/mypage" element={<MyPage/>}/>
+          <Route path="/phone" element={<PhoneCall/>}/>
+
         </Routes>
       </Router>
     </RecoilRoot>
