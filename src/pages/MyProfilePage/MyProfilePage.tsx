@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import theme from '@styles/theme';
 import { ReactComponent as TimesSvg } from '@assets/svg/times.svg';
 import StatusBox from '@components/StatusBox';
+import EditProfile from './components/EditProfile';
 
 export default function MyProfilePage() {
   return (
@@ -10,6 +11,7 @@ export default function MyProfilePage() {
       <CloseSVGStyle>
         <TimesSvg />
       </CloseSVGStyle>
+      <EditProfile />
     </MyProfilePageConatainer>
   );
 }
