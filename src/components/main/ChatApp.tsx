@@ -17,7 +17,7 @@ const ChatApp: React.FC = () => {
   return (
     <Container>
     <AppContainer>
-    <IphoneHeader src='/assets/Status Bar.png'/>
+    <IphoneHeader src='/assets/Status Bar.png' backgroundColor='#F7F8FC'/>
       <Header/>
       {messages.length > 0 ? ( // 조건부 렌더링: 이전에 나눈 대화가 있으면 ChatMessages 보여줌
         <ChatMessages />

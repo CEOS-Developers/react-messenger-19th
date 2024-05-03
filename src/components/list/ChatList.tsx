@@ -53,7 +53,7 @@ const ChatList = () => {
   return (
     <Container>
       <AppContainer>
-        <IphoneHeader src='/assets/Status Bar.png'/>
+      <IphoneHeader src='/assets/Status Bar.png'/>
         <ChatListHeader 
           onEditClick={handleEditClick} 
           onSearchChange={handleSearchChange} 
