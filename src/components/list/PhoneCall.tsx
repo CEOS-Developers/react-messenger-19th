@@ -4,7 +4,7 @@ import IphoneHeader from '../main/IphoneHeader';
 import IphoneFooter from '../main/IphoneFooter';
 import NavigatingFooter from './NavigateFooter';
 import { useLocation } from 'react-router-dom';
-
+import CallIcon from "./Call-icon.png"
 
 const numLettersMapping: { [key: string]: string } = {
   '1': '\u00A0', //공백
@@ -69,7 +69,9 @@ const PhoneCall: React.FC = () => {
                 <LettersText>{numLettersMapping[key]}</LettersText>
               </Button>
             ))}
-              <CallImg src="/assets/Call-icon.png" alt="Call" onClick={handleCall}/>
+              <CallImg onClick={handleCall}>
+                <img src={CallIcon} style={{width: '73px', height: '73px'}}/>
+              </CallImg>
             <BackspaceButton onClick={handleBackspace} src="/assets/DeletePhoneCall.svg"/>
           </Keypad>
         </KeypadContainer>
@@ -195,7 +197,7 @@ const BackspaceButton = styled.img`
 `;
 
 
-const CallImg = styled.img`
+const CallImg = styled.div`
 
   width: 73px;
   height: 73px;  
