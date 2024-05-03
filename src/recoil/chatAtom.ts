@@ -17,6 +17,7 @@ interface ChattingRoom {
   name: string;
   img: string;
   isUpdated: boolean;
+  stateMessage: string;
   unReadCount: number;
   chat: Chat[];
 }

@@ -17,9 +17,9 @@ export default function UpdatedProfileCard({ user, img }: UpdatedProfileCardProp
 
 
 const UpdatedProfileCardNameStyle = styled.div`
-  font-size: ${theme.textStyles.body1_2.font_size};
-  line-height: ${theme.textStyles.body1_2.line_height};
-  font-weight: ${theme.textStyles.body1_2.font_weight};
+  font-size: ${theme.textStyles.caption5.font_size};
+  line-height: ${theme.textStyles.caption5.line_height};
+  font-weight: ${theme.textStyles.caption5.font_weight};
   color: ${theme.colors.black};
   flex-grow: 1;
 `;

@@ -9,6 +9,7 @@ import ProfileCard from './components/ProfileCard';
 import { useRecoilValue } from 'recoil';
 import { chatDataState, currentChatUpdateState } from '@recoil/chatAtom';
 import UpdatedProfileCard from './components/UpdateProfileCard';
+import FriendCard from './components/FriendCard';
 
 export default function FriendListPage() {
   const chatData = useRecoilValue(chatDataState);
@@ -30,6 +31,9 @@ export default function FriendListPage() {
       </FriendListUpdatedFriendContainer>
       <Hr />
       <FriendListTextStyle>친구 {chatData.length}</FriendListTextStyle>
+      {chatData.map((data) => (
+        <FriendCard key={data.id} img={data.img} name={data.name} stateMessage={data.stateMessage} onClick={()=>{}}/>
+      ))}
       <MainFooter />
     </FriendListPageContainer>
   );

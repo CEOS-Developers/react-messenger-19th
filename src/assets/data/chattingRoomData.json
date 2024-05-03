@@ -5,6 +5,7 @@
       "name": "플래시",
       "img": "/pic.png",
       "isUpdated": true,
+      "stateMessage": "오늘은 비가올거야. 막걸리 먹을사람",
       "unReadCount": 0,
       "chat": [
         {
@@ -74,6 +75,7 @@
       "name": "이그나이트",
       "img": "/HappEmo.png",
       "isUpdated": false,
+      "stateMessage": "뜨거운 감자",
       "unReadCount": 1,
       "chat": [
         {
@@ -133,6 +135,7 @@
       "name": "마이크",
       "img": "/computer.png",
       "isUpdated": true,
+      "stateMessage": "나는야 경찰관",
       "unReadCount": 0,
       "chat": [
         {
@@ -140,7 +143,7 @@
           "to": "송은수",
           "from": "마이크",
           "content": "mic drop let's go",
-          "date": "2024-02-",
+          "date": "2024-02-11",
           "time": "08:31",
           "isDisplay": true,
           "isRead": true
@@ -152,6 +155,7 @@
       "name": "몬스터",
       "img": "/logo192.png",
       "isUpdated": false,
+      "stateMessage": "해치지 않아요",
       "unReadCount": 0,
       "chat": [
         {
