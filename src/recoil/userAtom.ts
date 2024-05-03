@@ -6,6 +6,7 @@ interface UserState {
   instagram: string;
   github: string;
   behance: string;
+  img: string;
 }
 
 export const UserState = atom<UserState>({
@@ -16,5 +17,6 @@ export const UserState = atom<UserState>({
     instagram: 'https://www.instagram.com/',
     github: 'github.com/songess',
     behance: 'https://www.behance.net/',
+    img: '/Introduce.png'
   },
 });

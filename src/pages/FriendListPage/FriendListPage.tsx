@@ -3,6 +3,7 @@ import MainFooter from '@components/MainFooter';
 import MainHeader from '@components/MainHeader';
 import StatusBox from '@components/StatusBox';
 import styled from 'styled-components';
+import ProfileCard from './components/ProfileCard';
 
 export default function FriendListPage() {
   return (
@@ -10,6 +11,7 @@ export default function FriendListPage() {
       <StatusBox />
       <MainHeader title="친구" />
       <Input />
+      <ProfileCard />
       <MainFooter />
     </FriendListPageContainer>
   );
