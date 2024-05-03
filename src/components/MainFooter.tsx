@@ -12,7 +12,7 @@ interface navBar {
 }
 
 const navBarMenu: navBar[] = [
-  { title: '친구', TitleComponent: FriendsSvg, url: '/friendlist' },
+  { title: '친구', TitleComponent: FriendsSvg, url: '/' },
   { title: '채팅', TitleComponent: ChatSvg, url: '/chattinglist' },
   { title: '기타', TitleComponent: EtcSvg, url: '/other' },
 ];
@@ -22,7 +22,7 @@ export default function MainFooter() {
   const navigate = useNavigate();
   const handleClick = (url: string) => {
     navigate(url);
-  }
+  };
   return (
     <MainFooterContainer>
       {navBarMenu.map((navBar, index) => (

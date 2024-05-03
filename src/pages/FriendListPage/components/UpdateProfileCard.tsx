@@ -13,7 +13,7 @@ export default function UpdatedProfileCard({
   img,
   id,
 }: UpdatedProfileCardProps) {
-  const navigate = useNavigate();
+  const navigate = useNavigate();                          
   return (
     <UpdatedProfileCardContainer
       onClick={() => navigate(`/chattingroom/${id}`)}
