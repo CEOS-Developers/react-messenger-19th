@@ -7,45 +7,33 @@ import myProfile from "../../assets/img/myProfile.png"
 import dayjs from "dayjs"
 import ChatBubbleReceiver from "../Chat/ChatBubbleReceiver"
 import ChatBubbleSender from "./ChatBubbleSender"
+import { useRecoilState } from 'recoil';
+import { chatDataState } from '../../atoms';
+import { useParams } from 'react-router-dom';
+
+interface ChatType {
+  //채팅 방 데이터
+  r_id: number; //채팅방(room) 고유 id
+  isGroup: boolean; //grop일 경우 group icon을 띄우기 위함
+  r_name: string; //채팅방 이름
+  r_profile: string; //수신자 프로필 url
+  //채팅 1개 당 데이터
+  chat : {
+    c_id: number | null; //채팅 1개당 id
+    sender: string; //발신자
+    receiver: string; //수신자
+    value: string; //텍스트 입력값
+    time: string //텍스트 보낸 시간
+  }[]
+}
+
 
 function ChattingPage() {
-  interface ChatType {
-    //채팅 방 데이터
-    r_id: number; //채팅방(room) 고유 id
-    isGroup: boolean; //grop일 경우 group icon을 띄우기 위함
-    r_name: string; //채팅방 이름
-    r_profile: string; //수신자 프로필 url
-    //채팅 1개 당 데이터
-    chat : {
-      c_id: number | null; //채팅 1개당 id
-      sender: string; //발신자
-      receiver: string; //수신자
-      r_img : string; //receiver_img 
-      value: string; //텍스트 입력값
-      time: string //텍스트 보낸 시간
-    }[]
-  }
-
+  const { r_id } = useParams();
+ 
   const [value,  setValue] = useState<string>(''); //텍스트 입력값을 넣어주기 위한 state
-  const [sender, setSender] = useState<string>('김다희');
-  const [receiver, setReceiver] = useState<string>('김유빈');
-  const [rImg, setRImg] = useState<string>(friendProfile);
-  const [chatData, setChatData] = useState<ChatType>({
-    r_id: 0,
-    isGroup: false,
-    r_name: '김유빈',
-    r_profile: friendProfile, // 추후 데이터는 url 형태
-    chat: [
-      {
-        c_id: null,
-        sender: '',
-        receiver: '',
-        r_img: '',
-        value: '',
-        time: ''
-      }
-    ],
-  })
+  const [chatData, setChatData] = useRecoilState<ChatType>(chatDataState);
+  
 
    //localStorage에서 가져오기
    useEffect(() => {
@@ -54,20 +42,6 @@ function ChattingPage() {
       setChatData(JSON.parse(getChatData))
     }
   }, [])
-
-   //유저 전환
-   const toggleUser = () =>{
-    if(sender === '김다희'){
-      setSender('김유빈');
-      setReceiver('김다희');
-      setRImg(myProfile);
-    }
-    else{
-      setSender('김다희');
-      setReceiver('김유빈');
-      setRImg(friendProfile);
-    }
-  }
 
 
   // 객체 생성
@@ -81,7 +55,6 @@ function ChattingPage() {
           c_id: Date.now(),
           sender: sender,
           receiver: receiver,
-          r_img: sender === '김다희' ? myProfile : friendProfile,
           value: value,
           time: currentTime
         }]
@@ -136,7 +109,8 @@ function ChattingPage() {
         value={value}
         setValue={setValue}
        />
-      
+
+
     </Wrapper>
   )
 }

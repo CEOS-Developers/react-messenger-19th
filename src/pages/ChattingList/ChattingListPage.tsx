@@ -3,7 +3,7 @@ import TopBarIcons from "../../components/TopBarIcons"
 import BottomTab from "../../components/BottomTab"
 import ChatRoomLIst from "./ChatRoomLIst"
 import chatData from "../../data/dummyData.json"
-import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 interface ChatDataType {
   r_id : number
@@ -20,6 +20,7 @@ function ChattingListPage() {
        <TopBarIcons/>
        <ChattingListsWrapper>
          {chatData.map((chatInfo : ChatDataType) =>( 
+        <Link to={`/chatting-page/${chatInfo.r_id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
          <ChatRoomLIst
             key={chatInfo.r_id}
             r_name = {chatInfo.r_name}
@@ -27,7 +28,9 @@ function ChattingListPage() {
             r_profile= {chatInfo.r_profile}
             lastMessage={chatInfo.chat.length > 0 ? chatInfo.chat[chatInfo.chat.length - 1].value : ''}
             lastTime = {chatInfo.chat.length > 0 ? chatInfo.chat[chatInfo.chat.length - 1].time : ''}
-         />))}
+         />
+         </Link>
+         ))}
        </ChattingListsWrapper>
        <BottomTab/>
     </ChattingListContainer>
