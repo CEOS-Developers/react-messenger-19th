@@ -65,28 +65,24 @@ function ChattingPage() {
           <FriendProfileImg src = {chatRoomJson?.r_profile ? chatRoomJson?.r_profile : friendProfile}/>
           <FriendProfileName> {chatRoomJson?.r_name} </FriendProfileName>
        </ProfileInfoWrapper>
-       {/*<ChatBody>
-        {chatData.chat.slice(1).map((chat, key) => (
-          chat.sender === sender?
+       <ChatBody>
+        {chatRoomJson?.chat.map((chat) => (
+          chat.sender === "user"?
          ( <ChatBubbleSender
             key={chat.c_id}
             value={chat.value}
             time={chat.time}
-            profileImg={chat.r_img}
           /> ): (
             <ChatBubbleReceiver
             key={chat.c_id}
             value={chat.value}
             time={chat.time}
-            profileImg={chat.r_img}
-            //조건 추후 수정 예정
-            isSameTime = {  key > 0 &&
-              chatData.chat[key - 1].sender === chat.sender}
+            r_profile={chatRoomJson.r_profile? chatRoomJson.r_profile: friendProfile}
             />)
           ))}
-        <div ref={chatEndRef} style={{ width: "100%" }}/>
+       {/* <div ref={chatEndRef} style={{ width: "100%" }}/>*/}
         </ChatBody>
-       <ChatInput
+     {/*  <ChatInput
         addChatData={addChatData}
         value={value}
         setValue={setValue}

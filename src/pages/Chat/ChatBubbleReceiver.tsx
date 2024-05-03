@@ -3,15 +3,14 @@ import styled, {css} from "styled-components"
 interface Props {
     value : string,
     time: string,
-    profileImg: string
-    isSameTime : boolean
+    r_profile?: string
 }
 
-function ChatBubbleReceiver({value, time ,profileImg, isSameTime}: Props) {
+function ChatBubbleReceiver({value, time ,r_profile}: Props) {
   return (
     <ChatBubbleWrapper>
-        <ProfileWrapper hide = {isSameTime}>
-          <ProfileImg src = {profileImg}/>
+        <ProfileWrapper >
+          <ProfileImg src = {r_profile}/>
           <Time>{time}</Time>
         </ProfileWrapper>
         
@@ -29,8 +28,7 @@ const ChatBubbleWrapper = styled.div`
     margin-left: 22.39px;
 `
 
-const ProfileWrapper = styled.div<{hide : boolean}>`
-     ${({ hide }) => hide && css`visibility: hidden;`} // hide가 true이면 display: hidden
+const ProfileWrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 39px;

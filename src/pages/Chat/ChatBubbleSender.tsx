@@ -3,7 +3,6 @@ import styled from "styled-components"
 interface Props {
     value : string,
     time: string,
-    profileImg: string,
 }
 
 function ChatBubbleSender({value}: Props) {
