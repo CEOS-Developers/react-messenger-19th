@@ -64,16 +64,23 @@ const ChatList = () => {
     }).replace('오전', 'AM').replace('오후', 'PM').replace('AM', '오전').replace('PM', '오후'); // 'AM'과 'PM'을 한국어 '오전', '오후'로 변경
   };
   
-  const filteredUsers = users.filter(user => 
+  const getLastMessageTime = (userId: number) => {
+    const lastMessage = getLastMessage(userId);
+    return lastMessage ? new Date(lastMessage.timestamp).getTime() : 0;
+  };
+  
+  const filteredUsers = users.filter(user =>
     user.id !== 0 && (
       user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      messages.some(msg => 
-        (msg.senderId === user.id || msg.receiverId === user.id) && 
+      messages.some(msg =>
+        (msg.senderId === user.id || msg.receiverId === user.id) &&
         msg.text.toLowerCase().includes(searchTerm.toLowerCase())
       )
-    ) && 
-    messages.some(msg => (msg.senderId === user.id || msg.receiverId === user.id)) // 대화 내용이 있는 애들만 랜더링
-  );
+    ) &&
+    messages.some(msg => (msg.senderId === user.id || msg.receiverId === user.id)) // 대화 내용이 있는 사용자만 렌더링
+  ).sort((a, b) => {
+    return getLastMessageTime(b.id) - getLastMessageTime(a.id); // 최신 메시지가 위로 오도록 정렬
+  });
   
 
   return (
