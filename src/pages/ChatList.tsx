@@ -14,9 +14,9 @@ export default function ChatList(): JSX.Element {
 	const navigate = useNavigate(); // 라우팅 함수 초기화
 	// 채팅 데이터 상태
 	const [chats, setChats] = useState<Chat[]>([
-		{ id: 1, name: '김동혁', message: '123123123123', time: '오후 11:11', unreadCount: 2 },
-		{ id: 2, name: '이수현', message: '안녕하세요!', time: '오전 9:20', unreadCount: 0 },
-		{ id: 3, name: '박지민', message: '오랜만이에요.', time: '오후 1:45', unreadCount: 1 },
+		{ id: 1, name: '정수완', message: 'message', time: '오후 11:11', unreadCount: 0 },
+		// { id: 2, name: '이수현', message: '안녕하세요!', time: '오전 9:20', unreadCount: 0 },
+		// { id: 3, name: '박지민', message: '오랜만이에요.', time: '오후 1:45', unreadCount: 1 },
 	]);
 
 	// 채팅 항목 클릭 이벤트
