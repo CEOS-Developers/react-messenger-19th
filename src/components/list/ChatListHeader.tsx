@@ -1,5 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import Modal from './NewChatModal'; 
+import { useNavigate } from 'react-router-dom';
+import { usersState } from '../state/userState'; 
+import { messagesState } from '../state/messageState'; 
+import { useRecoilValue } from 'recoil'; 
 
 interface ChatListHeaderProps {
     onEditClick: () => void;
@@ -8,12 +13,33 @@ interface ChatListHeaderProps {
 }
 
 const ChatListHeader: React.FC<ChatListHeaderProps> = ({ onEditClick, onSearchChange, searchTerm  }) => {
-   
+    const [isModalOpen, setModalOpen] = useState(false);
+    const navigate = useNavigate();
+    const users = useRecoilValue(usersState); 
+    const messages = useRecoilValue(messagesState);
+
+
     const handleNewChatClick = () => {
-        console.log('새로운 대화 시작');
-    };
+        setModalOpen(true);
+      };
+
+    const closeModal = () => {
+        setModalOpen(false);
+      };
+
+    const onUserSelect = (userId: number) => {
+        navigate(`/chat/${userId}`);
+        closeModal();
+      };
+
+    const usersWithoutMessages = users.filter(user => {
+        // 대화내역 있는지 확인
+        const relatedMessages = messages.filter(message => message.senderId === user.id || message.receiverId === user.id);
+        return relatedMessages.length === 0; // 대화 내용이 없는 사용자 필터링하긩
+    });
    
     return (
+       <>
         <HeaderContainer>
             <EditContainer>
                 <Button onClick={onEditClick}>
@@ -30,11 +56,18 @@ const ChatListHeader: React.FC<ChatListHeaderProps> = ({ onEditClick, onSearchCh
                     <Button onClick={handleNewChatClick}>
                         <NewChatButton src="/assets/Group 6 (1).svg"/>
                     </Button>
-                    <NewChatLabel>새로운 대화</NewChatLabel>
+                    <NewChatLabel  onClick={handleNewChatClick}>새로운 대화</NewChatLabel>
                 </NewChatContainer>
             )}
             <DivideLine src="/assets/Vector 564.svg"/>
         </HeaderContainer>
+        <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        users={usersWithoutMessages}
+        onUserSelect={onUserSelect}
+      />
+    </> 
     );
 };
 export default ChatListHeader;
@@ -104,4 +137,6 @@ const NewChatLabel = styled.h1`
 font-size: 17px;
 font-weight: 600; 
 margin-left: 16px;
+cursor: pointer;
+
 `;

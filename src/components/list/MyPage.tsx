@@ -41,7 +41,7 @@ const MyPage = () => {
             <Clip src="/assets/Clip.svg" onClick={handleInstagramClick}/>
           </SNSContainer>
         </ProfileContainer>
-        <IphoneFooter src='/assets/Home Indicator.png' backgroundColor='#F7F8FC'/>
+        <IphoneFooter src='/assets/Home Indicator.png' backgroundColor='#ffffff'/>
       </AppContainer>
     </Container>
   );

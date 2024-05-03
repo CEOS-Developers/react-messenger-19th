@@ -21,7 +21,7 @@ max-width: 375px;
 margin: 0 auto; 
 background-color: #F7F8FC;
 border-radius: 0 0 30px 30px ;
-background-color: ${({ backgroundColor }) => backgroundColor || '#ffffff'}; // 기본값은 하얀색
+background-color: ${({ backgroundColor }) => backgroundColor || '#F7F8FC'}; // 기본값은 하얀색
 
 @media (max-width: 768px) {
   display: none; 
