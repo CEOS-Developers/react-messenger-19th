@@ -57,6 +57,12 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const IntroWrapper = styled.div`
