@@ -9,7 +9,7 @@ export const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: 'chattingroom',
+        path: 'chattingroom/:id',
         element: <ChattingRoomPage />,
       },
       {

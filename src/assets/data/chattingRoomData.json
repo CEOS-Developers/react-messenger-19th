@@ -2,6 +2,7 @@
   "chattings": [
     {
       "id": "1",
+      "name": "플래시",
       "chat": [
         {
           "chatId": "1",
@@ -62,6 +63,62 @@
           "time": "12:02",
           "isDisplay": true,
           "isRead": false
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "이그나이트",
+      "chat": [
+        {
+          "chatId": "1",
+          "to": "송은수",
+          "from": "이그나이트",
+          "content": "야야야양야",
+          "date": "2024-03-01",
+          "time": "19:00",
+          "isDisplay": false,
+          "isRead": true
+        },
+        {
+          "chatId": "1",
+          "to": "송은수",
+          "from": "이그나이트",
+          "content": "하이하이하이하이",
+          "date": "2024-03-01",
+          "time": "19:01",
+          "isDisplay": false,
+          "isRead": true
+        },
+        {
+          "chatId": "2",
+          "to": "송은수",
+          "from": "이그나이트",
+          "content": "너는 먹고 싶은게 있어?",
+          "date": "2024-03-01",
+          "time": "19:00",
+          "isDisplay": true,
+          "isRead": true
+        },
+        {
+          "chatId": "3",
+          "to": "이그나이트",
+          "from": "송은수",
+          "content": "음...",
+          "date": "2024-03-01",
+          "time": "19:01",
+          "isDisplay": true,
+          "isRead": true
+        },
+        {
+          "chatId": "4",
+          "to": "송은수",
+          "from": "이그나이트",
+          "content": "걍 나가.",
+          "date": "2024-03-02",
+          "time": "08:31",
+          "isDisplay": true,
+          "isRead": true
         }
       ]
     }

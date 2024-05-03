@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import theme from '@styles/theme';
 import { ReactComponent as FriendsSvg } from '@assets/svg/friends.svg';
 import { ReactComponent as ChatSvg } from '@assets/svg/chat.svg';
 import { ReactComponent as EtcSvg } from '@assets/svg/etc.svg';

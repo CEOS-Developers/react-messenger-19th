@@ -9,7 +9,7 @@ interface StatusBoxStyleProps {
 }
 
 export default function StatusBox() {
-  const path = useLocation().pathname;
+  const path = useLocation().pathname.slice(0,13);
   return (
     <StatusboxStyle $path={path}>
       <ClockSvg />

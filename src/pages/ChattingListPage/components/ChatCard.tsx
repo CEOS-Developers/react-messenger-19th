@@ -2,15 +2,20 @@ import theme from '@styles/theme';
 import styled from 'styled-components';
 import { type ChatCardProps } from '@type/common';
 
+interface ChatCardPropss extends ChatCardProps {
+  onClick: (name: string) => void;
+}
+
 export default function ChatCard({
   img,
   name,
   lastMessage,
   date,
   unReadCount,
-}: ChatCardProps) {
+  onClick,
+}: ChatCardPropss) {
   return (
-    <ChatCardWrapperContainer>
+    <ChatCardWrapperContainer onClick={() => onClick(name)}>
       <ChatCardImg src={img}></ChatCardImg>
       <ChatContentContainer>
         <ChatNameStyle>{name}</ChatNameStyle>
@@ -85,6 +90,10 @@ const ChatCardWrapperContainer = styled.article`
   gap: 8px;
   display: flex;
   justify-content: center;
+  &:hover {
+    background-color: ${theme.colors.gray_5};
+    cursor: pointer;
+  }
 `;
 
 const ChatCardImg = styled.img`

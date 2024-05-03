@@ -8,14 +8,13 @@ import Mychat from './Mychat';
 import OppoChangeChat from './OppoChangeChat';
 import Oppochat from './OppoChat';
 import { type Chat } from '@type/common';
+import { useParams } from 'react-router-dom';
 
-//이번 과제는 한 명뿐이라 채팅방은 1개
-const DUMMYID = '1';
 
 export default function Chatting() {
-  //이름 클릭시 반전을 위한 더미상태
+  const params = useParams().id || "";
   const userName = useRecoilValue(UserState);
-  const chattingData = useRecoilValue(currentChatRoomIdState(DUMMYID));
+  const chattingData = useRecoilValue(currentChatRoomIdState(params));
   const chatRef = useRef<HTMLDivElement>(null);
 
   //메시지 출력 함수: 상대일 경우 이미지와 이름 출력

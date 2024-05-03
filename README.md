@@ -54,7 +54,7 @@ export const router = createBrowserRouter([
   ...
 ]);
 
-//
+//App.js
 import { RouterProvider } from 'react-router-dom';
 import { router } from '@util/routes';
 
@@ -136,7 +136,7 @@ CSR과 SSR는 렌더링 방식이고, SPA와 MPA는 웹페이지의 구성방식
 
 Next.js는 SSR과 `hydration`을 사용한다.
 
-SSR방식을 사용하면 `pre-rendering`이 된다. `pre-rendering`이란 DOM 요소들을 `build`하여 HTML 문서를 렌더링하는 것이다. 이렇게 `pre-rendering`된 HTML이 먼저 뷰에 보이기 때문에 빈화면이 보이지 않고 HTML문서들을 볼 수 있다. 이후 `hydration`과정을 통해 미리 렌더링된 HTML에 JS가 결합된다.
+SSR방식을 사용하면 `pre-rendering`이 된다. `pre-rendering`이란 서버사이드에서 DOM 요소들을 `build`하여 HTML 문서를 렌더링하는 것이다. 이렇게 `pre-rendering`된 HTML이 먼저 뷰에 보이기 때문에 빈화면이 보이지 않고 HTML문서들을 볼 수 있다. 이후 `hydration`과정을 통해 미리 렌더링된 HTML에 JS가 결합된다.
 
 SSR 방식은 크게 SSR방식과 SSG방식으로 구분된다. 상황에 따라 필요한 아키텍처를 사용한다.
 
@@ -145,7 +145,7 @@ SSR 방식은 크게 SSR방식과 SSG방식으로 구분된다. 상황에 따라
 - Static Site Generation 방식
   빌드 시 HTML이 생성되고 매 요청마다 HTML을 재사용한다. `pre-rendering`이 `build`될때 진행되고 이후 계속 재활용된다. 데이터가 변경되면 다시빌드해야되기 때문에 ISR을 사용해 일정시간마다 특정페이지만 다시 빌드해 페이지를 업데이트 할 수 있다.
 
-Next.js는 자체 웹서버를 가지고 있기 때문에 서버에서 수행되는 로직들은 여기서 수행되어 값이 다시 컴포넌트로 반환된다. 이렇게 하여 Next.js는 SPA에서 SSR방식을 수행한다.
+Next.js는 자체 웹서버를 가지고 있기 때문에 서버에서 수행되는 로직들은 여기서(자체 웹서버에서) 수행되어 값이 다시 컴포넌트로 반환된다. 이렇게 하여 Next.js는 SPA에서 SSR방식을 수행한다.
 
 ## 상태관리란?
 

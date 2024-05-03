@@ -14,6 +14,7 @@ interface Chat {
 
 interface ChattingRoom {
   id: string;
+  name: string;
   chat: Chat[];
 }
 

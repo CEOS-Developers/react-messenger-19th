@@ -6,14 +6,17 @@ import { ReactComponent as EmojiSvg } from '@assets/svg/emoji.svg';
 import { ReactComponent as MicSvg } from '@assets/svg/mic.svg';
 import { useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { chatDataState } from '@recoil/chatAtom';
+import { chatDataState, currentChatRoomIdState } from '@recoil/chatAtom';
 import { UserState } from '@recoil/userAtom';
 import { type Chat } from '@type/common';
+import { useParams } from 'react-router-dom';
 
 export default function ChatBottom() {
   const [inputValue, setInputValue] = useState('');
   const userName = useRecoilValue(UserState);
   const [chattingData, setChattingData] = useRecoilState(chatDataState);
+  const params = useParams().id || '';
+  const opponentName = useRecoilValue(currentChatRoomIdState(params))?.name || '';
 
   const formatDate = (date: Date) => {
     const year = date.getFullYear().toString();
@@ -33,8 +36,8 @@ export default function ChatBottom() {
     setInputValue('');
     const newChat: Chat = {
       chatId: Date.now().toString(),
-      to: userName === '송은수' ? '플래시' : '송은수',
-      from: userName === '송은수' ? '송은수' : '플래시',
+      to: userName === '송은수' ? opponentName : '송은수',
+      from: userName === '송은수' ? '송은수' : opponentName,
       content: inputValue,
       date: formatDate(new Date()),
       time: formatTime(new Date()),
