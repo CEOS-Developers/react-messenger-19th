@@ -17,9 +17,9 @@ export default function ChatRoomList() {
 
   const dispatch = useDispatch();
 
-  const handleChatRoomClick = (chatId: string) => {
-    navigate(`/chats/${chatId}`); // chatId를 이용하여 URL 경로를 설정
-    dispatch(selectChat(chatId));
+  const handleChatRoomClick = (partnerId: string) => {
+    navigate(`/chats/${partnerId}`); // chatId를 이용하여 URL 경로를 설정
+    dispatch(selectChat(partnerId));
   };
 
   return (
@@ -32,7 +32,7 @@ export default function ChatRoomList() {
       <SearchBar inputValue={inputValue} setInputValue={setInputValue} />
       <ChatRoomListBody>
         {filteredChatData.map((chat) => (
-          <ChatRoomsContainer key={chat.id} onClick={() => handleChatRoomClick(chat.id)}>
+          <ChatRoomsContainer key={chat.id} onClick={() => handleChatRoomClick(chat.partner.id)}>
             <ChatRoomIcon alt="각 채팅방을 나타내는 아이콘" />
             <div>
               <h3 className="name">{chat.partner.name}</h3>

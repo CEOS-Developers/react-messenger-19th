@@ -6,6 +6,10 @@ import partnerList from 'data/userData.json';
 import { User } from 'types/ChatData';
 import { flexColumn } from 'styles/CommonStyle';
 import { getElapsedTime } from 'util/getElapsedTime';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { selectChat } from 'store/chat';
+
 export default function Contacts() {
   const [inputValue, setInputValue] = useState('');
 
@@ -13,6 +17,13 @@ export default function Contacts() {
 
   const filteredPartners = partners.filter((partners) => partners.name.includes(inputValue));
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleChatRoomClick = (chatId: string) => {
+    navigate(`/chats/${chatId}`); // chatId를 이용하여 URL 경로를 설정
+    dispatch(selectChat(chatId));
+  };
   return (
     <ContactsWrapper>
       <ContactsHeader>
@@ -26,7 +37,7 @@ export default function Contacts() {
 
       <PartnerList>
         {filteredPartners.map((partner) => (
-          <Partner key={partner.id}>
+          <Partner key={partner.id} onClick={() => handleChatRoomClick(partner.id)}>
             <img src={partner.profileImage} />
             <div>
               <p className="name">{partner.name}</p>

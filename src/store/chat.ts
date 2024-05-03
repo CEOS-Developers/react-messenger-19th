@@ -6,7 +6,7 @@ import { Chat, Message, User } from 'types/ChatData';
 
 export interface InitialStateType {
   allChats: Chat[];
-  selectedChatId: null | string;
+
   participants: {
     me: User;
     partner: null | User;
@@ -16,7 +16,6 @@ export interface InitialStateType {
 
 const initialState: InitialStateType = {
   allChats: mockData.chats, // 전체 채팅방 데이터
-  selectedChatId: null, // 선택된 채팅방 ID
   participants: {
     // 현재 채팅방의 참가자들
     me: myData,
@@ -30,8 +29,7 @@ export const chatSlice = createSlice({
   initialState,
   reducers: {
     selectChat: (state, action: PayloadAction<string>) => {
-      const selectedChat = state.allChats.find((chat) => chat.id === action.payload);
-      state.selectedChatId = action.payload;
+      const selectedChat = state.allChats.find((chat) => chat.partner.id === action.payload);
       if (!selectedChat) return;
       state.participants.partner = selectedChat.partner;
       state.participants.me = myData;
