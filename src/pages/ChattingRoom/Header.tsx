@@ -26,6 +26,7 @@ const Header = () => {
     dispatch(currOpponentActions.setCurrOpponent(index));
   };
 
+  console.log(`${opponent}, ${currOpponent}`);
   return (
     <Wrapper>
       <StatusBar />

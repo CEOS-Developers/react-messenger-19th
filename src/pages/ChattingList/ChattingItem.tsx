@@ -3,11 +3,20 @@ import userData from "../../data/user.json";
 import { typography } from "../../style/typography";
 import { colors } from "../../style/colors";
 import arrow from "../../assets/arrow.svg";
+import { opponentActions, currOpponentActions } from "../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const ChattingItem = ({ id, chatArray }) => {
-  console.log(chatArray);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const opponent = useSelector((state) => state.opponent.opponent);
+  const currOpponent = useSelector((state) => state.currOpponent.currOpponent);
+
+  const handleChattingItemClick = () => {};
+
   return (
-    <Wrapper>
+    <Wrapper onClick={handleChattingItemClick}>
       <Profile
         src={`img/userProfile/${userData.users[id].profileImg}`}
       ></Profile>
@@ -27,7 +36,7 @@ const ChattingItem = ({ id, chatArray }) => {
 
 export default ChattingItem;
 
-const Wrapper = styled.div`
+const Wrapper = styled.button`
   width: 23.4375rem;
   height: 5.3125rem;
   display: grid;
@@ -81,4 +90,5 @@ const Chat = styled.span`
   max-height: 2.4375rem;
   overflow: hidden;
   text-overflow: ellipsis;
+  align-self: start;
 `;

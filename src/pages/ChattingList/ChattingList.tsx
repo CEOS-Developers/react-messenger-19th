@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import Template from "../../components/common/Template";
 import Footer from "../../components/common/Footer";
 import Main from "./Main";

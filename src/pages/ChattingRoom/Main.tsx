@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../store";
+import { RootState, currOpponentActions, opponentActions } from "../../store";
 import { chatsActions } from "../../store";
 
 // image
@@ -27,6 +27,8 @@ const Main = () => {
 
   const [value, setValue] = useState("");
   const [isEmpty, setIsEmpty] = useState(true); // input란에 텍스트 입력 여부
+
+  console.log(`chattingRoom 컴포넌트 가져온 후 ${opponent}, ${currOpponent}`);
 
   // 스크롤 이동
   const chatWrapperRef = useRef<HTMLDivElement>(null);
