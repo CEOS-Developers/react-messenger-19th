@@ -197,11 +197,11 @@ const BackspaceButton = styled.img`
 
 const CallImg = styled.img`
 
- width: 73px;
- height: 73px;  
- grid-column: 2 / span 1; 
+  width: 73px;
+  height: 73px;  
+  grid-column: 2 / span 1; 
   background-color: #31C75C; 
-  
+  cursor: pointer;
   border: none;
   border-radius: 50%;
   &:hover {
