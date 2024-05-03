@@ -5,8 +5,6 @@
       "name": "플래시",
       "img": "/pic.png",
       "unReadCount": 0,
-      "lastMessage": "미안해",
-      "date": "04-10",
       "chat": [
         {
           "chatId": "1",
@@ -75,8 +73,6 @@
       "name": "이그나이트",
       "img": "/HappEmo.png",
       "unReadCount": 1,
-      "lastMessage": "음 아마도 그건 아닌거 같아",
-      "date": "04-01",
       "chat": [
         {
           "chatId": "1",
@@ -124,6 +120,62 @@
           "from": "이그나이트",
           "content": "걍 나가.",
           "date": "2024-03-02",
+          "time": "08:31",
+          "isDisplay": true,
+          "isRead": true
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "마이크",
+      "img": "/computer.png",
+      "unReadCount": 0,
+      "chat": [
+        {
+          "chatId": "4",
+          "to": "송은수",
+          "from": "마이크",
+          "content": "mic drop let's go",
+          "date": "2024-02-",
+          "time": "08:31",
+          "isDisplay": true,
+          "isRead": true
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "몬스터",
+      "img": "/logo192.png",
+      "unReadCount": 0,
+      "chat": [
+        {
+          "chatId": "4",
+          "to": "송은수",
+          "from": "몬스터",
+          "content": "걍 나가.",
+          "date": "2024-02-02",
+          "time": "08:31",
+          "isDisplay": true,
+          "isRead": true
+        },
+        {
+          "chatId": "4",
+          "to": "몬스터",
+          "from": "송은수",
+          "content": "엥",
+          "date": "2024-02-02",
+          "time": "08:31",
+          "isDisplay": false,
+          "isRead": true
+        },
+        {
+          "chatId": "4",
+          "to": "몬스터",
+          "from": "송은수",
+          "content": "무슨소리임",
+          "date": "2024-02-02",
           "time": "08:31",
           "isDisplay": true,
           "isRead": true
