@@ -6,6 +6,12 @@ export const typography = {
   line-height: 2.5625rem;
   letter-spacing: 0.02338rem;
   `,
+  title2: `
+  font-size: 1.0625rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  `,
   body2: `
   font-size: 0.9375rem;
   font-style: normal;

@@ -68,6 +68,7 @@ const Wrapper = styled.div`
   gap: 6rem;
   border-top: 0.5px solid ${colors.gray300};
   background: ${colors.gray100};
+  margin-top: auto;
 `;
 
 const ButtonWrapper = styled.div`
