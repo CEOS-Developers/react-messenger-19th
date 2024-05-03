@@ -82,6 +82,7 @@ const Main = () => {
       <ChattingWrapper ref={chatWrapperRef}>
         {currChat.map((chat, index) => {
           const isMine = chat.sender !== currOpponent;
+          console.log(isMine);
           return (
             <ChattingItemWrapper key={index}>
               <TimeStamp>{chat.timestamp}</TimeStamp>
