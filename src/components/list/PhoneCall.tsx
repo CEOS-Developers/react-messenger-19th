@@ -56,7 +56,7 @@ const PhoneCall: React.FC = () => {
               </Button>
             ))}
              <CallButton onClick={handleCall}>
-              <img src="/assets/Call-icon.svg" alt="Call" style={{ width: '24px', height: '24px' }} />
+              <CallImg src="/assets/Call-icon.svg" alt="Call"/>
               </CallButton>
             <BackspaceButton onClick={handleBackspace} src="/assets/DeletePhoneCall.svg"/>
           </Keypad>
@@ -146,7 +146,6 @@ font-family: Pretendard;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   &:hover {
     background-color: #D3D3D3;  
   }
@@ -158,6 +157,8 @@ font-family: Pretendard;
 
 const KeyText = styled.div`
   font-size: 30px;
+  color: #000000;
+
 `;
 
 const LettersText = styled.div`
@@ -186,4 +187,9 @@ background-color: #31C75C;
   &:hover {
     background-color: #45A049; 
   }
+`;
+
+const CallImg = styled.img`
+ width: '24px';
+ height: '24px'  
 `;
