@@ -99,6 +99,7 @@ function ChatInput({ me }: ChatInputProps) {
         senderId: me.id,
         text: inputValue,
         createdAt: Date().toString(),
+        photo: { name, size, url },
       }),
     );
   };
