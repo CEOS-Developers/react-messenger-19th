@@ -43,9 +43,11 @@ const setInitialChatsData = () => {
       const chats = chat.chats;
       localStorage.setItem(key, JSON.stringify(chats));
     }
+    const storedChats = localStorage.getItem(key);
+    const parsedChats = storedChats ? JSON.parse(storedChats) : [];
     initialChats.push({
       opponent: key,
-      chats: JSON.parse(localStorage.getItem(key) || "[]"), // localStorage에서 가져와 파싱
+      chats: parsedChats,
     });
   }
   return initialChats; // initialChats 배열 반환
