@@ -1,13 +1,18 @@
+// src/index.tsx
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
+import App from './App';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 import './index.css';
-import ChattingRoom from './ChattingRoom';
 
-const root = ReactDOM.createRoot(
-	document.getElementById('root') as HTMLElement
-);
-root.render(
-	<React.StrictMode>
-		<ChattingRoom />
-	</React.StrictMode>
+ReactDOM.render(
+  <React.StrictMode>
+    <RecoilRoot>
+      <Router>
+        <App />
+      </Router>
+    </RecoilRoot>
+  </React.StrictMode>,
+  document.getElementById('root')
 );

@@ -87,7 +87,7 @@ const Profile = () => {
 				<div id='profile-name'>{profile.name}</div>
 			</ProfileField>
 			<ProfileField>
-				<div id='profile-name'>{profile.phone}</div>
+			<div id='profile-name'>{profile.phone}</div>
 			</ProfileField>
 			<ShortcutLink href={profile.instagram} target='_blank'>
 				<InstagramLogo src='/instagram_logo.png' alt='Instagram 로고' />
