@@ -5,16 +5,32 @@ import homeClicked from "../assets/icons/homeClick.png"
 import chatIcon from "../assets/icons/chat.png"
 import chatClicked from "../assets/icons/chatClick.png"
 import callIcon from "../assets/icons/call.png"
-import { Link } from "react-router-dom"
+import { useLocation, useNavigate } from 'react-router-dom';
+
 
 
 
 
 function BottomTab() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   return (
     <BottomTabContainer>
-      <Link to = "/"><HomeIcon type="button"><img src={homeIcon}/></HomeIcon></Link>
-      <Link to = "/chatting-list-page"><ChatIcon type="button"><img src={chatIcon}/></ChatIcon></Link>
+      <HomeIcon type="button"  
+        onClick={() => {
+          navigate('/');
+        }}>
+        {location.pathname === '/' ?  <img src={homeClicked}/> :  <img src={homeIcon}/>}
+      </HomeIcon>
+
+      <ChatIcon type="button"
+      onClick={() => {
+        navigate('/chatting-list-page');
+      }}>
+        {location.pathname === '/chatting-list-page' ?  <img src={chatClicked}/> :  <img src={chatIcon}/>}
+      </ChatIcon>
+
       <CallIcon type="button"><img src={callIcon}/></CallIcon>
     </BottomTabContainer>
   )
