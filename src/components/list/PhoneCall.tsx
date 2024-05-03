@@ -62,7 +62,7 @@ const PhoneCall: React.FC = () => {
           </Keypad>
         </KeypadContainer>
         <NavigatingFooter/>
-        <IphoneFooter src='/assets/Home Indicator.png'/>
+        <IphoneFooter src='/assets/Home Indicator.png' backgroundColor='#F7F8FC'/>
       </AppContainer>
     </Container>
   );

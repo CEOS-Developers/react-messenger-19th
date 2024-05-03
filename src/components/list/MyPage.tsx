@@ -21,7 +21,7 @@ const MyPage = () => {
   return (
     <Container>
       <AppContainer>
-        <IphoneHeader src='/assets/Status Bar.svg'/>
+        <IphoneHeader src='/assets/Status Bar.svg' backgroundColor='#F7F8FC'/>
         <MyPageHeader/>
         <ProfileContainer>
           <EditProfileLabel>프로필 수정</EditProfileLabel>
@@ -41,7 +41,7 @@ const MyPage = () => {
             <Clip src="/assets/Clip.svg" onClick={handleInstagramClick}/>
           </SNSContainer>
         </ProfileContainer>
-        <IphoneFooter src='/assets/Home Indicator.png'/>
+        <IphoneFooter src='/assets/Home Indicator.png' backgroundColor='#F7F8FC'/>
       </AppContainer>
     </Container>
   );

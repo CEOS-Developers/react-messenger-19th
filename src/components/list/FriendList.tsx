@@ -40,7 +40,7 @@ const FriendList = () => {
   return (
     <Container>
       <AppContainer>
-        <IphoneHeader src='/assets/Status Bar.svg'/>
+        <IphoneHeader src='/assets/Status Bar.svg' />
         <FriendListHeader 
           onEditClick={handleEditClick} 
           onSearchChange={handleSearchChange} 
@@ -74,7 +74,7 @@ const FriendList = () => {
           </FriendListUl>
         </FriendListContainer>
         <NavigatingFooter/>
-        <IphoneFooter src='/assets/Home Indicator.png'/>
+        <IphoneFooter src='/assets/Home Indicator.png' backgroundColor='#F7F8FC'/>
       </AppContainer>
       </Container>
   );

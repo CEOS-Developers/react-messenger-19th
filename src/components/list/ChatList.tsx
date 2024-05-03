@@ -112,7 +112,7 @@ const ChatList = () => {
           )}
         </ChatListContainer>
         <NavigatingFooter/>
-        <IphoneFooter src='/assets/Home Indicator.png'/>
+        <IphoneFooter src='/assets/Home Indicator.png' backgroundColor='#F7F8FC'/>
       </AppContainer>
     </Container>
   );
