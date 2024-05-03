@@ -1,21 +1,17 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { ChatHeadContainer, UserImage, UserName } from '../style/ChatHeadStyle';
+import { useNavigate } from 'react-router-dom';
 
 interface User {
     name: string;
     image: string;
 }
 
-interface ChatHeadProps {
-    user: User;
-}
-
-const ChatHead: React.FC<ChatHeadProps> = ({ user }) => {
-    const history = useHistory();
+const ChatHead: React.FC<{ user: User }> = ({ user }) => {
+    const navigate = useNavigate();
 
     const handleUserClick = () => {
-        history.push('/chattinglist');
+        navigate(`/chattinglist`);
     };
 
     return (
