@@ -56,7 +56,7 @@ const PhoneCall: React.FC = () => {
               </Button>
             ))}
              <CallButton onClick={handleCall}>
-              <CallImg src="/assets/Call-icon.svg" alt="Call"/>
+              <CallImg src="/assets/Call-icon.png" alt="Call"/>
               </CallButton>
             <BackspaceButton onClick={handleBackspace} src="/assets/DeletePhoneCall.svg"/>
           </Keypad>
