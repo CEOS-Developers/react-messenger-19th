@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 import { ReactComponent as HomeIcon } from '../../icons/TabBarHome.svg';
@@ -20,18 +20,25 @@ const tabs: Tab[] = [
 	{ Icon: ProfileIcon, text: '프로필', path: '/Profile' },
 ];
 
-interface FooterMenuProps {
-	currentPath: string; // Prop to determine the current path
-}
+export default function FooterMenu() {
+	const location = useLocation();
+	const paths = ['/ChatRoom', '/chatroom/1'];
 
-export default function FooterMenu({ currentPath }: FooterMenuProps): JSX.Element {
+	// 현재 경로가 paths 배열에 포함되어 있으면 null을 반환
+	if (paths.includes(location.pathname)) {
+		return null;
+	}
 	return (
 		<>
 			<Wrapper>
 				{tabs.map((tab, index) => (
 					<LinkStyle to={tab.path} key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
-						<IconContainer key={index}>
-							<tab.Icon fill={tab.path === currentPath ? 'black' : 'none'} />
+						<IconContainer
+							isActive={
+								tab.path === location.pathname || (tab.path === '/' && location.pathname === '/')
+							}
+						>
+							<tab.Icon />
 							<TabText>{tab.text}</TabText>
 						</IconContainer>
 					</LinkStyle>
@@ -53,25 +60,23 @@ const LinkStyle = styled(Link)`
 	display: flex;
 `;
 
-const IconContainer = styled.div`
+const IconContainer = styled.div<{ isActive: boolean }>`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-
 	cursor: pointer;
-`;
 
-const Icon = styled.img<{ isActive: boolean }>`
-	${({ isActive }) =>
-		isActive
-			? css`
-					filter: invert(0%) sepia(100%) saturate(7500%) hue-rotate(180deg) brightness(30%)
-						contrast(100%);
-				`
-			: css`
-					filter: none;
-				`}
+	svg {
+		${({ isActive }) =>
+			isActive
+				? css`
+						fill: black;
+					`
+				: css`
+						fill: none;
+					`}
+	}
 `;
 
 const TabText = styled.p`

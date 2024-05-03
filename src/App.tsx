@@ -21,7 +21,7 @@ function App(): JSX.Element {
 								<Routes>
 									<Route path="/" element={<Main />} />
 									<Route path="/ChatList" element={<ChatList />} />
-									<Route path="/ChatRoom" element={<ChatRoom />} />
+									<Route path="/ChatRoom/:id" element={<ChatRoom />} />
 									{/* </Route> */}
 									<Route path="/Profile" element={<Profile />} />
 									{/* <Route path="menu1" element={<Menu1 />} /> */}
@@ -51,7 +51,7 @@ const FullContainer = styled.div`
 
 const MobileContainer = styled.div`
 	width: 375px;
-	height: calc(100vh - 88px);
+	height: calc(100vh - 30px);
 	background-color: white;
 	overflow-y: scroll; // 내용이 이 높이를 초과할 경우에만 스크롤바 활성화
 	padding-top: 29px;

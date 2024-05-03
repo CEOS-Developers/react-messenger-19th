@@ -19,3 +19,12 @@ export interface YourFirstMessageProps {
 	sentTime: string;
 	isContinuous: boolean;
 }
+
+export interface User {
+	userId: number;
+	name: string;
+	email: string;
+}
+
+// UserData 배열을 위한 타입
+export type UserData = User[];

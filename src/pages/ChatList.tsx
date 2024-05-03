@@ -1,6 +1,32 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+interface Chat {
+	id: number;
+	name: string;
+	message: string;
+	time: string;
+	unreadCount: number;
+}
+
 export default function ChatList(): JSX.Element {
+	const navigate = useNavigate(); // 라우팅 함수 초기화
+	// 채팅 데이터 상태
+	const [chats, setChats] = useState<Chat[]>([
+		{ id: 1, name: '김동혁', message: '123123123123', time: '오후 11:11', unreadCount: 2 },
+		{ id: 2, name: '이수현', message: '안녕하세요!', time: '오전 9:20', unreadCount: 0 },
+		{ id: 3, name: '박지민', message: '오랜만이에요.', time: '오후 1:45', unreadCount: 1 },
+	]);
+
+	// 채팅 항목 클릭 이벤트
+	const handleClickChat = (chatId: number): void => {
+		const chat = chats.find(c => c.id === chatId);
+		if (!chat) return;
+
+		navigate(`/chatroom/${chatId}`, { state: { chat } });
+	};
+
 	return (
 		<Wrapper>
 			<ChatListHeader>
@@ -17,19 +43,27 @@ export default function ChatList(): JSX.Element {
 			</SearchDiv>
 
 			<ChatListContainer>
-				<Chat>
-					<Profile src="/icon/ChatProfile.svg" />
-					<ChatInfo>
-						<NameSpace>
-							<Name>김동혁</Name>
-							<RecentTime>오후 11:11</RecentTime>
-						</NameSpace>
-						<NameSpace>
-							<Message>123123123123</Message>
-							<NotCount>2</NotCount>
-						</NameSpace>
-					</ChatInfo>
-				</Chat>
+				{chats.map(chat => (
+					<Chat1
+						key={chat.id}
+						onClick={() => {
+							handleClickChat(chat.id);
+						}}
+					>
+						<Profile src="/icon/ChatProfile.svg" />
+						<ChatInfo>
+							<NameSpace>
+								<Name>{chat.name}</Name>
+								<RecentTime>{chat.time}</RecentTime>
+							</NameSpace>
+
+							<NameSpace>
+								<Message>{chat.message}</Message>
+								{chat.unreadCount > 0 && <NotCount>{chat.unreadCount}</NotCount>}
+							</NameSpace>
+						</ChatInfo>
+					</Chat1>
+				))}
 			</ChatListContainer>
 		</Wrapper>
 	);
@@ -37,7 +71,7 @@ export default function ChatList(): JSX.Element {
 
 const Wrapper = styled.div`
 	width: 100%;
-	padding: 40px 30px 20px 30px;
+	padding: 40px 15px 20px 15px;
 	display: flex;
 	flex-direction: column;
 `;
@@ -84,8 +118,9 @@ const Input = styled.input`
 
 const ChatListContainer = styled.div``;
 
-const Chat = styled.div`
+const Chat1 = styled.div`
 	display: flex;
+	margin-bottom: 10px;
 `;
 
 const Profile = styled.img``;
@@ -113,6 +148,7 @@ const ChatInfo = styled.div`
 	height: 100%;
 
 	padding: 7px 0 0 14px;
+	cursor: pointer;
 `;
 
 const Message = styled.p`

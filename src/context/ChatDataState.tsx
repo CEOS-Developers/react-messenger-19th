@@ -3,5 +3,5 @@ import type { Message } from '../lib/types';
 
 export const chatMessagesState = atom<Message[]>({
 	key: 'chatMessagesState',
-	default: [],
+	default: JSON.parse(localStorage.getItem('chatMessages') ?? '[]'),
 });

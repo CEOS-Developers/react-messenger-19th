@@ -7,7 +7,7 @@ export default function YourFirstMessage(props: YourFirstMessageProps): JSX.Elem
 	const messages = useRecoilValue(chatMessagesState);
 	return (
 		<MessageContainer>
-			{!props.isContinuous && <Profile src="./ChatRoom/defaultProfile.svg" alt="profile" />}
+			{!props.isContinuous && <Profile src="/ChatRoom/defaultProfile.svg" alt="profile" />}
 			<TextContainer>
 				{!props.isContinuous && <ProfileName>{props.name}</ProfileName>}
 				<Chat>
@@ -67,9 +67,9 @@ const ChatTail = styled.div`
 	position: absolute;
 	top: 0; // 꼬리의 정확한 위치를 조절합니다.
 	left: -10px; // 꼬리가 ChatBox 왼쪽에 위치하도록 조절합니다.
-	width: 20px; // 꼬리 이미지의 크기입니다.
-	height: 20px; // 꼬리 이미지의 크기입니다.
-	background-image: url('./ChatRoom/chatTail.svg');
+	width: 20px;
+	height: 20px;
+	background-image: url('/ChatRoom/chatTail.svg');
 	background-size: cover;
 	transform: rotate(0deg); // 필요한 경우 꼬리의 방향을 조절합니다.
 `;

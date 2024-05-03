@@ -6,25 +6,36 @@ import YourFirstMessage from './YourFirstMessage';
 import { UserData } from '../../../lib/data';
 import { useRecoilState } from 'recoil';
 import { chatMessagesState } from '../../../context/ChatDataState';
-import type { Message } from '../../../lib/types';
+import type { Message, User } from '../../../lib/types';
+import { Link } from 'react-router-dom';
 
 export default function ChatRoomComponent(): JSX.Element {
 	const me = UserData[0];
 	const opposite = UserData[1]; // 임시 지정 대화 상대
 	const [oppositeChat, setOppositeChat] = useState<string>(opposite.name);
-
 	const [user, setUser] = useState<string>(me.name);
 	const [message, setMessage] = useState('');
 	const [messages, setMessages] = useRecoilState(chatMessagesState);
 
-	// chatContainer 스크롤 하단 고정
+	// 로컬 스토리지에서 메시지 불러오기
+	useEffect(() => {
+		const storedMessages = localStorage.getItem('chatMessages');
+		if (storedMessages) {
+			setMessages(JSON.parse(storedMessages));
+		}
+	}, [setMessages]);
+
+	// 메시지 상태가 변경될 때마다 로컬 스토리지에 저장
+	useEffect(() => {
+		localStorage.setItem('chatMessages', JSON.stringify(messages));
+	}, [messages]);
+
 	const chatContainerRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
-		// messages 배열이 변경될 때마다 실행
-		if (chatContainerRef.current !== null) {
+		if (chatContainerRef.current) {
 			const { scrollHeight, clientHeight } = chatContainerRef.current;
-			chatContainerRef.current.scrollTop = scrollHeight - clientHeight; // 스크롤을 맨 아래로 이동
+			chatContainerRef.current.scrollTop = scrollHeight - clientHeight;
 		}
 	}, [messages]);
 
@@ -68,72 +79,52 @@ export default function ChatRoomComponent(): JSX.Element {
 
 	// User Change
 	const onClickChangeUser = (): void => {
-		if (user === me.name) {
-			setUser(opposite.name);
-			setOppositeChat(me.name);
-		} else {
-			setUser(me.name);
-			setOppositeChat(opposite.name);
-		}
+		// if (user === me.name) {
+		// 	setUser(opposite.name);
+		// 	setOppositeChat(me.name);
+		// } else {
+		// 	setUser(me.name);
+		// 	setOppositeChat(opposite.name);
+		// }
+		setUser(user === me.name ? opposite.name : me.name);
+		setOppositeChat(user === me.name ? opposite.name : me.name);
 	};
 
 	return (
 		<C.Wrapper>
 			<C.ChatHeader>
 				<C.HeaderBox>
-					<C.SVGIcon src="./ChatRoom/back.svg" />
+					<Link to={'/ChatList'}>
+						<C.SVGIcon src="/ChatRoom/back.svg" />
+					</Link>
 					<C.Name onClick={onClickChangeUser}>{oppositeChat}</C.Name>
 				</C.HeaderBox>
 				<C.HeaderBox>
-					<C.SVGIcon src="./ChatRoom/search.svg" />
-					<C.SVGIcon src="./ChatRoom/call.svg" />
-					<C.SVGIcon src="./ChatRoom/more.svg" />
+					<C.SVGIcon src="/ChatRoom/search.svg" />
+					<C.SVGIcon src="/ChatRoom/call.svg" />
+					<C.SVGIcon src="/ChatRoom/more.svg" />
 				</C.HeaderBox>
 			</C.ChatHeader>
 
 			<C.ChatContainer ref={chatContainerRef} className="ChatContainer">
-				{messages.map((msg, index) => {
-					// 연속성(sentTime, userId) 판단
-					const isContinuous =
-						index > 0 &&
-						messages[index - 1].userId === msg.userId &&
-						messages[index - 1].sentTime === msg.sentTime;
-					const isNewDay = index === 0 || messages[index - 1].sentDate !== msg.sentDate;
-
-					return (
-						<>
-							{isNewDay && (
-								<div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-									<C.DateSeparator>{formatDate(msg.sentDate)}</C.DateSeparator>
-								</div>
-							)}
-							{msg.userId === (user === me.name ? me.userId : opposite.userId) ? (
-								<MyFirstMessage
-									key={index}
-									message={msg.text}
-									sentTime={msg.sentTime}
-									isContinuous={isContinuous}
-								/>
-							) : (
-								<YourFirstMessage
-									key={index}
-									message={msg.text}
-									name={msg.name}
-									sentTime={msg.sentTime}
-									isContinuous={isContinuous}
-								/>
-							)}
-						</>
-					);
-				})}
+				{messages.map((msg, index) => (
+					<>
+						{isNewDay(index, messages) && (
+							<div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+								<C.DateSeparator>{formatDate(msg.sentDate)}</C.DateSeparator>
+							</div>
+						)}
+						{renderMessage(msg, index, user, me, opposite, messages)}
+					</>
+				))}
 			</C.ChatContainer>
 
 			<C.InputContainer>
-				<C.SVGIcon src="./ChatRoom/add.svg" />
+				<C.SVGIcon src="/ChatRoom/add.svg" />
 				<C.ChatForm onSubmit={onSubmitForm}>
 					<C.ChatInput type="text" onChange={onChangeMessage} value={message} />
 					<button type="submit" style={{ border: 'none', background: 'transparent' }}>
-						<C.SVGIcon src="./ChatRoom/send.svg" />
+						<C.SVGIcon src="/ChatRoom/send.svg" />
 					</button>
 				</C.ChatForm>
 			</C.InputContainer>
@@ -149,4 +140,42 @@ function formatDate(dateString: string): string {
 		weekday: 'long',
 	};
 	return new Date(dateString).toLocaleDateString('ko-KR', options);
+}
+
+function isNewDay(index: number, messages: Message[]): boolean {
+	return index === 0 || messages[index - 1].sentDate !== messages[index].sentDate;
+}
+
+function renderMessage(
+	msg: Message,
+	index: number,
+	user: string,
+	me: User,
+	opposite: User,
+	messages: Message[],
+): JSX.Element {
+	return msg.userId === (user === me.name ? me.userId : opposite.userId) ? (
+		<MyFirstMessage
+			key={index}
+			message={msg.text}
+			sentTime={msg.sentTime}
+			isContinuous={isContinuous(index, messages)}
+		/>
+	) : (
+		<YourFirstMessage
+			key={index}
+			message={msg.text}
+			name={msg.name}
+			sentTime={msg.sentTime}
+			isContinuous={isContinuous(index, messages)}
+		/>
+	);
+}
+
+function isContinuous(index: number, messages: Message[]) {
+	return (
+		index > 0 &&
+		messages[index - 1].userId === messages[index].userId &&
+		messages[index - 1].sentTime === messages[index].sentTime
+	);
 }

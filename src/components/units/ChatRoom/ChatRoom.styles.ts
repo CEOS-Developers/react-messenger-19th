@@ -45,8 +45,8 @@ export const Name = styled.div`
 `;
 
 export const ChatContainer = styled.div`
-	height: calc(100vh - 110px);
-	flex-grow: 1;
+	height: calc(100vh - 168px);
+
 	overflow-y: auto;
 	background-color: #8cabd9;
 	padding: 15px;
