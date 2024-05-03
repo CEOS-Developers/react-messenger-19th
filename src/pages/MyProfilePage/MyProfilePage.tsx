@@ -4,6 +4,7 @@ import { ReactComponent as TimesSvg } from '@assets/svg/times.svg';
 import StatusBox from '@components/StatusBox';
 import EditProfile from './components/EditProfile';
 import ProfileInfo from './components/ProfileInfo';
+import SNSBox from './components/SNSBox';
 
 export default function MyProfilePage() {
   return (
@@ -14,9 +15,22 @@ export default function MyProfilePage() {
       </CloseSVGStyle>
       <EditProfile />
       <ProfileInfo />
+      <SNSBoxesContainer>
+        <SNSBox img="/instagram.png" title="Instagram" />
+        <SNSBox img="/github.png" title="Github" />
+        <SNSBox img="/behance.png" title="Behance" />
+      </SNSBoxesContainer>
     </MyProfilePageConatainer>
   );
 }
+
+const SNSBoxesContainer = styled.div`
+  display: flex;
+  align-self: center;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 60px;
+`;
 
 const CloseSVGStyle = styled.div`
   flex-grow: 1;
