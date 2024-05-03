@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
     justify-content: center;
     align-items: center;
     height: 100dvh;
+    background-color: #f8f9fa;
   }
   body {
     line-height: 1.5;

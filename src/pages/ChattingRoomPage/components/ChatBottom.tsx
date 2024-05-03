@@ -10,6 +10,8 @@ import { chatDataState, currentChatRoomIdState } from '@recoil/chatAtom';
 import { UserState } from '@recoil/userAtom';
 import { type Chat } from '@type/common';
 import { useParams } from 'react-router-dom';
+import { formatDate, formatTime } from '@util/calculateDate';
+
 
 export default function ChatBottom() {
   const [inputValue, setInputValue] = useState('');
@@ -17,19 +19,6 @@ export default function ChatBottom() {
   const [chattingData, setChattingData] = useRecoilState(chatDataState);
   const params = useParams().id || '';
   const opponentName = useRecoilValue(currentChatRoomIdState(params))?.name || '';
-
-  const formatDate = (date: Date) => {
-    const year = date.getFullYear().toString();
-    let month = (date.getMonth() + 1).toString().padStart(2, '0');
-    let day = date.getDate().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  };
-
-  const formatTime = (date: Date) => {
-    let hour = date.getHours().toString().padStart(2, '0');
-    let minute = date.getMinutes().toString().padStart(2, '0');
-    return `${hour}:${minute}`;
-  };
 
   const handleSubmit = () => {
     if (!inputValue.trim()) return;

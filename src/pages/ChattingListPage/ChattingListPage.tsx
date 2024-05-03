@@ -9,43 +9,40 @@ import MainFooter from '@components/MainFooter';
 import { useRecoilValue } from 'recoil';
 import { chatDataState } from '@recoil/chatAtom';
 import { useNavigate } from 'react-router-dom';
-
-const DUMMYChatCards: ChatCardProps[] = [
-  {
-    img: Pic,
-    name: '플래시',
-    lastMessage: 'lastMessage',
-    date: 'date',
-    unReadCount: 1,
-  },
-  {
-    img: Pic,
-    name: '이그나이트',
-    lastMessage: 'lastMessage',
-    date: 'date',
-    unReadCount: 3,
-  },
-];
+import { formatDate } from '@util/calculateDate';
 
 export default function ChattingListPage() {
   const chatList = useRecoilValue(chatDataState);
   const navigate = useNavigate();
-  const handleClick = (clickedName:string) => {
+  const handleClick = (clickedName: string) => {
     chatList.map((chat) => {
-      if(chat.name === clickedName) {
+      if (chat.name === clickedName) {
         navigate(`/chattingroom/${chat.id}`);
       }
       return null;
     });
-  }
+  };
+  const today = formatDate(new Date());
 
   return (
     <ChattingListContainer>
       <StatusBox />
       <MainHeader title="채팅" />
       <Input />
-      {DUMMYChatCards.map((chatCard, index) => (
-        <ChatCard key={index} {...chatCard} onClick={handleClick}/>
+      {chatList.map((chatCard, index) => (
+        <ChatCard
+          key={index}
+          img={chatCard.img}
+          name={chatCard.name}
+          lastMessage={chatCard.chat[chatCard.chat.length - 1].content}
+          date={
+            chatCard.chat[chatCard.chat.length - 1].date === today
+              ? chatCard.chat[chatCard.chat.length - 1].time
+              : chatCard.chat[chatCard.chat.length - 1].date.slice(5)
+          }
+          unReadCount={chatCard.unReadCount}
+          onClick={handleClick}
+        />
       ))}
       <MainFooter />
     </ChattingListContainer>

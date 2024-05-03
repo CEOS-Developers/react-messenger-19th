@@ -6,6 +6,10 @@ interface ChatCardPropss extends ChatCardProps {
   onClick: (name: string) => void;
 }
 
+interface UnreadCateNumberStyleProps {
+  unReadCount: number;
+}
+
 export default function ChatCard({
   img,
   name,
@@ -23,7 +27,7 @@ export default function ChatCard({
       </ChatContentContainer>
       <ChatInfoContainer>
         <ChatDateStyle>{date}</ChatDateStyle>
-        <UnreadCateNumberStyle>
+        <UnreadCateNumberStyle unReadCount={unReadCount}>
           <div>{unReadCount}</div>
         </UnreadCateNumberStyle>
       </ChatInfoContainer>
@@ -37,12 +41,13 @@ const ChatDateStyle = styled.div`
   color: ${theme.colors.gray_2};
 `;
 
-const UnreadCateNumberStyle = styled.div`
+const UnreadCateNumberStyle = styled.div<UnreadCateNumberStyleProps>`
   font-size: ${theme.textStyles.caption2.font_size};
   font-weight: ${theme.textStyles.caption2.font_weight};
   line-height: ${theme.textStyles.caption2.line_height};
   color: ${theme.colors.white};
-  background-color: ${theme.colors.orange};
+  background-color: ${(props) =>
+    props.unReadCount > 0 ? theme.colors.orange : 'inherit'};
   text-align: center;
   width: 16px;
   height: 18px;

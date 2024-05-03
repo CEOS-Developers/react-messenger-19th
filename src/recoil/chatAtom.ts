@@ -15,6 +15,10 @@ interface Chat {
 interface ChattingRoom {
   id: string;
   name: string;
+  img: string;
+  unReadCount: number;
+  lastMessage: string;
+  date: string;
   chat: Chat[];
 }
 
