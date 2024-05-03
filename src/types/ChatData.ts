@@ -13,6 +13,7 @@ export interface User {
   name: string;
   profileImage: string;
   lastAccess: string;
+  phoneNumber?: string;
 }
 
 interface Photo {

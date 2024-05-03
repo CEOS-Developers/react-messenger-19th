@@ -3,21 +3,22 @@ import { ReactComponent as ChatIcon } from 'asset/icons/ChatIcon.svg';
 import { ReactComponent as Minji } from 'asset/icons/Minji.svg';
 import styled from 'styled-components';
 import { flexCenter, flexColumn } from 'styles/CommonStyle';
+import { Link } from 'react-router-dom';
 export default function BottomNavBar() {
   return (
     <BottomNavBarWrapper>
-      <button>
+      <Link to="/contacts">
         <NoProfileIcon alt="연락처 아이콘" />
         <p>연락처</p>
-      </button>
-      <button>
+      </Link>
+      <Link to="/chats">
         <ChatIcon alt="대화 아이콘" />
         <p>대화</p>
-      </button>
-      <button>
+      </Link>
+      <Link to="settings">
         <img src="images/Minji.png" />
         <p>설정</p>
-      </button>
+      </Link>
     </BottomNavBarWrapper>
   );
 }
@@ -37,7 +38,7 @@ const BottomNavBarWrapper = styled.div`
     height: 3rem;
   }
 
-  & button {
+  & a {
     ${flexCenter}
     flex-direction: column;
     gap: 0.5rem;

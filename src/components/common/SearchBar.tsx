@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import { ReactComponent as SearchIcon } from 'asset/icons/SearchIcon.svg';
 import { ReactComponent as CloseIcon } from 'asset/icons/CloseIcon.svg';
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store';
 
 interface SearchBarProp {
   inputValue: string;
