@@ -2,5 +2,5 @@ import { atom } from 'recoil';
 
 export const selectedUserState = atom({
   key: 'selectedUserState',
-  default: 1, // 기본값으로 사용자 ID 2 설정
+  default: 1, // 기본값으로 사용자 ID 1 설정
 });

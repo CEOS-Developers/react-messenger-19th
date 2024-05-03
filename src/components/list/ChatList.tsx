@@ -26,7 +26,18 @@ const ChatList = () => {
 
 
   const handleUserClick = (userId: number) => {
-    setSelectedUserId(userId); // 사용자 클릭시 selectedUserId 상태 업데이트
+    const userMessages = messages.filter(
+      message => message.senderId === userId || message.receiverId === userId
+    );
+
+    if (userMessages.length > 0) {
+      // 사용자가 선택되었고 메시지가 있을 때
+      setSelectedUserId(userId);
+    } else {
+      // 메시지가 없을 때 별도 처리
+      // 예: 선택된 사용자 ID를 null로 설정하고 UserProfile을 보여주기
+      setSelectedUserId(0);
+    }
   };
 
   const getLastMessage = (userId: number) => {
