@@ -1,11 +1,20 @@
 import styled from "styled-components"
 import friendImg from "../../assets/img/friendProfile.png"
 
-function FriendList() {
+interface FriendListProps {
+    f_name: string;
+    f_profile: string;
+    }
+function FriendList({ f_name, f_profile }: FriendListProps) {
+
   return (
     <FriendListContainer>
-        <FriendImg><img src ={friendImg}/></FriendImg>
-        <span>이름</span>
+        {f_profile ? (
+        <FriendImg><img src={f_profile} alt={f_name} /></FriendImg>
+      ) : (
+        <FriendImg><img src={friendImg} alt="Profile" /></FriendImg>
+      )}
+        <span>{f_name}</span>
     </FriendListContainer>
   )
 }

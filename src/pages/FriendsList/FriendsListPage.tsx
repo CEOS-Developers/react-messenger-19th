@@ -6,27 +6,42 @@ import ServiceTab from "./ServiceTab"
 import AddGroup from "./AddGroup"
 import FriendList from "../FriendsList/FriendList"
 import { Link } from "react-router-dom"
+import friendsData from "../../data/frinds.json"
+import userInfo from "../../data/userData.json"
+
+
+interface friendsDataType {
+    f_id: number,
+    f_name: string,
+    f_profile: string
+}
 
 
 function FriendsListPage() {
 
+
   return (
     <FriendsListPageContainer>
         <TopBarIconsMain/>
-        <Link to = "/my-profile-page" style={{ textDecoration: 'none', color: 'inherit' }}><UserInfo/></Link>
+        <Link to = "/my-profile-page" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <UserInfo
+                u_profile={userInfo.u_profile}
+                u_name = {userInfo.u_name}
+                u_message={userInfo.u_message}
+            />
+        </Link>
         <ServiceTab/>
         <AddGroup/>
         <FriendsListsWrapper>
             <FriendsTitle>친구118</FriendsTitle>
             <ScrollWrapper>
-                <FriendList/>
-                <FriendList/>
-                <FriendList/>
-                <FriendList/>
-                <FriendList/>
-                <FriendList/>
-                <FriendList/>
-                <FriendList/>
+                {friendsData.map((friend: friendsDataType) => (
+                <FriendList
+                    key={friend.f_id}
+                    f_name={friend.f_name}
+                    f_profile={friend.f_profile}
+                />
+               ))}
             </ScrollWrapper>
         </FriendsListsWrapper>
         <BottomTab/>

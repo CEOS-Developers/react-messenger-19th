@@ -4,50 +4,62 @@ import profileUpload from "../../assets/img/profileUpload.png"
 import showIcon from "../../assets/icons/show.png"
 import linkIcon from "../../assets/icons/link.png"
 import { Link } from "react-router-dom"
+import userData from "../../data/userData.json"
+
+interface UserInfoDataType {
+    u_name: string,
+    u_profile: string,
+    u_message : string,
+    u_phoneNum: string,
+    u_insta: string,
+    u_github: string
+}
 
 function MyProfilePage() {
+const { u_name, u_profile, u_message, u_phoneNum, u_insta, u_github }: UserInfoDataType = userData;
+
   return (
     <MyProfileConatainer>
         <BackButton>
             <Link to = "/"><img src = {backButton}/></Link>
         </BackButton>
-        <MyProfileImgWrapper><img src={profileUpload}/></MyProfileImgWrapper>
+        <MyProfileImgWrapper>{u_profile? <img src={u_profile}/> : <img src={profileUpload}/>}</MyProfileImgWrapper>
         <MyProfileInfoWrapper>
-            <UserInfo>
+            <UserInfoWrapper>
                 <div>
                     <h4>이름</h4>
-                    <span>김유빈</span>
+                    <span>{u_name}</span>
                 </div>
                 <img src={showIcon}/>
-            </UserInfo>
-            <UserInfo>
+            </UserInfoWrapper>
+            <UserInfoWrapper>
                 <div>
                     <h4>상태메세지</h4>
-                    <span>상태메세지를 입력해보세요</span>
+                    <span>{u_message? u_message : "상태메세지를 입력해보세요"}</span>
                 </div>
                 <img src={showIcon}/>
-            </UserInfo>
-            <UserInfo>
+            </UserInfoWrapper>
+            <UserInfoWrapper>
                 <div>
                     <h4>전화번호</h4>
-                    <span>+82 10-3613-6160 </span>
+                    <span>{"+82 "+ u_phoneNum}</span>
                 </div>
                 <img src={showIcon}/>
-            </UserInfo>
-            <UserInfo>
+            </UserInfoWrapper>
+            <UserInfoWrapper>
                  <div>
                     <h4>인스타그램</h4>
-                    <span>instagram.com</span>
+                    <span>{u_insta}</span>
                 </div>
-                <a href="https://www.instagram.com"><img src={linkIcon}/></a>
-            </UserInfo>
-            <UserInfo>
+                <a href={"https://www." + u_insta}><img src={linkIcon}/></a>
+            </UserInfoWrapper>
+            <UserInfoWrapper>
                 <div>
                     <h4>GIT HUB</h4>
-                    <span>github.com</span>
+                    <span>{u_github}</span>
                 </div>
-                <a href="https://www.github.com"><img src={linkIcon}/></a>
-            </UserInfo>
+                <a href={"https://www." + u_github}><img src={linkIcon}/></a>
+            </UserInfoWrapper>
         </MyProfileInfoWrapper>
     </MyProfileConatainer>
   )
@@ -81,7 +93,7 @@ const MyProfileInfoWrapper = styled.div`
     flex-direction: column;
     align-items: center;
 `
-const UserInfo = styled.div`
+const UserInfoWrapper = styled.div`
     width: 343px;
     height: 26px;
     display: flex;

@@ -1,14 +1,19 @@
 import styled from "styled-components"
 import userImg from "../../assets/img/myProfile.png"
 
+interface UserInfoType {
+    u_name: string,
+    u_profile: string,
+    u_message: string
+}
 
-function UserInfo() {
+function UserInfo({u_name, u_profile, u_message}:UserInfoType) {
   return (
     <UserInfoContainer>
-        <UserImgWrapper><img src={userImg}/></UserImgWrapper>
+        <UserImgWrapper>{u_profile?( <img src={u_profile}/>):(<img src={userImg}/>)}</UserImgWrapper>
         <UserInfoWrapper>
-            <h4>김유빈</h4>
-            <span>상태 메세지를 입력해보세요</span>
+            <h4>{u_name}</h4>
+            <span>{u_message? u_message : "상태 메세지를 입력해보세요"}</span>
         </UserInfoWrapper>
     </UserInfoContainer>
   )
