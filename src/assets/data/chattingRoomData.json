@@ -89,7 +89,7 @@
           "isRead": true
         },
         {
-          "chatId": "1",
+          "chatId": "2",
           "to": "송은수",
           "from": "이그나이트",
           "content": "하이하이하이하이",
@@ -99,7 +99,7 @@
           "isRead": true
         },
         {
-          "chatId": "2",
+          "chatId": "3",
           "to": "송은수",
           "from": "이그나이트",
           "content": "너는 먹고 싶은게 있어?",
@@ -109,7 +109,7 @@
           "isRead": true
         },
         {
-          "chatId": "3",
+          "chatId": "4",
           "to": "이그나이트",
           "from": "송은수",
           "content": "음...",
@@ -119,7 +119,7 @@
           "isRead": true
         },
         {
-          "chatId": "4",
+          "chatId": "5",
           "to": "송은수",
           "from": "이그나이트",
           "content": "걍 나가.",
@@ -136,15 +136,25 @@
       "img": "/computer.png",
       "isUpdated": true,
       "stateMessage": "나는야 경찰관",
-      "unReadCount": 0,
+      "unReadCount": 1,
       "chat": [
         {
-          "chatId": "4",
+          "chatId": "1",
           "to": "송은수",
           "from": "마이크",
           "content": "mic drop let's go",
           "date": "2024-02-11",
           "time": "08:31",
+          "isDisplay": true,
+          "isRead": true
+        },
+        {
+          "chatId": "2",
+          "to": "송은수",
+          "from": "마이크",
+          "content": "읽씹노노",
+          "date": "2024-02-11",
+          "time": "08:34",
           "isDisplay": true,
           "isRead": true
         }
@@ -159,7 +169,7 @@
       "unReadCount": 0,
       "chat": [
         {
-          "chatId": "4",
+          "chatId": "1",
           "to": "송은수",
           "from": "몬스터",
           "content": "걍 나가.",
@@ -169,7 +179,7 @@
           "isRead": true
         },
         {
-          "chatId": "4",
+          "chatId": "2",
           "to": "몬스터",
           "from": "송은수",
           "content": "엥",
@@ -179,7 +189,7 @@
           "isRead": true
         },
         {
-          "chatId": "4",
+          "chatId": "3",
           "to": "몬스터",
           "from": "송은수",
           "content": "무슨소리임",

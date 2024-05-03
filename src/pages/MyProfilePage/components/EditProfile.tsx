@@ -17,7 +17,7 @@ const EditProfileTextStyle = styled.p`
   line-height: ${theme.textStyles.caption5.line_height};
 `;
 
-const EditProfileContainer = styled.div`
+const EditProfileContainer = styled.article`
   align-self: center;
   width: fit-content;
   height: 32px;

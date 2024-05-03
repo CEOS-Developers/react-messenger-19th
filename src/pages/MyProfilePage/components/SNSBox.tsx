@@ -33,7 +33,7 @@ const SNSBoxTitle = styled.p`
   color: ${theme.colors.white};
 `;
 
-const SNSBoxContainer = styled.div`
+const SNSBoxContainer = styled.article`
   width: 52px;
   height: 48px;
   display: flex;

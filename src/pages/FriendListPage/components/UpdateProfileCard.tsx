@@ -38,7 +38,7 @@ const UpdatedProfileCardImg = styled.img`
   border-radius: 16px;
 `;
 
-const UpdatedProfileCardContainer = styled.div`
+const UpdatedProfileCardContainer = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;

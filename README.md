@@ -1,6 +1,89 @@
 # 배포링크
+**3주차 때 저장했던 localStorage값이 남아있으면 개발자도구에서 초기화시키고 실행해주세요!**   
+[카카오톡](https://ceos-week3-react-messenger.vercel.app/)
+# 구현기능 및 후기
+- 3주차 피드백 반영
+- `FriendListPage`, `MyProfilePage`, `NotFoundPage` 구현
+- `react-router-dom`을 사용한 라우팅기능 구현
+- 채팅전송 시
+  - `lastMessage` 갱신
+  - `lastMessageDate` 갱신, 오늘이면 시간, 오늘 이전이면 날짜가 뜨도록 구현
+  - `unReadCount`말풍선 있었다면 제거
 
-# 후기 및 구현기능
+src
+ ┣ assets
+ ┃ ┣ data
+ ┃ ┣ img
+ ┃ ┣ svg
+ ┣ components
+ ┃ ┣ FooterCard.tsx
+ ┃ ┣ Hr.tsx
+ ┃ ┣ Input.tsx
+ ┃ ┣ MainFooter.tsx
+ ┃ ┣ MainHeader.tsx
+ ┃ ┗ StatusBox.tsx
+ ┣ hooks
+ ┣ layout
+ ┣ pages
+ ┃ ┣ ChattingListPage
+ ┃ ┃ ┣ components
+ ┃ ┃ ┗ ChattingListPage.tsx
+ ┃ ┣ ChattingRoomPage
+ ┃ ┃ ┣ components
+ ┃ ┃ ┗ ChattingRoomPage.tsx
+ ┃ ┣ FriendListPage
+ ┃ ┃ ┣ components
+ ┃ ┃ ┗ FriendListPage.tsx
+ ┃ ┣ MyProfilePage
+ ┃ ┃ ┣ components
+ ┃ ┃ ┗ MyProfilePage.tsx
+ ┃ ┗ NotFoundPage
+ ┃ ┃ ┗ NotFoundPage.tsx
+ ┣ recoil
+ ┃ ┣ chatAtom.ts
+ ┃ ┗ userAtom.ts
+ ┣ styles
+ ┃ ┣ GlobalStyle.ts
+ ┃ ┗ theme.ts
+ ┣ types
+ ┃ ┗ common.ts
+ ┣ util
+ ┃ ┣ calculateDate.ts
+ ┃ ┗ routes.tsx
+ ┣ App.tsx
+ ┣ index.tsx
+ ┣ svg.d.ts
+ ┗ types.d.ts
+ 공통으로 사용되는 컴포넌트는 `src/components`폴더에서 사용했고, 각 페이지에서 사용하는 컴포넌트는 `src/pages/*/components`폴더에서 개별적으로만 사용했다.
+
+`chattingRoomData.json`하나만으로 모든 상태를 제어하려고 시간을 많이 쓴 거 같다.
+
+### `tsconfig.paths.json`
+```json
+{
+	"compilerOptions": {
+		"baseUrl": "./src",
+		"paths": {
+		"@components/*": ["./components/*"],
+		"@assets/*": ["./assets/*"],
+		"@styles/*": ["./styles/*"],
+		"@types/*": ["./types/*"],
+		"@hooks/*": ["./hooks/*"],
+		"@pages/*": ["./pages/*"],
+		"@recoil/*": ["./recoil/*"]
+		}
+	}
+}
+```
+`tsconfig.paths.json`파일을 다음과 작성했더니 `@types`가 호출이 되지 않았다. 다른 것들엔 문제가 없는데 이것만 안돼서 도대체 뭐가 문제지 싶었다.
+
+이유는 `@types/` 접두사는 DefinitelyTyped에서 제공하는 타입 정의 패키지에 사용됨으로, 표준 JavaScript 라이브러리에서 사용하는 예약어이기 때문에 생기는 오류인 듯 했다. `@type`으로 변경하니 정상적으로 별칭을 사용할 수 있었다. 
+
+라우팅을 사용하면서 기본적인 뷰의 틀로 모바일화면 사이즈를 원했기 때문에 `<Layout>`을 라우팅하고 중첩라우팅을 사용해 내부에 페이지들을 구현했다.
+
+채팅방에서 이름을 클릭하여 사용자가 전환된 상태에서 나가면 `user`가 달라져 꼬일 수 있기에 `unmount`시 `user`를 기본값으로 바꿔줬다.
+
+
 
 # Key Questions
 
@@ -50,6 +133,7 @@ export const router = createBrowserRouter([
         element: <Component1 />,
       },
     ],
+    errorElement: <NotFoundPage />,
   },
   ...
 ]);
@@ -68,7 +152,7 @@ function App() {
 
 export default App;
 ```
-페이지가 많아지면 이 방법이 가독성이 좋아보여 이 방법을 사용해서 개발했다.
+페이지가 많아지면 가독성이 좋아보이고 `Error`페이지도 한눈에 들어오는 방식이라 이 방법을 사용했다.
 
 ### Link
 

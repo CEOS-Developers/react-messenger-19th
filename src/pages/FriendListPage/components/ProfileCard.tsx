@@ -41,7 +41,7 @@ const ProfileCardImg = styled.img`
   border-radius: 24px;
 `;
 
-const ProfileCardContainer = styled.div`
+const ProfileCardContainer = styled.article`
   display: flex;
   align-items: center;
   width: 100%;

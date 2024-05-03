@@ -51,7 +51,7 @@ const UnreadCateNumberStyle = styled.div<UnreadCateNumberStyleProps>`
   text-align: center;
   width: 16px;
   height: 18px;
-  border-radius: 50%;
+  border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;

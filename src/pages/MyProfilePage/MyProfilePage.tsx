@@ -13,13 +13,13 @@ export default function MyProfilePage() {
   const userState = useRecoilValue(UserState);
   const navigate = useNavigate();
   const handleClickSNSBox = (title: string) => {
-    if(title === 'Instagram') window.open(userState.instagram);
-    else if(title === 'Github') window.open(userState.github);
-    else if(title === 'Behance') window.open(userState.behance);
+    if (title === 'Instagram') window.open(userState.instagram);
+    else if (title === 'Github') window.open(userState.github);
+    else if (title === 'Behance') window.open(userState.behance);
   };
   const handleClickCloseSVG = () => {
     navigate(-1);
-  }
+  };
   return (
     <MyProfilePageConatainer>
       <StatusBox />
@@ -29,9 +29,17 @@ export default function MyProfilePage() {
       <EditProfile />
       <ProfileInfo />
       <SNSBoxesContainer>
-        <SNSBox img="/instagram.png" title="Instagram" onClick={handleClickSNSBox} />
+        <SNSBox
+          img="/instagram.png"
+          title="Instagram"
+          onClick={handleClickSNSBox}
+        />
         <SNSBox img="/github.png" title="Github" onClick={handleClickSNSBox} />
-        <SNSBox img="/behance.png" title="Behance" onClick={handleClickSNSBox} />
+        <SNSBox
+          img="/behance.png"
+          title="Behance"
+          onClick={handleClickSNSBox}
+        />
       </SNSBoxesContainer>
     </MyProfilePageConatainer>
   );
@@ -51,7 +59,7 @@ const CloseSVGStyle = styled.div`
   cursor: pointer;
 `;
 
-const MyProfilePageConatainer = styled.div`
+const MyProfilePageConatainer = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;

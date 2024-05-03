@@ -20,7 +20,7 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const NotFoundPageContainer = styled.div`
+const NotFoundPageContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;

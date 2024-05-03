@@ -32,7 +32,7 @@ const ProfileInfoImg = styled.img`
   border-radius: 37px;
 `;
 
-const ProfileInfoContainer = styled.div`
+const ProfileInfoContainer = styled.article`
   align-self: center;
   width: fit-content;
   height: fit-content;
