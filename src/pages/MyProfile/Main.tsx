@@ -42,7 +42,12 @@ const Main = () => {
         <Title>Links</Title>
         <LinkBox>
           {linkData.map((el) => (
-            <LinkItem icon={el.icon} userId={el.userId} link={el.link} />
+            <LinkItem
+              key={el.id}
+              icon={el.icon}
+              userId={el.userId}
+              link={el.link}
+            />
           ))}
         </LinkBox>
       </LinkWrapper>

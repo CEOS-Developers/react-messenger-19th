@@ -15,6 +15,12 @@ import userData from "../../data/user.json";
 import { colors } from "../../style/colors";
 import { typography } from "../../style/typography";
 
+interface Chat {
+  text: string;
+  sender: number;
+  timestamp: string;
+}
+
 const Main = () => {
   const dispatch = useDispatch();
   const chats = useSelector((state: RootState) => state.chats);
@@ -77,7 +83,7 @@ const Main = () => {
   return (
     <Wrapper>
       <ChattingWrapper ref={chatWrapperRef}>
-        {currChat.map((chat, index) => {
+        {currChat.map((chat: Chat, index: number) => {
           const isMine = chat.sender !== currOpponent;
           return (
             <ChattingItemWrapper key={index}>

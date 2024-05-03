@@ -1,7 +1,13 @@
 import styled from "styled-components";
 import { colors } from "../../style/colors";
 
-const LinkItem = ({ icon, userId, link }) => {
+interface LinkItemProps {
+  icon: string;
+  userId: string;
+  link: string;
+}
+
+const LinkItem = ({ icon, userId, link }: LinkItemProps) => {
   const handleClick = () => {
     window.location.href = link;
   };
