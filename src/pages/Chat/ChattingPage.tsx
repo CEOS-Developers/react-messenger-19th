@@ -10,13 +10,14 @@ import ChatBubbleSender from "./ChatBubbleSender"
 import { useRecoilState } from 'recoil';
 import { chatDataState } from '../../atoms';
 import { useParams } from 'react-router-dom';
+import dummyData from "../../data/dummyData.json"
 
 interface ChatType {
   //채팅 방 데이터
   r_id: number; //채팅방(room) 고유 id
   isGroup: boolean; //grop일 경우 group icon을 띄우기 위함
   r_name: string; //채팅방 이름
-  r_profile: string; //수신자 프로필 url
+  r_profile?: string; //수신자 프로필 url
   //채팅 1개 당 데이터
   chat : {
     c_id: number | null; //채팅 1개당 id
@@ -29,41 +30,23 @@ interface ChatType {
 
 
 function ChattingPage() {
-  const { r_id } = useParams();
- 
+  const { id } = useParams<{ id: string }>();
+  const chatRoomJson = dummyData.find(chat => chat.r_id === Number(id));
+  console.log(chatRoomJson);
+
   const [value,  setValue] = useState<string>(''); //텍스트 입력값을 넣어주기 위한 state
-  const [chatData, setChatData] = useRecoilState<ChatType>(chatDataState);
-  
 
-   //localStorage에서 가져오기
-   useEffect(() => {
-    const getChatData = localStorage.getItem('chatData')
-    if (getChatData) {
-      setChatData(JSON.parse(getChatData))
+
+  {/*const [chatData, setChatData] = useRecoilState<ChatType>(chatDataState);
+
+  useEffect(() => {
+    if (chatRoomJson) {
+      setChatData(chatRoomJson);
     }
-  }, [])
+  }, []);
+  
+  console.log(chatData);
 
-
-  // 객체 생성
-  const currentTime:string = dayjs().format('HH:mm'); // 시:분 형식으로 포맷팅
-  const addChatData = (value: string): void => {
-    setChatData((prevChatData: ChatType) => {
-      const newChatData = {
-        //localStorage 저장을 위해 분리
-        ...prevChatData,
-        chat : [...prevChatData.chat, {
-          c_id: Date.now(),
-          sender: sender,
-          receiver: receiver,
-          value: value,
-          time: currentTime
-        }]
-      }
-      localStorage.setItem('chatData', JSON.stringify(newChatData))
-
-      return newChatData
-    }) 
-  }
   
   //스크롤 구현
   const chatEndRef = useRef<HTMLDivElement>(null);
@@ -72,17 +55,17 @@ function ChattingPage() {
   }, [chatData]);
 
 
- 
+*/}
 
 
   return (
     <Wrapper>
        <TopBarIcons/>
        <ProfileInfoWrapper>
-          <FriendProfileImg src = {rImg} onClick={toggleUser}/>
-          <FriendProfileName> {receiver} </FriendProfileName>
+          <FriendProfileImg src = {chatRoomJson?.r_profile ? chatRoomJson?.r_profile : friendProfile}/>
+          <FriendProfileName> {chatRoomJson?.r_name} </FriendProfileName>
        </ProfileInfoWrapper>
-       <ChatBody>
+       {/*<ChatBody>
         {chatData.chat.slice(1).map((chat, key) => (
           chat.sender === sender?
          ( <ChatBubbleSender
@@ -101,16 +84,13 @@ function ChattingPage() {
               chatData.chat[key - 1].sender === chat.sender}
             />)
           ))}
-        {/* 스크롤을 위한 빈 div */}
         <div ref={chatEndRef} style={{ width: "100%" }}/>
         </ChatBody>
        <ChatInput
         addChatData={addChatData}
         value={value}
         setValue={setValue}
-       />
-
-
+       />*/}
     </Wrapper>
   )
 }
