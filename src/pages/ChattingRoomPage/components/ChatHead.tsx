@@ -31,7 +31,7 @@ export default function ChatHead() {
     return () => {
       setUserName('송은수');
     };
-  }, []);
+  }, [setUserName]);
   return (
     <ChatHeaderWrapper>
       <StatusBox />

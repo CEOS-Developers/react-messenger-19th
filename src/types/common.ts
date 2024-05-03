@@ -38,6 +38,7 @@ export interface OppoChangeChatProps {
   time: string;
   isDisplay: boolean;
   from: string;
+  img: string;
 }
 
 export interface ChatCardProps {

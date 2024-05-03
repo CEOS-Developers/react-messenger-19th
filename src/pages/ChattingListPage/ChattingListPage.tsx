@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { type ChatCardProps } from '@type/common';
-import Pic from '@assets/img/pic.png';
 import StatusBox from '@components/StatusBox';
 import ChatCard from './components/ChatCard';
 import MainHeader from '@components/MainHeader';

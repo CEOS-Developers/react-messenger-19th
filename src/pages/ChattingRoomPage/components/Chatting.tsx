@@ -45,6 +45,7 @@ export default function Chatting() {
           isDisplay={chat.isDisplay}
           time={chat.time}
           from={chat.from}
+          img={chattingData?.img || ""}
         />
       );
     }

@@ -5,20 +5,19 @@ import useDoubleClick from '@hooks/useDoubleClick';
 import HeartBox from './HeartBox';
 import { type OppoChangeChatProps } from '@type/common';
 
-
-
 export default function OppoChangeChat({
   content,
   time,
   isDisplay,
   from,
+  img,
 }: OppoChangeChatProps) {
   const { handleClick, isDoubleClicked } = useDoubleClick();
   return (
     <OppoChangeChatContainer>
       <OppoChangeChatWrapper>
         <OppoImageBox>
-          <OppoImg src={Pic} alt="profile" />
+          <OppoImg src={img} alt="profile" />
         </OppoImageBox>
         <OppoContentBox>
           <OppoChangeChatName>{from}</OppoChangeChatName>
