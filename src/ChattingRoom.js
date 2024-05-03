@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+/*import React, { useState, useEffect, useRef } from 'react';
 import ChatHead from './components/ChatHead';
 import ChatBody from './components/ChatBody';
 import ChatBottom from './components/ChatBottom';
@@ -84,3 +84,4 @@ function ChattingRoom() {
 }
 
 export default ChattingRoom;
+*/

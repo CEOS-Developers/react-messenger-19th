@@ -1,12 +1,13 @@
 // src/App.tsx
 
 import React from 'react';
-import { Route, Routes,useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import ChattingRoom from './pages/ChattingRoom';
 import UserList from './pages/UserList';
 import ChattingList from './pages/ChattingList';
 import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
+import NavbarHead from './components/NavbarHead';
 
 const App = () => {
 	const { pathname } = useLocation();
@@ -24,6 +25,5 @@ const App = () => {
 		</>
 	);
 };
-
 
 export default App;

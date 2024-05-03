@@ -38,7 +38,7 @@ const ChattingList = () => {
 			<ChatItem key={chat.id} to={`/chattingroom/${chat.id}`}>
             {`${chat.partner}`} 
             {'\n'}
-            ({chat.unreadCount} unread messages)
+            ({chat.recentMsg} 최근 메시지)
           </ChatItem>
           
 			))}

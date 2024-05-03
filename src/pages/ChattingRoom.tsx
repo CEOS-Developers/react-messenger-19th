@@ -54,7 +54,7 @@ const ChattingRoom = () => {
 		<div>
 			<ChatHead
 				user={currentUser || { name: '', image: '' }}
-				//onUserClick={() => {}}
+				// onUserClick={() => {}}
 			/>
 			<ChatBody
 				messages={messages}
