@@ -1,20 +1,28 @@
 import styled from 'styled-components';
 import theme from '@styles/theme';
+import { useNavigate } from 'react-router-dom';
 
 interface UpdatedProfileCardProps {
   user: string;
   img: string;
+  id: string;
 }
 
-export default function UpdatedProfileCard({ user, img }: UpdatedProfileCardProps) {
+export default function UpdatedProfileCard({
+  user,
+  img,
+  id,
+}: UpdatedProfileCardProps) {
+  const navigate = useNavigate();
   return (
-    <UpdatedProfileCardContainer>
+    <UpdatedProfileCardContainer
+      onClick={() => navigate(`/chattingroom/${id}`)}
+    >
       <UpdatedProfileCardImg src={img}></UpdatedProfileCardImg>
       <UpdatedProfileCardNameStyle>{user}</UpdatedProfileCardNameStyle>
     </UpdatedProfileCardContainer>
   );
 }
-
 
 const UpdatedProfileCardNameStyle = styled.div`
   font-size: ${theme.textStyles.caption5.font_size};

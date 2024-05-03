@@ -4,11 +4,16 @@ import theme from '@styles/theme';
 interface SNSBoxProps {
   img: string;
   title: string;
+  onClick: (title: string) => void;
 }
 
-export default function SNSBox({ img, title }: SNSBoxProps) {
+export default function SNSBox({ img, title, onClick }: SNSBoxProps) {
   return (
-    <SNSBoxContainer>
+    <SNSBoxContainer
+      onClick={() => {
+        onClick(title);
+      }}
+    >
       <SNSBoxImg src={img}></SNSBoxImg>
       <SNSBoxTitle>{title}</SNSBoxTitle>
     </SNSBoxContainer>

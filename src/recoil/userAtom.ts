@@ -15,7 +15,7 @@ export const UserState = atom<UserState>({
     user: '송은수',
     stateMessage: '안녕하세요!',
     instagram: 'https://www.instagram.com/',
-    github: 'github.com/songess',
+    github: 'https://github.com/songess',
     behance: 'https://www.behance.net/',
     img: '/Introduce.png'
   },

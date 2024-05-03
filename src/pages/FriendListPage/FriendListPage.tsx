@@ -26,13 +26,13 @@ export default function FriendListPage() {
       </FriendListTextStyle>
       <FriendListUpdatedFriendContainer>
         {updatedChatData.map((data) => (
-          <UpdatedProfileCard key={data.id} img={data.img} user={data.name} />
+          <UpdatedProfileCard key={data.id} img={data.img} user={data.name} id={data.id}/>
         ))}
       </FriendListUpdatedFriendContainer>
       <Hr />
       <FriendListTextStyle>친구 {chatData.length}</FriendListTextStyle>
       {chatData.map((data) => (
-        <FriendCard key={data.id} img={data.img} name={data.name} stateMessage={data.stateMessage} onClick={()=>{}}/>
+        <FriendCard key={data.id} img={data.img} name={data.name} stateMessage={data.stateMessage} id={data.id}/>
       ))}
       <MainFooter />
     </FriendListPageContainer>

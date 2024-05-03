@@ -1,21 +1,23 @@
 import theme from '@styles/theme';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface FriendCardProps {
   img: string;
   name: string;
   stateMessage: string;
-  onClick: (name: string) => void;
+  id: string;
 }
 
 export default function FriendCard({
   img,
   name,
   stateMessage,
-  onClick,
+  id,
 }: FriendCardProps) {
+  const navigate = useNavigate();
   return (
-    <FriendCardWrapperContainer onClick={() => onClick(name)}>
+    <FriendCardWrapperContainer onClick={() => navigate(`/chattingroom/${id}`)}>
       <FriendCardImg src={img}></FriendCardImg>
       <ChatContentContainer>
         <ChatNameStyle>{name}</ChatNameStyle>

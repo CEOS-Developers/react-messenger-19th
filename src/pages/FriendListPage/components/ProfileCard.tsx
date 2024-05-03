@@ -2,11 +2,17 @@ import styled from 'styled-components';
 import theme from '@styles/theme';
 import { useRecoilValue } from 'recoil';
 import { UserState } from '@recoil/userAtom';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProfileCard() {
   const userState = useRecoilValue(UserState);
+  const navigate = useNavigate();
   return (
-    <ProfileCardContainer>
+    <ProfileCardContainer
+      onClick={() => {
+        navigate('/myprofile');
+      }}
+    >
       <ProfileCardImg src={userState.img}></ProfileCardImg>
       <ProfileCardNameStyle>{userState.user}</ProfileCardNameStyle>
       <ProfileCardLinkStyle>내 프로필 보기 {'>'}</ProfileCardLinkStyle>
