@@ -43,7 +43,7 @@ const PhoneCall: React.FC = () => {
   return (
     <Container>
       <AppContainer>
-        <IphoneHeader src='/assets/Status Bar.png'/>
+        <IphoneHeader src='/assets/Status Bar.svg'/>
         <KeypadContainer>
           <Display>
             <DisplayContent>{displayText}</DisplayContent>
@@ -170,7 +170,7 @@ const BackspaceButton = styled.button`
   border: none;
   color: #B6B6B6;
   cursor: pointer;
-  
+
   &:active {
     transform: scale(0.95); 
   }

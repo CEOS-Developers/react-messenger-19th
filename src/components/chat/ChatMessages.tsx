@@ -30,6 +30,8 @@ const ChatMessages: React.FC = () => { //상턔관리 변수들
 
   const [activeModalMessageId, setActiveModalMessageId] = useState<string | null>(null); //공감 모달이 열린 메세지의 ID저장해야돼서
   const [selectedEmojis, setSelectedEmojis] = useState<{ [key: string]: string }>({});
+  const [filteredMessages, setFilteredMessages] = useState<Message[]>([]);
+  const [lastSelectedUserId, setLastSelectedUserId] = useState<number | null>(null);
 
 
   const findUserProfileImage = (userId: number): string | undefined => {
@@ -38,10 +40,28 @@ const ChatMessages: React.FC = () => { //상턔관리 변수들
   };
 
 
- // 필터링된 메시지: 현재 유저와 선택된 유저 간의 메시지만 표시
-  const filteredMessages = messages.filter(
-    message => (message.senderId === selectedUserId || message.receiverId === selectedUserId)
-  );
+ // 필터링된 메시지:0이랑 선택된 유저 간의 메시지만 표시
+ useEffect(() => {
+    if (selectedUserId !== 0) {
+      setLastSelectedUserId(selectedUserId);
+    } 
+    const newFilteredMessages = selectedUserId === 0 && lastSelectedUserId
+      ? messages.filter(message => 
+          message.senderId === lastSelectedUserId || message.receiverId === lastSelectedUserId
+        )
+      : messages.filter(message => 
+          message.senderId === selectedUserId || message.receiverId === selectedUserId
+        );
+    setFilteredMessages(newFilteredMessages);
+  }, [selectedUserId, messages, lastSelectedUserId]);
+
+
+
+useEffect(() => {
+  console.log("Selected User ID:", selectedUserId);
+  console.log("Filtered Messages:", filteredMessages);
+}, [selectedUserId, filteredMessages]);
+
 
   //날짜로 메세지 그룹화하기 (꼬리물기)
   const groupMessagesByDate = (messages: Message[]) => {

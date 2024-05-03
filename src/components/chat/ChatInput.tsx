@@ -27,31 +27,41 @@ const ChatInput: React.FC = () => {
     const [message, setMessage] = useState<string>('');
     const setMessageList = useSetRecoilState(messagesState);
     const selectedUserId = useRecoilValue(selectedUserState);
-    const [isComposing, setIsComposing] = useState(false); //한글 입력할때 상태관리를 위한 변수
+    const [lastSelectedUserId, setLastSelectedUserId] = useState<number | null>(null);
 
-   
+    useEffect(() => {
+      if (selectedUserId !== 0) {
+          setLastSelectedUserId(selectedUserId);
+      }
+  }, [selectedUserId]);
+
     const send = (): void => {
       if (message.trim() !== '') {
-        //수신자와 발신자 설정 ... 나중에 수정해야됨!!
-        const senderId = selectedUserId;
-        const receiverId = selectedUserId === 1 ? 2 : 1;
+          let senderId = 0; // 기본으로 0이 발신자
+          let receiverId = selectedUserId; // 선택된 사용자가 수신자
 
-        const newMessage = {
-          id: Date.now(),
-          senderId, 
-          receiverId,
-          text: message,
-          timestamp: new Date().toISOString(),
-        };
-        setMessageList((oldMessageList) => {
-          const updatedMessages = [...oldMessageList, newMessage];
-          saveMessagesToLocalStorage(updatedMessages);
-          return updatedMessages;
-        });
-        setMessage(''); 
+          // 토글해서 송수신자 바꿧을때
+          if (selectedUserId === 0 && lastSelectedUserId !== null) {
+              senderId = lastSelectedUserId; // 이전에 선택된 사용자가 발신자가 됨
+              receiverId = 0; // 수신자는 0
+          }
+
+          const newMessage = {
+              id: Date.now(),
+              senderId: receiverId,
+              receiverId: senderId,
+              text: message,
+              timestamp: new Date().toISOString(),
+          };
+
+          setMessageList((oldMessageList) => {
+              const updatedMessages = [...oldMessageList, newMessage];
+              saveMessagesToLocalStorage(updatedMessages);
+              return updatedMessages;
+          });
+          setMessage(''); // 메시지 보낸 후 입력 필드 초기화
       }
   };
-
   //배경 클릭 감지 핸들러
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -79,7 +89,7 @@ const ChatInput: React.FC = () => {
     if (e.key === "Enter" && !e.nativeEvent.isComposing) {
         e.preventDefault();
         send();
-        setMessage(''); // setInput("")와 같은 역할을 하는 로직
+        setMessage(''); // setInput("")와 같은 역할
     }
 };
 

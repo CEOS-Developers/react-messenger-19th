@@ -21,7 +21,7 @@ const MyPage = () => {
   return (
     <Container>
       <AppContainer>
-        <IphoneHeader src='/assets/Status Bar.png'/>
+        <IphoneHeader src='/assets/Status Bar.svg'/>
         <MyPageHeader/>
         <ProfileContainer>
           <EditProfileLabel>프로필 수정</EditProfileLabel>

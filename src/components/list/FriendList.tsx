@@ -40,7 +40,7 @@ const FriendList = () => {
   return (
     <Container>
       <AppContainer>
-        <IphoneHeader src='/assets/Status Bar.png'/>
+        <IphoneHeader src='/assets/Status Bar.svg'/>
         <FriendListHeader 
           onEditClick={handleEditClick} 
           onSearchChange={handleSearchChange} 
