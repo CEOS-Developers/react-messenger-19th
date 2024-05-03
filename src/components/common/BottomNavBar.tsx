@@ -25,6 +25,7 @@ export default function BottomNavBar() {
 
 const BottomNavBarWrapper = styled.div`
   display: flex;
+
   padding: 0.3rem 1.9rem;
   justify-content: space-between;
 
