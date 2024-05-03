@@ -8,11 +8,11 @@ import theme from '@styles/theme';
 import ProfileCard from './components/ProfileCard';
 import { useRecoilValue } from 'recoil';
 import { chatDataState, currentChatUpdateState } from '@recoil/chatAtom';
+import UpdatedProfileCard from './components/UpdateProfileCard';
 
 export default function FriendListPage() {
   const chatData = useRecoilValue(chatDataState);
   const updatedChatData = useRecoilValue(currentChatUpdateState);
-  console.log(updatedChatData);
   return (
     <FriendListPageContainer>
       <StatusBox />
@@ -20,15 +20,31 @@ export default function FriendListPage() {
       <Input />
       <ProfileCard />
       <Hr />
-      <FriendListTextStyle>업데이트</FriendListTextStyle>
+      <FriendListTextStyle>
+        업데이트 {updatedChatData.length}
+      </FriendListTextStyle>
+      <FriendListUpdatedFriendContainer>
+        {updatedChatData.map((data) => (
+          <UpdatedProfileCard key={data.id} img={data.img} user={data.name} />
+        ))}
+      </FriendListUpdatedFriendContainer>
       <Hr />
-      <FriendListTextStyle>친구</FriendListTextStyle>
+      <FriendListTextStyle>친구 {chatData.length}</FriendListTextStyle>
       <MainFooter />
     </FriendListPageContainer>
   );
 }
 
-const FriendListTextStyle =  styled.div`
+const FriendListUpdatedFriendContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 78px;
+  padding: 0 16px;
+  cursor: pointer;
+`;
+
+const FriendListTextStyle = styled.div`
   font-size: ${theme.textStyles.caption3.font_size};
   line-height: ${theme.textStyles.caption3.line_height};
   font-weight: ${theme.textStyles.caption3.font_weight};
