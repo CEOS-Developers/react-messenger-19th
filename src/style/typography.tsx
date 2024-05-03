@@ -1,4 +1,11 @@
 export const typography = {
+  title1: `
+  font-size: 1.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2.5625rem;
+  letter-spacing: 0.02338rem;
+  `,
   body2: `
   font-size: 0.9375rem;
   font-style: normal;

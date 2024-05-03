@@ -137,9 +137,7 @@ table {
 }
 
 body{
-  width: 375px;
-  height: 812px;
-  margin: auto auto; // 가운데 정렬
+  min-height: 100vh;
   background-color: black;
 }
 

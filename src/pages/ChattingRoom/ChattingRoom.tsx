@@ -7,6 +7,7 @@ import Header from "./Header";
 import Main from "./Main";
 
 import chattingData from "../../data/chatting.json";
+import Template from "../../components/common/Template";
 
 const ChattingRoom = () => {
   const findChats = (opponent: number) => {
@@ -34,15 +35,11 @@ const ChattingRoom = () => {
   }, [chats, opponent]);
 
   return (
-    <Wrapper>
+    <Template>
       <Header />
       <Main chats={chats} setChats={setChats} />
-    </Wrapper>
+    </Template>
   );
 };
 
 export default ChattingRoom;
-
-const Wrapper = styled.div`
-  background-color: white;
-`;
