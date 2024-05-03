@@ -1,4 +1,4 @@
-import { atom, selectorFamily } from 'recoil';
+import { atom, selector, selectorFamily } from 'recoil';
 import chattingData from '@assets/data/chattingRoomData.json';
 
 interface Chat {
@@ -16,6 +16,7 @@ interface ChattingRoom {
   id: string;
   name: string;
   img: string;
+  isUpdated: boolean;
   unReadCount: number;
   chat: Chat[];
 }
@@ -46,4 +47,12 @@ export const currentChatRoomIdState = selectorFamily({
       const chatData = get(chatDataState);
       return chatData.find((room) => room.id === id);
     },
+});
+
+export const currentChatUpdateState = selector({
+  key: 'currentChatUpdateState',
+  get: ({ get }) => {
+    const chatData = get(chatDataState);
+    return chatData.filter((room) => room.isUpdated === true);
+  },
 });

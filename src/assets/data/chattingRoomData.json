@@ -4,6 +4,7 @@
       "id": "1",
       "name": "플래시",
       "img": "/pic.png",
+      "isUpdated": true,
       "unReadCount": 0,
       "chat": [
         {
@@ -72,6 +73,7 @@
       "id": "2",
       "name": "이그나이트",
       "img": "/HappEmo.png",
+      "isUpdated": false,
       "unReadCount": 1,
       "chat": [
         {
@@ -130,6 +132,7 @@
       "id": "3",
       "name": "마이크",
       "img": "/computer.png",
+      "isUpdated": true,
       "unReadCount": 0,
       "chat": [
         {
@@ -148,6 +151,7 @@
       "id": "4",
       "name": "몬스터",
       "img": "/logo192.png",
+      "isUpdated": false,
       "unReadCount": 0,
       "chat": [
         {
