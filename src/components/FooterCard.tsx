@@ -5,6 +5,7 @@ interface FooterCardProps {
   TitleComponent: React.FC;
   title: string;
   currentURL: boolean;
+  onClick: () => void;
 }
 
 interface FooterCardStyleProps {
@@ -15,9 +16,10 @@ export default function FooterCard({
   TitleComponent,
   title,
   currentURL,
+  onClick,
 }: FooterCardProps) {
   return (
-    <FooterCardContainter>
+    <FooterCardContainter onClick={onClick}>
       <FooterSVGStyle $currentURL={currentURL}>
         <TitleComponent />
       </FooterSVGStyle>
@@ -46,6 +48,7 @@ const FooterCardContainter = styled.section`
   justify-content: center;
   height: 60px;
   flex-grow: 1;
+  cursor: pointer;
   &:hover {
     background-color: ${theme.colors.gray_5};
   }

@@ -14,7 +14,7 @@ import { formatDate, formatTime } from '@util/calculateDate';
 
 export default function ChatBottom() {
   const [inputValue, setInputValue] = useState('');
-  const userName = useRecoilValue(UserState);
+  const userName = useRecoilValue(UserState).user;
   const [chattingData, setChattingData] = useRecoilState(chatDataState);
   const params = useParams().id || '';
   const currentIndex = chattingData.findIndex((chat) => chat.id === params);

@@ -9,6 +9,7 @@ import StatusBox from '@components/StatusBox';
 import { useNavigate, useParams } from 'react-router-dom';
 import { currentChatRoomIdState } from '@recoil/chatAtom';
 import { useEffect } from 'react';
+import { createPrivateKey } from 'crypto';
 
 const DUMMYLEFTCOUNT = 3;
 
@@ -18,18 +19,18 @@ export default function ChatHead() {
   const params = useParams().id || '';
   const chattingData = useRecoilValue(currentChatRoomIdState(params));
   const opponentName = chattingData?.name || '';
-  const displayName = userName === '송은수' ? opponentName : '송은수';
+  const displayName = userName.user === '송은수' ? opponentName : '송은수';
   const handleNameToggle = () => {
-    if (userName === '송은수') {
-      setUserName(opponentName);
+    if (userName.user === '송은수') {
+      setUserName(prev => ({ ...prev, user: opponentName }));
     } else {
-      setUserName('송은수');
+      setUserName(prev => ({ ...prev, user: '송은수' }));
     }
   };
 
   useEffect(() => {
     return () => {
-      setUserName('송은수');
+      setUserName(prev => ({ ...prev, user: '송은수' }));
     };
   }, [setUserName]);
   return (

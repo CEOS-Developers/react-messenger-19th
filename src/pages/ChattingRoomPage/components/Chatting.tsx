@@ -13,7 +13,7 @@ import { useParams } from 'react-router-dom';
 
 export default function Chatting() {
   const params = useParams().id || "";
-  const userName = useRecoilValue(UserState);
+  const userName = useRecoilValue(UserState).user;
   const chattingData = useRecoilValue(currentChatRoomIdState(params));
   const chatRef = useRef<HTMLDivElement>(null);
 

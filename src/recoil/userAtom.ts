@@ -1,6 +1,20 @@
 import { atom } from 'recoil';
 
-export const UserState = atom<string>({
+interface UserState {
+  user: string;
+  stateMessage: string;
+  instagram: string;
+  github: string;
+  behance: string;
+}
+
+export const UserState = atom<UserState>({
   key: 'userState',
-  default: '송은수',
+  default: {
+    user: '송은수',
+    stateMessage: '안녕하세요!',
+    instagram: 'https://www.instagram.com/',
+    github: 'github.com/songess',
+    behance: 'https://www.behance.net/',
+  },
 });

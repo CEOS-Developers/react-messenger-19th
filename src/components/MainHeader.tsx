@@ -31,6 +31,6 @@ const MainHeaderContainer = styled.article`
   display: flex;
   align-items: center;
   padding: 0 16px;
-  margin-top: 8px;
+  margin: 8px 0;
   gap: 12px;
 `;

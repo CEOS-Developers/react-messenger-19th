@@ -19,7 +19,7 @@ const InputContainer = styled.div`
   padding: 0 4px;
   gap: 4px;
   background-color: ${theme.colors.gray_5};
-  margin: 0 16px;
+  margin: 0 16px 2px 16px;
   border-radius: 5px;
   flex-shrink: 1;
 `;

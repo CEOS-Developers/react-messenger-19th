@@ -3,7 +3,7 @@ import { ReactComponent as FriendsSvg } from '@assets/svg/friends.svg';
 import { ReactComponent as ChatSvg } from '@assets/svg/chat.svg';
 import { ReactComponent as EtcSvg } from '@assets/svg/etc.svg';
 import FooterCard from './FooterCard';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface navBar {
   title: string;
@@ -12,13 +12,17 @@ interface navBar {
 }
 
 const navBarMenu: navBar[] = [
-  { title: '친구', TitleComponent: FriendsSvg, url: '/friend' },
+  { title: '친구', TitleComponent: FriendsSvg, url: '/friendlist' },
   { title: '채팅', TitleComponent: ChatSvg, url: '/chattinglist' },
   { title: '기타', TitleComponent: EtcSvg, url: '/other' },
 ];
 
 export default function MainFooter() {
   const currentURL = useLocation().pathname;
+  const navigate = useNavigate();
+  const handleClick = (url: string) => {
+    navigate(url);
+  }
   return (
     <MainFooterContainer>
       {navBarMenu.map((navBar, index) => (
@@ -27,6 +31,7 @@ export default function MainFooter() {
           TitleComponent={navBar.TitleComponent}
           title={navBar.title}
           currentURL={currentURL === navBar.url}
+          onClick={() => handleClick(navBar.url)}
         />
       ))}
     </MainFooterContainer>
