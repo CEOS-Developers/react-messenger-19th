@@ -117,3 +117,8 @@ font-weight: 600;
 margin-left: 16px;
 cursor: pointer;
 `;
+
+const MagnifyingGlass=styled.img`
+width:19px;
+height:19px;
+`;

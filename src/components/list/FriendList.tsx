@@ -10,6 +10,7 @@ import FriendListHeader from './FriendListHeader';
 import { selectedUserState } from '../state/selectedUserState';
 import { messagesState } from '../state/messageState'; 
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -21,6 +22,7 @@ const pageTransitionVariants = { //페이지 전환 애니메이션
 
 
 const FriendList = () => {
+  const navigate = useNavigate();
   const users = useRecoilValue(usersState);
   const [selectedUserId, setSelectedUserId] = useRecoilState(selectedUserState); 
   const messages = useRecoilValue(messagesState);
@@ -37,6 +39,11 @@ const FriendList = () => {
 
   const handleUserClick = (userId: number) => {
     setSelectedUserId(userId); // 사용자 클릭시 selectedUserId 상태 업데이트
+  };
+
+  const handleCallIconClick = (phoneNumber: string): void => {
+   
+    navigate('/phone', { state: { phoneNumber } }); //핸드폰번호랑 같이 전화화면으로넘어가기
   };
 
   useEffect(() => {
@@ -64,24 +71,26 @@ const FriendList = () => {
             searchTerm={searchTerm}
           />
           <FriendListContainer>
-            <FriendListUl>
               <FriendCount>친구 {friendCount}명</FriendCount>
-
+              <FriendListUl>
               {filteredUsers.length > 0 ? filteredUsers.map(user => (
-                  <Link 
-                    to={`/chat/${user.id}`} 
-                    key={user.id} 
-                    style={{ textDecoration: 'none', color: 'inherit' }}
-                    onClick={() => handleUserClick(user.id)}
-                  >
+                 
                   <FriendListItem>
                     <FriendImage src={user.profileImage} alt={user.name} style={{width:"37px", height:"37px"}}/>
-                    <FriendInfo>
-                        <FriendName>{user.name}</FriendName>  
-                        <CallIcon src="/assets/Call (3).png"/>   
+                    <FriendInfo> 
+                      <Link 
+                        to={`/chat/${user.id}`} 
+                        key={user.id} 
+                        style={{ textDecoration: 'none', color: 'inherit' }}
+                        onClick={() => handleUserClick(user.id)}
+                      >
+                        <FriendName>{user.name}</FriendName>
+                      </Link>
+                        <CallIcon 
+                          src="/assets/Call (3).png"
+                          onClick={() => handleCallIconClick(user.phoneNumber)}/>
                     </FriendInfo>
                   </FriendListItem>
-                </Link>
                 )) : (
                   <NoResultsContainer>
                 <NoResults>{`'${searchTerm}'에 대한 결과 없음`}</NoResults>
@@ -127,7 +136,11 @@ const AppContainer = styled.div`
 `;
 
 const FriendListContainer = styled.div`
-  flex: 1;
+max-width: 375px;
+width: 100%;
+display: flex;
+flex-direction: column;
+flex: 1;
   overflow-y: auto;
 `;
 
@@ -166,6 +179,7 @@ font-size: 17px;
 const CallIcon = styled.img`
 width: 30px;
 hwight:30px;
+cursor: pointer;
 `;
 
 const FriendCount = styled.div`
@@ -174,6 +188,7 @@ const FriendCount = styled.div`
   margin-left: 15px;
   margin-bottom: 2px;
   color: #63666A;
+  width:
 `;
 
 
@@ -194,10 +209,7 @@ font-weight: 500;
 color: #8D949E;
 margin-top: 8px;
 `;
-const MagnifyingGlass=styled.img`
-width:40px;
-height:40px;
-`;
+
 const NoResultsContainer = styled.div`
 display:flex;
 width:100%;

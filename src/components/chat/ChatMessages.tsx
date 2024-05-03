@@ -65,28 +65,31 @@ useEffect(() => {
 
   //날짜로 메세지 그룹화하기 (꼬리물기)
   const groupMessagesByDate = (messages: Message[]) => {
-    const grouped: { [key: string]: Message[][] } = {}; //그룹화된 메세지를 저장
+    const grouped: { [key: string]: Message[][] } = {}; // 그룹화된 메세지를 저장
     messages.forEach((message) => {
-      const dateKey = formatShortDate(message.timestamp); //기준: 날짜
+        const dateKey = formatShortDate(message.timestamp); // 기준: 날짜
 
-      if (!grouped[dateKey]) {
-        grouped[dateKey] = [];
-      }
+        if (!grouped[dateKey]) {
+            grouped[dateKey] = [];
+        }
 
-      const lastGroup = grouped[dateKey][grouped[dateKey].length - 1];
-      if (
-        lastGroup &&
-        lastGroup[lastGroup.length - 1].senderId === message.senderId && //자신이 보낸 메세지가 마지막 것인지
-        new Date(message.timestamp).getTime() - new Date(lastGroup[lastGroup.length - 1].timestamp).getTime() <= 60000 //시간차 1분
-      ) {
-        lastGroup.push(message); // 꼬리물기
-      } else {
-        grouped[dateKey].push([message]); //새그룹 (시간뜨게)
-      }
+        const lastGroup = grouped[dateKey][grouped[dateKey].length - 1];
+        const lastMessage = lastGroup && lastGroup[lastGroup.length - 1];
+
+        if (
+            lastMessage &&
+            lastMessage.senderId === message.senderId && // 자신이 보낸 메세지가 마지막 것인지
+            Math.abs(new Date(message.timestamp).getMinutes() - new Date(lastMessage.timestamp).getMinutes()) < 1 // 분이 달라지면 꼬리물기!!
+        ) {
+            lastGroup.push(message); // 꼬리물기
+        } else {
+            grouped[dateKey].push([message]); // 새 그룹 (시간 뜨게)
+        }
     });
 
     return grouped;
-  };
+};
+
 
 
   const groupedMessages = groupMessagesByDate(filteredMessages);

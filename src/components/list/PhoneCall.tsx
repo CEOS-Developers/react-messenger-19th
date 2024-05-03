@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import IphoneHeader from '../main/IphoneHeader';
 import IphoneFooter from '../main/IphoneFooter';
 import NavigatingFooter from './NavigateFooter';
+import { useLocation } from 'react-router-dom';
 
 
 const numLettersMapping: { [key: string]: string } = {
-  '1': '\u00A0',
+  '1': '\u00A0', //공백
   '2': 'A B C', '3': 'D E F',
   '4': 'G H I', '5': 'J K L', '6': 'M N O',
   '7': 'P Q R S', '8': 'T U V', '9': 'W X Y Z',
@@ -15,8 +16,8 @@ const numLettersMapping: { [key: string]: string } = {
 
 
 const PhoneCall: React.FC = () => {
+  const location = useLocation();
   const [inputValue, setInputValue] = useState("");
-  const [isCalling, setIsCalling] = useState(false);
 
   const handleButtonClick = (value: string) => {
     setInputValue(prev => {
@@ -25,6 +26,7 @@ const PhoneCall: React.FC = () => {
       }
       return prev + value;
     });
+
   };
   const handleBackspace = () => {
     setInputValue(prev => prev.slice(0, -1));
@@ -32,10 +34,18 @@ const PhoneCall: React.FC = () => {
 
   const handleCall = () => {
     if(inputValue){ //번호 입력했을때만 알람뜨기
-    alert(`${inputValue}에게 전화거는 중...`); 
+    alert(`${inputValue} 에게 전화거는 중...`); 
   }
     setInputValue("");
   };
+
+  useEffect(() => { //넘겨받은 유저의 폰번호로 input값 설정하기
+    console.log(location);
+
+    if (location.state && location.state.phoneNumber) {
+      setInputValue(location.state.phoneNumber);
+    }
+  }, [location]);
 
 
   const displayText = inputValue.length > 15 ? '...' + inputValue.slice(-21) : inputValue;
