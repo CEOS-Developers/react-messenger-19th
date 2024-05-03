@@ -9,6 +9,16 @@ import NavigatingFooter from './NavigateFooter';
 import FriendListHeader from './FriendListHeader';
 import { selectedUserState } from '../state/selectedUserState';
 import { messagesState } from '../state/messageState'; 
+import { motion } from 'framer-motion';
+
+
+
+const pageTransitionVariants = { //페이지 전환 애니메이션
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 }
+};
+
 
 const FriendList = () => {
   const users = useRecoilValue(usersState);
@@ -38,30 +48,37 @@ const FriendList = () => {
   );
   
   return (
-    <Container>
-      <AppContainer>
-        <IphoneHeader src='/assets/Status Bar.svg' />
-        <FriendListHeader 
-          onEditClick={handleEditClick} 
-          onSearchChange={handleSearchChange} 
-          searchTerm={searchTerm}
-        />
-        <FriendListContainer>
-          <FriendListUl>
-          <FriendCount>친구 {friendCount}명</FriendCount>
+    <motion.div
+    variants={pageTransitionVariants}
+    initial="initial"
+    animate="animate"
+    exit="exit"
+    transition={{ duration: 0.3 }}
+    >
+      <Container>
+        <AppContainer>
+          <IphoneHeader src='/assets/Status Bar.svg' />
+          <FriendListHeader 
+            onEditClick={handleEditClick} 
+            onSearchChange={handleSearchChange} 
+            searchTerm={searchTerm}
+          />
+          <FriendListContainer>
+            <FriendListUl>
+              <FriendCount>친구 {friendCount}명</FriendCount>
 
-          {filteredUsers.length > 0 ? filteredUsers.map(user => (
-              <Link 
-                to={`/chat/${user.id}`} 
-                key={user.id} 
-                style={{ textDecoration: 'none', color: 'inherit' }}
-                onClick={() => handleUserClick(user.id)}
-              >
+              {filteredUsers.length > 0 ? filteredUsers.map(user => (
+                  <Link 
+                    to={`/chat/${user.id}`} 
+                    key={user.id} 
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                    onClick={() => handleUserClick(user.id)}
+                  >
                   <FriendListItem>
                     <FriendImage src={user.profileImage} alt={user.name} style={{width:"37px", height:"37px"}}/>
                     <FriendInfo>
                         <FriendName>{user.name}</FriendName>  
-                        <CallIcon src="/assets/Call (1).svg"/>   
+                        <CallIcon src="/assets/Call (3).png"/>   
                     </FriendInfo>
                   </FriendListItem>
                 </Link>
@@ -77,6 +94,7 @@ const FriendList = () => {
         <IphoneFooter src='/assets/Home Indicator.png' backgroundColor='#F7F8FC'/>
       </AppContainer>
       </Container>
+    </motion.div>
   );
 };
 export default FriendList;
@@ -92,6 +110,8 @@ const Container = styled.div`
 const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center; 
+
   width: 100vw; 
   height: 100vh; 
   background-color: #FFFFFF; 
@@ -144,6 +164,8 @@ font-size: 17px;
 `;
 
 const CallIcon = styled.img`
+width: 30px;
+hwight:30px;
 `;
 
 const FriendCount = styled.div`

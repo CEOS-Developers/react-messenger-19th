@@ -9,6 +9,14 @@ import NavigatingFooter from './NavigateFooter';
 import ChatListHeader from './ChatListHeader';
 import { selectedUserState } from '../state/selectedUserState'; // selectedUserId 상태 추가
 import { messagesState } from '../state/messageState'; 
+import { motion } from 'framer-motion';
+
+
+const pageTransitionVariants = { //페이지 전환 애니메이션
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 }
+};
 
 const ChatList = () => {
   const users = useRecoilValue(usersState);
@@ -69,6 +77,13 @@ const ChatList = () => {
   
 
   return (
+  <motion.div
+    variants={pageTransitionVariants}
+    initial="initial"
+    animate="animate"
+    exit="exit"
+    transition={{ duration: 0.2 }}
+  >
     <Container>
       <AppContainer>
       <IphoneHeader src='/assets/Status Bar.svg'/>
@@ -115,6 +130,8 @@ const ChatList = () => {
         <IphoneFooter src='/assets/Home Indicator.png' backgroundColor='#F7F8FC'/>
       </AppContainer>
     </Container>
+  </motion.div>
+
   );
 };
 

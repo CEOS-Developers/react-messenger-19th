@@ -16,9 +16,9 @@ const NavigatingFooter: React.FC = () => {
   const location = useLocation();
 
   const navItems: NavIconProps[] = [
-    { src: "/assets/Group 1.svg", alt: "Friends", navigateTo: "/friends", width: "22px", height: "35.81px" },
-    { src: "/assets/Message-bubble.svg", alt: "Chat", navigateTo: "/", width: "30px", height: "29px" },
-    { src: "/assets/Call.svg", alt: "Phone", navigateTo: "/phone", width: "32px", height: "31px" },
+    { src: "/assets/Friend.png", alt: "Friends", navigateTo: "/friends", width: "22px", height: "35.81px" },
+    { src: "/assets/Message-bubble.png", alt: "Chat", navigateTo: "/", width: "30px", height: "29px" },
+    { src: "/assets/Call1.png", alt: "Phone", navigateTo: "/phone", width: "32px", height: "31px" },
   ];
 
   return (
@@ -27,7 +27,7 @@ const NavigatingFooter: React.FC = () => {
         {navItems.map(item => (
           <NavIcon
             key={item.alt}
-            src={location.pathname === item.navigateTo ? item.src.replace(".svg", "-active.png") : item.src}             //현재 위치 추적해서 아이콘 색깔바꾸기
+            src={location.pathname === item.navigateTo ? item.src.replace(".png", "-active.png") : item.src}             //현재 위치 추적해서 아이콘 색깔바꾸기
             alt={item.alt}
             onClick={() => navigate(item.navigateTo)}
             width={item.width}

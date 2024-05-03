@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { RecoilRoot } from 'recoil'; 
 import ChatList from './components/list/ChatList';
 import ChatApp from './components/main/ChatApp'; 
@@ -8,19 +9,33 @@ import GlobalStyle from './components/style/GlobalStyle';
 import MyPage from './components/list/MyPage'
 import PhoneCall from './components/list/PhoneCall';
 
+
+
+const AnimatedRoutes = () => {
+  const location = useLocation();  // 현재 위치를 가져옴
+
+  return (
+    <AnimatePresence mode='wait'>
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<ChatList />} />
+        <Route path="/chat/:userId" element={<ChatApp />} />
+        <Route path="/friends" element={<FriendList />} />
+        <Route path="/mypage" element={<MyPage/>}/>
+        <Route path="/phone" element={<PhoneCall/>}/>
+      </Routes>
+    </AnimatePresence>
+  );
+};
+
+
+
 const App: React.FC = () => {
+  
   return (
     <RecoilRoot>
       <Router>
         <GlobalStyle />
-        <Routes>
-          <Route path="/" element={<ChatList />} />
-          <Route path="/chat/:userId" element={<ChatApp />} />
-          <Route path="/friends" element={<FriendList />} />
-          <Route path="/mypage" element={<MyPage/>}/>
-          <Route path="/phone" element={<PhoneCall/>}/>
-
-        </Routes>
+        <AnimatedRoutes />
       </Router>
     </RecoilRoot>
   );

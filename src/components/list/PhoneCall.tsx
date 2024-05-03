@@ -157,6 +157,7 @@ font-family: Pretendard;
 
 const KeyText = styled.div`
   font-size: 30px;
+  font-weight:
   color: #000000;
 
 `;
@@ -164,6 +165,7 @@ const KeyText = styled.div`
 const LettersText = styled.div`
   font-size: 10px;
   color: #000000;
+  margin-top:-4px;
 `;
 
 const BackspaceButton = styled.img`
