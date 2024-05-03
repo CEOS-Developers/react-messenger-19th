@@ -5,40 +5,45 @@ import styled from 'styled-components';
 interface FriendListHeaderProps {
     onEditClick: () => void;
     onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void; 
+    searchTerm?: string; //없어도댐 검색어
+
 }
 
-const FriendListHeader: React.FC<FriendListHeaderProps> = ({ onEditClick, onSearchChange }) => {
+const FriendListHeader: React.FC<FriendListHeaderProps> = ({ onEditClick, onSearchChange,searchTerm  }) => {
    
     const navigate = useNavigate();
-
+    const handleNewChatClick = () => {
+        console.log('새로운 대화 시작');
+      };
 
     const handleGoMyPage = () => {
         console.log('마이페이지 이동');
         navigate('/mypage');
     };
-   
     return (
         <HeaderContainer>
-            <EditContainer>
-                <Button onClick={onEditClick}>
-                    <EditButton2 onClick={onEditClick} src="/assets/icon.svg"></EditButton2>
-                </Button>
-            </EditContainer>
-            <Title>친구</Title>
-            <SearchInput
-                type="text"
-                onChange={onSearchChange}
-            />
+          <EditContainer>
+            <Button onClick={onEditClick}>
+              <EditButton2 src="/assets/icon.svg"></EditButton2>
+            </Button>
+          </EditContainer>
+          <Title>대화</Title>
+          <SearchInput
+            type="text"
+            onChange={onSearchChange}
+          />
+          {!searchTerm && (
             <NewChatContainer>
-                <Button onClick={handleGoMyPage}>
-                    <NewChatButton src="/assets/profile (3).svg"/>
-                </Button>
-                <NewChatLabel onClick={handleGoMyPage}>김수현</NewChatLabel>
+              <Button onClick={handleNewChatClick}>
+                <NewChatButton src="/assets/Group 6 (1).svg"/>
+              </Button>
+              <NewChatLabel>새로운 대화</NewChatLabel>
             </NewChatContainer>
-            <DivideLine src="/assets/Vector 564.svg"/>
+          )}
+          <DivideLine src="/assets/Vector 564.svg"/>
         </HeaderContainer>
-    );
-};
+      );
+    };
 
 export default FriendListHeader;
 

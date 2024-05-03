@@ -15,13 +15,14 @@ const FriendList = () => {
   const [selectedUserId, setSelectedUserId] = useRecoilState(selectedUserState); 
   const messages = useRecoilValue(messagesState);
   const [friendCount, setFriendCount] = useState(0); 
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleEditClick = () => {
     // 편집 버튼 핸들러..
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // 검색핸들러
+    setSearchTerm(e.target.value);
   };
 
   const handleUserClick = (userId: number) => {
@@ -32,6 +33,9 @@ const FriendList = () => {
     setFriendCount(users.filter(user => user.id !== 0).length); // 자기 자신을 뺀 친구 수
   }, [users]);
 
+  const filteredUsers = users.filter(user => user.id !== 0 &&
+    (user.name.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
   
   return (
     <Container>
@@ -40,19 +44,19 @@ const FriendList = () => {
         <FriendListHeader 
           onEditClick={handleEditClick} 
           onSearchChange={handleSearchChange} 
+          searchTerm={searchTerm}
         />
         <FriendListContainer>
           <FriendListUl>
           <FriendCount>친구 {friendCount}명</FriendCount>
 
-          {users.filter(user => user.id !== 0).map(user => {
-              return (
-                <Link 
-                  to={`/chat/${user.id}`} 
-                  key={user.id} 
-                  style={{ textDecoration: 'none', color: 'inherit' }}
-                  onClick={() => handleUserClick(user.id)}
-                >
+          {filteredUsers.length > 0 ? filteredUsers.map(user => (
+              <Link 
+                to={`/chat/${user.id}`} 
+                key={user.id} 
+                style={{ textDecoration: 'none', color: 'inherit' }}
+                onClick={() => handleUserClick(user.id)}
+              >
                   <FriendListItem>
                     <FriendImage src={user.profileImage} alt={user.name} style={{width:"37px", height:"37px"}}/>
                     <FriendInfo>
@@ -61,14 +65,18 @@ const FriendList = () => {
                     </FriendInfo>
                   </FriendListItem>
                 </Link>
-              );
-            })}
+                )) : (
+                  <NoResultsContainer>
+                <NoResults>{`'${searchTerm}'에 대한 결과 없음`}</NoResults>
+                <NoResults2>맞춤법을 확인하거나 새로운 검색을 시도하십시오.</NoResults2>
+              </NoResultsContainer>
+            )}
           </FriendListUl>
         </FriendListContainer>
         <NavigatingFooter/>
         <IphoneFooter src='/assets/Home Indicator.png'/>
       </AppContainer>
-    </Container>
+      </Container>
   );
 };
 export default FriendList;
@@ -144,4 +152,36 @@ const FriendCount = styled.div`
   margin-left: 15px;
   margin-bottom: 2px;
   color: #63666A;
+`;
+
+
+
+const NoResults = styled.div`
+max-width:292px;
+text-align: center;
+margin-top: 20px;
+font-size: 19px;
+color: #1F1F1F;
+font-weight: 600;
+`;
+const NoResults2 = styled.div`
+max-width:292px;
+text-align: center;
+font-size: 16px;
+font-weight: 500;
+color: #8D949E;
+margin-top: 8px;
+`;
+const MagnifyingGlass=styled.img`
+width:40px;
+height:40px;
+`;
+const NoResultsContainer = styled.div`
+display:flex;
+width:100%;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 100%;
+margin-top: 164px;
 `;

@@ -57,6 +57,7 @@ const ChatList = () => {
         <ChatListHeader 
           onEditClick={handleEditClick} 
           onSearchChange={handleSearchChange} 
+          searchTerm={searchTerm}
         />
         <ChatListContainer>
           {filteredUsers.length > 0 ? (
@@ -128,21 +129,26 @@ const AppContainer = styled.div`
 const ChatListContainer = styled.div`
   flex: 1;
   display: flex;            
-  justify-content: center;   
-  align-items: center;      
   overflow-y: auto;          
-  width: 100%;            
-  position: relative;`;
+  width: 100%;   
+ `;
 
 const ChatListUl = styled.ul`
+display: flex;
+flex-direction: column;
+
   list-style: none;
-  padding: 0;
+  width: 100%;
 `;
 
 const FriendListItem = styled.li`
-  padding: 11px 15px;
+
   display: flex;
+  justify-content: center;
+  padding: 12px 0;
+
   margin-bottom: 4px;
+  width: 100%;  
 `;
 
 const FriendImage = styled.img`
@@ -202,8 +208,10 @@ height:40px;
 `;
 const NoResultsContainer = styled.div`
 display:flex;
+width:100%;
 flex-direction: column;
 align-items: center;
 justify-content: center;
 height: 100%;
+margin-top: 164px;
 `;

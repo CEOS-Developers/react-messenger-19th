@@ -4,9 +4,10 @@ import styled from 'styled-components';
 interface ChatListHeaderProps {
     onEditClick: () => void;
     onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void; 
+    searchTerm?: string; //없어도댐 검색어
 }
 
-const ChatListHeader: React.FC<ChatListHeaderProps> = ({ onEditClick, onSearchChange }) => {
+const ChatListHeader: React.FC<ChatListHeaderProps> = ({ onEditClick, onSearchChange, searchTerm  }) => {
    
     const handleNewChatClick = () => {
         console.log('새로운 대화 시작');
@@ -16,7 +17,7 @@ const ChatListHeader: React.FC<ChatListHeaderProps> = ({ onEditClick, onSearchCh
         <HeaderContainer>
             <EditContainer>
                 <Button onClick={onEditClick}>
-                    <EditButton2 onClick={onEditClick} src="/assets/icon.svg"></EditButton2>
+                    <EditButton2 src="/assets/icon.svg"></EditButton2>
                 </Button>
             </EditContainer>
             <Title>대화</Title>
@@ -24,26 +25,26 @@ const ChatListHeader: React.FC<ChatListHeaderProps> = ({ onEditClick, onSearchCh
                 type="text"
                 onChange={onSearchChange}
             />
-            <NewChatContainer>
-                <Button onClick={handleNewChatClick}>
-                    <NewChatButton src="/assets/Group 6 (1).svg"/>
-                </Button>
-                <NewChatLabel>새로운 대화</NewChatLabel>
-            </NewChatContainer>
+            { !searchTerm && ( 
+                <NewChatContainer>
+                    <Button onClick={handleNewChatClick}>
+                        <NewChatButton src="/assets/Group 6 (1).svg"/>
+                    </Button>
+                    <NewChatLabel>새로운 대화</NewChatLabel>
+                </NewChatContainer>
+            )}
             <DivideLine src="/assets/Vector 564.svg"/>
         </HeaderContainer>
     );
 };
-
 export default ChatListHeader;
 
 const HeaderContainer = styled.div`
-    max-width: 345px;
     margin: 13px 15px 0 15px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color: #fff;
+    background-color: #fff;z
 `;
 
 const Title = styled.h1`
@@ -79,7 +80,6 @@ const SearchInput = styled.input`
     flex-grow: 1;
     border-radius: 10px;
     width: 100%;
-    max-width: 345px;
     height: 39px;
     border: none;
     outline: none;
