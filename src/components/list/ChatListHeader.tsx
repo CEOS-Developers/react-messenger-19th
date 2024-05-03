@@ -12,7 +12,7 @@ interface ChatListHeaderProps {
     searchTerm?: string; //없어도댐 검색어
 }
 
-const ChatListHeader: React.FC<ChatListHeaderProps> = ({ onEditClick, onSearchChange, searchTerm  }) => {
+const ChatListHeader: React.FC<ChatListHeaderProps> = ({ onEditClick, onSearchChange, searchTerm }) => {
     const [isModalOpen, setModalOpen] = useState(false);
     const navigate = useNavigate();
     const users = useRecoilValue(usersState); 
