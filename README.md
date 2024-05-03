@@ -6,6 +6,8 @@ https://discord-react-typescript.vercel.app/
 
 ## 👩‍💻 구현 기능
 
+- 하단바 아이콘을 누르면 해당하는 페이지로 라우팅
+
 ## 🥳 후기
 
 ## 💡 새롭게 배운 점

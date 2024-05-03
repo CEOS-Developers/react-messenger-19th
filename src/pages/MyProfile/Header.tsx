@@ -19,7 +19,7 @@ const Header = () => {
         </BackCircle>
         <NameWrapper>
           <Nickname>{me.name}</Nickname>
-          <LoginId>{me.loginId}</LoginId>
+          <LoginId>jioni</LoginId>
         </NameWrapper>
       </ProfileWrapper>
     </Wrapper>
