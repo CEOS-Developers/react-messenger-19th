@@ -69,7 +69,7 @@ const PhoneCall: React.FC = () => {
                 <LettersText>{numLettersMapping[key]}</LettersText>
               </Button>
             ))}
-              <CallImg src="/assets/Call-icon.png" alt="Call" onClick={handleCall}/>
+<CallImg src={`${process.env.REACT_APP_BASE_URL}assets/Call-icon.png`} alt="Call" onClick={handleCall}/>
             <BackspaceButton onClick={handleBackspace} src="/assets/DeletePhoneCall.svg"/>
           </Keypad>
         </KeypadContainer>
