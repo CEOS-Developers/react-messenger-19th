@@ -196,9 +196,9 @@ const BackspaceButton = styled.img`
 
 
 const CallImg = styled.img`
-padding:16.5px;
- width: 40px;
- height: 40px;  
+
+ width: 73px;
+ height: 73px;  
  grid-column: 2 / span 1; 
   background-color: #31C75C; 
   
