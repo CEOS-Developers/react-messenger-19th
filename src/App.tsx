@@ -5,6 +5,7 @@ import ChatRoom from 'components/ChatRoom/ChatRoom';
 import ChatList from 'components/ChatRoom/ChatList';
 import ChatRoomList from 'components/ChatRoomList/ChatRoomList';
 import Settings from 'components/Settings/Settings';
+import Contacts from 'components/Contacts/Contacts';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route path="/chats" element={<ChatRoomList />} />
             <Route path="/chats/:chatId" element={<ChatRoom />} />
-            <Route path="/contacts" />
+            <Route path="/contacts" element={<Contacts />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
         </Routes>

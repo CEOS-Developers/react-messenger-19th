@@ -24,13 +24,13 @@ export default function ChatRoomList() {
 
   return (
     <>
-      <ChatNavigationBar>
+      <ChatRoomListHeader>
         <button>편집</button>
-        <p>대화</p>
+        <h1>대화</h1>
         <EditIcon alt="채팅방 수정 아이콘" />
-      </ChatNavigationBar>
+      </ChatRoomListHeader>
       <SearchBar inputValue={inputValue} setInputValue={setInputValue} />
-      <ChatRoomListWrapper>
+      <ChatRoomListBody>
         {filteredChatData.map((chat) => (
           <ChatRoomsContainer key={chat.id} onClick={() => handleChatRoomClick(chat.id)}>
             <ChatRoomIcon alt="각 채팅방을 나타내는 아이콘" />
@@ -40,18 +40,18 @@ export default function ChatRoomList() {
             </div>
           </ChatRoomsContainer>
         ))}
-      </ChatRoomListWrapper>
+      </ChatRoomListBody>
     </>
   );
 }
 
-const ChatRoomListWrapper = styled.div`
+const ChatRoomListBody = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
   height: 55rem;
 `;
-const ChatNavigationBar = styled.div`
+const ChatRoomListHeader = styled.div`
   display: flex;
   padding: 1rem 1.6rem;
   font-size: 1.7rem;
