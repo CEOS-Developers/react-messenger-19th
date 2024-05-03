@@ -3,13 +3,16 @@ import theme from '@styles/theme';
 import { ReactComponent as SearchSvg } from '@assets/svg/search.svg';
 
 export default function Input() {
-  return <InputContainer>
-    <SearchSvg />
-    <InputStyle type="text" placeholder="검색" />
-  </InputContainer>;
+  return (
+    <InputContainer>
+      <SearchSvg />
+      <InputStyle type="text" placeholder="검색" />
+    </InputContainer>
+  );
 }
 
 const InputContainer = styled.div`
+  color: ${theme.colors.gray_3};
   height: 30px;
   display: flex;
   align-items: center;
