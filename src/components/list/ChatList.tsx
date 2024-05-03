@@ -45,10 +45,17 @@ const ChatList = () => {
     }).replace('오전', 'AM').replace('오후', 'PM').replace('AM', '오전').replace('PM', '오후'); // 'AM'과 'PM'을 한국어 '오전', '오후'로 변경
   };
   
-  const filteredUsers = users.filter(user => user.id !== 0 && (
-    user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    messages.some(msg => (msg.senderId === user.id || msg.receiverId === user.id) && msg.text.toLowerCase().includes(searchTerm.toLowerCase()))
-  ));
+  const filteredUsers = users.filter(user => 
+    user.id !== 0 && (
+      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      messages.some(msg => 
+        (msg.senderId === user.id || msg.receiverId === user.id) && 
+        msg.text.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    ) && 
+    messages.some(msg => (msg.senderId === user.id || msg.receiverId === user.id)) // 대화 내용이 있는 애들만 랜더링
+  );
+  
 
   return (
     <Container>
