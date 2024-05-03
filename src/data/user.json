@@ -3,7 +3,8 @@
     {
       "id": 0,
       "name": "지원",
-      "profileImg": "mine.svg"
+      "profileImg": "mine.svg",
+      "loginId": "jioni"
     },
     {
       "id": 1,
