@@ -12,13 +12,14 @@ import { type Chat } from '@type/common';
 import { useParams } from 'react-router-dom';
 import { formatDate, formatTime } from '@util/calculateDate';
 
-
 export default function ChatBottom() {
   const [inputValue, setInputValue] = useState('');
   const userName = useRecoilValue(UserState);
   const [chattingData, setChattingData] = useRecoilState(chatDataState);
   const params = useParams().id || '';
-  const opponentName = useRecoilValue(currentChatRoomIdState(params))?.name || '';
+  const currentIndex = chattingData.findIndex((chat) => chat.id === params);
+  const opponentName =
+    useRecoilValue(currentChatRoomIdState(params))?.name || '';
 
   const handleSubmit = () => {
     if (!inputValue.trim()) return;
@@ -33,25 +34,60 @@ export default function ChatBottom() {
       isDisplay: true,
       isRead: false,
     };
-    const lastChat = chattingData[0].chat[chattingData[0].chat.length - 1];
+    const lastChat =
+      chattingData[currentIndex].chat[
+        chattingData[currentIndex].chat.length - 1
+      ];
     if (lastChat.from === newChat.from && lastChat.time === newChat.time) {
       setChattingData((prev) => {
-        const lastChatIndex = prev[0].chat.length - 1;
+        const lastChatIndex = prev[currentIndex].chat.length - 1;
         const lastChat = {
-          ...prev[0].chat[lastChatIndex],
+          ...prev[currentIndex].chat[lastChatIndex],
           isDisplay: false,
         };
         const newChats = [
-          ...prev[0].chat.slice(0, lastChatIndex),
+          ...prev[currentIndex].chat.slice(0, lastChatIndex),
           lastChat,
           newChat,
         ];
-        return [{ ...prev[0], chat: newChats }, ...prev.slice(1)];
+        if (currentIndex === 0) {
+          //처음 채팅방일 경우
+          return [{ ...prev[currentIndex], chat: newChats }, ...prev.slice(1)];
+        } else if (currentIndex === chattingData.length - 1) {
+          //마지막 채팅방일 경우
+          return [
+            ...prev.slice(0, currentIndex),
+            { ...prev[currentIndex], chat: newChats },
+          ];
+        } else {
+          //중간 채팅방일 경우
+          return [
+            ...prev.slice(0, currentIndex),
+            { ...prev[currentIndex], chat: newChats },
+            ...prev.slice(currentIndex + 1),
+          ];
+        }
       });
     } else {
       setChattingData((prev) => {
-        const newChats = [...prev[0].chat, newChat];
-        return [{ ...prev[0], chat: newChats }, ...prev.slice(1)];
+        const newChats = [...prev[currentIndex].chat, newChat];
+        if (currentIndex === 0) {
+          //처음 채팅방일 경우
+          return [{ ...prev[currentIndex], chat: newChats }, ...prev.slice(1)];
+        } else if (currentIndex === chattingData.length - 1) {
+          //마지막 채팅방일 경우
+          return [
+            ...prev.slice(0, currentIndex),
+            { ...prev[currentIndex], chat: newChats },
+          ];
+        } else {
+          //중간 채팅방일 경우
+          return [
+            ...prev.slice(0, currentIndex),
+            { ...prev[currentIndex], chat: newChats },
+            ...prev.slice(currentIndex + 1),
+          ];
+        }
       });
     }
   };
