@@ -69,9 +69,7 @@ const PhoneCall: React.FC = () => {
                 <LettersText>{numLettersMapping[key]}</LettersText>
               </Button>
             ))}
-             <CallButton onClick={handleCall}>
-              <CallImg src="/assets/Call-icon.png" alt="Call"/>
-              </CallButton>
+              <CallImg src="/assets/Call-icon.png" alt="Call" onClick={handleCall}/>
             <BackspaceButton onClick={handleBackspace} src="/assets/DeletePhoneCall.svg"/>
           </Keypad>
         </KeypadContainer>
@@ -148,8 +146,8 @@ const Keypad = styled.div`
 `;
 
 const Button = styled.button`
-font-family: Pretendard;
-
+  font-family: Pretendard;
+  color: #000000; 
   width: 73px;
   height: 73px;
   background-color: #E2E2E2;
@@ -190,22 +188,27 @@ const BackspaceButton = styled.img`
   color: #B6B6B6;
   cursor: pointer;
   width: 45px;
-margin-left:12px;
+  margin-left:12px;
   &:active {
     transform: scale(0.95); 
   }
 `;
 
-const CallButton = styled(Button)`
-grid-column: 2 / span 1; 
-background-color: #31C75C; 
 
+const CallImg = styled.img`
+padding:16.5px;
+ width: 40px;
+ height: 40px;  
+ grid-column: 2 / span 1; 
+  background-color: #31C75C; 
+  
+  border: none;
+  border-radius: 50%;
   &:hover {
     background-color: #45A049; 
   }
-`;
 
-const CallImg = styled.img`
- width: 30.96px;
- height: 30px;  
+  &:active {
+    transform: scale(0.95); 
+  }
 `;
