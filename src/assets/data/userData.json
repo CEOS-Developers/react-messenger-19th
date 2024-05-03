@@ -1,0 +1,64 @@
+{
+  "users": [
+    {
+      "id": 0,
+      "name": "My Status",
+      "profileImg": "/img/MyStatus.svg",
+      "isActive": true
+    },
+    {
+      "id": 1,
+      "name": "Dain Park",
+      "profileImg": "/img/DainPark.svg",
+      "isActive": true
+    },
+    {
+      "id": 2,
+      "name": "Leah Stimptson",
+      "profileImg": "/img/LeahStimptson.svg",
+      "isActive": true
+    },
+    {
+      "id": 3,
+      "name": "Colin Bearman",
+      "profileImg": "/img/ColinBearman.svg",
+      "isActive": false
+    },
+    {
+      "id": 4,
+      "name": "Charile Moore",
+      "profileImg": "/img/CharileMoore.svg",
+      "isActive": true
+    },
+    {
+      "id": 5,
+      "name": "Hailey Stephenson",
+      "profileImg": "/img/HaileyStephenson.svg",
+      "isActive": false
+    },
+    {
+      "id": 6,
+      "name": "Sena Adams",
+      "profileImg": "/img/SenaAdams.svg",
+      "isActive": false
+    },
+    {
+      "id": 7,
+      "name": "Sienna Hwang",
+      "profileImg": "/img/SiennaHwang.svg",
+      "isActive": true
+    },
+    {
+      "id": 8,
+      "name": "Declan Walker",
+      "profileImg": "/img/DeclanWalker.svg",
+      "isActive": false
+    },
+    {
+      "id": 9,
+      "name": "Joshua Lawrence",
+      "profileImg": "/img/JoshuaLawrence.svg",
+      "isActive": true
+    }
+  ]
+}

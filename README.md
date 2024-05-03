@@ -1,66 +1,45 @@
-# 서론
-
-안녕하세요 🙌🏻 19기 프론트 운영진 배성준입니다. 이번 미션에서는 드디어 투두리스트에서 벗어나 새로운 프로젝트인 **messenger** 만들기를 진행합니다.
-
-이번주는 특별히 **디자이너와의 협업**으로 진행되는 미션입니다. 디자이너분께서 열심히 리디자인 한 메신저 프로젝트를 여러분들께서 구현해주시면 됩니다.
-
-동시에, 이번주부터는 새로 **TypeScript**를 적용해보려고 합니다.
-
-프로젝트의 규모가 커지게 될 수록, 컴포넌트가 가지는 props의 종류 또한 다양해지게 됩니다. 무지성 코딩을 하다보면 가끔 이 props의 구성과 이름, 어떤 타입이 들어가야 하는지 헷갈리기 마련이죠. 보통 그럴 때 다시 컴포넌트 정의 부분으로 돌아가 props의 구성을 보고 오곤 합니다.
-
-하지만 이럴 때, typescript를 적용한다면 컴포넌트의 구성과 그 이름, 심지어 타입까지 한번에 자동완성으로 편리하게 관리할 수 있고, 생산성이 증대되겠죠.
-
-또한, **React Hooks**에 조금 더 익숙해지는 것을 목표로 합니다. 여러 Hook들이 있지만 그 중에서도 `useState`, `useEffect`, `useRef`를 중점적으로 사용해 보는 미션인데요, React를 사용하면서 굉장히 자주 쓰이는 Hook들이기 때문에 이 부분을 집중적으로 공부해 보아요!
-
-그럼 이번 미션도 파이팅입니다!!🎉
-
 # 미션
+
+## 배포링크
+
+- [배포링크](https://react-messenger-19th-tawny.vercel.app/)
+
+## 피그마 링크
+
+- [피그마 링크](https://www.figma.com/file/W7XzAbakNIOQxwiza0wLIo/CEOS-Messenger-Redesign?type=design&node-id=5-3617&mode=design&t=ic7kPkFW1UIT5FiD-11)
+
+![image](https://github.com/CEOS-Developers/react-messenger-19th/assets/126255206/c1bbe729-7ada-4da0-84fb-4aced07614da)
+
+## 디자이너 분께 받은 QA
+
+- 입력창 폼 안에 양옆으로 10px 패딩 추가
+- 한줄짜리 채팅 버블 추가
+- 챗을 보내면 생성되는 ‘날짜 인디케이터’의 상하너비 수정
+- contact-info 페이지에서 이름 축약
 
 ## Key Questions
 
-- JavaScript를 사용할때에 비해 TypeScript를 사용할 때의 장점은 무엇인가요?
-- 디자이너로부터 전달받은 피그마 링크 혹은, 피그마 캡처본
-- 컴포넌트를 분리한 기준은 무엇인가요?
-- 디자인 시스템을 적용하면서 느낀 점은 무엇인가요?
-- 디자이너와 소통하며 느낀점은 무엇인가요?
+**1. Routing이란?**
 
-## 미션 목표
+Routing이란 경로를 선택하면 웹의 URL을 변경하여 사용자가 선택한 해당 경로로 이동하게 해주며 새로 페이지를 로드하지 않고도 변경 가능합니다. React 자체에는 Routing 기능이 내장되어 있지 않습니다. 따라서 React 애플리케이션에서 Routing을 구현하기 위해 react-router-dom과 같은 외부 라이브러리를 사용합니다. react-router-dom은 React에서 SPA를 구현할 때 널리 사용되는 Routing 라이브러리입니다.
 
-- TypeScript를 사용해봅시다.
-- useState로 컴포넌트의 상태를 관리합니다.
-- useEffect와 useRef의 사용법을 이해합니다.
-- styled-components를 통한 CSS-in-JS 및 CSS Preprocessor의 사용법에 익숙해집니다.
+이번 과제를 진행하며 react router에서 제공하는 여러 hook을 사용하였습니다. 가장 기본 경로를 채팅 목록 chats page로 지정하였고 이외에도 다른 페이지들은 각각의 URL에 맞는 컴포넌트를 정의하였습니다. URL 이동을 해야할 때에는 useNavigate을 사용해서 경로 이동을 하였습니다. useParams를 사용해서 url에서 채팅방 ID를 추출하기도 하고 useLocation을 사용하여 이전 페이지로부터 전달받은 userId 정보를 컴포넌트 내에서 사용할 수 있게 하기도 하였습니다.
 
-## 기한
+**2. SPA란?**
 
-2024년 3월 29일 금요일
+SPA는 Single Page Application의 약자로 하나의 페이지로 이루어진 웹 애플리케이션을 말합니다. 새로 페이지를 로드하지 않고 필요한 부분만 수정합니다. SPA는 클라이언트 사이드 렌더링(Client Side Rendering, CSR) 방식을 취하고 있습니다. 이는 빠른 페이지 로딩과 부드러운 페이지 전환, 그리고 사용자 화면에 높은 반응성을 유지할 수 있도록 합니다. 하지만 검색 엔진 최적화에 제한이 있으며 첫 페이지 로딩 속도가 느리다는 단점이 있습니다.
 
-## 필수 구현 기능
+**3. 상태관리란?**
 
-- 피그마를 보고 [결과화면](https://3th-fb-messenger.netlify.app)과 같이 구현합니다.
-- 디자인 시스템을 구축합니다.
-- 채팅방 상단의 프로필을 클릭하면 사용자를 변경할 수 있습니다.
-- 메세지를 보내면 채팅방 하단으로 스크롤을 이동시킵니다.
-- 메세지에 유저 정보(프로필 사진, 이름)를 표시합니다.
-- user와 message 데이터를 json 파일에 저장합니다.
-- UI는 **반응형을 제외**하고 피그마파일을 따라서 진행합니다.
+리액트의 가장 큰 특징은 부모 요소에서 자식 요소로 데이터를 전달한다는 것입니다. 컴포넌트 간에 상태를 공유하려면 이처럼 상위 컴포넌트에서 하위 컴포넌트로 porp을 넘겨 전달합니다. 이런 prop 전달 과정이 복잡해지면 계속해서 추적하고 관리하기 어렵기 때문에 전역 상태 관리를 합니다.
 
-### 추가 구현 기능
+전역 상태 관리는 여러 방법이 있는데 그중에서도 Context API, Redux, React Query가 많이 쓰입니다.
+제가 이번 과제에서 사용한 redux toolkit에 대해 간단히 설명을 해보면 . . .
 
-- 더블 클릭 하면 감정표현을 추가합니다.
-- 그 외 추가하고 싶은 기능이 있다면 마음껏 추가해 주세요!
-
-참고로 이번 과제는 다음주까지 이어지는 과제이므로 **확장성**을 충분히 고려해 주세요. 참고로 **4주차 과제에서는 유저 및 기능 추가와 Routing을** 진행합니다. 이를 위해 [recoil](https://recoiljs.org/ko/)이나 [redux](https://ko.redux.js.org/introduction/getting-started/)를 이용한 상태관리를 미리 해보시는 것을 추천합니다!! 모두 공식문서 많이 읽어보시고 자신만의 상태관리 조합도 찾아보면 재밌을 거에요 XD
+리액트는 컴포넌트 자신이 개별적으로 상태관리를 하는데 redux를 쓰면 전용 장소 store에서 상태를 관리하고, 리액트 컴포넌트는 그걸 보여주기만 하는 용도로 쓰입니다. 리액트 컴포넌트가 store에 접근하고 싶으면 action을 발행해야합니다. 여기서 reducer는 이전 상태와 action을 합쳐서 새로운 상태를 state을 만드는 조작을 말합니다. redux 사용시 저장소 구성의 복잡성, 많은 패키지 필요성, 한 작업 시 필요한 수 많은 코드양 등의 문제점을 보완하여 redux toolkit은 redux를 더 사용하기 쉽게 만들었습니다. 여기서 createSlice는 action과 reducer를 전부 가진 함수로 기존에는 액션생성함수와 액션 타입을 선언해 사용했다면 createSlice는 액션을 선언하고 해당 액션이 dispatch되면 바로 해당 액션을 처리합니다.
 
 ## 링크 및 참고자료
 
-- [React docs - Hook](https://ko.reactjs.org/docs/hooks-intro.html)
-- [React의 Hooks 완벽 정복하기](https://velog.io/@velopert/react-hooks#1-usestate)
-- [useEffect 완벽 가이드](https://overreacted.io/ko/a-complete-guide-to-useeffect/)
-- [코딩 컨벤션](https://ui.toast.com/fe-guide/ko_CODING-CONVENTION)
-- [타입스크립트 핸드북](https://joshua1988.github.io/ts/intro.html)
-- [리액트 프로젝트에서 타입스크립트 사용하기 (시리즈)](https://velog.io/@velopert/series/react-with-typescript)
-- [디자인 시스템 구축기](https://yozm.wishket.com/magazine/detail/1830/)
-- [[영상] : 컴포넌트에 대한 이해](https://www.youtube.com/watch?v=21eiJc90ggo)
-- [Styled Component로 디자인 시스템 구축하기](https://zaat.dev/blog/building-a-design-system-in-react-with-styled-components/)
-- [ts 절대경로 설정하기](https://tesseractjh.tistory.com/232)
+- [React에서 상태 관리하기](https://mingule.tistory.com/74)
+- [React - Router, useLocation 를 통해 상세페이지 구현](https://bmy1320.tistory.com/entry/React-Router-useLocation-%EB%A5%BC-%ED%86%B5%ED%95%B4-%EC%83%81%EC%84%B8%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B5%AC%ED%98%84)
+- [SPA란](https://www.elancer.co.kr/blog/view?seq=214)
