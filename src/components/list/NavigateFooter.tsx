@@ -27,7 +27,7 @@ const NavigatingFooter: React.FC = () => {
         {navItems.map(item => (
           <NavIcon
             key={item.alt}
-            src={location.pathname === item.navigateTo ? item.src.replace(".svg", "-active.svg") : item.src}             //현재 위치 추적해서 아이콘 색깔바꾸기
+            src={location.pathname === item.navigateTo ? item.src.replace(".svg", "-active.png") : item.src}             //현재 위치 추적해서 아이콘 색깔바꾸기
             alt={item.alt}
             onClick={() => navigate(item.navigateTo)}
             width={item.width}
