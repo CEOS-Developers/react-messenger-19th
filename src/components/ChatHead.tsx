@@ -11,7 +11,10 @@ interface ChatHeadProps {
 	onUserClick: () => void;
 }
 
-const ChatHead: React.FC<ChatHeadProps> = ({ user, onUserClick }) => {
+const ChatHead: React.FC<ChatHeadProps> = ({
+	user,
+	onUserClick = () => {},
+}) => {
 	return (
 		<ChatHeadContainer onClick={onUserClick}>
 			<UserImage
