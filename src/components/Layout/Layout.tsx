@@ -11,7 +11,6 @@ function Layout() {
   const isChatRoom = pathSegments.length === 2 && pathSegments[0] === 'chats';
 
   function determineBackgroundColor(segments: string[]) {
-    // 경로가 "/chats/:chatId"를 포함하는 경우 개별 채팅방 페이지
     if (isChatRoom || segments[0] == 'settings') {
       return 'var(--gray02)';
     }

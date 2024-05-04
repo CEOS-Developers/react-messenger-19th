@@ -5,7 +5,7 @@ import { getElapsedTime } from 'util/getElapsedTime';
 import { useDispatch } from 'react-redux';
 import { toggleParticipants } from 'store/chat';
 import { AppDispatch } from 'store';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface ChatRoomHeaderProps {
   toggleParticipants: () => void;

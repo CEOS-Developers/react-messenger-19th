@@ -4,7 +4,7 @@
       "id": "1",
       "partner": {
         "id": "user1",
-        "name": "연우",
+        "name": "남연우",
         "profileImage": "/images/User1.png",
         "lastAccess": "2024-03-29T21:49:00"
       },
@@ -164,7 +164,7 @@
     {
       "id": "8",
       "partner": {
-        "id": "user7",
+        "id": "user8",
         "name": "이영인",
         "profileImage": "/images/User1.png",
         "lastAccess": "2024-03-29T21:49:00"

@@ -25,27 +25,31 @@ function ChatList({ messages, me }: ChatListProps) {
 
   return (
     <ChatListWrapper>
-      {messages?.map((message) => (
-        <ChatWrapper $isMyMessage={message.senderId === me.id} key={message.id}>
-          <div className="time_wrapper">
-            {/* 현재 시간 */}
-            <SentTime>{formatDateToTime(message.createdAt)} </SentTime>
-          </div>
-          {/* 사진과 텍스트가 같이 있는 경우는 없음 -> 사진 속성이 존재하는 경우에는 사진을 존재하지 않는 경우에는 일반 텍스트 메세지를 보여줌 */}
-          {/* isMyMessage라는 prop으로 보낸 사람과 me가 같은 사람인지 아닌지에 따라 스타일링을 다르게 해줌 */}
-          {message.photo ? (
-            <ChatPhoto as="div" $isMyMessage={message.senderId === me.id}>
-              <img src={message.photo?.url} alt="Attached photograph" />
-              <div className="file_info">
-                <p className="file_name">{message.photo.name}</p>
-                <p className="file_size">{getByteSize(message.photo.size)}</p>
-              </div>
-            </ChatPhoto>
-          ) : (
-            <ChatText $isMyMessage={message.senderId === me.id}>{message.text}</ChatText>
-          )}
-        </ChatWrapper>
-      ))}
+      {messages?.map((message, idx) => {
+        const isSameTime = formatDateToTime(message.createdAt) === formatDateToTime(messages[idx - 1]?.createdAt);
+
+        return (
+          <ChatWrapper $isMyMessage={message.senderId === me.id} key={message.id}>
+            <div className="time_wrapper">
+              {/* 현재 시간 */}
+              {!isSameTime && <SentTime>{formatDateToTime(message.createdAt)} </SentTime>}
+            </div>
+            {/* 사진과 텍스트가 같이 있는 경우는 없음 -> 사진 속성이 존재하는 경우에는 사진을 존재하지 않는 경우에는 일반 텍스트 메세지를 보여줌 */}
+            {/* isMyMessage라는 prop으로 보낸 사람과 me가 같은 사람인지 아닌지에 따라 스타일링을 다르게 해줌 */}
+            {message.photo ? (
+              <ChatPhoto as="div" $isMyMessage={message.senderId === me.id}>
+                <img src={message.photo?.url} alt="Attached photograph" />
+                <div className="file_info">
+                  <p className="file_name">{message.photo.name}</p>
+                  <p className="file_size">{getByteSize(message.photo.size)}</p>
+                </div>
+              </ChatPhoto>
+            ) : (
+              <ChatText $isMyMessage={message.senderId === me.id}>{message.text}</ChatText>
+            )}
+          </ChatWrapper>
+        );
+      })}
       <div ref={messagesEndRef}></div>
     </ChatListWrapper>
   );
