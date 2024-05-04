@@ -9,6 +9,7 @@ function Router() {
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/" element={<FriendsList />} />
+        <Route path="/*" element={<FriendsList />} />
         <Route path="/chats" element={<ChattingList />} />
         <Route path="/room" element={<ChattingRoom />} />
         <Route path="/profile" element={<MyProfile />} />
