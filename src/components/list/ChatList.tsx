@@ -192,11 +192,15 @@ const ChatList = () => {
                 );
               })}
             </ChatListUl>
-          ) : (
+          )  : messages.length > 0 ? (
             <NoResultsContainer>
               <MagnifyingGlass src="/assets/Group 7.svg"/>
               <NoResults>{`'${searchTerm}'에 대한 결과 없음`}</NoResults>
               <NoResults2>맞춤법을 확인하거나 새로운 검색을 시도하십시오.</NoResults2>
+            </NoResultsContainer>
+          ) : (
+            <NoResultsContainer>
+              <NoResults2>대화 내역 없음</NoResults2>
             </NoResultsContainer>
           )}
         </ChatListContainer>

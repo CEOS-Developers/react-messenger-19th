@@ -23,8 +23,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, users, onUserSelect }) =
         <CloseButton onClick={onClose}>×</CloseButton>
         <ModalHeader>친구 선택</ModalHeader>
         <ModalContent>
-          {users.map(user => (
-            <UserItem key={user.id} onClick={() => onUserSelect(user.id)}>
+        {users.filter(user => user.id !== 0).map(user => (            <UserItem key={user.id} onClick={() => onUserSelect(user.id)}>
               <UserImage src={user.profileImage} alt={user.name} />
               <UserName>{user.name}</UserName>
             </UserItem>
