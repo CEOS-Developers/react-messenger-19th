@@ -31,16 +31,13 @@ const ChattingItem = ({ id, chatArray }: ChattingItemProps) => {
     navigate("/room");
   };
 
-  console.log(userData);
-  console.log(userData.users);
-  console.log(userData.users[idNum]);
-  console.log(userData.users[idNum].profileImg);
-
   return (
     <Wrapper onClick={handleChattingItemClick}>
-      <Profile
-        src={`img/userProfile/${userData.users[idNum].profileImg}`}
-      ></Profile>
+      {userData.users[idNum] && (
+        <Profile
+          src={`img/userProfile/${userData.users[idNum].profileImg}`}
+        ></Profile>
+      )}
       <ContentWrapper>
         <RoomInfoWrapper>
           <RoomInfoLeft>{userData.users[idNum].name}</RoomInfoLeft>

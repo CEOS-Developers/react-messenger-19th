@@ -6,7 +6,7 @@ import MyProfile from "../pages/MyProfile/MyProfile";
 
 function Router() {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<FriendsList />} />
         <Route path="/chats" element={<ChattingList />} />
