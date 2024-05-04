@@ -1,7 +1,20 @@
 // src/components/NavbarHead.tsx
 
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import styled from 'styled-components';
+
+const NavbarHeadContainer = styled.div`
+	display: flex;
+	justify-content: space-around;
+	position: fixed;
+	font-size: 20px;
+	width: 375px;
+	top: -33px;
+	height: 80px;
+	background: #f0f0f0;
+	padding-top: 30px;
+`;
 
 const NavbarHead = () => {
 	const { pathname } = useLocation();
@@ -24,11 +37,7 @@ const NavbarHead = () => {
 			navText = '';
 	}
 
-	return (
-		<div>
-			{navText}
-		</div>
-	);
+	return <NavbarHeadContainer>{navText}</NavbarHeadContainer>;
 };
 
 export default NavbarHead;
