@@ -5,7 +5,7 @@ import { getElapsedTime } from 'util/getElapsedTime';
 import { useDispatch } from 'react-redux';
 import { toggleParticipants } from 'store/chat';
 import { AppDispatch } from 'store';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface ChatRoomHeaderProps {
   toggleParticipants: () => void;
@@ -19,11 +19,17 @@ function ChatRoomHeader({ partner }: ChatRoomHeaderProps) {
   const toggleParticipant = () => {
     dispatch(toggleParticipants());
   };
+
+  const navigate = useNavigate();
+
+  const handleGoBackButtonClick = () => {
+    navigate(-1);
+  };
   return (
     <ChatRoomHeaderWrapper>
-      <Link to={'/chats'}>
+      <button onClick={handleGoBackButtonClick}>
         <LeftArrowIcon className="arrow_icon" alt="뒤로 가기 아이콘" />
-      </Link>
+      </button>
       <UserDetailInfo>
         <h1 className="user_name">{partner?.name}</h1>
         <p className="last_access">

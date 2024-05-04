@@ -136,7 +136,7 @@
       "messages": [
         {
           "id": "1",
-          "senderId": "user5",
+          "senderId": "user0",
           "text": "공식 채널에서 쓰면 편할듯",
           "createdAt": "2024-03-29T11:30:00",
           "photoUrl": ""
