@@ -1,28 +1,28 @@
 import { ReactComponent as ProfileIcon } from 'asset/icons/ProfileIcon.svg';
 import { ReactComponent as ChatIcon } from 'asset/icons/ChatIcon.svg';
-import styled, { css } from 'styled-components';
-import { flexCenter, flexColumn } from 'styles/CommonStyle';
+import styled from 'styled-components';
+import { flexCenter } from 'styles/CommonStyle';
 import { Link, useLocation } from 'react-router-dom';
 
 export default function BottomNavBar() {
   const location = useLocation();
 
   // 현재 경로와 링크 경로가 일치하는지 확인하는 함수
-  const isActive = (path: string) => {
+  const isActivePath = (path: string) => {
     return location.pathname.includes(path);
   };
 
   return (
     <BottomNavBarWrapper>
-      <Link to="/contacts" className={isActive('/contacts') ? 'active' : 'inactive'}>
+      <Link to="/contacts" className={isActivePath('/contacts') ? 'active' : 'inactive'}>
         <ProfileIcon alt="연락처 아이콘" />
         <p>연락처</p>
       </Link>
-      <Link to="/chats" className={isActive('/chats') ? 'active' : 'inactive'}>
+      <Link to="/chats" className={isActivePath('/chats') ? 'active' : 'inactive'}>
         <ChatIcon alt="대화 아이콘" />
         <p>대화</p>
       </Link>
-      <Link to="/settings" className={isActive('/settings') ? 'active' : 'inactive'}>
+      <Link to="/settings" className={isActivePath('/settings') ? 'active' : 'inactive'}>
         <img src="images/Minji.png" alt="설정 아이콘" />
         <p>설정</p>
       </Link>
@@ -34,7 +34,7 @@ const BottomNavBarWrapper = styled.div`
   display: flex;
   padding: 0.3rem 1.9rem;
   justify-content: space-between;
-
+  background-color: var(--gray01);
   position: absolute;
   left: 0;
   right: 0;
