@@ -83,7 +83,7 @@ export const BottomDiv = styled.div`
 export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	padding: 15px 22px;
+	padding: 15px 22px 72px 22px;
 `;
 
 export const ProfileHeader = styled.div`
