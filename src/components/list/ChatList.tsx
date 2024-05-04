@@ -285,14 +285,17 @@ const LastMessageText = styled.div`
   text-overflow: ellipsis;
   margin-top: 4px;
   `;
+  
 const FriendName = styled.div`
 font-size: 19px;
   font-weight: 600;
 `;
+
 const MessageTime = styled.span`
   font-size: 14px;
   color: #8D949E;
 `;
+
 const NameTimeContainer = styled.div`
   display: flex;
   align-items: center;
@@ -300,7 +303,7 @@ const NameTimeContainer = styled.div`
   width: 100%; 
   `
 
-  const NoResults = styled.div`
+const NoResults = styled.div`
   max-width:292px;
   text-align: center;
   margin-top: 20px;
@@ -308,6 +311,7 @@ const NameTimeContainer = styled.div`
   color: #1F1F1F;
   font-weight: 600;
 `;
+
 const NoResults2 = styled.div`
 max-width:292px;
 text-align: center;
@@ -316,10 +320,12 @@ font-weight: 500;
 color: #8D949E;
 margin-top: 8px;
 `;
+
 const MagnifyingGlass=styled.img`
 width:40px;
 height:40px;
 `;
+
 const NoResultsContainer = styled.div`
 display:flex;
 width:100%;
@@ -327,8 +333,8 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 height: 100%;
-margin-top: 164px;
 `;
+
 const DeleteButton = styled(motion.button)`
   font-family: Pretendard;
   font-size: 15px;

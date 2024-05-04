@@ -93,6 +93,7 @@ const FriendList = () => {
                   </FriendListItem>
                 )) : (
                   <NoResultsContainer>
+                 <MagnifyingGlass src="/assets/Group 7.svg"/>
                 <NoResults>{`'${searchTerm}'에 대한 결과 없음`}</NoResults>
                 <NoResults2>맞춤법을 확인하거나 새로운 검색을 시도하십시오.</NoResults2>
               </NoResultsContainer>
@@ -139,6 +140,7 @@ const FriendListContainer = styled.div`
 max-width: 375px;
 width: 100%;
 display: flex;
+
 flex-direction: column;
 flex: 1;
   overflow-y: auto;
@@ -217,5 +219,10 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 height: 100%;
-margin-top: 164px;
+margin-top: 127px; //임의로 조정..
+
+`;
+const MagnifyingGlass=styled.img`
+width:40px;
+height:40px;
 `;

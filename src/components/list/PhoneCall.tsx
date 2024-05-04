@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import IphoneHeader from '../main/IphoneHeader';
 import IphoneFooter from '../main/IphoneFooter';
@@ -17,6 +18,7 @@ const numLettersMapping: { [key: string]: string } = {
 
 const PhoneCall: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [inputValue, setInputValue] = useState("");
 
   const handleButtonClick = (value: string) => {
@@ -33,9 +35,9 @@ const PhoneCall: React.FC = () => {
   };
 
   const handleCall = () => {
-    if(inputValue){ //번호 입력했을때만 알람뜨기
-    alert(`${inputValue} 에게 전화거는 중...`); 
-  }
+    if(inputValue) {
+      navigate('/active-call', { state: { phoneNumber: inputValue } });
+    }
     setInputValue("");
   };
 
