@@ -31,6 +31,9 @@ const ChattingItem = ({ id, chatArray }: ChattingItemProps) => {
     navigate("/room");
   };
 
+  console.log(userData);
+  console.log(userData.users);
+  console.log(userData.users[idNum]);
   console.log(userData.users[idNum].profileImg);
 
   return (
