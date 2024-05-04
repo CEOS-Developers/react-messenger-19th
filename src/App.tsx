@@ -15,6 +15,7 @@ const App = () => {
 
 	return (
 		<>
+			<NavbarHead />
 			<Routes>
 				<Route path='/chattingroom/:userId' element={<ChattingRoom />} />
 				<Route path='/userlist' element={<UserList />} />
