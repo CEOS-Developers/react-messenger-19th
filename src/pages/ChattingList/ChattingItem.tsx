@@ -31,6 +31,8 @@ const ChattingItem = ({ id, chatArray }: ChattingItemProps) => {
     navigate("/room");
   };
 
+  console.log(userData.users[idNum].profileImg);
+
   return (
     <Wrapper onClick={handleChattingItemClick}>
       <Profile
