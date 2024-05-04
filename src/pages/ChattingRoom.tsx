@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useId, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { userListState } from '../state/userState';
@@ -17,8 +17,12 @@ interface Message {
 
 const ChattingRoom = () => {
 	const { userId } = useParams<{ userId: string }>();
+	console.log(useId);
+
 	const messagesStateValue = useRecoilValue(messagesState);
 	const [messages, setMessages] = useState<Message[]>([]);
+
+	const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
 		// 로컬 스토리지에서 이전 메시지 가져오기
@@ -29,8 +33,18 @@ const ChattingRoom = () => {
 		}
 	}, [userId]); // userId가 변경될 때마다 이펙트 재실행
 
+	useEffect(() => {
+		// 메시지가 추가될 때마다 스크롤을 하단으로 이동
+		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+	}, [messages]);
+
+	// 메세지 목록 끝으로 스크롤
+
 	const userList = useRecoilValue(userListState);
-	const currentUser = userList.find((user) => user.id === userId);
+	const otherUser = userList.find((user) => user.id === userId);
+	console.log(otherUser);
+	const otherUserIndex = otherUser?.id;
+	console.log(otherUserIndex);
 
 	const sendMessage = (content: string, from: string, to: string) => {
 		const newMessage: Message = {
@@ -51,11 +65,15 @@ const ChattingRoom = () => {
 
 	return (
 		<>
-			
-			<ChatBody messages={messages} userImage={currentUser?.image ?? ''} currentUser={currentUser?.name ?? ''} />
+			<ChatBody
+				messages={messages}
+				userImage={otherUser?.image ?? ''}
+				currentUser={otherUser?.name ?? ''}
+			/>
+			<div ref={messagesEndRef} />
 			<ChatBottom
 				onSendMessage={(content) =>
-					sendMessage(content, currentUser?.name ?? '', userId ?? '')
+					sendMessage(content, otherUser?.name ?? '', userId ?? '')
 				}
 			/>
 		</>
