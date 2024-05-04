@@ -16,7 +16,7 @@ function App(): JSX.Element {
 				<FullContainer>
 					<MobileContainer>
 						<BrowserRouter>
-							<div style={{ position: 'relative', height: '100%' }}>
+							<div style={{ position: 'relative', height: '100vh' }}>
 								<Header color="white" />
 								<Routes>
 									<Route path="/" element={<Main />} />

@@ -2,9 +2,10 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
 	display: flex;
+
 	flex-direction: column;
 
-	padding: 17px;
+	padding: 17px 17px 60px 17px;
 `;
 
 export const HeaderBar = styled.div`
