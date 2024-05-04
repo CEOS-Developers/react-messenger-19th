@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
@@ -13,6 +13,8 @@ const ActiveCall: React.FC<ActiveCallProps>  = ({ phoneNumber }) => {
     const navigate = useNavigate();
     const users = useRecoilValue(usersState);
     const phone = phoneNumber || location.state?.phoneNumber;
+    const [isAudioActive, setAudioActive] = useState(false); //이미지 토글을위한변수
+    const [isMuteActive, setMuteActive] = useState(false);
 
 
     console.log("phoneNumber:", phone);
@@ -56,18 +58,18 @@ const ActiveCall: React.FC<ActiveCallProps>  = ({ phoneNumber }) => {
           <PhoneNumberDisplay>{userName}</PhoneNumberDisplay>
         </StatusContainer>
         <ButtonContainer>
-          <ButtonWrapper>
-            <Button src="/assets/sound.png" alt="audio"/>
-            <ButtonLabel>오디오</ButtonLabel>
-          </ButtonWrapper>
-          <ButtonWrapper onClick={handleEndCall}>
-            <Button src="/assets/EndCall.png" alt="End call"/>
-            <ButtonLabel>종료</ButtonLabel>
-          </ButtonWrapper>
-          <ButtonWrapper>
-            <Button src="/assets/mute.png" alt="Mute"/>
-            <ButtonLabel>소리끔</ButtonLabel>
-          </ButtonWrapper>
+            <ButtonWrapper onClick={() => setAudioActive(prev => !prev)}>
+              <Button src={isAudioActive ? "/assets/sound-active.png" : "/assets/sound.png"} alt="audio"/>
+              <ButtonLabel>오디오</ButtonLabel>
+            </ButtonWrapper>
+            <ButtonWrapper onClick={handleEndCall}>
+              <Button src="/assets/EndCall.png" alt="End call"/>
+              <ButtonLabel>종료</ButtonLabel>
+            </ButtonWrapper>
+            <ButtonWrapper onClick={() => setMuteActive(prev => !prev)}>
+              <Button src={isMuteActive ? "/assets/mute-active.png" : "/assets/mute.png"} alt="Mute"/>
+              <ButtonLabel>소리끔</ButtonLabel>
+            </ButtonWrapper>
         </ButtonContainer>
         <IphoneFooter src='/assets/Home Indicator.png'/>
       </AppContainer>
