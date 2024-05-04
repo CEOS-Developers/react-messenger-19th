@@ -35,7 +35,7 @@ function ChatRoom() {
 export default ChatRoom;
 
 const ChatRoomContainer = styled.div`
-  height: 74rem;
+  /* height: 74rem; */
   ${flexColumn}
   padding: 0 1.6rem;
 `;

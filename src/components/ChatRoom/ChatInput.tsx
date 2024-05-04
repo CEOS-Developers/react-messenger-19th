@@ -172,8 +172,9 @@ const ChatInputWrapper = styled.form`
   gap: 0.5rem;
   height: 6rem;
   width: 100%;
-  position: relative;
+  position: absolute;
 
+  bottom: 3.2rem;
   .file_audio_button {
     ${flexCenter}
     gap: 0.5rem;

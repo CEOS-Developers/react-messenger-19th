@@ -13,7 +13,7 @@ export default Footer;
 
 const FooterWrapper = styled.div`
   background-color: var(--gray01);
-  position: sticky;
+  position: absolute;
   right: 0;
   left: 0;
   bottom: 0;

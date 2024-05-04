@@ -35,6 +35,10 @@ const BottomNavBarWrapper = styled.div`
   padding: 0.3rem 1.9rem;
   justify-content: space-between;
 
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 3.4rem;
   & p {
     color: var(--gray04);
     font-size: 1rem;
