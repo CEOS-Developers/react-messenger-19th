@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface HeaderProps {
@@ -5,9 +6,11 @@ interface HeaderProps {
 }
 
 export default function Header(props: HeaderProps): JSX.Element {
+	const location = useLocation();
+	const headerColor = location.pathname === '/chatroom/1' ? '#8cabd9' : 'white';
 	return (
 		<>
-			<Wrapper color={props.color}>
+			<Wrapper color={headerColor}>
 				<Time>09:23</Time>
 				<Icon src="/icon/Status Bar/Icons.svg" />
 			</Wrapper>
