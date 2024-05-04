@@ -13,7 +13,7 @@ const Header: React.FC = () => {
   const [initialSelectedUserId, setInitialSelectedUserId] = useState(selectedUserId);
   const messages = useRecoilValue(messagesState);
 
-  // selectedUserId가 변경될 때마다 초기 selectedUserId를 업데이트합니다.
+  // selectedUserId가 변경될 때마다 초기 selectedUserId 업데이트
   useEffect(() => {
     if (selectedUserId !== 0) {
       setInitialSelectedUserId(selectedUserId);
@@ -26,9 +26,13 @@ const Header: React.FC = () => {
     navigate(-1); // 뒤로가기 로직
   };
 
-  const handleCallButtonClick = () => {
-    console.log('Call button clicked'); // 전화 걸기 로직
-  };
+  const handleCallButtonClick = () => { //전화걸기 버튼 활성화!!
+    if (selectedUser && selectedUser.phoneNumber) {
+        navigate('/phone', { state: { phoneNumber: selectedUser.phoneNumber } });
+    } else {
+        console.log('전화번호가 없습니다.');
+    }
+};
 
   const toggleUser = () => {
     // 메시지가 있는지 확인
