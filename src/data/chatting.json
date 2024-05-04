@@ -1,0 +1,107 @@
+[
+  {
+    "opponent": 1,
+    "chats": [
+      {
+        "text": "짱구야 노올자~",
+        "sender": 0,
+        "timestamp": "5월 3일 (금) 9:21 AM"
+      },
+      {
+        "text": "유치원 갔니?",
+        "sender": 0,
+        "timestamp": "5월 3일 (금) 12:45 PM"
+      },
+      {
+        "text": "부리부리부리!",
+        "sender": 1,
+        "timestamp": "5월 3일 (금) 3:09 PM"
+      }
+    ]
+  },
+  {
+    "opponent": 2,
+    "chats": [
+      {
+        "text": "나현님 안녕하세요!",
+        "sender": 0,
+        "timestamp": "3월 21일 (목) 9:38 AM"
+      },
+      {
+        "text": "지원님 안녕하세요! 디자인 완전 최고최고입니다",
+        "sender": 2,
+        "timestamp": "3월 21일 (목) 9:38 AM"
+      },
+      {
+        "text": "헤헷",
+        "sender": 0,
+        "timestamp": "3월 22일 (금) 3:18 PM"
+      }
+    ]
+  },
+  {
+    "opponent": 3,
+    "chats": [
+      {
+        "text": "뭐해?",
+        "sender": 3,
+        "timestamp": "4월 28일 (일) 10:01 PM"
+      },
+      {
+        "text": "연락하지마",
+        "sender": 0,
+        "timestamp": "4월 29일 (월) 11:19 AM"
+      },
+      {
+        "text": "바쁘구나",
+        "sender": 3,
+        "timestamp": "4월 29일 (월) 11:30 AM"
+      },
+      {
+        "text": "미안! 카톡 안 할게~!",
+        "sender": 3,
+        "timestamp": "4월 29일 (월) 11:31 AM"
+      },
+      {
+        "text": "자니?",
+        "sender": 3,
+        "timestamp": "4월 30일 (화) 1:04 AM"
+      },
+      {
+        "text": "자는구나",
+        "sender": 3,
+        "timestamp": "4월 30일 (화) 1:56 AM"
+      },
+      {
+        "text": "잘자",
+        "sender": 3,
+        "timestamp": "4월 30일 (화) 2:24 AM"
+      }
+    ]
+  },
+  {
+    "opponent": 4,
+    "chats": [
+      {
+        "text": "나 이제 너랑 친구 그만할래 못하겠어",
+        "sender": 4,
+        "timestamp": "4월 1일 (월) 10:01 AM"
+      },
+      {
+        "text": "답장 안해? 너랑 절교하고 싶다고",
+        "sender": 4,
+        "timestamp": "4월 1일 (월) 8:13 PM"
+      },
+      {
+        "text": "그래",
+        "sender": 0,
+        "timestamp": "4월 2일 (화) 11:48 PM"
+      },
+      {
+        "text": "만우절 장난이었어.......너 진심이야?",
+        "sender": 4,
+        "timestamp": "4월 2일 (화) 11:49 PM"
+      }
+    ]
+  }
+]
