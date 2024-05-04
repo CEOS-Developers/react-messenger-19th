@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { usersState } from '../state/userState';
 import styled from 'styled-components';
@@ -9,7 +9,7 @@ import NavigatingFooter from './NavigateFooter';
 import ChatListHeader from './ChatListHeader';
 import { selectedUserState } from '../state/selectedUserState'; // selectedUserId 상태 추가
 import { messagesState } from '../state/messageState'; 
-import { motion } from 'framer-motion';
+import { motion,AnimatePresence } from 'framer-motion';
 
 
 const pageTransitionVariants = { //페이지 전환 애니메이션
@@ -18,17 +18,64 @@ const pageTransitionVariants = { //페이지 전환 애니메이션
   exit: { opacity: 0 }
 };
 
+
+const buttonVariants = { //버튼 애니메이션!!
+  hidden: {
+    x: 50,
+    opacity: 0,
+  },
+  visible: {
+    x: 15,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 300,
+      damping: 20,
+    }
+  },
+  hover: {
+    scale: 1.04,
+    transition: { yoyo: Infinity, duration: 0.2 },
+  },
+  tap: { //클릭햇을떄
+    scale: 0.98,
+    transition: { duration: 0.1 },
+  },
+};
+
 const ChatList = () => {
   const users = useRecoilValue(usersState);
   const [selectedUserId, setSelectedUserId] = useRecoilState(selectedUserState); // selectedUserId 상태 추가
-  const messages = useRecoilValue(messagesState);
+  const [messages, setMessages] = useRecoilState(messagesState);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
 
-  const handleEditClick = () => {
-    // 편집 버튼 핸들러..
+  const handleEditClick = () => { //편집버튼핸들러
+    setIsEditing(!isEditing);
   };
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+  useEffect(() => {
+    const localMessages = localStorage.getItem('messages');
+    if (localMessages) {
+      setMessages(JSON.parse(localMessages));
+    }
+  }, []);
+
+  const handleDeleteMessage = (userId: number, event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    const updatedMessages = messages.filter(
+      message => message.senderId !== userId && message.receiverId !== userId
+    );
+    setMessages(updatedMessages);
+    localStorage.setItem('messages', JSON.stringify(updatedMessages));
+  };
+
+
+
+
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => { //검색핸들러
     setSearchTerm(e.target.value);
   };
 
@@ -42,8 +89,8 @@ const ChatList = () => {
       // 사용자가 선택되었고 메시지가 있을 때
       setSelectedUserId(userId);
     } else {
-      // 메시지가 없을 때 별도 처리
-      // 예: 선택된 사용자 ID를 null로 설정하고 UserProfile을 보여주기
+      // 메시지가 없을 때
+      // 선택된 사용자 ID를 0로 설정
       setSelectedUserId(0);
     }
   };
@@ -64,16 +111,23 @@ const ChatList = () => {
     }).replace('오전', 'AM').replace('오후', 'PM').replace('AM', '오전').replace('PM', '오후'); // 'AM'과 'PM'을 한국어 '오전', '오후'로 변경
   };
   
-  const filteredUsers = users.filter(user => 
+  const getLastMessageTime = (userId: number) => { //최근 메세지 보낸 시각 가져오기
+    const lastMessage = getLastMessage(userId);
+    return lastMessage ? new Date(lastMessage.timestamp).getTime() : 0;
+  };
+  
+  const filteredUsers = users.filter(user => // 목록에 랜더링할 사용자 필터링
     user.id !== 0 && (
       user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      messages.some(msg => 
-        (msg.senderId === user.id || msg.receiverId === user.id) && 
+      messages.some(msg =>
+        (msg.senderId === user.id || msg.receiverId === user.id) &&
         msg.text.toLowerCase().includes(searchTerm.toLowerCase())
       )
-    ) && 
-    messages.some(msg => (msg.senderId === user.id || msg.receiverId === user.id)) // 대화 내용이 있는 애들만 랜더링
-  );
+    ) &&
+    messages.some(msg => (msg.senderId === user.id || msg.receiverId === user.id)) // 대화 내용이 있는 사용자만 렌더링
+  ).sort((a, b) => {
+    return getLastMessageTime(b.id) - getLastMessageTime(a.id); // 최신 메시지가 위로 오도록 정렬
+  });
   
 
   return (
@@ -91,6 +145,7 @@ const ChatList = () => {
           onEditClick={handleEditClick} 
           onSearchChange={handleSearchChange} 
           searchTerm={searchTerm}
+          isEditing={isEditing}
         />
         <ChatListContainer>
           {filteredUsers.length > 0 ? (
@@ -98,23 +153,42 @@ const ChatList = () => {
               {filteredUsers.map(user => {
                 const lastMessage = getLastMessage(user.id);
                 return (
-                  <Link 
-                    to={`/chat/${user.id}`} 
-                    key={user.id} 
-                    style={{ textDecoration: 'none', color: 'inherit' }}
-                    onClick={() => handleUserClick(user.id)}
-                  >
+                  
                     <FriendListItem>
                       <FriendImage src={user.profileImage} alt={user.name} />
                       <FriendInfo>
                         <NameTimeContainer>
+                        <Link 
+                            to={`/chat/${user.id}`} 
+                            key={user.id} 
+                            style={{ textDecoration: 'none', color: 'inherit' }}
+                            onClick={() => handleUserClick(user.id)}
+                          >
                           <FriendName>{user.name}</FriendName>
-                          <MessageTime>{lastMessage ? `${formatMessageTime(lastMessage.timestamp)}`: null}</MessageTime>
+                          </Link>
+
+                          {isEditing ? (
+                            <AnimatePresence>
+                                <DeleteButton
+                                      key="delete"
+                                      variants={buttonVariants}
+                                      initial="hidden"
+                                      animate="visible"
+                                      exit="hidden"
+                                      whileHover="hover"
+                                      whileTap="tap"
+                                      onClick={(e) => handleDeleteMessage(user.id, e)}
+                                      >
+                                  삭제
+                                </DeleteButton>
+                              </AnimatePresence>
+                            ) : (
+                              <MessageTime>{lastMessage ? `${formatMessageTime(lastMessage.timestamp)}`: null}</MessageTime>
+                            )}
                         </NameTimeContainer>
                         <LastMessageText>{lastMessage ? lastMessage.text : "No messages"}</LastMessageText>
                       </FriendInfo>
                     </FriendListItem>
-                  </Link>
                 );
               })}
             </ChatListUl>
@@ -136,6 +210,9 @@ const ChatList = () => {
 };
 
 export default ChatList;
+
+
+
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -165,7 +242,9 @@ const ChatListContainer = styled.div`
   flex: 1;
   display: flex;            
   overflow-y: auto;          
-  width: 100%;   
+  width: 100%; 
+  overflow-x: hidden; // 가로 스크롤바 숨김
+  
  `;
 
 const ChatListUl = styled.ul`
@@ -181,7 +260,7 @@ const FriendListItem = styled.li`
   display: flex;
   justify-content: center;
   padding: 12px 0;
-
+  position: relative;
   margin-bottom: 4px;
   width: 100%;  
 `;
@@ -194,7 +273,7 @@ const FriendImage = styled.img`
 
 const FriendInfo = styled.span`
 font-family: pretendard;
-  margin: 6px 0px 6px 11px;
+  margin: 0px 0px 0px 11px;
   width:280px;
 `;
 
@@ -249,4 +328,20 @@ align-items: center;
 justify-content: center;
 height: 100%;
 margin-top: 164px;
+`;
+const DeleteButton = styled(motion.button)`
+  font-family: Pretendard;
+  font-size: 15px;
+  position: absolute; 
+  width: 75px;
+  height: 75px;
+  right: 30px;
+  top: 1px;
+  background-color: #FF4062;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

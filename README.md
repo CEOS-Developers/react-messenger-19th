@@ -231,3 +231,51 @@ useRecoilState() : 읽고 쓸 수 있음
 - 메세지에 유저 정보(프로필 사진, 이름)를 표시합니다.
 - user와 message 데이터를 json 파일에 저장합니다.
 - UI는 **반응형을 제외**하고 피그마파일을 따라서 진행합니다.
+
+
+
+react-messenger-19th
+├─ package-lock.json
+├─ package.json
+├─ public
+│  ├─ assets
+│  │ 
+│  └─ index.html
+├─ README.md
+├─ src
+│  ├─ App.tsx
+│  ├─ components
+│  │  ├─ chat
+│  │  │  ├─ ChatInput.tsx
+│  │  │  ├─ ChatMessages.tsx
+│  │  │  ├─ EmojiModal.tsx
+│  │  │  └─ UserProfile.tsx
+│  │  ├─ fakedata
+│  │  │  │  ├─ messages.json
+│  │  │  └─ users.json
+│  │  ├─ list
+│  │  │  ├─ Call-icon.png
+│  │  │  ├─ ChatList.tsx
+│  │  │  ├─ ChatListHeader.tsx
+│  │  │  ├─ FriendList.tsx
+│  │  │  ├─ FriendListHeader.tsx
+│  │  │  ├─ MyPage.tsx
+│  │  │  ├─ MyPageHeader.tsx
+│  │  │  ├─ NavigateFooter.tsx
+│  │  │  ├─ NewChatModal.tsx
+│  │  │  └─ PhoneCall.tsx
+│  │  ├─ main
+│  │  │  ├─ ChatApp.tsx
+│  │  │  ├─ Header.tsx
+│  │  │  ├─ IphoneFooter.tsx
+│  │  │  └─ IphoneHeader.tsx
+│  │  ├─ state
+│  │  │  ├─ currentUserState.ts
+│  │  │  ├─ messageState.ts
+│  │  │  ├─ selectedUserState.ts
+│  │  │  └─ userState.ts
+│  └─ style
+│  │     └─ GlobalStyle.tsx
+│  ├─ index.tsx
+│  └─ react-app-env.d.ts
+└─ tsconfig.json

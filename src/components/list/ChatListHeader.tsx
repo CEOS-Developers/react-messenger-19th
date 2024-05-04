@@ -10,9 +10,10 @@ interface ChatListHeaderProps {
     onEditClick: () => void;
     onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void; 
     searchTerm?: string; //없어도댐 검색어
+    isEditing: boolean;
 }
 
-const ChatListHeader: React.FC<ChatListHeaderProps> = ({ onEditClick, onSearchChange, searchTerm }) => {
+const ChatListHeader: React.FC<ChatListHeaderProps> = ({ onEditClick, onSearchChange, searchTerm, isEditing }) => {
     const [isModalOpen, setModalOpen] = useState(false);
     const navigate = useNavigate();
     const users = useRecoilValue(usersState); 
