@@ -40,7 +40,9 @@ const ChattingItem = ({ id, chatArray }: ChattingItemProps) => {
       )}
       <ContentWrapper>
         <RoomInfoWrapper>
-          <RoomInfoLeft>{userData.users[idNum].name}</RoomInfoLeft>
+          {userData.users[idNum] && (
+            <RoomInfoLeft>{userData.users[idNum].name}</RoomInfoLeft>
+          )}
           <RoomInfoRight>
             <Time>{chatArray[chatArray.length - 1].timestamp}</Time>
             <Icon src={arrow}></Icon>
