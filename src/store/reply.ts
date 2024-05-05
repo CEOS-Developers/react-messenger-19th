@@ -3,9 +3,10 @@ import { Message } from 'types/ChatData';
 
 export interface InitialStateType {
   replyMessage: Message | null; // 답장을 위한 상태
+  replyMessageId: string | undefined;
   isReplyWindowOpen: boolean;
 }
-const initialState: InitialStateType = { replyMessage: null, isReplyWindowOpen: false };
+const initialState: InitialStateType = { replyMessage: null, isReplyWindowOpen: false, replyMessageId: undefined };
 
 export const replySlice = createSlice({
   name: 'reply',
@@ -13,6 +14,7 @@ export const replySlice = createSlice({
   reducers: {
     setReplyMessage: (state, action: PayloadAction<Message | null>) => {
       state.replyMessage = action.payload;
+      state.replyMessageId = action.payload?.id;
     },
 
     toggleReplyWindow: (state) => {

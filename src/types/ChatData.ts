@@ -28,4 +28,5 @@ export interface Message {
   text?: string;
   createdAt: string;
   photo?: Photo;
+  replyTo?: string;
 }

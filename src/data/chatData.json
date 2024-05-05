@@ -30,6 +30,7 @@
           "id": "3",
           "senderId": "user1",
           "text": "지금 뭐하고있어?",
+          "replyTo": "1",
           "createdAt": "2024-03-29T11:33:00"
         },
         {

@@ -48,6 +48,8 @@ export const chatSlice = createSlice({
         state.selectedChats = [];
       }
       state.selectedChats.push(newMessage);
+
+      console.log(state.selectedChats);
     },
   },
 });

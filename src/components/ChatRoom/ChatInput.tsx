@@ -25,8 +25,8 @@ function ChatInput({ me }: ChatInputProps) {
     dispatch(toggleReplyWindow());
   };
 
-  const replyMessage = useSelector((state: RootState) => state.reply.replyMessage);
-  const isReplyWindowOpen = useSelector((state: RootState) => state.reply.isReplyWindowOpen);
+  const { replyMessage, isReplyWindowOpen } = useSelector((state: RootState) => state.reply);
+  const { selectedChats } = useSelector((state: RootState) => state.chat);
 
   // shift + enter로 줄 바꿈 기능
   const handleKeyDownShiftEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -54,17 +54,20 @@ function ChatInput({ me }: ChatInputProps) {
       return;
     }
 
+    if (!selectedChats) return;
     dispatch(
       addNewChat({
-        id: Date().toString(),
+        id: String(+selectedChats[selectedChats.length - 1].id + 1),
         // me가 보내는 사람임
         senderId: me.id,
         text: inputValue,
-        createdAt: Date().toString(),
+        createdAt: new Date().toISOString(),
+        replyTo: replyMessage?.id,
       }),
     );
 
     setInputValue('');
+    handleReplyWindowToggle();
   };
 
   const textArea = useRef<HTMLTextAreaElement>(null);
@@ -93,10 +96,10 @@ function ChatInput({ me }: ChatInputProps) {
     const { size, name } = targetFile;
 
     const url = URL.createObjectURL(targetFile);
-
+    if (!selectedChats) return;
     dispatch(
       addNewChat({
-        id: Date().toString(),
+        id: String(+selectedChats[selectedChats.length - 1].id + 1),
         // me가 보내는 사람임
         senderId: me.id,
         text: inputValue,
@@ -154,7 +157,7 @@ function ChatInput({ me }: ChatInputProps) {
         </TextAreaWrapper>
         {inputValue && (
           <button>
-            <SendIcon alt="보내기아이콘" />
+            <SendIcon alt="보내기 아이콘" />
           </button>
         )}
       </ChatInputWrapper>

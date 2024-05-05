@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from 'store';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from 'store';
 import { setReplyMessage, toggleReplyWindow } from 'store/reply';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/CommonStyle';
@@ -27,8 +27,6 @@ function ChatList({ messages, me }: ChatListProps) {
     dispatch(toggleReplyWindow());
     dispatch(setReplyMessage(message));
   };
-
-  const replyMessage = useSelector((state: RootState) => state.reply.replyMessage);
 
   // 메시지 목록이 업데이트될 때마다 scrollToBottom 함수를 호출
   useEffect(() => {
@@ -64,13 +62,15 @@ function ChatList({ messages, me }: ChatListProps) {
             ) : (
               <>
                 <ChatText $isMyMessage={message.senderId === me.id}>
-                  <ReplyTargetInfo>
-                    <div className="reply-indicator" />
-                    <div className="reply-info">
-                      <p className="reply-name">{replyMessage?.senderId}</p>
-                      <p className="reply-message">{replyMessage?.text}</p>
-                    </div>
-                  </ReplyTargetInfo>
+                  {message.replyTo && (
+                    <ReplyTargetInfo>
+                      <div className="reply-indicator" />
+                      <div className="reply-info">
+                        <p className="reply-name">{messages[+message.replyTo - 1].senderId}</p>
+                        <p className="reply-message">{messages[+message.replyTo - 1].text}</p>
+                      </div>
+                    </ReplyTargetInfo>
+                  )}
                   {message.text}
                 </ChatText>
               </>
@@ -137,7 +137,7 @@ const ReplyTargetInfo = styled.div`
     gap: 0rem;
   }
 `;
-const ChatText = styled.p<{ $isMyMessage: boolean }>`
+const ChatText = styled.div<{ $isMyMessage: boolean }>`
   max-width: 20rem;
   padding: 0.7rem 1.5rem;
   color: var(--black);
