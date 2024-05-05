@@ -1,10 +1,15 @@
 import React from 'react';
-import { ChatHeadContainer, UserImage, UserName, SendButton} from '../style/ChatHeadStyle';
+import {
+	ChatHeadContainer,
+	UserImage,
+	UserName,
+	SendButton,
+} from '../style/ChatHeadStyle';
 import { useNavigate } from 'react-router-dom';
 
 interface User {
-    name: string;
-    image: string;
+	name: string;
+	image: string;
 }
 
 interface ChatHeadProps {
@@ -12,27 +17,26 @@ interface ChatHeadProps {
 	onUserClick: () => void;
 }
 
-const buttonImage =  '/item/sendIcon.png';
+const buttonImage = '/item/sendIcon.png';
 
+const ChatHead: React.FC<ChatHeadProps> = ({ user, onUserClick }) => {
+	const navigate = useNavigate();
 
-const ChatHead:React.FC<ChatHeadProps> = ({ user, onUserClick })=> {
-    const navigate = useNavigate();
+	const handleUserClick = () => {
+		navigate(`/chattinglist`);
+	};
 
-    const handleUserClick = () => {
-        navigate(`/chattinglist`);
-    };
-
-    return (
-        <ChatHeadContainer onClick={handleUserClick}>
+	return (
+		<ChatHeadContainer onClick={onUserClick}>
 			<SendButton src={buttonImage} onClick={handleUserClick} alt='Send' />
-            <UserImage
-                src={user.image}
-                alt='Profile'
-                style={{ width: '34px', height: '34px', borderRadius: '50%' }}
-            />
-            <UserName>{user.name}</UserName>
-        </ChatHeadContainer>
-    );
+			<UserImage
+				src={user.image}
+				alt='Profile'
+				style={{ width: '34px', height: '34px', borderRadius: '50%' }}
+			/>
+			<UserName>{user.name}</UserName>
+		</ChatHeadContainer>
+	);
 };
 
 export default ChatHead;

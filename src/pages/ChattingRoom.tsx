@@ -43,21 +43,26 @@ const ChattingRoom = () => {
 
 	// 유저 관리
 	// 현재 사용자 상태 관리
-	const [currentUserIndex, setCurrentUserIndex] = useState(0);
 
 	const userList = useRecoilValue(userListState);
 	// 대화 상대방
 	const otherUser = userList.find((user) => user.id === userId);
-	// 유저 리스트 1번째
-	const currentUser = userList[0];
+
+	const otherUserIndex = Number(otherUser?.id);
+
+	const [currentUserIndex, setCurrentUserIndex] = useState(0);
+	const [counterUserIndex, setCounterUserIndex] = useState(otherUserIndex);
+
+	let currentUser = userList[currentUserIndex];
+	let counterUser = userList[counterUserIndex];
+
 	console.log(currentUser);
-	console.log(otherUser);
-	const otherUserIndex = otherUser?.id;
 
 	//console.log(otherUserIndex);
 
 	const toggleUser = () => {
-		setCurrentUserIndex((currentIndex) => (currentIndex === 0 ? 1 : 0));
+		setCurrentUserIndex(counterUserIndex);
+		setCounterUserIndex(currentUserIndex);
 	};
 
 	const sendMessage = (content: string, from: string, to: string) => {
@@ -80,18 +85,18 @@ const ChattingRoom = () => {
 	return (
 		<>
 			<ChatHead
-				user={otherUser ?? { name: 'Unknown', image: 'default.png' }}
+				user={counterUser ?? { name: 'Unknown', image: 'default.png' }}
 				onUserClick={toggleUser}
 			/>
 			<ChatBody
 				messages={messages}
-				userImage={otherUser?.image ?? ''}
+				userImage={counterUser?.image ?? ''}
 				currentUser={currentUser?.id ?? ''}
 			/>
 			<div ref={messagesEndRef} />
 			<ChatBottom
 				onSendMessage={(content) =>
-					sendMessage(content, currentUser?.id ?? '', userId ?? '')
+					sendMessage(content, currentUser?.id ?? '', counterUser?.id ?? '')
 				}
 			/>
 		</>
