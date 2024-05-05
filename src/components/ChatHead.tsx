@@ -17,7 +17,7 @@ interface ChatHeadProps {
 	onUserClick: () => void;
 }
 
-const buttonImage = '/item/sendIcon.png';
+const buttonImage = '/item/back.png';
 
 const ChatHead: React.FC<ChatHeadProps> = ({ user, onUserClick }) => {
 	const navigate = useNavigate();
