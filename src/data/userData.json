@@ -1,0 +1,52 @@
+{
+  "users": [
+    {
+      "id": "user1",
+      "name": "남연우",
+      "profileImage": "/images/User1.png",
+      "lastAccess": "2024-03-29T21:49:00"
+    },
+    {
+      "id": "user2",
+      "name": "구윤지",
+      "profileImage": "/images/User1.png",
+      "lastAccess": "2024-03-29T21:49:00"
+    },
+    {
+      "id": "user3",
+      "name": "김유빈",
+      "profileImage": "/images/User1.png",
+      "lastAccess": "2024-03-29T21:49:00"
+    },
+    {
+      "id": "user4",
+      "name": "김정민",
+      "profileImage": "/images/User1.png",
+      "lastAccess": "2024-03-29T21:49:00"
+    },
+    {
+      "id": "user5",
+      "name": "박다인",
+      "profileImage": "/images/User1.png",
+      "lastAccess": "2024-03-29T21:49:00"
+    },
+    {
+      "id": "user6",
+      "name": "박서연",
+      "profileImage": "/images/User1.png",
+      "lastAccess": "2024-03-29T21:49:00"
+    },
+    {
+      "id": "user7",
+      "name": "송예은",
+      "profileImage": "/images/User1.png",
+      "lastAccess": "2024-03-29T21:49:00"
+    },
+    {
+      "id": "user8",
+      "name": "이영인",
+      "profileImage": "/images/User1.png",
+      "lastAccess": "2024-03-29T21:49:00"
+    }
+  ]
+}
