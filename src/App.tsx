@@ -10,7 +10,15 @@ import ChatHead from './components/ChatHead';
 import ChatBody from './components/ChatBody';
 import ChatBottom from './components/ChatBottom';
 import GlobalStyle from './style/GlobalStyle';
+import styled from 'styled-components';
 
+const BottomBackground = styled.div`
+	bottom: 100px;
+	background-color: #fffff;
+	widht: 385px;
+	height: 300px;
+	z-index:100;
+`;
 
 const App = () => {
 	const { pathname } = useLocation();
@@ -18,7 +26,6 @@ const App = () => {
 
 	return (
 		<>
-
 			<GlobalStyle />
 			{isChattingRoomPage ? (
 				<span />
@@ -36,6 +43,8 @@ const App = () => {
 				</Routes>
 			</div>
 			{!isChattingRoomPage && <Navbar />}
+
+	
 		</>
 	);
 };

@@ -15,6 +15,7 @@ const NavbarHeadContainer = styled.div`
 	height: 80px;
 	background: #fffff;
 	padding-top: 30px;
+    
 
 `;
 const NavbarHeadTexts=styled.div`

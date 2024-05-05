@@ -18,6 +18,15 @@ interface Message {
 	date: string;
 }
 
+const ChatBottomMask = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: 100%; // 뷰포트 전체 너비 사용
+  height: 360px; // ChatBottom의 높이와 동일하게 설정
+  background-color: white; // 흰색 배경
+  z-index: 1; // ChatBottom보다 낮은 z-index 설정
+`;
+
 const ChattingRoom = () => {
 	const { userId } = useParams<{ userId: string }>();
 	console.log(useId);
@@ -86,21 +95,24 @@ const ChattingRoom = () => {
 
 	return (
 		<>
-			<ChatHead
-				user={counterUser ?? { name: 'Unknown', image: 'default.png' }}
-				onUserClick={toggleUser}
-			/>
-			<ChatBody
-				messages={messages}
-				userImage={counterUser?.image ?? ''}
-				currentUser={currentUser?.id ?? currentUser?.id}
-			/>
-			<div ref={messagesEndRef} />
-			<ChatBottom
-				onSendMessage={(content) =>
-					sendMessage(content, currentUser?.id ?? '', counterUser?.id ?? '')
-				}
-			/>
+			
+				<ChatHead
+					user={counterUser ?? { name: 'Unknown', image: 'default.png' }}
+					onUserClick={toggleUser}
+				/>
+				<ChatBody
+					messages={messages}
+					userImage={counterUser?.image ?? ''}
+					currentUser={currentUser?.id ?? currentUser?.id}
+				/>
+                  <ChatBottomMask /> // 메시지 하단에 흰색 마스크 추가
+				<div ref={messagesEndRef} />
+				<ChatBottom
+					onSendMessage={(content) =>
+						sendMessage(content, currentUser?.id ?? '', counterUser?.id ?? '')
+					}
+				/>
+			
 		</>
 	);
 };

@@ -12,6 +12,7 @@ export const ChatHeadContainer = styled.div`
 	flex-shrink: 0;
 	background-image: url('/item/chatHead.png');
 	background-size: cover;
+  
 `;
 
 export const UserImage = styled.img`
@@ -38,6 +39,6 @@ export const SendButton = styled.img`
 	cursor: pointer;
 	border: none;
 	position: absolute;
-	margin-top: 28px;
-	margin-left: 14px;
+	margin-top: 30px;
+	margin-left: 10px;
 `;

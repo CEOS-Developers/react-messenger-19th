@@ -32,8 +32,26 @@ const ProfileImage = styled.img`
 	margin-bottom: 20px;
 `;
 
-const ProfileField = styled.div`
+const ProfileFieldName = styled.div`
 	margin: 10px 0;
+	text-align: center;
+font-family: "Noto Sans KR";
+font-size: 24px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+letter-spacing: 0.33px;
+`;
+
+const ProfileFieldPhone = styled.div`
+color: var(--gray, #8D8D8F);
+text-align: center;
+font-family: "Noto Sans KR";
+font-size: 15px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: -0.2px;
 `;
 
 const Input = styled.input`
@@ -90,12 +108,12 @@ const Profile = () => {
 				src={profile.image || '/default-profile.png'}
 				alt='프로필 이미지'
 			/>
-			<ProfileField>
+			<ProfileFieldName>
 				<div id='profile-name'>{profile.name}</div>
-			</ProfileField>
-			<ProfileField>
+			</ProfileFieldName>
+			<ProfileFieldPhone>
 				<div id='profile-name'>{profile.phone}</div>
-			</ProfileField>
+			</ProfileFieldPhone>
 			<ShortcutLink href={profile.instagram} target='_blank'>
 				<InstagramLogo src='/instagram_logo.png' alt='Instagram 로고' />
 			</ShortcutLink>

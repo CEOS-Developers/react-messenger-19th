@@ -10,6 +10,7 @@ export const ChatBottomContainer = styled.div`
 
 	background-image: url('/item/chatBottom.png');
 	background-size: cover;
+	z-index: 2;
 `;
 
 export const ChatInput = styled.input`
