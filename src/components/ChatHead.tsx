@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChatHeadContainer, UserImage, UserName } from '../style/ChatHeadStyle';
+import { ChatHeadContainer, UserImage, UserName, SendButton} from '../style/ChatHeadStyle';
 import { useNavigate } from 'react-router-dom';
 
 interface User {
@@ -7,7 +7,15 @@ interface User {
     image: string;
 }
 
-const ChatHead: React.FC<{ user: User }> = ({ user }) => {
+interface ChatHeadProps {
+	user: User;
+	onUserClick: () => void;
+}
+
+const buttonImage =  '/item/sendIcon.png';
+
+
+const ChatHead:React.FC<ChatHeadProps> = ({ user, onUserClick })=> {
     const navigate = useNavigate();
 
     const handleUserClick = () => {
@@ -16,6 +24,7 @@ const ChatHead: React.FC<{ user: User }> = ({ user }) => {
 
     return (
         <ChatHeadContainer onClick={handleUserClick}>
+			<SendButton src={buttonImage} onClick={handleUserClick} alt='Send' />
             <UserImage
                 src={user.image}
                 alt='Profile'

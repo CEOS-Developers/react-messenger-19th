@@ -79,7 +79,10 @@ const ChattingRoom = () => {
 
 	return (
 		<>
-			<ChatHead user={otherUser ?? { name: 'Unknown', image: 'default.png' }} />
+			<ChatHead
+				user={otherUser ?? { name: 'Unknown', image: 'default.png' }}
+				onUserClick={toggleUser}
+			/>
 			<ChatBody
 				messages={messages}
 				userImage={otherUser?.image ?? ''}

@@ -34,3 +34,15 @@ margin-top:47px;
 font-style: normal;
 font-weight: 500;
 `;
+
+
+export const SendButton = styled.img`
+	width: 30px;
+	height: 30px;
+	flex-shrink: 0;
+	cursor: pointer;
+	border: none;
+	position: absolute;
+	margin-top: 9px;
+	margin-left: 4px;
+`;

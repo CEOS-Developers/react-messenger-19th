@@ -17,7 +17,8 @@ const App = () => {
 	return (
 		<>
 			{isChattingRoomPage ? (
-				<ChatHead user={{ name: '', image: '' }} />
+				<span/>
+				//<ChatHead user={{ name: '', image: '' }} />
 			) : (
 				<NavbarHead />
 			)}
