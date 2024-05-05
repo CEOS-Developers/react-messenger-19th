@@ -51,6 +51,12 @@ export const userListState = atom<User[]>({
 			image: '/item/profile_mini.png',
 			chatHistory: [],
 		},
+        {
+			id: '5',
+			name: '정모씨',
+			image: '/item/profile_mini.png',
+			chatHistory: [],
+		},
 	],
 });
 

@@ -105,7 +105,7 @@ const ChattingRoom = () => {
 					userImage={counterUser?.image ?? ''}
 					currentUser={currentUser?.id ?? currentUser?.id}
 				/>
-                  <ChatBottomMask /> // 메시지 하단에 흰색 마스크 추가
+                  <ChatBottomMask /> 
 				<div ref={messagesEndRef} />
 				<ChatBottom
 					onSendMessage={(content) =>
