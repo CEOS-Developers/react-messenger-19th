@@ -8,6 +8,7 @@ import { RootState } from 'store';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { selectChatRoom } from 'store/chat';
+import { closeReplyWindow } from 'store/reply';
 
 export default function ChatRoomList() {
   const chatData = useSelector((state: RootState) => state.chat.allChats);
@@ -20,6 +21,7 @@ export default function ChatRoomList() {
   const handleChatRoomClick = (partnerId: string) => {
     navigate(`/chats/${partnerId}`); // chatId를 이용하여 URL 경로를 설정
     dispatch(selectChatRoom(partnerId));
+    dispatch(closeReplyWindow());
   };
 
   return (

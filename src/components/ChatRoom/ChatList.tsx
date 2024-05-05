@@ -1,12 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'store';
-import { setReplyMessage, toggleReplyWindow } from 'store/reply';
+import { setReplyMessage, openReplyWindow } from 'store/reply';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/CommonStyle';
 import { Message, User } from 'types/ChatData';
 import { formatDateToTime } from 'util/formatDateToTime';
 import { getByteSize } from 'util/getByteSize';
+import findReplyTargetName from 'util/findReplyTargetName';
 interface ChatListProps {
   messages: Message[] | null;
   me: User;
@@ -24,7 +25,7 @@ function ChatList({ messages, me }: ChatListProps) {
   const dispatch: AppDispatch = useDispatch();
 
   const selectReplyMessage = (message: Message) => {
-    dispatch(toggleReplyWindow());
+    dispatch(openReplyWindow());
     dispatch(setReplyMessage(message));
   };
 
@@ -66,7 +67,7 @@ function ChatList({ messages, me }: ChatListProps) {
                     <ReplyTargetInfo>
                       <div className="reply-indicator" />
                       <div className="reply-info">
-                        <p className="reply-name">{messages[+message.replyTo - 1].senderId}</p>
+                        <p className="reply-name">{findReplyTargetName(messages[+message.replyTo - 1].senderId)}</p>
                         <p className="reply-message">{messages[+message.replyTo - 1].text}</p>
                       </div>
                     </ReplyTargetInfo>

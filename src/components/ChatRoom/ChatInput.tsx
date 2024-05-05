@@ -11,7 +11,8 @@ import { User } from 'types/ChatData';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewChat } from 'store/chat';
 import { AppDispatch, RootState } from 'store';
-import { toggleReplyWindow } from 'store/reply';
+import { closeReplyWindow, setReplyMessage } from 'store/reply';
+import findReplyTargetName from 'util/findReplyTargetName';
 
 interface ChatInputProps {
   me: User;
@@ -21,8 +22,8 @@ function ChatInput({ me }: ChatInputProps) {
 
   const dispatch: AppDispatch = useDispatch();
 
-  const handleReplyWindowToggle = () => {
-    dispatch(toggleReplyWindow());
+  const handleReplyWindowClose = () => {
+    dispatch(closeReplyWindow());
   };
 
   const { replyMessage, isReplyWindowOpen } = useSelector((state: RootState) => state.reply);
@@ -67,7 +68,8 @@ function ChatInput({ me }: ChatInputProps) {
     );
 
     setInputValue('');
-    handleReplyWindowToggle();
+    handleReplyWindowClose();
+    dispatch(setReplyMessage(null));
   };
 
   const textArea = useRef<HTMLTextAreaElement>(null);
@@ -107,6 +109,7 @@ function ChatInput({ me }: ChatInputProps) {
         photo: { name, size, url },
       }),
     );
+    dispatch(setReplyMessage(null));
   };
 
   return (
@@ -114,10 +117,10 @@ function ChatInput({ me }: ChatInputProps) {
       {isReplyWindowOpen && (
         <ReplyWindowWrapper>
           <ReplyWindow>
-            <p className="reply-target">{replyMessage?.senderId}</p>
+            <p className="reply-target">{findReplyTargetName(replyMessage?.senderId)}에게 답장</p>
             <p className="message-text">{replyMessage?.text}</p>
           </ReplyWindow>
-          <button onClick={handleReplyWindowToggle}>
+          <button onClick={handleReplyWindowClose}>
             <CloseIcon alt="닫기 아이콘" />
           </button>
         </ReplyWindowWrapper>

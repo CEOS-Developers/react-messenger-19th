@@ -29,6 +29,7 @@ export const chatSlice = createSlice({
   reducers: {
     selectChatRoom: (state, action: PayloadAction<string>) => {
       const selectedChat = state.allChats.find((chat) => chat.partner.id === action.payload);
+
       if (!selectedChat) return;
       state.participants.partner = selectedChat.partner;
       state.participants.me = myData;
@@ -48,8 +49,6 @@ export const chatSlice = createSlice({
         state.selectedChats = [];
       }
       state.selectedChats.push(newMessage);
-
-      console.log(state.selectedChats);
     },
   },
 });

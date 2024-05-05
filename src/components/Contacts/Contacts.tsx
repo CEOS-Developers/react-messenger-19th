@@ -9,6 +9,7 @@ import { getElapsedTime } from 'util/getElapsedTime';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectChatRoom } from 'store/chat';
+import { closeReplyWindow } from 'store/reply';
 
 export default function Contacts() {
   const [inputValue, setInputValue] = useState('');
@@ -23,6 +24,7 @@ export default function Contacts() {
   const handleChatRoomClick = (chatId: string) => {
     navigate(`/chats/${chatId}`); // chatId를 이용하여 URL 경로를 설정
     dispatch(selectChatRoom(chatId));
+    dispatch(closeReplyWindow());
   };
   return (
     <ContactsWrapper>
