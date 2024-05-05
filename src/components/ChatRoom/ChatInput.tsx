@@ -4,27 +4,29 @@ import { ReactComponent as AudioIcon } from 'asset/icons/AudioIcon.svg';
 import { ReactComponent as SendIcon } from 'asset/icons/SendIcon.svg';
 import { ReactComponent as CloseIcon } from 'asset/icons/CloseIcon.svg';
 
-import { ChangeEvent, Dispatch, FormEvent, KeyboardEvent, SetStateAction, useRef, useState } from 'react';
+import { ChangeEvent, FormEvent, KeyboardEvent, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { flexCenter } from 'styles/CommonStyle';
-import { Chat, User } from 'types/ChatData';
-import { useDispatch } from 'react-redux';
+import { User } from 'types/ChatData';
+import { useDispatch, useSelector } from 'react-redux';
 import { addNewChat } from 'store/chat';
+import { AppDispatch, RootState } from 'store';
+import { toggleReplyWindow } from 'store/reply';
 
 interface ChatInputProps {
-  // setChatData: Dispatch<SetStateAction<Chat>>;
   me: User;
 }
 function ChatInput({ me }: ChatInputProps) {
   const [inputValue, setInputValue] = useState('');
 
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
-  // const [isReplyWindowOpen, setIsReplyWindowOpen] = useState(true);
+  const handleReplyWindowToggle = () => {
+    dispatch(toggleReplyWindow());
+  };
 
-  // const handleReplyWindowToggle = () => {
-  //   setIsReplyWindowOpen((prev) => !prev);
-  // };
+  const replyMessage = useSelector((state: RootState) => state.reply.replyMessage);
+  const isReplyWindowOpen = useSelector((state: RootState) => state.reply.isReplyWindowOpen);
 
   // shift + enter로 줄 바꿈 기능
   const handleKeyDownShiftEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -106,20 +108,17 @@ function ChatInput({ me }: ChatInputProps) {
 
   return (
     <>
-      {/* {isReplyWindowOpen && (
+      {isReplyWindowOpen && (
         <ReplyWindowWrapper>
           <ReplyWindow>
-            <p className="reply-target">연우에게 답장</p>
-            <p className="message-text">
-              지금 뭐하고 있어?dfasdfasdfsadfsdfsddfdfdfsdfdasdfasdㅇㄹㄴㅇㄹ
-              dfadsfadfadfsdfsdf
-            </p>
+            <p className="reply-target">{replyMessage?.senderId}</p>
+            <p className="message-text">{replyMessage?.text}</p>
           </ReplyWindow>
           <button onClick={handleReplyWindowToggle}>
             <CloseIcon alt="닫기 아이콘" />
           </button>
         </ReplyWindowWrapper>
-      )} */}
+      )}
       <ChatInputWrapper onSubmit={handleInputSubmit}>
         <div className="file_audio_button">
           <button type="button" onClick={handleFileButtonClick}>
@@ -223,7 +222,8 @@ const TextAreaWrapper = styled.div`
 `;
 
 const ReplyWindowWrapper = styled.div`
-  position: relative;
+  position: absolute;
+  bottom: 9.2rem;
   width: 37.5rem;
   height: 6.6rem;
   background-color: var(--white);

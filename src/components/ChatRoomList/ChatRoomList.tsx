@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { selectChat } from 'store/chat';
+import { selectChatRoom } from 'store/chat';
 
 export default function ChatRoomList() {
   const chatData = useSelector((state: RootState) => state.chat.allChats);
@@ -19,7 +19,7 @@ export default function ChatRoomList() {
 
   const handleChatRoomClick = (partnerId: string) => {
     navigate(`/chats/${partnerId}`); // chatId를 이용하여 URL 경로를 설정
-    dispatch(selectChat(partnerId));
+    dispatch(selectChatRoom(partnerId));
   };
 
   return (

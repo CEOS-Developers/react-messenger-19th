@@ -1,4 +1,7 @@
 import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from 'store';
+import { setReplyMessage, toggleReplyWindow } from 'store/reply';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/CommonStyle';
 import { Message, User } from 'types/ChatData';
@@ -18,6 +21,15 @@ function ChatList({ messages, me }: ChatListProps) {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const dispatch: AppDispatch = useDispatch();
+
+  const selectReplyMessage = (message: Message) => {
+    dispatch(toggleReplyWindow());
+    dispatch(setReplyMessage(message));
+  };
+
+  const replyMessage = useSelector((state: RootState) => state.reply.replyMessage);
+
   // 메시지 목록이 업데이트될 때마다 scrollToBottom 함수를 호출
   useEffect(() => {
     scrollToBottom();
@@ -26,16 +38,21 @@ function ChatList({ messages, me }: ChatListProps) {
   return (
     <ChatListWrapper>
       {messages?.map((message, idx) => {
-        const isSameTime = formatDateToTime(message.createdAt) === formatDateToTime(messages[idx - 1]?.createdAt);
+        // 다음 메시지와 현재 메시지의 시간 비교
+        const isSameTime =
+          idx < messages.length - 1 &&
+          formatDateToTime(message.createdAt) === formatDateToTime(messages[idx + 1]?.createdAt);
 
         return (
-          <ChatWrapper $isMyMessage={message.senderId === me.id} key={message.id}>
+          <ChatWrapper
+            onClick={() => selectReplyMessage(message)}
+            $isMyMessage={message.senderId === me.id}
+            key={message.id}
+          >
             <div className="time_wrapper">
-              {/* 현재 시간 */}
-              {!isSameTime && <SentTime>{formatDateToTime(message.createdAt)} </SentTime>}
+              {/* 이전 메세지와 현재 메세제의 시간이 같으면 이전 메세지의 시간을 보여주지 않음*/}
+              {!isSameTime && <SentTime>{formatDateToTime(message.createdAt)}</SentTime>}
             </div>
-            {/* 사진과 텍스트가 같이 있는 경우는 없음 -> 사진 속성이 존재하는 경우에는 사진을 존재하지 않는 경우에는 일반 텍스트 메세지를 보여줌 */}
-            {/* isMyMessage라는 prop으로 보낸 사람과 me가 같은 사람인지 아닌지에 따라 스타일링을 다르게 해줌 */}
             {message.photo ? (
               <ChatPhoto as="div" $isMyMessage={message.senderId === me.id}>
                 <img src={message.photo?.url} alt="Attached photograph" />
@@ -45,7 +62,18 @@ function ChatList({ messages, me }: ChatListProps) {
                 </div>
               </ChatPhoto>
             ) : (
-              <ChatText $isMyMessage={message.senderId === me.id}>{message.text}</ChatText>
+              <>
+                <ChatText $isMyMessage={message.senderId === me.id}>
+                  <ReplyTargetInfo>
+                    <div className="reply-indicator" />
+                    <div className="reply-info">
+                      <p className="reply-name">{replyMessage?.senderId}</p>
+                      <p className="reply-message">{replyMessage?.text}</p>
+                    </div>
+                  </ReplyTargetInfo>
+                  {message.text}
+                </ChatText>
+              </>
             )}
           </ChatWrapper>
         );
@@ -59,6 +87,7 @@ export default ChatList;
 
 const ChatListWrapper = styled.div`
   display: flex;
+  height: 66rem;
   gap: 1.6rem;
   flex-direction: column;
   padding: 2.5rem 0;
@@ -84,6 +113,30 @@ const SentTime = styled.p`
   letter-spacing: 0.01rem;
 `;
 
+const ReplyTargetInfo = styled.div`
+  display: flex;
+  gap: 0.8rem;
+  .reply-indicator {
+    width: 0.2rem;
+    height: 4rem;
+    background-color: var(--blue01);
+  }
+
+  .reply-name {
+    color: var(--blue01, #3478f6);
+    font-size: 1.4rem;
+  }
+
+  .reply-message {
+    overflow: hidden;
+    color: var(--black);
+    font-size: 1.4rem;
+  }
+
+  .reply-info {
+    gap: 0rem;
+  }
+`;
 const ChatText = styled.p<{ $isMyMessage: boolean }>`
   max-width: 20rem;
   padding: 0.7rem 1.5rem;

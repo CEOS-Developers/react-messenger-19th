@@ -13,29 +13,36 @@
           "id": "1",
           "senderId": "user0",
           "text": "Good morning!",
-          "createdAt": "2024-03-29T11:30:00",
-          "photoUrl": ""
+          "createdAt": "2024-03-29T11:30:00"
         },
         {
           "id": "2",
-          "senderId": "user1",
-          "text": "지금 뭐하고있어?",
-          "createdAt": "2024-03-29T11:33:00",
-          "photoUrl": ""
+          "senderId": "user0",
+          "photo": {
+            "name": "IMG_0475.PNG",
+            "url": "/images/flower.png",
+            "size": 2540000
+          },
+          "createdAt": "2024-03-29T11:30:00"
         },
+
         {
           "id": "3",
-          "senderId": "user0",
-          "text": "나야 뭐 과제하는 중이지!",
-          "createdAt": "2024-03-29T11:36:00",
-          "photoUrl": ""
+          "senderId": "user1",
+          "text": "지금 뭐하고있어?",
+          "createdAt": "2024-03-29T11:33:00"
         },
         {
           "id": "4",
+          "senderId": "user0",
+          "text": "나야 뭐 과제하는 중이지!",
+          "createdAt": "2024-03-29T11:36:00"
+        },
+        {
+          "id": "5",
           "senderId": "user1",
           "text": "한가하면 같이 저녁먹자",
-          "createdAt": "2024-03-29T11:40:00",
-          "photoUrl": ""
+          "createdAt": "2024-03-29T11:40:00"
         }
       ]
     },
@@ -52,8 +59,7 @@
           "id": "1",
           "senderId": "user2",
           "text": "갑자기 노션이 터져서 엄청 놀랐어요.",
-          "createdAt": "2024-03-29T11:30:00",
-          "photoUrl": ""
+          "createdAt": "2024-03-29T11:30:00"
         }
       ]
     },
@@ -70,22 +76,19 @@
           "id": "1",
           "senderId": "user0",
           "text": "과제 끝났어?",
-          "createdAt": "2024-03-29T11:30:00",
-          "photoUrl": ""
+          "createdAt": "2024-03-29T11:30:00"
         },
         {
           "id": "2",
           "senderId": "user3",
           "text": "하나 끝났어! ",
-          "createdAt": "2024-03-29T11:30:00",
-          "photoUrl": ""
+          "createdAt": "2024-03-29T11:30:00"
         },
         {
           "id": "3",
           "senderId": "user3",
           "text": "하지만 과제는 계속된다.",
-          "createdAt": "2024-03-29T11:30:00",
-          "photoUrl": ""
+          "createdAt": "2024-03-29T11:30:00"
         }
       ]
     },
@@ -102,8 +105,7 @@
           "id": "1",
           "senderId": "user4",
           "text": "텔레그램 직접 보는 건 처음인데 ",
-          "createdAt": "2024-03-29T11:30:00",
-          "photoUrl": ""
+          "createdAt": "2024-03-29T11:30:00"
         }
       ]
     },
@@ -120,8 +122,7 @@
           "id": "1",
           "senderId": "user5",
           "text": "자료삭제가 안되어서 좋다더라고요. ",
-          "createdAt": "2024-03-29T11:30:00",
-          "photoUrl": ""
+          "createdAt": "2024-03-29T11:30:00"
         }
       ]
     },
@@ -138,8 +139,7 @@
           "id": "1",
           "senderId": "user0",
           "text": "공식 채널에서 쓰면 편할듯",
-          "createdAt": "2024-03-29T11:30:00",
-          "photoUrl": ""
+          "createdAt": "2024-03-29T11:30:00"
         }
       ]
     },
@@ -156,8 +156,7 @@
           "id": "1",
           "senderId": "user7",
           "text": "외국에서도 범용성이 높다네요",
-          "createdAt": "2024-03-29T11:30:00",
-          "photoUrl": ""
+          "createdAt": "2024-03-29T11:30:00"
         }
       ]
     },
@@ -174,8 +173,7 @@
           "id": "1",
           "senderId": "user7",
           "text": "이렇게 서비스 하나 탐구하고가요",
-          "createdAt": "2024-03-29T11:30:00",
-          "photoUrl": ""
+          "createdAt": "2024-03-29T11:30:00"
         }
       ]
     }

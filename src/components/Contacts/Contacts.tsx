@@ -8,7 +8,7 @@ import { flexColumn } from 'styles/CommonStyle';
 import { getElapsedTime } from 'util/getElapsedTime';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { selectChat } from 'store/chat';
+import { selectChatRoom } from 'store/chat';
 
 export default function Contacts() {
   const [inputValue, setInputValue] = useState('');
@@ -22,7 +22,7 @@ export default function Contacts() {
 
   const handleChatRoomClick = (chatId: string) => {
     navigate(`/chats/${chatId}`); // chatId를 이용하여 URL 경로를 설정
-    dispatch(selectChat(chatId));
+    dispatch(selectChatRoom(chatId));
   };
   return (
     <ContactsWrapper>

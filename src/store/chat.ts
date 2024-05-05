@@ -3,8 +3,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import mockData from 'data/chatData.json';
 import myData from 'data/myData.json';
 import { Chat, Message, User } from 'types/ChatData';
-
-export interface InitialStateType {
+interface InitialStateType {
   allChats: Chat[];
 
   participants: {
@@ -28,7 +27,7 @@ export const chatSlice = createSlice({
   name: 'chat',
   initialState,
   reducers: {
-    selectChat: (state, action: PayloadAction<string>) => {
+    selectChatRoom: (state, action: PayloadAction<string>) => {
       const selectedChat = state.allChats.find((chat) => chat.partner.id === action.payload);
       if (!selectedChat) return;
       state.participants.partner = selectedChat.partner;
@@ -53,6 +52,4 @@ export const chatSlice = createSlice({
   },
 });
 
-export const { selectChat, toggleParticipants, addNewChat } = chatSlice.actions;
-
-export default chatSlice;
+export const { selectChatRoom, toggleParticipants, addNewChat } = chatSlice.actions;

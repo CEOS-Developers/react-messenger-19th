@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import chatSlice from 'store/chat';
+import { chatSlice } from 'store/chat';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { replySlice } from 'store/reply';
 
 // 스토어 설정
 const store = configureStore({
   reducer: {
     chat: chatSlice.reducer,
+    reply: replySlice.reducer,
   },
 });
 
