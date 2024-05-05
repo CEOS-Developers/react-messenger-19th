@@ -2,6 +2,7 @@ import React, { useEffect, useId, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { userListState } from '../state/userState';
+import { userProfileState } from '../state/userProfileState';
 import { messagesState } from '../state/messageState';
 import ChatHead from '../components/ChatHead';
 import ChatBody from '../components/ChatBody';
@@ -40,11 +41,27 @@ const ChattingRoom = () => {
 
 	// 메세지 목록 끝으로 스크롤
 
+
+
+    // 유저 관리 
+    // 현재 사용자 상태 관리
+	const [currentUserIndex, setCurrentUserIndex] = useState(0);
 	const userList = useRecoilValue(userListState);
 	const otherUser = userList.find((user) => user.id === userId);
-	console.log(otherUser);
-	const otherUserIndex = otherUser?.id;
-	console.log(otherUserIndex);
+
+	const currentUser = userList[0]
+	console.log(currentUser);
+	//console.log(otherUser);
+	const otherUserIndex = (otherUser?.id);
+
+
+
+	//console.log(otherUserIndex);
+
+ const toggleUser = () => {
+		setCurrentUserIndex((currentIndex) => (currentIndex === 0 ? 1 : 0));
+	};
+
 
 	const sendMessage = (content: string, from: string, to: string) => {
 		const newMessage: Message = {
@@ -59,12 +76,14 @@ const ChattingRoom = () => {
 		const updatedMessages = [...messages, newMessage];
 		setMessages(updatedMessages);
 
+
 		// localStorage에 업데이트된 메시지 저장
 		localStorage.setItem(`messages_${userId}`, JSON.stringify(updatedMessages));
 	};
 
 	return (
 		<>
+			<ChatHead user={currentUser}  />
 			<ChatBody
 				messages={messages}
 				userImage={otherUser?.image ?? ''}
@@ -73,7 +92,7 @@ const ChattingRoom = () => {
 			<div ref={messagesEndRef} />
 			<ChatBottom
 				onSendMessage={(content) =>
-					sendMessage(content, otherUser?.name ?? '', userId ?? '')
+					sendMessage(content, otherUser?.name ?? '', userId ??'')
 				}
 			/>
 		</>

@@ -20,9 +20,15 @@ interface User {
 export const userListState = atom<User[]>({
 	key: 'userListState',
 	default: [
+		{ id: '0', name: '김모씨', image: '', chatHistory: [] },
 		{ id: '1', name: '김모씨', image: '', chatHistory: [] },
 		{ id: '2', name: '박모씨', image: '', chatHistory: [] },
 		{ id: '3', name: '최모씨', image: '', chatHistory: [] },
 		{ id: '4', name: '최모씨', image: '', chatHistory: [] },
 	],
+});
+
+export const currentUserState = atom<User>({
+	key: 'currentUserState',
+	default: { id: '0', name: '김모씨', image: '', chatHistory: [] },
 });

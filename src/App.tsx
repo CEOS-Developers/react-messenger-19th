@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import ChattingRoom from './pages/ChattingRoom';
-import UserList from './pages/UserList';
+import UserList from './pages/userList';
 import ChattingList from './pages/ChattingList';
 import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
@@ -16,7 +16,11 @@ const App = () => {
 
 	return (
 		<>
-			{isChattingRoomPage ? <ChatHead user={{ name: '', image: '' }} /> : <NavbarHead />}
+			{isChattingRoomPage ? (
+				<ChatHead user={{ name: '', image: '' }} />
+			) : (
+				<NavbarHead />
+			)}
 			<div style={{ paddingTop: isChattingRoomPage ? '0px' : '80px' }}>
 				<Routes>
 					<Route path='/chattingroom/:userId' element={<ChattingRoom />} />
@@ -26,7 +30,6 @@ const App = () => {
 				</Routes>
 			</div>
 			{!isChattingRoomPage && <Navbar />}
-			
 		</>
 	);
 };
