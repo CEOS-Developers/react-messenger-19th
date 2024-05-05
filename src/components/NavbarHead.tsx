@@ -6,14 +6,24 @@ import styled from 'styled-components';
 
 const NavbarHeadContainer = styled.div`
 	display: flex;
-	justify-content: space-around;
+	justify-content: flex-start;
 	position: fixed;
 	font-size: 20px;
+	padding-left: 15px;
 	width: 375px;
 	top: -33px;
 	height: 80px;
-	background: #f0f0f0;
+	background: #fffff;
 	padding-top: 30px;
+
+`;
+const NavbarHeadTexts=styled.div`
+background: #fffff;
+padding-top: 30px;
+font-family: 'Noto Sans KR';
+font-size: 20px;
+font-style: normal;
+font-weight: 500;
 `;
 
 const NavbarHead = () => {
@@ -22,22 +32,25 @@ const NavbarHead = () => {
 
 	switch (pathname) {
 		case '/chattingroom':
-			navText = 'Chatting Room';
+			navText = '';
 			break;
 		case '/userlist':
-			navText = 'User List';
+			navText = '친구 목록';
 			break;
 		case '/chattinglist':
-			navText = 'Chatting List';
+			navText = '대화';
 			break;
 		case '/profile':
-			navText = 'Profile';
+			navText = '내 프로필';
 			break;
 		default:
 			navText = '';
 	}
 
-	return <NavbarHeadContainer>{navText}</NavbarHeadContainer>;
+	return( 
+    <NavbarHeadContainer>
+        <NavbarHeadTexts>{navText}</NavbarHeadTexts>
+        </NavbarHeadContainer>);
 };
 
 export default NavbarHead;
