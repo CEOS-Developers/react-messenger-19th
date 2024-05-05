@@ -9,6 +9,8 @@ import NavbarHead from './components/NavbarHead';
 import ChatHead from './components/ChatHead';
 import ChatBody from './components/ChatBody';
 import ChatBottom from './components/ChatBottom';
+import GlobalStyle from './style/GlobalStyle';
+
 
 const App = () => {
 	const { pathname } = useLocation();
@@ -16,12 +18,15 @@ const App = () => {
 
 	return (
 		<>
+
+			<GlobalStyle />
 			{isChattingRoomPage ? (
-				<span/>
-				//<ChatHead user={{ name: '', image: '' }} />
+				<span />
 			) : (
+				//<ChatHead user={{ name: '', image: '' }} />
 				<NavbarHead />
 			)}
+
 			<div style={{ paddingTop: isChattingRoomPage ? '0px' : '80px' }}>
 				<Routes>
 					<Route path='/chattingroom/:userId' element={<ChattingRoom />} />

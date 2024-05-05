@@ -7,6 +7,8 @@ import { messagesState } from '../state/messageState';
 import ChatHead from '../components/ChatHead';
 import ChatBody from '../components/ChatBody';
 import ChatBottom from '../components/ChatBottom';
+import { ChatRoomContainer } from '../style/ChattingRoomStyle';
+import styled from 'styled-components';
 
 interface Message {
 	id: number;
@@ -91,7 +93,7 @@ const ChattingRoom = () => {
 			<ChatBody
 				messages={messages}
 				userImage={counterUser?.image ?? ''}
-				currentUser={currentUser?.id ?? ''}
+				currentUser={currentUser?.id ?? currentUser?.id}
 			/>
 			<div ref={messagesEndRef} />
 			<ChatBottom

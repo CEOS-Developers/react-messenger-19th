@@ -3,7 +3,7 @@ import styled from 'styled-components';
 // ChatBottomContainer를 div로 변경하여 컨테이너로 사용
 export const ChatBottomContainer = styled.div`
 	position: fixed;
-	bottom: 0;
+	bottom:  280px;
 	width: 375px;
 	height: 80px;
 	flex-shrink: 0;

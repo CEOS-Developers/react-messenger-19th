@@ -12,10 +12,17 @@ interface Profile {
 }
 
 const ProfileContainer = styled.div`
-	padding: 20px;
+margin-left:10px;
+position:fixed;
+widfht:375px;
+display: flex;
+flex-direction: column;
+align-items: center;
+/*	padding: 20px;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: center;*/
+
 `;
 
 const ProfileImage = styled.img`
@@ -58,15 +65,15 @@ const ShortcutLink = styled.a`
 
 // 로고 이미지 스타일링
 const InstagramLogo = styled.img`
-	width: 30px;
-	height: 30px;
-	margin-right: 10px;
+	/* width: 30px;
+height: 30px;
+margin-right: 10px; */
 `;
 
 const GitHubLogo = styled.img`
-	width: 30px;
-	height: 30px;
-	margin-right: 10px;
+	/* width: 30px;
+height: 30px;
+margin-right: 10px; */
 `;
 
 const Profile = () => {
@@ -87,15 +94,13 @@ const Profile = () => {
 				<div id='profile-name'>{profile.name}</div>
 			</ProfileField>
 			<ProfileField>
-			<div id='profile-name'>{profile.phone}</div>
+				<div id='profile-name'>{profile.phone}</div>
 			</ProfileField>
 			<ShortcutLink href={profile.instagram} target='_blank'>
 				<InstagramLogo src='/instagram_logo.png' alt='Instagram 로고' />
-				인스타그램
 			</ShortcutLink>
 			<ShortcutLink href={profile.github} target='_blank'>
 				<GitHubLogo src='/github_logo.png' alt='GitHub 로고' />
-				깃허브
 			</ShortcutLink>
 		</ProfileContainer>
 	);
