@@ -19,12 +19,12 @@ interface Message {
 }
 
 const ChatBottomMask = styled.div`
-  position: fixed;
-  bottom: 0;
-  width: 100%; // 뷰포트 전체 너비 사용
-  height: 360px; // ChatBottom의 높이와 동일하게 설정
-  background-color: white; // 흰색 배경
-  z-index: 1; // ChatBottom보다 낮은 z-index 설정
+	position: fixed;
+	bottom: 0;
+	width: 100%; // 뷰포트 전체 너비 사용
+	height: 360px; // ChatBottom의 높이와 동일하게 설정
+	background-color: white; // 흰색 배경
+	z-index: 1; // ChatBottom보다 낮은 z-index 설정
 `;
 
 const ChattingRoom = () => {
@@ -45,17 +45,7 @@ const ChattingRoom = () => {
 		}
 	}, [userId]); // userId가 변경될 때마다 이펙트 재실행
 
-	useEffect(() => {
-		// 메시지가 추가될 때마다 스크롤을 하단으로 이동
-		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-	}, [messages]);
-
-	// 메세지 목록 끝으로 스크롤
-
-	// 유저 관리
-	// 현재 사용자 상태 관리
-
-	const userList = useRecoilValue(userListState);
+    const userList = useRecoilValue(userListState);
 	// 대화 상대방
 	const otherUser = userList.find((user) => user.id === userId);
 
@@ -67,6 +57,18 @@ const ChattingRoom = () => {
 	let currentUser = userList[currentUserIndex];
 	let counterUser = userList[counterUserIndex];
 
+
+	useEffect(() => {
+		// 메시지가 추가될 때마다 스크롤을 하단으로 이동
+		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+	}, [messages, currentUserIndex, counterUserIndex]);
+
+	// 메세지 목록 끝으로 스크롤
+
+	// 유저 관리
+	// 현재 사용자 상태 관리
+
+	
 	console.log(currentUser);
 
 	//console.log(otherUserIndex);
@@ -95,24 +97,22 @@ const ChattingRoom = () => {
 
 	return (
 		<>
-			
-				<ChatHead
-					user={counterUser ?? { name: 'Unknown', image: 'default.png' }}
-					onUserClick={toggleUser}
-				/>
-				<ChatBody
-					messages={messages}
-					userImage={counterUser?.image ?? ''}
-					currentUser={currentUser?.id ?? currentUser?.id}
-				/>
-                  <ChatBottomMask /> 
-				<div ref={messagesEndRef} />
-				<ChatBottom
-					onSendMessage={(content) =>
-						sendMessage(content, currentUser?.id ?? '', counterUser?.id ?? '')
-					}
-				/>
-			
+			<ChatHead
+				user={counterUser ?? { name: 'Unknown', image: 'default.png' }}
+				onUserClick={toggleUser}
+			/>
+			<ChatBody
+				messages={messages}
+				userImage={counterUser?.image ?? ''}
+				currentUser={currentUser?.id ?? currentUser?.id}
+			/>
+			<ChatBottomMask />
+			<div ref={messagesEndRef} />
+			<ChatBottom
+				onSendMessage={(content) =>
+					sendMessage(content, currentUser?.id ?? '', counterUser?.id ?? '')
+				}
+			/>
 		</>
 	);
 };
