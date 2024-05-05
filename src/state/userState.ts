@@ -20,7 +20,8 @@ interface User {
 export const userListState = atom<User[]>({
 	key: 'userListState',
 	default: [
-		{ id: '0', name: '김모씨', image: '', chatHistory: [] },
+		// 0번은 current user - 메신저 앱 주인으로 설정
+		{ id: '0', name: '이영인', image: '', chatHistory: [] },
 		{ id: '1', name: '김모씨', image: '', chatHistory: [] },
 		{ id: '2', name: '박모씨', image: '', chatHistory: [] },
 		{ id: '3', name: '최모씨', image: '', chatHistory: [] },

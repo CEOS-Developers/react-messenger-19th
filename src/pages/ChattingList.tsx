@@ -22,26 +22,25 @@ const ChatItem = styled(Link)`
 	color: black;
 	text-decoration: none;
 	border-radius: 5px;
-	white-space: pre-line; 
+	white-space: pre-line;
 
 	&:hover {
 		background-color: #e0e0e0;
 	}
 `;
 
-
 const ChattingList = () => {
-    const userList = useRecoilValue(userListState);
-  
-    return (
-      <div>
-        {userList.map((user) => (
-          <div key={user.id}>
-            <Link to={`/chattingroom/${user.id}`}>{user.name}</Link>
-          </div>
-        ))}
-      </div>
-    );
-  };
-  
-  export default ChattingList;
+	const userList = useRecoilValue(userListState);
+
+	return (
+		<div>
+			{userList.slice(1).map((user) => (
+				<div key={user.id}>
+					<Link to={`/chattingroom/${user.id}`}>{user.name}</Link>
+				</div>
+			))}
+		</div>
+	);
+};
+
+export default ChattingList;

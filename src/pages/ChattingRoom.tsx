@@ -41,27 +41,24 @@ const ChattingRoom = () => {
 
 	// 메세지 목록 끝으로 스크롤
 
-
-
-    // 유저 관리 
-    // 현재 사용자 상태 관리
+	// 유저 관리
+	// 현재 사용자 상태 관리
 	const [currentUserIndex, setCurrentUserIndex] = useState(0);
+
 	const userList = useRecoilValue(userListState);
+	// 대화 상대방
 	const otherUser = userList.find((user) => user.id === userId);
-
-	const currentUser = userList[0]
+	// 유저 리스트 1번째
+	const currentUser = userList[0];
 	console.log(currentUser);
-	//console.log(otherUser);
-	const otherUserIndex = (otherUser?.id);
-
-
+	console.log(otherUser);
+	const otherUserIndex = otherUser?.id;
 
 	//console.log(otherUserIndex);
 
- const toggleUser = () => {
+	const toggleUser = () => {
 		setCurrentUserIndex((currentIndex) => (currentIndex === 0 ? 1 : 0));
 	};
-
 
 	const sendMessage = (content: string, from: string, to: string) => {
 		const newMessage: Message = {
@@ -76,14 +73,13 @@ const ChattingRoom = () => {
 		const updatedMessages = [...messages, newMessage];
 		setMessages(updatedMessages);
 
-
 		// localStorage에 업데이트된 메시지 저장
 		localStorage.setItem(`messages_${userId}`, JSON.stringify(updatedMessages));
 	};
 
 	return (
 		<>
-			<ChatHead user={currentUser}  />
+			<ChatHead user={otherUser ?? { name: 'Unknown', image: 'default.png' }} />
 			<ChatBody
 				messages={messages}
 				userImage={otherUser?.image ?? ''}
@@ -92,7 +88,7 @@ const ChattingRoom = () => {
 			<div ref={messagesEndRef} />
 			<ChatBottom
 				onSendMessage={(content) =>
-					sendMessage(content, otherUser?.name ?? '', userId ??'')
+					sendMessage(content, currentUser?.id ?? '', userId ?? '')
 				}
 			/>
 		</>
