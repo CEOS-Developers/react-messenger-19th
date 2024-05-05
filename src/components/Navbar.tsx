@@ -10,7 +10,7 @@ const NavbarContainer = styled.div`
 	position: fixed;
 	font-size: 20px;
 	width: 375px;
-	bottom: 20px;
+	bottom: 220px;
 	height: 50px;
 	background: #f0f0f0;
 	padding-top: 30px;
