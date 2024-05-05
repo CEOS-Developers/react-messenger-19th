@@ -83,7 +83,7 @@ const ChattingRoom = () => {
 			<ChatBody
 				messages={messages}
 				userImage={otherUser?.image ?? ''}
-				currentUser={otherUser?.name ?? ''}
+				currentUser={currentUser?.id ?? ''}
 			/>
 			<div ref={messagesEndRef} />
 			<ChatBottom
