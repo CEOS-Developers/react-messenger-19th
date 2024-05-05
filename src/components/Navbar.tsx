@@ -10,7 +10,7 @@ const NavbarContainer = styled.div`
 	position: fixed;
 	font-size: 20px;
 	width: 375px;
-	bottom: 280px;
+	bottom: 250px;
 	height: 80px;
 	background: #f0f0f0;
 	padding-top: 30px;
@@ -22,9 +22,9 @@ const NavbarLink = styled(Link)`
 `;
 
 const NavButton = styled.img`
-position: fixed;
-bottom:320px;
-margin-left: -35px;
+	position: fixed;
+	bottom: 320px;
+	margin-left: -35px;
 	/* width: 30px;
 height: 30px;
 margin-right: 10px; */
