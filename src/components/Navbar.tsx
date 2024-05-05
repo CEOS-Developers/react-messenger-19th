@@ -23,7 +23,7 @@ const NavbarLink = styled(Link)`
 
 const NavButton = styled.img`
 	position: fixed;
-	bottom: 320px;
+	bottom: 280px;
 	margin-left: -35px;
 	/* width: 30px;
 height: 30px;
