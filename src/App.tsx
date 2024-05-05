@@ -32,7 +32,6 @@ function App() {
               path="*"
               element={<Navigate to="/not-found" replace />}
             ></Route>
-            <Route path="/not-found" element={<NotFound />}></Route>
           </Routes>
         </ThemeProvider>
       </RecoilRoot>
