@@ -1,13 +1,19 @@
+// src/index.tsx
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import ReactDOM from 'react-dom';
 import App from './App';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
+import './index.css';
 
-const root = ReactDOM.createRoot(
-	document.getElementById('root') as HTMLElement
-);
-root.render(
+ReactDOM.render(
 	<React.StrictMode>
-		<App />
-	</React.StrictMode>
+		<RecoilRoot>
+			<Router>
+				<App />
+			</Router>
+		</RecoilRoot>
+	</React.StrictMode>,
+
+	document.getElementById('root')
 );
